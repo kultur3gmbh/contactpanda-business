@@ -14,5 +14,12 @@ header="$(awk -F': ' '/^ \* Version:/{print $2; exit}' contactpanda-business/con
 constant="$(sed -n "s/^define( 'CONTACTPANDA_BUSINESS_VERSION', '\([^']*\)' );/\1/p" contactpanda-business/contactpanda-business.php | head -1)"
 stable="$(awk -F': ' '/^Stable tag:/{print $2; exit}' contactpanda-business/readme.txt)"
 [[ "$header" == "$constant" && "$header" == "$stable" ]] || { echo "Business versions do not match." >&2; status=1; }
+for translation_file in \
+  contactpanda-business/languages/contactpanda-business-de_DE.po \
+  contactpanda-business/languages/contactpanda-business-de_DE.mo \
+  contactpanda-business/languages/contactpanda-business-de_DE_formal.po \
+  contactpanda-business/languages/contactpanda-business-de_DE_formal.mo; do
+  [[ -f "$translation_file" ]] || { echo "Missing German translation file: $translation_file" >&2; status=1; }
+done
 [[ "$status" -eq 0 ]] || exit "$status"
 echo "ContactPanda Business checks passed."
