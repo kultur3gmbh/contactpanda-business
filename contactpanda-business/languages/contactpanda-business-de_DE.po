@@ -1,0 +1,321 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ContactPanda Business 0.8.0\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%1$d open / %2$d total"
+msgstr "%1$d offen / %2$d gesamt"
+
+msgid "A Business task was created from the support request."
+msgstr "Aus dem Hilfeersuchen wurde eine Business-Aufgabe erstellt."
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Add comment"
+msgstr "Kommentar hinzufügen"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Archived"
+msgstr "Archiviert"
+
+msgid "Automatic ContactPanda Business updates require a current ContactPanda Basic installation."
+msgstr "Automatische Aktualisierungen für ContactPanda Business erfordern eine aktuelle Installation von ContactPanda Basic."
+
+msgid "Back to board"
+msgstr "Zurück zum Board"
+
+msgid "Back to projects"
+msgstr "Zurück zu den Projekten"
+
+msgid "Business overview"
+msgstr "Business-Übersicht"
+
+msgid "Business task"
+msgstr "Business-Aufgabe"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Column"
+msgstr "Spalte"
+
+msgid "Comment"
+msgstr "Kommentar"
+
+msgid "Comments"
+msgstr "Kommentare"
+
+msgid "Company ID"
+msgstr "Firmen-ID"
+
+msgid "Completed"
+msgstr "Abgeschlossen"
+
+msgid "ContactPanda Business"
+msgstr "ContactPanda Business"
+
+msgid "ContactPanda Business could not create all required tables."
+msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen."
+
+msgid "ContactPanda Business requires ContactPanda Basic 0.8.0 or newer."
+msgstr "ContactPanda Business erfordert ContactPanda Basic 0.8.0 oder neuer."
+
+msgid "Contract management"
+msgstr "Vertragsverwaltung"
+
+msgid "Create a Business project before converting this support request into a task."
+msgstr "Erstellen Sie zuerst ein Business-Projekt, bevor Sie dieses Hilfeersuchen in eine Aufgabe umwandeln."
+
+msgid "Create project"
+msgstr "Projekt erstellen"
+
+msgid "Create task"
+msgstr "Aufgabe erstellen"
+
+msgid "Create task from request"
+msgstr "Aufgabe aus Anfrage erstellen"
+
+msgid "Created from Support Desk request #%d."
+msgstr "Aus dem Hilfeersuchen #%d erstellt."
+
+msgid "Customer"
+msgstr "Kunde"
+
+msgid "Customer account"
+msgstr "Kundenkonto"
+
+msgid "Customer management"
+msgstr "Kundenverwaltung"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Done"
+msgstr "Erledigt"
+
+msgid "Due"
+msgstr "Fällig"
+
+msgid "Due by"
+msgstr "Zu erledigen bis"
+
+msgid "Due today"
+msgstr "Heute fällig"
+
+msgid "Due tomorrow"
+msgstr "Morgen fällig"
+
+msgid "High"
+msgstr "Hoch"
+
+msgid "In progress"
+msgstr "In Bearbeitung"
+
+msgid "Internal"
+msgstr "Intern"
+
+msgid "Internal comment"
+msgstr "Interner Kommentar"
+
+msgid "Internal only"
+msgstr "Nur intern"
+
+msgid "Invalid task movement."
+msgstr "Ungültige Aufgabenverschiebung."
+
+msgid "Low"
+msgstr "Niedrig"
+
+msgid "Move this task to the trash?"
+msgstr "Diese Aufgabe in den Papierkorb verschieben?"
+
+msgid "Move to trash"
+msgstr "In den Papierkorb verschieben"
+
+msgid "New"
+msgstr "Neu"
+
+msgid "No comments yet."
+msgstr "Noch keine Kommentare."
+
+msgid "No due date"
+msgstr "Kein Fälligkeitsdatum"
+
+msgid "No projects are assigned to your account."
+msgstr "Ihrem Konto sind keine Projekte zugeordnet."
+
+msgid "No projects have been created yet."
+msgstr "Es wurden noch keine Projekte erstellt."
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Not assigned"
+msgstr "Nicht zugeordnet"
+
+msgid "On hold"
+msgstr "Ruhend"
+
+msgid "Open"
+msgstr "Offen"
+
+msgid "Open projects & corrections"
+msgstr "Projekte & Korrekturen öffnen"
+
+msgid "Open status"
+msgstr "Status in Offen"
+
+msgid "Open tasks"
+msgstr "Offene Aufgaben"
+
+msgid "Overdue: %s"
+msgstr "Überfällig: %s"
+
+msgid "Overview"
+msgstr "Übersicht"
+
+msgid "Payment management"
+msgstr "Zahlungsverwaltung"
+
+msgid "Person ID"
+msgstr "Personen-ID"
+
+msgid "Plan work on a board and decide separately which tasks customers may see."
+msgstr "Planen Sie Arbeiten auf einem Board und legen Sie für jede Aufgabe fest, ob Kunden sie sehen dürfen."
+
+msgid "Planned"
+msgstr "Geplant"
+
+msgid "Please enter a comment."
+msgstr "Bitte geben Sie einen Kommentar ein."
+
+msgid "Please enter a project name."
+msgstr "Bitte geben Sie einen Projektnamen ein."
+
+msgid "Please enter a task title."
+msgstr "Bitte geben Sie einen Aufgabentitel ein."
+
+msgid "Priority"
+msgstr "Priorität"
+
+msgid "Progress"
+msgstr "Fortschritt"
+
+msgid "Project"
+msgstr "Projekt"
+
+msgid "Project and correction management"
+msgstr "Projekt- und Korrekturverwaltung"
+
+msgid "Project name"
+msgstr "Projektname"
+
+msgid "Projects"
+msgstr "Projekte"
+
+msgid "Projects & corrections"
+msgstr "Projekte & Korrekturen"
+
+msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
+msgstr "Projekte, Korrekturen, kundensichtbare Aufgaben, Verträge, Abonnements und Zahlungen sind vom Support Desk getrennt."
+
+msgid "Question"
+msgstr "Rückfrage"
+
+msgid "Review"
+msgstr "Zur Kontrolle"
+
+msgid "Save project"
+msgstr "Projekt speichern"
+
+msgid "Save task"
+msgstr "Aufgabe speichern"
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "Search projects"
+msgstr "Projekte durchsuchen"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Submit a new task"
+msgstr "Neue Aufgabe einreichen"
+
+msgid "Submit new tasks and follow customer-visible progress."
+msgstr "Reichen Sie neue Aufgaben ein und verfolgen Sie den sichtbaren Fortschritt."
+
+msgid "Submit task"
+msgstr "Aufgabe einreichen"
+
+msgid "Subscription management"
+msgstr "Abonnementverwaltung"
+
+msgid "Task"
+msgstr "Aufgabe"
+
+msgid "Task details"
+msgstr "Aufgabendetails"
+
+msgid "Task not found."
+msgstr "Aufgabe nicht gefunden."
+
+msgid "Tasks"
+msgstr "Aufgaben"
+
+msgid "The comment was added."
+msgstr "Der Kommentar wurde hinzugefügt."
+
+msgid "The project was created."
+msgstr "Das Projekt wurde erstellt."
+
+msgid "The support request could not be converted."
+msgstr "Das Hilfeersuchen konnte nicht umgewandelt werden."
+
+msgid "The support request could not be found."
+msgstr "Das Hilfeersuchen wurde nicht gefunden."
+
+msgid "The task was moved to the trash."
+msgstr "Die Aufgabe wurde in den Papierkorb verschoben."
+
+msgid "The task was saved."
+msgstr "Die Aufgabe wurde gespeichert."
+
+msgid "This project does not exist."
+msgstr "Dieses Projekt existiert nicht."
+
+msgid "This task does not exist."
+msgstr "Diese Aufgabe existiert nicht."
+
+msgid "This task is not available."
+msgstr "Diese Aufgabe ist nicht verfügbar."
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Urgent"
+msgstr "Dringend"
+
+msgid "View project"
+msgstr "Projekt ansehen"
+
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
+msgid "Visible to customer"
+msgstr "Für Kunden sichtbar"
+
+msgid "Waiting for customer"
+msgstr "Wartet auf Kundenantwort"
+
+msgid "You do not have permission."
+msgstr "Sie haben keine Berechtigung."

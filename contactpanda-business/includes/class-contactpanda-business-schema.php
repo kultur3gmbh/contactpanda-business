@@ -1,0 +1,105 @@
+<?php
+
+defined( 'ABSPATH' ) || exit;
+
+final class ContactPanda_Business_Schema {
+	const VERSION = '1.0.0';
+	const OPTION = 'contactpanda_business_db_version';
+
+	public static function table_names() {
+		global $wpdb;
+		return array(
+			'projects'    => $wpdb->prefix . 'cp_business_projects',
+			'tasks'       => $wpdb->prefix . 'cp_business_tasks',
+			'comments'    => $wpdb->prefix . 'cp_business_task_comments',
+			'attachments' => $wpdb->prefix . 'cp_business_task_attachments',
+			'events'      => $wpdb->prefix . 'cp_business_task_events',
+		);
+	}
+
+	public static function maybe_upgrade() {
+		return self::VERSION === (string) get_option( self::OPTION, '' ) ? true : self::install();
+	}
+
+	public static function install() {
+		global $wpdb;
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		$t = self::table_names();
+		$c = $wpdb->get_charset_collate();
+		$sql = array(
+			"CREATE TABLE {$t['projects']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				uuid char(36) NOT NULL,
+				contact_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				company_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				customer_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				name varchar(190) NOT NULL,
+				description longtext NULL,
+				status varchar(30) NOT NULL DEFAULT 'active',
+				visibility varchar(20) NOT NULL DEFAULT 'customer',
+				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				updated_at datetime NOT NULL,
+				deleted_at datetime DEFAULT NULL,
+				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY status (status), KEY customer_user_id (customer_user_id)
+			) $c;",
+			"CREATE TABLE {$t['tasks']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				uuid char(36) NOT NULL,
+				project_id bigint(20) unsigned NOT NULL,
+				support_ticket_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				title varchar(255) NOT NULL,
+				description longtext NULL,
+				board_column varchar(30) NOT NULL DEFAULT 'open',
+				open_status varchar(30) NOT NULL DEFAULT 'new',
+				progress tinyint(3) unsigned NOT NULL DEFAULT 0,
+				priority varchar(20) NOT NULL DEFAULT 'normal',
+				category varchar(80) NOT NULL DEFAULT '',
+				assigned_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				due_at datetime DEFAULT NULL,
+				visibility varchar(20) NOT NULL DEFAULT 'customer',
+				sort_order int(11) NOT NULL DEFAULT 0,
+				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				updated_at datetime NOT NULL,
+				completed_at datetime DEFAULT NULL,
+				deleted_at datetime DEFAULT NULL,
+				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY project_board (project_id,board_column,sort_order), KEY due_at (due_at), KEY support_ticket_id (support_ticket_id)
+			) $c;",
+			"CREATE TABLE {$t['comments']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				task_id bigint(20) unsigned NOT NULL,
+				visibility varchar(20) NOT NULL DEFAULT 'customer',
+				author_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				author_contact_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				body longtext NOT NULL,
+				created_at datetime NOT NULL,
+				PRIMARY KEY  (id), KEY task_created (task_id,created_at)
+			) $c;",
+			"CREATE TABLE {$t['attachments']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				task_id bigint(20) unsigned NOT NULL,
+				comment_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				attachment_id bigint(20) unsigned NOT NULL,
+				visibility varchar(20) NOT NULL DEFAULT 'customer',
+				uploaded_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				PRIMARY KEY  (id), KEY task_id (task_id)
+			) $c;",
+			"CREATE TABLE {$t['events']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				project_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				task_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				event_type varchar(60) NOT NULL,
+				actor_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				details_json longtext NULL,
+				created_at datetime NOT NULL,
+				PRIMARY KEY  (id), KEY task_created (task_id,created_at), KEY project_created (project_id,created_at)
+			) $c;",
+		);
+		foreach ( $sql as $statement ) dbDelta( $statement );
+		foreach ( $t as $table ) if ( $table !== $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) ) ) return new WP_Error( 'contactpanda_business_schema', __( 'ContactPanda Business could not create all required tables.', 'contactpanda-business' ) );
+		update_option( self::OPTION, self::VERSION, false );
+		return true;
+	}
+}

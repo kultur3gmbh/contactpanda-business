@@ -1,0 +1,321 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ContactPanda Business 0.8.0\nContent-Type: text/plain; charset=UTF-8\n"
+
+msgid "%1$d open / %2$d total"
+msgstr ""
+
+msgid "A Business task was created from the support request."
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Add comment"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Archived"
+msgstr ""
+
+msgid "Automatic ContactPanda Business updates require a current ContactPanda Basic installation."
+msgstr ""
+
+msgid "Back to board"
+msgstr ""
+
+msgid "Back to projects"
+msgstr ""
+
+msgid "Business overview"
+msgstr ""
+
+msgid "Business task"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Column"
+msgstr ""
+
+msgid "Comment"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Company ID"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "ContactPanda Business"
+msgstr ""
+
+msgid "ContactPanda Business could not create all required tables."
+msgstr ""
+
+msgid "ContactPanda Business requires ContactPanda Basic 0.8.0 or newer."
+msgstr ""
+
+msgid "Contract management"
+msgstr ""
+
+msgid "Create a Business project before converting this support request into a task."
+msgstr ""
+
+msgid "Create project"
+msgstr ""
+
+msgid "Create task"
+msgstr ""
+
+msgid "Create task from request"
+msgstr ""
+
+msgid "Created from Support Desk request #%d."
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "Customer account"
+msgstr ""
+
+msgid "Customer management"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Due"
+msgstr ""
+
+msgid "Due by"
+msgstr ""
+
+msgid "Due today"
+msgstr ""
+
+msgid "Due tomorrow"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "In progress"
+msgstr ""
+
+msgid "Internal"
+msgstr ""
+
+msgid "Internal comment"
+msgstr ""
+
+msgid "Internal only"
+msgstr ""
+
+msgid "Invalid task movement."
+msgstr ""
+
+msgid "Low"
+msgstr ""
+
+msgid "Move this task to the trash?"
+msgstr ""
+
+msgid "Move to trash"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "No comments yet."
+msgstr ""
+
+msgid "No due date"
+msgstr ""
+
+msgid "No projects are assigned to your account."
+msgstr ""
+
+msgid "No projects have been created yet."
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Not assigned"
+msgstr ""
+
+msgid "On hold"
+msgstr ""
+
+msgid "Open"
+msgstr ""
+
+msgid "Open projects & corrections"
+msgstr ""
+
+msgid "Open status"
+msgstr ""
+
+msgid "Open tasks"
+msgstr ""
+
+msgid "Overdue: %s"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Payment management"
+msgstr ""
+
+msgid "Person ID"
+msgstr ""
+
+msgid "Plan work on a board and decide separately which tasks customers may see."
+msgstr ""
+
+msgid "Planned"
+msgstr ""
+
+msgid "Please enter a comment."
+msgstr ""
+
+msgid "Please enter a project name."
+msgstr ""
+
+msgid "Please enter a task title."
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "Project"
+msgstr ""
+
+msgid "Project and correction management"
+msgstr ""
+
+msgid "Project name"
+msgstr ""
+
+msgid "Projects"
+msgstr ""
+
+msgid "Projects & corrections"
+msgstr ""
+
+msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
+msgstr ""
+
+msgid "Question"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Save project"
+msgstr ""
+
+msgid "Save task"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search projects"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Submit a new task"
+msgstr ""
+
+msgid "Submit new tasks and follow customer-visible progress."
+msgstr ""
+
+msgid "Submit task"
+msgstr ""
+
+msgid "Subscription management"
+msgstr ""
+
+msgid "Task"
+msgstr ""
+
+msgid "Task details"
+msgstr ""
+
+msgid "Task not found."
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "The comment was added."
+msgstr ""
+
+msgid "The project was created."
+msgstr ""
+
+msgid "The support request could not be converted."
+msgstr ""
+
+msgid "The support request could not be found."
+msgstr ""
+
+msgid "The task was moved to the trash."
+msgstr ""
+
+msgid "The task was saved."
+msgstr ""
+
+msgid "This project does not exist."
+msgstr ""
+
+msgid "This task does not exist."
+msgstr ""
+
+msgid "This task is not available."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Urgent"
+msgstr ""
+
+msgid "View project"
+msgstr ""
+
+msgid "Visibility"
+msgstr ""
+
+msgid "Visible to customer"
+msgstr ""
+
+msgid "Waiting for customer"
+msgstr ""
+
+msgid "You do not have permission."
+msgstr ""
