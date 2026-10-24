@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Project, correction, customer, contract, subscription, and payment management for ContactPanda.
- * Version: 0.8.6
+ * Version: 0.8.7
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.6' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.7' );
 define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.1' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
@@ -97,6 +97,10 @@ function contactpanda_business_register_locked_actions() {
 		'contactpanda_business_task_action',
 		'contactpanda_business_save_area',
 		'contactpanda_business_export_report',
+		'contactpanda_business_save_project_step',
+		'contactpanda_business_save_project_payment',
+		'contactpanda_business_upload_project_documents',
+		'contactpanda_business_remove_project_document',
 		'contactpanda_business_upload_import',
 		'contactpanda_business_apply_import',
 	);
