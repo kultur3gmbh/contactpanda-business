@@ -108,4 +108,72 @@
 		const filterAreas = () => { if (!area) return; Array.from(area.options).forEach((option) => { option.hidden = !!option.dataset.project && option.dataset.project !== project.value; }); if (area.selectedOptions[0]?.hidden) area.value = '0'; };
 		project.addEventListener('change', filterAreas); filterAreas();
 	});
+
+	document.querySelectorAll('[data-cpb-import-bulk]').forEach((bulk) => {
+		const form = bulk.closest('form');
+		const rows = Array.from(form?.querySelectorAll('[data-cpb-import-row]') || []);
+		const selections = rows.map((row) => row.querySelector('[data-cpb-import-select]')).filter(Boolean);
+		const selectAll = form?.querySelector('[data-cpb-import-select-all]');
+		const count = bulk.querySelector('[data-cpb-import-selected-count]');
+		const project = bulk.querySelector('[data-cpb-import-bulk-project]');
+		const area = bulk.querySelector('[data-cpb-import-bulk-area]');
+		const assignee = bulk.querySelector('[data-cpb-import-bulk-assignee]');
+		const priority = bulk.querySelector('[data-cpb-import-bulk-priority]');
+		const visibility = bulk.querySelector('[data-cpb-import-bulk-visibility]');
+		const action = bulk.querySelector('[data-cpb-import-bulk-action]');
+		const dueMode = bulk.querySelector('[data-cpb-import-bulk-due-mode]');
+		const due = bulk.querySelector('[data-cpb-import-bulk-due]');
+		const updateSelection = () => {
+			const selected = selections.filter((input) => input.checked).length;
+			if (count) count.textContent = String(selected);
+			if (selectAll) {
+				selectAll.checked = selected === selections.length && selections.length > 0;
+				selectAll.indeterminate = selected > 0 && selected < selections.length;
+			}
+		};
+		const filterBulkAreas = () => {
+			if (!area || !project) return;
+			const hasProject = project.value !== '';
+			area.disabled = !hasProject;
+			Array.from(area.options).forEach((option) => {
+				option.hidden = !!option.dataset.project && (!hasProject || option.dataset.project !== project.value);
+			});
+			if (!hasProject || area.selectedOptions[0]?.hidden) area.value = '';
+		};
+		const setSelect = (field, value) => {
+			if (!field || value === '') return;
+			const option = Array.from(field.options).find((candidate) => candidate.value === value && !candidate.hidden && !candidate.disabled);
+			if (option) field.value = value;
+		};
+		selectAll?.addEventListener('change', () => {
+			selections.forEach((input) => { input.checked = selectAll.checked; });
+			updateSelection();
+		});
+		selections.forEach((input) => input.addEventListener('change', updateSelection));
+		project?.addEventListener('change', filterBulkAreas);
+		dueMode?.addEventListener('change', () => {
+			if (!due) return;
+			due.disabled = dueMode.value !== 'set';
+			if (dueMode.value !== 'set') due.value = '';
+		});
+		bulk.querySelector('[data-cpb-import-apply-bulk]')?.addEventListener('click', () => {
+			rows.forEach((row) => {
+				if (!row.querySelector('[data-cpb-import-select]')?.checked) return;
+				const rowProject = row.querySelector('[data-cpb-import-project]');
+				const rowArea = row.querySelector('[data-cpb-import-area]');
+				setSelect(rowProject, project?.value || '');
+				if (project?.value !== '') rowProject?.dispatchEvent(new Event('change'));
+				setSelect(rowArea, area?.value || '');
+				setSelect(row.querySelector('[data-cpb-import-assignee]'), assignee?.value || '');
+				setSelect(row.querySelector('[data-cpb-import-priority]'), priority?.value || '');
+				setSelect(row.querySelector('[data-cpb-import-visibility]'), visibility?.value || '');
+				setSelect(row.querySelector('[data-cpb-import-action]'), action?.value || '');
+				const rowDue = row.querySelector('[data-cpb-import-due]');
+				if (rowDue && dueMode?.value === 'clear') rowDue.value = '';
+				if (rowDue && dueMode?.value === 'set' && due?.value) rowDue.value = due.value;
+			});
+		});
+		filterBulkAreas();
+		updateSelection();
+	});
 })();
