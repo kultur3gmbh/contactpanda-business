@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.0\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.1\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d open / %2$d total"
 msgstr ""
@@ -17,10 +17,19 @@ msgstr ""
 msgid "Add comment"
 msgstr ""
 
+msgid "Agency"
+msgstr ""
+
 msgid "All"
 msgstr ""
 
 msgid "Archived"
+msgstr ""
+
+msgid "Assign one or more customer accounts, people or companies and define their role in the project."
+msgstr ""
+
+msgid "Assigned projects"
 msgstr ""
 
 msgid "Automatic ContactPanda Business updates require a current ContactPanda Basic installation."
@@ -53,10 +62,13 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-msgid "Company ID"
+msgid "Companies"
 msgstr ""
 
 msgid "Completed"
+msgstr ""
+
+msgid "Contact person"
 msgstr ""
 
 msgid "ContactPanda Business"
@@ -65,7 +77,7 @@ msgstr ""
 msgid "ContactPanda Business could not create all required tables."
 msgstr ""
 
-msgid "ContactPanda Business requires ContactPanda Basic 0.8.0 or newer."
+msgid "ContactPanda Business requires ContactPanda Basic 0.8.1 or newer."
 msgstr ""
 
 msgid "Contract management"
@@ -92,6 +104,9 @@ msgstr ""
 msgid "Customer account"
 msgstr ""
 
+msgid "Customer accounts with portal access"
+msgstr ""
+
 msgid "Customer management"
 msgstr ""
 
@@ -101,9 +116,6 @@ msgstr ""
 msgid "Done"
 msgstr ""
 
-msgid "Due"
-msgstr ""
-
 msgid "Due by"
 msgstr ""
 
@@ -111,6 +123,9 @@ msgid "Due today"
 msgstr ""
 
 msgid "Due tomorrow"
+msgstr ""
+
+msgid "Edit project"
 msgstr ""
 
 msgid "High"
@@ -134,6 +149,12 @@ msgstr ""
 msgid "Low"
 msgstr ""
 
+msgid "Manage and move tasks"
+msgstr ""
+
+msgid "Manage task"
+msgstr ""
+
 msgid "Move this task to the trash?"
 msgstr ""
 
@@ -147,6 +168,12 @@ msgid "No comments yet."
 msgstr ""
 
 msgid "No due date"
+msgstr ""
+
+msgid "No matching records are available."
+msgstr ""
+
+msgid "No project is currently assigned to this customer."
 msgstr ""
 
 msgid "No projects are assigned to your account."
@@ -167,13 +194,22 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+msgid "Open full task view"
+msgstr ""
+
 msgid "Open projects & corrections"
 msgstr ""
 
 msgid "Open status"
 msgstr ""
 
+msgid "Open task: %s"
+msgstr ""
+
 msgid "Open tasks"
+msgstr ""
+
+msgid "Other participant"
 msgstr ""
 
 msgid "Overdue: %s"
@@ -185,7 +221,7 @@ msgstr ""
 msgid "Payment management"
 msgstr ""
 
-msgid "Person ID"
+msgid "People"
 msgstr ""
 
 msgid "Plan work on a board and decide separately which tasks customers may see."
@@ -215,7 +251,16 @@ msgstr ""
 msgid "Project and correction management"
 msgstr ""
 
+msgid "Project color"
+msgstr ""
+
 msgid "Project name"
+msgstr ""
+
+msgid "Project participants"
+msgstr ""
+
+msgid "Project permissions"
 msgstr ""
 
 msgid "Projects"
@@ -230,7 +275,16 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
+msgid "Read and write"
+msgstr ""
+
+msgid "Read only"
+msgstr ""
+
 msgid "Review"
+msgstr ""
+
+msgid "Role in project"
 msgstr ""
 
 msgid "Save project"
@@ -242,7 +296,13 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Search participants"
+msgstr ""
+
 msgid "Search projects"
+msgstr ""
+
+msgid "Select participants"
 msgstr ""
 
 msgid "Status"
@@ -260,9 +320,6 @@ msgstr ""
 msgid "Subscription management"
 msgstr ""
 
-msgid "Task"
-msgstr ""
-
 msgid "Task details"
 msgstr ""
 
@@ -275,13 +332,25 @@ msgstr ""
 msgid "The comment was added."
 msgstr ""
 
+msgid "The project could not be created."
+msgstr ""
+
+msgid "The project could not be updated."
+msgstr ""
+
 msgid "The project was created."
+msgstr ""
+
+msgid "The project was updated."
 msgstr ""
 
 msgid "The support request could not be converted."
 msgstr ""
 
 msgid "The support request could not be found."
+msgstr ""
+
+msgid "The task could not be moved."
 msgstr ""
 
 msgid "The task was moved to the trash."
@@ -300,6 +369,15 @@ msgid "This task is not available."
 msgstr ""
 
 msgid "Title"
+msgstr ""
+
+msgid "Unnamed company"
+msgstr ""
+
+msgid "Unnamed person"
+msgstr ""
+
+msgid "Update task"
 msgstr ""
 
 msgid "Urgent"

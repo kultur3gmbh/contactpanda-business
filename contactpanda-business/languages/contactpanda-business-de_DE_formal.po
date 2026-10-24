@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.0\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.1\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d open / %2$d total"
 msgstr "%1$d offen / %2$d gesamt"
@@ -17,11 +17,20 @@ msgstr "Aktiv"
 msgid "Add comment"
 msgstr "Kommentar hinzufügen"
 
+msgid "Agency"
+msgstr "Agentur"
+
 msgid "All"
 msgstr "Alle"
 
 msgid "Archived"
 msgstr "Archiviert"
+
+msgid "Assign one or more customer accounts, people or companies and define their role in the project."
+msgstr "Ordnen Sie ein oder mehrere Kundenkonten, Personen oder Firmen zu und legen Sie deren Rolle im Projekt fest."
+
+msgid "Assigned projects"
+msgstr "Assigned projects"
 
 msgid "Automatic ContactPanda Business updates require a current ContactPanda Basic installation."
 msgstr "Automatische Aktualisierungen für ContactPanda Business erfordern eine aktuelle Installation von ContactPanda Basic."
@@ -53,11 +62,14 @@ msgstr "Kommentar"
 msgid "Comments"
 msgstr "Kommentare"
 
-msgid "Company ID"
-msgstr "Firmen-ID"
+msgid "Companies"
+msgstr "Firmen"
 
 msgid "Completed"
 msgstr "Abgeschlossen"
+
+msgid "Contact person"
+msgstr "Ansprechperson"
 
 msgid "ContactPanda Business"
 msgstr "ContactPanda Business"
@@ -65,8 +77,8 @@ msgstr "ContactPanda Business"
 msgid "ContactPanda Business could not create all required tables."
 msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen."
 
-msgid "ContactPanda Business requires ContactPanda Basic 0.8.0 or newer."
-msgstr "ContactPanda Business erfordert ContactPanda Basic 0.8.0 oder neuer."
+msgid "ContactPanda Business requires ContactPanda Basic 0.8.1 or newer."
+msgstr "ContactPanda Business erfordert ContactPanda Basic 0.8.1 oder neuer."
 
 msgid "Contract management"
 msgstr "Vertragsverwaltung"
@@ -92,6 +104,9 @@ msgstr "Kunde"
 msgid "Customer account"
 msgstr "Kundenkonto"
 
+msgid "Customer accounts with portal access"
+msgstr "Kundenkonten mit Portalzugang"
+
 msgid "Customer management"
 msgstr "Kundenverwaltung"
 
@@ -101,9 +116,6 @@ msgstr "Beschreibung"
 msgid "Done"
 msgstr "Erledigt"
 
-msgid "Due"
-msgstr "Fällig"
-
 msgid "Due by"
 msgstr "Zu erledigen bis"
 
@@ -112,6 +124,9 @@ msgstr "Heute fällig"
 
 msgid "Due tomorrow"
 msgstr "Morgen fällig"
+
+msgid "Edit project"
+msgstr "Projekt bearbeiten"
 
 msgid "High"
 msgstr "Hoch"
@@ -134,6 +149,12 @@ msgstr "Ungültige Aufgabenverschiebung."
 msgid "Low"
 msgstr "Niedrig"
 
+msgid "Manage and move tasks"
+msgstr "Aufgaben verwalten und verschieben"
+
+msgid "Manage task"
+msgstr "Aufgabe verwalten"
+
 msgid "Move this task to the trash?"
 msgstr "Diese Aufgabe in den Papierkorb verschieben?"
 
@@ -148,6 +169,12 @@ msgstr "Noch keine Kommentare."
 
 msgid "No due date"
 msgstr "Kein Fälligkeitsdatum"
+
+msgid "No matching records are available."
+msgstr "Es sind keine passenden Datensätze verfügbar."
+
+msgid "No project is currently assigned to this customer."
+msgstr "No project is currently assigned to this customer."
 
 msgid "No projects are assigned to your account."
 msgstr "Ihrem Konto sind keine Projekte zugeordnet."
@@ -167,14 +194,23 @@ msgstr "Ruhend"
 msgid "Open"
 msgstr "Offen"
 
+msgid "Open full task view"
+msgstr "Vollständige Aufgabenansicht öffnen"
+
 msgid "Open projects & corrections"
 msgstr "Projekte & Korrekturen öffnen"
 
 msgid "Open status"
 msgstr "Status in Offen"
 
+msgid "Open task: %s"
+msgstr "Aufgabe öffnen: %s"
+
 msgid "Open tasks"
 msgstr "Offene Aufgaben"
+
+msgid "Other participant"
+msgstr "Weitere Beteiligte"
 
 msgid "Overdue: %s"
 msgstr "Überfällig: %s"
@@ -185,8 +221,8 @@ msgstr "Übersicht"
 msgid "Payment management"
 msgstr "Zahlungsverwaltung"
 
-msgid "Person ID"
-msgstr "Personen-ID"
+msgid "People"
+msgstr "Personen"
 
 msgid "Plan work on a board and decide separately which tasks customers may see."
 msgstr "Planen Sie Arbeiten auf einem Board und legen Sie für jede Aufgabe fest, ob Kunden sie sehen dürfen."
@@ -215,8 +251,17 @@ msgstr "Projekt"
 msgid "Project and correction management"
 msgstr "Projekt- und Korrekturverwaltung"
 
+msgid "Project color"
+msgstr "Projektfarbe"
+
 msgid "Project name"
 msgstr "Projektname"
+
+msgid "Project participants"
+msgstr "Projektbeteiligte"
+
+msgid "Project permissions"
+msgstr "Projektberechtigungen"
 
 msgid "Projects"
 msgstr "Projekte"
@@ -230,8 +275,17 @@ msgstr "Projekte, Korrekturen, kundensichtbare Aufgaben, Verträge, Abonnements 
 msgid "Question"
 msgstr "Rückfrage"
 
+msgid "Read and write"
+msgstr "Lesen und schreiben"
+
+msgid "Read only"
+msgstr "Nur lesen"
+
 msgid "Review"
 msgstr "Zur Kontrolle"
+
+msgid "Role in project"
+msgstr "Rolle im Projekt"
 
 msgid "Save project"
 msgstr "Projekt speichern"
@@ -242,8 +296,14 @@ msgstr "Aufgabe speichern"
 msgid "Search"
 msgstr "Suchen"
 
+msgid "Search participants"
+msgstr "Beteiligte suchen"
+
 msgid "Search projects"
 msgstr "Projekte durchsuchen"
+
+msgid "Select participants"
+msgstr "Beteiligte auswählen"
 
 msgid "Status"
 msgstr "Status"
@@ -260,9 +320,6 @@ msgstr "Aufgabe einreichen"
 msgid "Subscription management"
 msgstr "Abonnementverwaltung"
 
-msgid "Task"
-msgstr "Aufgabe"
-
 msgid "Task details"
 msgstr "Aufgabendetails"
 
@@ -275,14 +332,26 @@ msgstr "Aufgaben"
 msgid "The comment was added."
 msgstr "Der Kommentar wurde hinzugefügt."
 
+msgid "The project could not be created."
+msgstr "Das Projekt konnte nicht erstellt werden."
+
+msgid "The project could not be updated."
+msgstr "Das Projekt konnte nicht aktualisiert werden."
+
 msgid "The project was created."
 msgstr "Das Projekt wurde erstellt."
+
+msgid "The project was updated."
+msgstr "Das Projekt wurde aktualisiert."
 
 msgid "The support request could not be converted."
 msgstr "Das Hilfeersuchen konnte nicht umgewandelt werden."
 
 msgid "The support request could not be found."
 msgstr "Das Hilfeersuchen wurde nicht gefunden."
+
+msgid "The task could not be moved."
+msgstr "Die Aufgabe konnte nicht verschoben werden."
 
 msgid "The task was moved to the trash."
 msgstr "Die Aufgabe wurde in den Papierkorb verschoben."
@@ -301,6 +370,15 @@ msgstr "Diese Aufgabe ist nicht verfügbar."
 
 msgid "Title"
 msgstr "Titel"
+
+msgid "Unnamed company"
+msgstr "Firma ohne Namen"
+
+msgid "Unnamed person"
+msgstr "Person ohne Namen"
+
+msgid "Update task"
+msgstr "Aufgabe aktualisieren"
 
 msgid "Urgent"
 msgstr "Dringend"

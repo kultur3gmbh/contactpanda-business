@@ -3,13 +3,14 @@
 defined( 'ABSPATH' ) || exit;
 
 final class ContactPanda_Business_Schema {
-	const VERSION = '1.0.0';
+	const VERSION = '1.2.0';
 	const OPTION = 'contactpanda_business_db_version';
 
 	public static function table_names() {
 		global $wpdb;
 		return array(
 			'projects'    => $wpdb->prefix . 'cp_business_projects',
+			'participants'=> $wpdb->prefix . 'cp_business_project_participants',
 			'tasks'       => $wpdb->prefix . 'cp_business_tasks',
 			'comments'    => $wpdb->prefix . 'cp_business_task_comments',
 			'attachments' => $wpdb->prefix . 'cp_business_task_attachments',
@@ -35,6 +36,7 @@ final class ContactPanda_Business_Schema {
 				customer_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				name varchar(190) NOT NULL,
 				description longtext NULL,
+				color varchar(7) NOT NULL DEFAULT '#3d5cf5',
 				status varchar(30) NOT NULL DEFAULT 'active',
 				visibility varchar(20) NOT NULL DEFAULT 'customer',
 				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
@@ -42,6 +44,17 @@ final class ContactPanda_Business_Schema {
 				updated_at datetime NOT NULL,
 				deleted_at datetime DEFAULT NULL,
 				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY status (status), KEY customer_user_id (customer_user_id)
+			) $c;",
+			"CREATE TABLE {$t['participants']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				project_id bigint(20) unsigned NOT NULL,
+				entity_type varchar(20) NOT NULL,
+				entity_id bigint(20) unsigned NOT NULL,
+				participant_role varchar(30) NOT NULL DEFAULT 'participant',
+				access_level varchar(20) NOT NULL DEFAULT 'read',
+				is_primary tinyint(1) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				PRIMARY KEY  (id), UNIQUE KEY project_entity (project_id,entity_type,entity_id), KEY entity_lookup (entity_type,entity_id), KEY project_role (project_id,participant_role)
 			) $c;",
 			"CREATE TABLE {$t['tasks']} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -99,7 +112,37 @@ final class ContactPanda_Business_Schema {
 		);
 		foreach ( $sql as $statement ) dbDelta( $statement );
 		foreach ( $t as $table ) if ( $table !== $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) ) ) return new WP_Error( 'contactpanda_business_schema', __( 'ContactPanda Business could not create all required tables.', 'contactpanda-business' ) );
+		self::migrate_legacy_participants( $t );
 		update_option( self::OPTION, self::VERSION, false );
 		return true;
+	}
+
+	private static function migrate_legacy_participants( $tables ) {
+		global $wpdb;
+		$now = current_time( 'mysql', true );
+		$projects = $wpdb->get_results( "SELECT id,contact_id,company_id,customer_user_id FROM `{$tables['projects']}`", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Internal prefix-safe table name.
+		foreach ( (array) $projects as $project ) {
+			$legacy = array(
+				array( 'person', absint( $project['contact_id'] ), 'contact', 'read' ),
+				array( 'company', absint( $project['company_id'] ), 'customer', 'read' ),
+				array( 'user', absint( $project['customer_user_id'] ), 'customer_account', 'write' ),
+			);
+			foreach ( $legacy as $participant ) {
+				if ( ! $participant[1] ) continue;
+				$wpdb->query(
+					$wpdb->prepare(
+						"INSERT IGNORE INTO `{$tables['participants']}` (project_id,entity_type,entity_id,participant_role,access_level,is_primary,created_at) VALUES (%d,%s,%d,%s,%s,1,%s)",
+						absint( $project['id'] ), $participant[0], $participant[1], $participant[2], $participant[3], $now
+					)
+				); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Internal prefix-safe table name.
+				if ( 'user' === $participant[0] ) {
+					$wpdb->update(
+						$tables['participants'],
+						array( 'access_level' => 'write' ),
+						array( 'project_id' => absint( $project['id'] ), 'entity_type' => 'user', 'entity_id' => $participant[1] )
+					);
+				}
+			}
+		}
 	}
 }
