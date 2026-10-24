@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.2\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.3\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d open / %2$d total"
 msgstr "%1$d offen / %2$d gesamt"
@@ -257,6 +257,9 @@ msgstr "Nur intern"
 msgid "Invalid task movement."
 msgstr "Ungültige Aufgabenverschiebung."
 
+msgid "List Business projects"
+msgstr "Business-Projekte auflisten"
+
 msgid "List Business projects and open task counts."
 msgstr "Listet Business-Projekte und die Anzahl offener Aufgaben auf."
 
@@ -359,6 +362,9 @@ msgstr "Aufgabe öffnen: %s"
 msgid "Open tasks"
 msgstr "Offene Aufgaben"
 
+msgid "Optional project search term."
+msgstr "Optionaler Suchbegriff für Projekte."
+
 msgid "Original source text"
 msgstr "Ursprünglicher Quelltext"
 
@@ -394,6 +400,12 @@ msgstr "Bitte geben Sie einen Projektnamen ein."
 
 msgid "Please enter a task title."
 msgstr "Bitte geben Sie einen Aufgabentitel ein."
+
+msgid "Prepare a Business import draft"
+msgstr "Business-Importentwurf vorbereiten"
+
+msgid "Prepare a Business project report"
+msgstr "Business-Projektbericht vorbereiten"
 
 msgid "Prepare links for a customer-visible HTML/PDF print view and editable Word report."
 msgstr "Bereitet Links für eine kundensichtbare HTML-/PDF-Druckansicht und einen bearbeitbaren Word-Bericht vor."
@@ -440,11 +452,17 @@ msgstr "Projekte & Korrekturen"
 msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
 msgstr "Projekte, Korrekturen, kundensichtbare Aufgaben, Verträge, Abonnements und Zahlungen sind vom Support Desk getrennt."
 
+msgid "Projects, tasks, reviewed imports, and customer reports."
+msgstr "Projekte, Aufgaben, geprüfte Importe und Kundenberichte."
+
 msgid "Provide at least one task for review."
 msgstr "Stellen Sie mindestens eine Aufgabe zur Prüfung bereit."
 
 msgid "Question"
 msgstr "Rückfrage"
+
+msgid "Read Business project"
+msgstr "Business-Projekt lesen"
 
 msgid "Read and write"
 msgstr "Lesen und schreiben"
@@ -493,6 +511,9 @@ msgstr "Aufgabe speichern"
 
 msgid "Search"
 msgstr "Suchen"
+
+msgid "Search Business tasks"
+msgstr "Business-Aufgaben durchsuchen"
 
 msgid "Search and manage tasks across all projects."
 msgstr "Suchen und verwalten Sie Aufgaben projektübergreifend."

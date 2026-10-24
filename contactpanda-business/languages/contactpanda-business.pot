@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.2\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.3\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d open / %2$d total"
 msgstr ""
@@ -257,6 +257,9 @@ msgstr ""
 msgid "Invalid task movement."
 msgstr ""
 
+msgid "List Business projects"
+msgstr ""
+
 msgid "List Business projects and open task counts."
 msgstr ""
 
@@ -359,6 +362,9 @@ msgstr ""
 msgid "Open tasks"
 msgstr ""
 
+msgid "Optional project search term."
+msgstr ""
+
 msgid "Original source text"
 msgstr ""
 
@@ -393,6 +399,12 @@ msgid "Please enter a project name."
 msgstr ""
 
 msgid "Please enter a task title."
+msgstr ""
+
+msgid "Prepare a Business import draft"
+msgstr ""
+
+msgid "Prepare a Business project report"
 msgstr ""
 
 msgid "Prepare links for a customer-visible HTML/PDF print view and editable Word report."
@@ -440,10 +452,16 @@ msgstr ""
 msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
 msgstr ""
 
+msgid "Projects, tasks, reviewed imports, and customer reports."
+msgstr ""
+
 msgid "Provide at least one task for review."
 msgstr ""
 
 msgid "Question"
+msgstr ""
+
+msgid "Read Business project"
 msgstr ""
 
 msgid "Read and write"
@@ -492,6 +510,9 @@ msgid "Save task"
 msgstr ""
 
 msgid "Search"
+msgstr ""
+
+msgid "Search Business tasks"
 msgstr ""
 
 msgid "Search and manage tasks across all projects."
