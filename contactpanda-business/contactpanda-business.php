@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Project, correction, customer, contract, subscription, and payment management for ContactPanda.
- * Version: 0.8.3
+ * Version: 0.8.4
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
@@ -15,13 +15,17 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.3' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.4' );
 define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.1' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
 
 require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-updater.php';
+require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-mcp.php';
+
+// Register Abilities API hooks before secure MCP plugins initialize the registry.
+ContactPanda_Business_MCP::register_ability_hooks();
 
 function contactpanda_business_license_modules( $modules ) {
 	$modules['business']                = __( 'ContactPanda Business', 'contactpanda-business' );
@@ -58,7 +62,6 @@ function contactpanda_business_boot() {
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-admin.php';
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-workspace.php';
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-imports.php';
-	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-mcp.php';
 	ContactPanda_Business_Schema::maybe_upgrade();
 	if ( contactpanda_business_module_entitled( 'project_management' ) ) {
 		ContactPanda_Business_Projects::boot();

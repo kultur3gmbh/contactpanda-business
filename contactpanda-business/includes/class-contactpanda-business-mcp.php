@@ -6,11 +6,19 @@ defined( 'ABSPATH' ) || exit;
 final class ContactPanda_Business_MCP {
 	const ROUTE = 'contactpanda-business/v1';
 	const AUDIT_OPTION = 'contactpanda_business_mcp_audit';
+	private static $ability_hooks_registered = false;
 
-	public static function boot() {
-		add_action( 'rest_api_init', array( __CLASS__, 'register_route' ) );
+	/** Register discovery hooks before another plugin initializes the lazy registry. */
+	public static function register_ability_hooks() {
+		if ( self::$ability_hooks_registered ) return;
+		self::$ability_hooks_registered = true;
 		add_action( 'wp_abilities_api_categories_init', array( __CLASS__, 'register_ability_category' ) );
 		add_action( 'wp_abilities_api_init', array( __CLASS__, 'register_abilities' ) );
+	}
+
+	public static function boot() {
+		self::register_ability_hooks();
+		add_action( 'rest_api_init', array( __CLASS__, 'register_route' ) );
 		if ( class_exists( 'ContactPanda_Plus_MCP' ) ) { add_filter( 'contactpanda_plus_mcp_tools', array( __CLASS__, 'extend_tools' ) ); add_filter( 'contactpanda_plus_mcp_tool_call', array( __CLASS__, 'extend_call' ), 10, 3 ); }
 	}
 
@@ -22,7 +30,7 @@ final class ContactPanda_Business_MCP {
 	 * MCP connectors. Older WordPress versions continue to use the REST route.
 	 */
 	public static function register_ability_category() {
-		if ( ! function_exists( 'wp_register_ability_category' ) ) return;
+		if ( ! function_exists( 'wp_register_ability_category' ) || ! contactpanda_business_module_entitled( 'project_management' ) ) return;
 		wp_register_ability_category(
 			'contactpanda-business',
 			array(
@@ -33,7 +41,7 @@ final class ContactPanda_Business_MCP {
 	}
 
 	public static function register_abilities() {
-		if ( ! function_exists( 'wp_register_ability' ) ) return;
+		if ( ! function_exists( 'wp_register_ability' ) || ! contactpanda_business_module_entitled( 'project_management' ) ) return;
 
 		$read_meta = array(
 			'public'       => true,

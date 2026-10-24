@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.3\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.4\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d open / %2$d total"
 msgstr "%1$d offen / %2$d gesamt"
