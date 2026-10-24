@@ -153,6 +153,35 @@ GERMAN.update({
     "Write a comment …": "Kommentar schreiben …",
 })
 
+GERMAN.update({
+    "%d project documents were added.": "%d Projektdokumente wurden hinzugefügt.",
+    "Acceptance": "Abnahme", "Acceptance document": "Abnahmeprotokoll", "Add payment": "Zahlung hinzufügen",
+    "Add project documents": "Projektdokumente hinzufügen", "Add project part": "Projektteil hinzufügen", "Add project step": "Projektschritt hinzufügen",
+    "Amount": "Betrag", "Briefing": "Briefing", "Cancelled": "Storniert", "Click to add a description.": "Klicken Sie, um eine Beschreibung hinzuzufügen.",
+    "Click to add a project description.": "Klicken Sie, um eine Projektbeschreibung hinzuzufügen.",
+    "Click to add financing details and internal notes.": "Klicken Sie, um Finanzierungsdetails und interne Notizen hinzuzufügen.",
+    "Contract": "Vertrag", "Correspondence": "Korrespondenz", "Currency": "Währung", "Document date": "Dokumentdatum", "Document type": "Dokumenttyp",
+    "Final payment": "Schlusszahlung", "Financing and notes": "Finanzierung und Notizen", "Financing and payment plan": "Finanzierungs- und Zahlungsplan", "Financing notes": "Finanzierungsnotizen",
+    "General information": "Allgemeine Informationen", "Invoice": "Rechnung", "Keep offers, contracts, order confirmations, invoices, and other files with their context.": "Verwalten Sie Angebote, Verträge, Auftragsbestätigungen, Rechnungen und weitere Dateien mit ihrem Zusammenhang.",
+    "Keep project information, documents, finances, tasks, and customer-visible progress together.": "Verwalten Sie Projektinformationen, Dokumente, Finanzen, Aufgaben und den kundensichtbaren Fortschritt gemeinsam.",
+    "No payments have been planned yet.": "Es wurden noch keine Zahlungen geplant.", "No project activity has been recorded yet.": "Es wurde noch keine Projektaktivität aufgezeichnet.",
+    "No project documents have been added yet.": "Es wurden noch keine Projektdokumente hinzugefügt.", "No project parts have been created yet.": "Es wurden noch keine Projektteile angelegt.", "Project parts": "Projektteile", "Overdue": "Überfällig",
+    "No project step": "Kein Projektschritt", "No project steps have been created yet.": "Es wurden noch keine Projektschritte angelegt.", "Notes": "Notizen",
+    "Offer": "Angebot", "Order awarded": "Auftrag vergeben", "Order confirmation": "Auftragsbestätigung", "Other document": "Weiteres Dokument", "Other milestone": "Weiterer Meilenstein",
+    "Paid": "Bezahlt", "Paid amount": "Bezahlter Betrag", "Paid date": "Zahlungsdatum", "Partially paid": "Teilweise bezahlt", "Partial payment": "Teilzahlung", "Payment": "Zahlung", "Payment title": "Bezeichnung der Zahlung",
+    "Plan partial and final payments and record when they were paid.": "Planen Sie Teil- und Schlusszahlungen und dokumentieren Sie deren Zahlung.",
+    "Please enter a payment title.": "Bitte geben Sie eine Bezeichnung für die Zahlung ein.", "Please enter a project step title.": "Bitte geben Sie einen Titel für den Projektschritt ein.",
+    "Project documents": "Projektdokumente", "Project history": "Projektverlauf", "Project overview": "Projektübersicht", "Project part": "Projektteil", "Project part / step": "Projektteil / Schritt",
+    "Project phase": "Projektphase", "Project start": "Projektstart", "Project steps": "Projektschritte", "Reference": "Referenz", "Related project step": "Zugehöriger Projektschritt", "Remove document from project": "Dokument aus dem Projekt entfernen",
+    "Remove this document from the project? The file remains available in the Media Library.": "Dieses Dokument aus dem Projekt entfernen? Die Datei bleibt in der Mediathek verfügbar.",
+    "Revised offer": "Überarbeitetes Angebot", "Save payment": "Zahlung speichern", "Save project step": "Projektschritt speichern", "Select at least one project document.": "Wählen Sie mindestens ein Projektdokument aus.",
+    "Split the project into independently responsible areas.": "Teilen Sie das Projekt in eigenständig verantwortete Bereiche.", "Step type": "Art des Projektschritts", "Target completion": "Geplanter Abschluss", "Tasks and corrections": "Aufgaben und Korrekturen",
+    "The document was removed from the project. The media file was retained.": "Das Dokument wurde aus dem Projekt entfernt. Die Mediendatei blieb erhalten.", "The payment could not be added.": "Die Zahlung konnte nicht hinzugefügt werden.", "The payment was added.": "Die Zahlung wurde hinzugefügt.",
+    "The project document could not be removed.": "Das Projektdokument konnte nicht entfernt werden.", "The project document does not exist.": "Das Projektdokument ist nicht vorhanden.", "The project step could not be added.": "Der Projektschritt konnte nicht hinzugefügt werden.", "The project step was added.": "Der Projektschritt wurde hinzugefügt.",
+    "Total budget": "Gesamtbudget", "Track offers, orders, phases, acceptance, and other milestones chronologically.": "Verfolgen Sie Angebote, Aufträge, Phasen, Abnahme und weitere Meilensteine chronologisch.", "Upload documents": "Dokumente hochladen",
+    "added a payment to the plan.": "hat eine Zahlung zum Plan hinzugefügt.", "added a project step.": "hat einen Projektschritt hinzugefügt.", "added project documents.": "hat Projektdokumente hinzugefügt.", "created the project.": "hat das Projekt erstellt.", "removed a document from the project.": "hat ein Dokument aus dem Projekt entfernt.", "updated the project information.": "hat die Projektinformationen aktualisiert.",
+})
+
 
 def quote(value):
     return '"' + value.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n') + '"'
@@ -164,8 +193,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.6\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.6\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.7\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.7\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]
