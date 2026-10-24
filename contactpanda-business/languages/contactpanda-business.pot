@@ -1,17 +1,38 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.1\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.2\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d open / %2$d total"
+msgstr ""
+
+msgid "%d%% match"
+msgstr ""
+
+msgid "A Business license is required"
 msgstr ""
 
 msgid "A Business task was created from the support request."
 msgstr ""
 
+msgid "A valid ContactPanda Business license is required."
+msgstr ""
+
+msgid "A valid ContactPanda Business license is required. Activate the license in the ContactPanda settings and try again."
+msgstr ""
+
 msgid "Actions"
 msgstr ""
 
+msgid "Activate a valid ContactPanda Business license to use projects, tasks, imports, reports, and the Business MCP interface."
+msgstr ""
+
 msgid "Active"
+msgstr ""
+
+msgid "Add area"
+msgstr ""
+
+msgid "Add as comment"
 msgstr ""
 
 msgid "Add comment"
@@ -23,7 +44,25 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+msgid "All assignees"
+msgstr ""
+
+msgid "All projects"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Apply selected tasks"
+msgstr ""
+
 msgid "Archived"
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "Area name"
 msgstr ""
 
 msgid "Assign one or more customer accounts, people or companies and define their role in the project."
@@ -32,13 +71,34 @@ msgstr ""
 msgid "Assigned projects"
 msgstr ""
 
+msgid "Assignee"
+msgstr ""
+
+msgid "Assignee and due date"
+msgstr ""
+
 msgid "Automatic ContactPanda Business updates require a current ContactPanda Basic installation."
 msgstr ""
 
 msgid "Back to board"
 msgstr ""
 
+msgid "Back to imports"
+msgstr ""
+
 msgid "Back to projects"
+msgstr ""
+
+msgid "Back to tasks"
+msgstr ""
+
+msgid "Board filters"
+msgstr ""
+
+msgid "Business MCP interface"
+msgstr ""
+
+msgid "Business license required"
 msgstr ""
 
 msgid "Business overview"
@@ -47,10 +107,16 @@ msgstr ""
 msgid "Business task"
 msgstr ""
 
+msgid "CSV, Excel, Word, text, and MCP imports always open a review list before anything is added to the live task board."
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Color"
 msgstr ""
 
 msgid "Column"
@@ -83,7 +149,16 @@ msgstr ""
 msgid "Contract management"
 msgstr ""
 
+msgid "Copy of %s"
+msgstr ""
+
 msgid "Create a Business project before converting this support request into a task."
+msgstr ""
+
+msgid "Create a review draft from extracted document items. This does not create or modify live tasks."
+msgstr ""
+
+msgid "Create new task"
 msgstr ""
 
 msgid "Create project"
@@ -95,7 +170,13 @@ msgstr ""
 msgid "Create task from request"
 msgstr ""
 
+msgid "Created"
+msgstr ""
+
 msgid "Created from Support Desk request #%d."
+msgstr ""
+
+msgid "Created: %s"
 msgstr ""
 
 msgid "Customer"
@@ -108,6 +189,15 @@ msgid "Customer accounts with portal access"
 msgstr ""
 
 msgid "Customer management"
+msgstr ""
+
+msgid "Customer response"
+msgstr ""
+
+msgid "Delete permanently"
+msgstr ""
+
+msgid "Delete project permanently"
 msgstr ""
 
 msgid "Description"
@@ -125,10 +215,31 @@ msgstr ""
 msgid "Due tomorrow"
 msgstr ""
 
+msgid "Duplicate task"
+msgstr ""
+
 msgid "Edit project"
 msgstr ""
 
+msgid "Enter an area name."
+msgstr ""
+
+msgid "Existing task"
+msgstr ""
+
 msgid "High"
+msgstr ""
+
+msgid "Import action"
+msgstr ""
+
+msgid "Import complete: %1$d tasks created, %2$d comments added, %3$d tasks updated."
+msgstr ""
+
+msgid "Import drafts"
+msgstr ""
+
+msgid "Import tasks"
 msgstr ""
 
 msgid "In progress"
@@ -146,13 +257,25 @@ msgstr ""
 msgid "Invalid task movement."
 msgstr ""
 
+msgid "List Business projects and open task counts."
+msgstr ""
+
 msgid "Low"
 msgstr ""
 
 msgid "Manage and move tasks"
 msgstr ""
 
+msgid "Manage project areas"
+msgstr ""
+
 msgid "Manage task"
+msgstr ""
+
+msgid "Move project to trash"
+msgstr ""
+
+msgid "Move task to trash"
 msgstr ""
 
 msgid "Move this task to the trash?"
@@ -161,13 +284,25 @@ msgstr ""
 msgid "Move to trash"
 msgstr ""
 
+msgid "My tasks"
+msgstr ""
+
 msgid "New"
+msgstr ""
+
+msgid "No area"
 msgstr ""
 
 msgid "No comments yet."
 msgstr ""
 
 msgid "No due date"
+msgstr ""
+
+msgid "No import drafts are available."
+msgstr ""
+
+msgid "No importable tasks were found in the file."
 msgstr ""
 
 msgid "No matching records are available."
@@ -182,10 +317,16 @@ msgstr ""
 msgid "No projects have been created yet."
 msgstr ""
 
+msgid "No tasks were found."
+msgstr ""
+
 msgid "Normal"
 msgstr ""
 
 msgid "Not assigned"
+msgstr ""
+
+msgid "Nothing is written to the task board until you confirm this list."
 msgstr ""
 
 msgid "On hold"
@@ -194,10 +335,19 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+msgid "Open existing task"
+msgstr ""
+
 msgid "Open full task view"
 msgstr ""
 
+msgid "Open license settings"
+msgstr ""
+
 msgid "Open projects & corrections"
+msgstr ""
+
+msgid "Open review"
 msgstr ""
 
 msgid "Open status"
@@ -209,6 +359,9 @@ msgstr ""
 msgid "Open tasks"
 msgstr ""
 
+msgid "Original source text"
+msgstr ""
+
 msgid "Other participant"
 msgstr ""
 
@@ -216,6 +369,9 @@ msgid "Overdue: %s"
 msgstr ""
 
 msgid "Overview"
+msgstr ""
+
+msgid "PDF / print report"
 msgstr ""
 
 msgid "Payment management"
@@ -239,6 +395,12 @@ msgstr ""
 msgid "Please enter a task title."
 msgstr ""
 
+msgid "Prepare links for a customer-visible HTML/PDF print view and editable Word report."
+msgstr ""
+
+msgid "Print or save as PDF"
+msgstr ""
+
 msgid "Priority"
 msgstr ""
 
@@ -246,6 +408,9 @@ msgid "Progress"
 msgstr ""
 
 msgid "Project"
+msgstr ""
+
+msgid "Project and area"
 msgstr ""
 
 msgid "Project and correction management"
@@ -263,6 +428,9 @@ msgstr ""
 msgid "Project permissions"
 msgstr ""
 
+msgid "Project report: %s"
+msgstr ""
+
 msgid "Projects"
 msgstr ""
 
@@ -272,16 +440,46 @@ msgstr ""
 msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
 msgstr ""
 
+msgid "Provide at least one task for review."
+msgstr ""
+
 msgid "Question"
 msgstr ""
 
 msgid "Read and write"
 msgstr ""
 
+msgid "Read one project with areas and tasks."
+msgstr ""
+
 msgid "Read only"
 msgstr ""
 
+msgid "Read project data and prepare reviewed import drafts. Changes are applied only after manual confirmation in WordPress."
+msgstr ""
+
+msgid "Reopen completed task"
+msgstr ""
+
+msgid "Reset filters"
+msgstr ""
+
+msgid "Responsible person"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Restore project"
+msgstr ""
+
 msgid "Review"
+msgstr ""
+
+msgid "Review corrections from documents, spreadsheets, or MCP before adding them to projects."
+msgstr ""
+
+msgid "Review imported tasks"
 msgstr ""
 
 msgid "Role in project"
@@ -296,13 +494,34 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Search and manage tasks across all projects."
+msgstr ""
+
 msgid "Search participants"
 msgstr ""
 
 msgid "Search projects"
 msgstr ""
 
+msgid "Search tasks"
+msgstr ""
+
+msgid "Search tasks by project, area, assignee, or status."
+msgstr ""
+
+msgid "Select a file to import."
+msgstr ""
+
 msgid "Select participants"
+msgstr ""
+
+msgid "Select project"
+msgstr ""
+
+msgid "Skip"
+msgstr ""
+
+msgid "Source"
 msgstr ""
 
 msgid "Status"
@@ -320,6 +539,9 @@ msgstr ""
 msgid "Subscription management"
 msgstr ""
 
+msgid "Task"
+msgstr ""
+
 msgid "Task details"
 msgstr ""
 
@@ -329,7 +551,49 @@ msgstr ""
 msgid "Tasks"
 msgstr ""
 
+msgid "The CSV file could not be read."
+msgstr ""
+
+msgid "The Excel workbook could not be opened."
+msgstr ""
+
+msgid "The PHP ZIP extension is required to create a Word report."
+msgstr ""
+
+msgid "The PHP ZIP extension is required to import Word or Excel files."
+msgstr ""
+
+msgid "The Word document contains no readable text."
+msgstr ""
+
+msgid "The Word document could not be opened."
+msgstr ""
+
+msgid "The Word report could not be created."
+msgstr ""
+
 msgid "The comment was added."
+msgstr ""
+
+msgid "The file was parsed. Review the tasks before importing them."
+msgstr ""
+
+msgid "The first Excel sheet could not be read."
+msgstr ""
+
+msgid "The import draft could not be created."
+msgstr ""
+
+msgid "The import draft does not exist."
+msgstr ""
+
+msgid "The project and its related records were deleted permanently."
+msgstr ""
+
+msgid "The project area could not be added."
+msgstr ""
+
+msgid "The project area was added."
 msgstr ""
 
 msgid "The project could not be created."
@@ -338,10 +602,25 @@ msgstr ""
 msgid "The project could not be updated."
 msgstr ""
 
+msgid "The project does not exist."
+msgstr ""
+
 msgid "The project was created."
 msgstr ""
 
+msgid "The project was moved to the trash."
+msgstr ""
+
+msgid "The project was restored."
+msgstr ""
+
 msgid "The project was updated."
+msgstr ""
+
+msgid "The requested project action is invalid."
+msgstr ""
+
+msgid "The requested task action is invalid."
 msgstr ""
 
 msgid "The support request could not be converted."
@@ -353,10 +632,28 @@ msgstr ""
 msgid "The task could not be moved."
 msgstr ""
 
+msgid "The task does not exist."
+msgstr ""
+
+msgid "The task was deleted permanently."
+msgstr ""
+
+msgid "The task was duplicated."
+msgstr ""
+
 msgid "The task was moved to the trash."
 msgstr ""
 
+msgid "The task was restored."
+msgstr ""
+
 msgid "The task was saved."
+msgstr ""
+
+msgid "This action also affects related records. Do you want to continue?"
+msgstr ""
+
+msgid "This file type is not supported for direct import."
 msgstr ""
 
 msgid "This project does not exist."
@@ -371,19 +668,43 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+msgid "Trash"
+msgstr ""
+
+msgid "Unassigned"
+msgstr ""
+
 msgid "Unnamed company"
 msgstr ""
 
 msgid "Unnamed person"
 msgstr ""
 
+msgid "Update existing task"
+msgstr ""
+
 msgid "Update task"
+msgstr ""
+
+msgid "Upload and review"
+msgstr ""
+
+msgid "Upload corrections or tasks"
 msgstr ""
 
 msgid "Urgent"
 msgstr ""
 
+msgid "Use"
+msgstr ""
+
+msgid "Use a WordPress application password to read projects and tasks or to create import drafts. MCP never applies a draft without confirmation in WordPress."
+msgstr ""
+
 msgid "View project"
+msgstr ""
+
+msgid "View task"
 msgstr ""
 
 msgid "Visibility"
@@ -393,6 +714,12 @@ msgid "Visible to customer"
 msgstr ""
 
 msgid "Waiting for customer"
+msgstr ""
+
+msgid "Without area"
+msgstr ""
+
+msgid "Word report"
 msgstr ""
 
 msgid "You do not have permission."
