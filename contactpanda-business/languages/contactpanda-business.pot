@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.6\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.7\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d of %2$d"
 msgstr ""
@@ -12,6 +12,9 @@ msgid "%d files could not be uploaded."
 msgstr ""
 
 msgid "%d files were added."
+msgstr ""
+
+msgid "%d project documents were added."
 msgstr ""
 
 msgid "%d runs"
@@ -30,6 +33,12 @@ msgid "A valid ContactPanda Business license is required."
 msgstr ""
 
 msgid "A valid ContactPanda Business license is required. Activate the license in the ContactPanda settings and try again."
+msgstr ""
+
+msgid "Acceptance"
+msgstr ""
+
+msgid "Acceptance document"
 msgstr ""
 
 msgid "Actions"
@@ -62,6 +71,18 @@ msgstr ""
 msgid "Add files"
 msgstr ""
 
+msgid "Add payment"
+msgstr ""
+
+msgid "Add project documents"
+msgstr ""
+
+msgid "Add project part"
+msgstr ""
+
+msgid "Add project step"
+msgstr ""
+
 msgid "Add task"
 msgstr ""
 
@@ -78,6 +99,9 @@ msgid "All projects"
 msgstr ""
 
 msgid "All statuses"
+msgstr ""
+
+msgid "Amount"
 msgstr ""
 
 msgid "Applied"
@@ -128,6 +152,9 @@ msgstr ""
 msgid "Board filters"
 msgstr ""
 
+msgid "Briefing"
+msgstr ""
+
 msgid "Bulk edit selected tasks"
 msgstr ""
 
@@ -149,7 +176,19 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "Cancelled"
+msgstr ""
+
 msgid "Checklist"
+msgstr ""
+
+msgid "Click to add a description."
+msgstr ""
+
+msgid "Click to add a project description."
+msgstr ""
+
+msgid "Click to add financing details and internal notes."
 msgstr ""
 
 msgid "Close"
@@ -191,10 +230,16 @@ msgstr ""
 msgid "ContactPanda Business requires ContactPanda Basic 0.8.1 or newer."
 msgstr ""
 
+msgid "Contract"
+msgstr ""
+
 msgid "Contract management"
 msgstr ""
 
 msgid "Copy of %s"
+msgstr ""
+
+msgid "Correspondence"
 msgstr ""
 
 msgid "Create a Business project before converting this support request into a task."
@@ -224,6 +269,9 @@ msgstr ""
 msgid "Created: %s"
 msgstr ""
 
+msgid "Currency"
+msgstr ""
+
 msgid "Customer"
 msgstr ""
 
@@ -251,10 +299,19 @@ msgstr ""
 msgid "Do not change"
 msgstr ""
 
+msgid "Document date"
+msgstr ""
+
+msgid "Document type"
+msgstr ""
+
 msgid "Done"
 msgstr ""
 
 msgid "Download file"
+msgstr ""
+
+msgid "Due"
 msgstr ""
 
 msgid "Due by"
@@ -275,9 +332,6 @@ msgstr ""
 msgid "Edit project"
 msgstr ""
 
-msgid "Edit task details"
-msgstr ""
-
 msgid "Enter a checklist item."
 msgstr ""
 
@@ -291,6 +345,21 @@ msgid "Existing task"
 msgstr ""
 
 msgid "Files"
+msgstr ""
+
+msgid "Final payment"
+msgstr ""
+
+msgid "Financing and notes"
+msgstr ""
+
+msgid "Financing and payment plan"
+msgstr ""
+
+msgid "Financing notes"
+msgstr ""
+
+msgid "General information"
 msgstr ""
 
 msgid "High"
@@ -324,6 +393,15 @@ msgid "Internal only"
 msgstr ""
 
 msgid "Invalid task movement."
+msgstr ""
+
+msgid "Invoice"
+msgstr ""
+
+msgid "Keep offers, contracts, order confirmations, invoices, and other files with their context."
+msgstr ""
+
+msgid "Keep project information, documents, finances, tasks, and customer-visible progress together."
 msgstr ""
 
 msgid "Last run: %1$s. Number of runs: %2$d."
@@ -383,9 +461,6 @@ msgstr ""
 msgid "No comments yet."
 msgstr ""
 
-msgid "No description has been added."
-msgstr ""
-
 msgid "No due date"
 msgstr ""
 
@@ -401,7 +476,25 @@ msgstr ""
 msgid "No matching records are available."
 msgstr ""
 
+msgid "No payments have been planned yet."
+msgstr ""
+
+msgid "No project activity has been recorded yet."
+msgstr ""
+
+msgid "No project documents have been added yet."
+msgstr ""
+
 msgid "No project is currently assigned to this customer."
+msgstr ""
+
+msgid "No project parts have been created yet."
+msgstr ""
+
+msgid "No project step"
+msgstr ""
+
+msgid "No project steps have been created yet."
 msgstr ""
 
 msgid "No projects are assigned to your account."
@@ -419,7 +512,13 @@ msgstr ""
 msgid "Not assigned"
 msgstr ""
 
+msgid "Notes"
+msgstr ""
+
 msgid "Nothing is written to the task board until you confirm this list."
+msgstr ""
+
+msgid "Offer"
 msgstr ""
 
 msgid "On hold"
@@ -435,9 +534,6 @@ msgid "Open"
 msgstr ""
 
 msgid "Open existing task"
-msgstr ""
-
-msgid "Open full task view"
 msgstr ""
 
 msgid "Open license settings"
@@ -461,10 +557,25 @@ msgstr ""
 msgid "Optional project search term."
 msgstr ""
 
+msgid "Order awarded"
+msgstr ""
+
+msgid "Order confirmation"
+msgstr ""
+
 msgid "Original source text"
 msgstr ""
 
+msgid "Other document"
+msgstr ""
+
+msgid "Other milestone"
+msgstr ""
+
 msgid "Other participant"
+msgstr ""
+
+msgid "Overdue"
 msgstr ""
 
 msgid "Overdue: %s"
@@ -476,13 +587,34 @@ msgstr ""
 msgid "PDF / print report"
 msgstr ""
 
+msgid "Paid"
+msgstr ""
+
+msgid "Paid amount"
+msgstr ""
+
+msgid "Paid date"
+msgstr ""
+
+msgid "Partial payment"
+msgstr ""
+
+msgid "Partially paid"
+msgstr ""
+
+msgid "Payment"
+msgstr ""
+
 msgid "Payment management"
+msgstr ""
+
+msgid "Payment title"
 msgstr ""
 
 msgid "People"
 msgstr ""
 
-msgid "Plan work on a board and decide separately which tasks customers may see."
+msgid "Plan partial and final payments and record when they were paid."
 msgstr ""
 
 msgid "Planned"
@@ -491,7 +623,13 @@ msgstr ""
 msgid "Please enter a comment."
 msgstr ""
 
+msgid "Please enter a payment title."
+msgstr ""
+
 msgid "Please enter a project name."
+msgstr ""
+
+msgid "Please enter a project step title."
 msgstr ""
 
 msgid "Please enter a task title."
@@ -527,22 +665,46 @@ msgstr ""
 msgid "Project color"
 msgstr ""
 
+msgid "Project documents"
+msgstr ""
+
+msgid "Project history"
+msgstr ""
+
 msgid "Project name"
+msgstr ""
+
+msgid "Project overview"
+msgstr ""
+
+msgid "Project part"
+msgstr ""
+
+msgid "Project part / step"
 msgstr ""
 
 msgid "Project participants"
 msgstr ""
 
+msgid "Project parts"
+msgstr ""
+
 msgid "Project permissions"
+msgstr ""
+
+msgid "Project phase"
 msgstr ""
 
 msgid "Project report: %s"
 msgstr ""
 
-msgid "Projects"
+msgid "Project start"
 msgstr ""
 
-msgid "Projects & corrections"
+msgid "Project steps"
+msgstr ""
+
+msgid "Projects"
 msgstr ""
 
 msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
@@ -575,10 +737,22 @@ msgstr ""
 msgid "Ready for review"
 msgstr ""
 
+msgid "Reference"
+msgstr ""
+
+msgid "Related project step"
+msgstr ""
+
+msgid "Remove document from project"
+msgstr ""
+
 msgid "Remove due date"
 msgstr ""
 
 msgid "Remove file from task"
+msgstr ""
+
+msgid "Remove this document from the project? The file remains available in the Media Library."
 msgstr ""
 
 msgid "Remove this file from the task? The file remains available in the Media Library."
@@ -608,13 +782,22 @@ msgstr ""
 msgid "Review imported tasks"
 msgstr ""
 
+msgid "Revised offer"
+msgstr ""
+
 msgid "Role in project"
 msgstr ""
 
 msgid "Running it again can create duplicate tasks or repeat comments and updates."
 msgstr ""
 
+msgid "Save payment"
+msgstr ""
+
 msgid "Save project"
+msgstr ""
+
+msgid "Save project step"
 msgstr ""
 
 msgid "Save task"
@@ -647,6 +830,9 @@ msgstr ""
 msgid "Select at least one file."
 msgstr ""
 
+msgid "Select at least one project document."
+msgstr ""
+
 msgid "Select one or more files or drag them here."
 msgstr ""
 
@@ -668,7 +854,13 @@ msgstr ""
 msgid "Source"
 msgstr ""
 
+msgid "Split the project into independently responsible areas."
+msgstr ""
+
 msgid "Status"
+msgstr ""
+
+msgid "Step type"
 msgstr ""
 
 msgid "Submit a new task"
@@ -681,6 +873,9 @@ msgid "Submit task"
 msgstr ""
 
 msgid "Subscription management"
+msgstr ""
+
+msgid "Target completion"
 msgstr ""
 
 msgid "Task"
@@ -696,6 +891,9 @@ msgid "Task title"
 msgstr ""
 
 msgid "Tasks"
+msgstr ""
+
+msgid "Tasks and corrections"
 msgstr ""
 
 msgid "The CSV file could not be read."
@@ -734,6 +932,9 @@ msgstr ""
 msgid "The comment was added."
 msgstr ""
 
+msgid "The document was removed from the project. The media file was retained."
+msgstr ""
+
 msgid "The file link could not be removed."
 msgstr ""
 
@@ -752,6 +953,12 @@ msgstr ""
 msgid "The import draft does not exist."
 msgstr ""
 
+msgid "The payment could not be added."
+msgstr ""
+
+msgid "The payment was added."
+msgstr ""
+
 msgid "The project and its related records were deleted permanently."
 msgstr ""
 
@@ -767,7 +974,19 @@ msgstr ""
 msgid "The project could not be updated."
 msgstr ""
 
+msgid "The project document could not be removed."
+msgstr ""
+
+msgid "The project document does not exist."
+msgstr ""
+
 msgid "The project does not exist."
+msgstr ""
+
+msgid "The project step could not be added."
+msgstr ""
+
+msgid "The project step was added."
 msgstr ""
 
 msgid "The project was created."
@@ -839,6 +1058,12 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+msgid "Total budget"
+msgstr ""
+
+msgid "Track offers, orders, phases, acceptance, and other milestones chronologically."
+msgstr ""
+
 msgid "Trash"
 msgstr ""
 
@@ -864,6 +1089,9 @@ msgid "Upload and review"
 msgstr ""
 
 msgid "Upload corrections or tasks"
+msgstr ""
+
+msgid "Upload documents"
 msgstr ""
 
 msgid "Upload files"
@@ -911,7 +1139,19 @@ msgstr ""
 msgid "added a comment."
 msgstr ""
 
+msgid "added a payment to the plan."
+msgstr ""
+
+msgid "added a project step."
+msgstr ""
+
 msgid "added files."
+msgstr ""
+
+msgid "added project documents."
+msgstr ""
+
+msgid "created the project."
 msgstr ""
 
 msgid "created the task."
@@ -923,6 +1163,9 @@ msgstr ""
 msgid "moved the task."
 msgstr ""
 
+msgid "removed a document from the project."
+msgstr ""
+
 msgid "removed a file from the task."
 msgstr ""
 
@@ -930,6 +1173,9 @@ msgid "tasks selected"
 msgstr ""
 
 msgid "updated the checklist."
+msgstr ""
+
+msgid "updated the project information."
 msgstr ""
 
 msgid "updated the task."

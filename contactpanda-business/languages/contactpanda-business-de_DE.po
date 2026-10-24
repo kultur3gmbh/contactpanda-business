@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.6\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.7\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
@@ -13,6 +13,9 @@ msgstr "%d Dateien konnten nicht hochgeladen werden."
 
 msgid "%d files were added."
 msgstr "%d Dateien wurden hinzugefügt."
+
+msgid "%d project documents were added."
+msgstr "%d Projektdokumente wurden hinzugefügt."
 
 msgid "%d runs"
 msgstr "%d Durchläufe"
@@ -31,6 +34,12 @@ msgstr "Eine gültige ContactPanda-Business-Lizenz ist erforderlich."
 
 msgid "A valid ContactPanda Business license is required. Activate the license in the ContactPanda settings and try again."
 msgstr "Eine gültige ContactPanda-Business-Lizenz ist erforderlich. Aktivieren Sie die Lizenz in den ContactPanda-Einstellungen und versuchen Sie es erneut."
+
+msgid "Acceptance"
+msgstr "Abnahme"
+
+msgid "Acceptance document"
+msgstr "Abnahmeprotokoll"
 
 msgid "Actions"
 msgstr "Aktionen"
@@ -62,6 +71,18 @@ msgstr "Kommentar hinzufügen"
 msgid "Add files"
 msgstr "Dateien hinzufügen"
 
+msgid "Add payment"
+msgstr "Zahlung hinzufügen"
+
+msgid "Add project documents"
+msgstr "Projektdokumente hinzufügen"
+
+msgid "Add project part"
+msgstr "Projektteil hinzufügen"
+
+msgid "Add project step"
+msgstr "Projektschritt hinzufügen"
+
 msgid "Add task"
 msgstr "Aufgabe hinzufügen"
 
@@ -79,6 +100,9 @@ msgstr "Alle Projekte"
 
 msgid "All statuses"
 msgstr "Alle Status"
+
+msgid "Amount"
+msgstr "Betrag"
 
 msgid "Applied"
 msgstr "Durchgeführt"
@@ -128,6 +152,9 @@ msgstr "Zurück zu den Aufgaben"
 msgid "Board filters"
 msgstr "Board-Filter"
 
+msgid "Briefing"
+msgstr "Briefing"
+
 msgid "Bulk edit selected tasks"
 msgstr "Ausgewählte Aufgaben gemeinsam bearbeiten"
 
@@ -149,8 +176,20 @@ msgstr "CSV-, Excel-, Word-, Text- und MCP-Importe öffnen immer zuerst eine Pr�
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Cancelled"
+msgstr "Storniert"
+
 msgid "Checklist"
 msgstr "Checkliste"
+
+msgid "Click to add a description."
+msgstr "Klicken Sie, um eine Beschreibung hinzuzufügen."
+
+msgid "Click to add a project description."
+msgstr "Klicken Sie, um eine Projektbeschreibung hinzuzufügen."
+
+msgid "Click to add financing details and internal notes."
+msgstr "Klicken Sie, um Finanzierungsdetails und interne Notizen hinzuzufügen."
 
 msgid "Close"
 msgstr "Schließen"
@@ -191,11 +230,17 @@ msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstelle
 msgid "ContactPanda Business requires ContactPanda Basic 0.8.1 or newer."
 msgstr "ContactPanda Business erfordert ContactPanda Basic 0.8.1 oder neuer."
 
+msgid "Contract"
+msgstr "Vertrag"
+
 msgid "Contract management"
 msgstr "Vertragsverwaltung"
 
 msgid "Copy of %s"
 msgstr "Kopie von %s"
+
+msgid "Correspondence"
+msgstr "Korrespondenz"
 
 msgid "Create a Business project before converting this support request into a task."
 msgstr "Erstellen Sie zuerst ein Business-Projekt, bevor Sie dieses Hilfeersuchen in eine Aufgabe umwandeln."
@@ -224,6 +269,9 @@ msgstr "Aus dem Hilfeersuchen #%d erstellt."
 msgid "Created: %s"
 msgstr "Erstellt: %s"
 
+msgid "Currency"
+msgstr "Währung"
+
 msgid "Customer"
 msgstr "Kunde"
 
@@ -251,11 +299,20 @@ msgstr "Beschreibung"
 msgid "Do not change"
 msgstr "Nicht ändern"
 
+msgid "Document date"
+msgstr "Dokumentdatum"
+
+msgid "Document type"
+msgstr "Dokumenttyp"
+
 msgid "Done"
 msgstr "Erledigt"
 
 msgid "Download file"
 msgstr "Datei herunterladen"
+
+msgid "Due"
+msgstr "Fällig"
 
 msgid "Due by"
 msgstr "Zu erledigen bis"
@@ -275,9 +332,6 @@ msgstr "Aufgabe duplizieren"
 msgid "Edit project"
 msgstr "Projekt bearbeiten"
 
-msgid "Edit task details"
-msgstr "Aufgabendetails bearbeiten"
-
 msgid "Enter a checklist item."
 msgstr "Geben Sie einen Checklistenpunkt ein."
 
@@ -292,6 +346,21 @@ msgstr "Bestehende Aufgabe"
 
 msgid "Files"
 msgstr "Dateien"
+
+msgid "Final payment"
+msgstr "Schlusszahlung"
+
+msgid "Financing and notes"
+msgstr "Finanzierung und Notizen"
+
+msgid "Financing and payment plan"
+msgstr "Finanzierungs- und Zahlungsplan"
+
+msgid "Financing notes"
+msgstr "Finanzierungsnotizen"
+
+msgid "General information"
+msgstr "Allgemeine Informationen"
 
 msgid "High"
 msgstr "Hoch"
@@ -325,6 +394,15 @@ msgstr "Nur intern"
 
 msgid "Invalid task movement."
 msgstr "Ungültige Aufgabenverschiebung."
+
+msgid "Invoice"
+msgstr "Rechnung"
+
+msgid "Keep offers, contracts, order confirmations, invoices, and other files with their context."
+msgstr "Verwalten Sie Angebote, Verträge, Auftragsbestätigungen, Rechnungen und weitere Dateien mit ihrem Zusammenhang."
+
+msgid "Keep project information, documents, finances, tasks, and customer-visible progress together."
+msgstr "Verwalten Sie Projektinformationen, Dokumente, Finanzen, Aufgaben und den kundensichtbaren Fortschritt gemeinsam."
 
 msgid "Last run: %1$s. Number of runs: %2$d."
 msgstr "Letzter Durchlauf: %1$s. Anzahl der Durchläufe: %2$d."
@@ -383,9 +461,6 @@ msgstr "Es wurden noch keine Checklistenpunkte hinzugefügt."
 msgid "No comments yet."
 msgstr "Noch keine Kommentare."
 
-msgid "No description has been added."
-msgstr "Es wurde noch keine Beschreibung hinzugefügt."
-
 msgid "No due date"
 msgstr "Kein Fälligkeitsdatum"
 
@@ -401,8 +476,26 @@ msgstr "In der Datei wurden keine importierbaren Aufgaben gefunden."
 msgid "No matching records are available."
 msgstr "Es sind keine passenden Datensätze verfügbar."
 
+msgid "No payments have been planned yet."
+msgstr "Es wurden noch keine Zahlungen geplant."
+
+msgid "No project activity has been recorded yet."
+msgstr "Es wurde noch keine Projektaktivität aufgezeichnet."
+
+msgid "No project documents have been added yet."
+msgstr "Es wurden noch keine Projektdokumente hinzugefügt."
+
 msgid "No project is currently assigned to this customer."
 msgstr "Diesem Kunden ist derzeit kein Projekt zugeordnet."
+
+msgid "No project parts have been created yet."
+msgstr "Es wurden noch keine Projektteile angelegt."
+
+msgid "No project step"
+msgstr "Kein Projektschritt"
+
+msgid "No project steps have been created yet."
+msgstr "Es wurden noch keine Projektschritte angelegt."
 
 msgid "No projects are assigned to your account."
 msgstr "Ihrem Konto sind keine Projekte zugeordnet."
@@ -419,8 +512,14 @@ msgstr "Normal"
 msgid "Not assigned"
 msgstr "Nicht zugeordnet"
 
+msgid "Notes"
+msgstr "Notizen"
+
 msgid "Nothing is written to the task board until you confirm this list."
 msgstr "In das Aufgaben-Board wird nichts übernommen, bevor Sie diese Liste bestätigen."
+
+msgid "Offer"
+msgstr "Angebot"
 
 msgid "On hold"
 msgstr "Ruhend"
@@ -436,9 +535,6 @@ msgstr "Offen"
 
 msgid "Open existing task"
 msgstr "Bestehende Aufgabe öffnen"
-
-msgid "Open full task view"
-msgstr "Vollständige Aufgabenansicht öffnen"
 
 msgid "Open license settings"
 msgstr "Lizenzeinstellungen öffnen"
@@ -461,11 +557,26 @@ msgstr "Offene Aufgaben"
 msgid "Optional project search term."
 msgstr "Optionaler Suchbegriff für Projekte."
 
+msgid "Order awarded"
+msgstr "Auftrag vergeben"
+
+msgid "Order confirmation"
+msgstr "Auftragsbestätigung"
+
 msgid "Original source text"
 msgstr "Ursprünglicher Quelltext"
 
+msgid "Other document"
+msgstr "Weiteres Dokument"
+
+msgid "Other milestone"
+msgstr "Weiterer Meilenstein"
+
 msgid "Other participant"
 msgstr "Weitere Beteiligte"
+
+msgid "Overdue"
+msgstr "Überfällig"
 
 msgid "Overdue: %s"
 msgstr "Überfällig: %s"
@@ -476,14 +587,35 @@ msgstr "Übersicht"
 msgid "PDF / print report"
 msgstr "PDF-/Druckbericht"
 
+msgid "Paid"
+msgstr "Bezahlt"
+
+msgid "Paid amount"
+msgstr "Bezahlter Betrag"
+
+msgid "Paid date"
+msgstr "Zahlungsdatum"
+
+msgid "Partial payment"
+msgstr "Teilzahlung"
+
+msgid "Partially paid"
+msgstr "Teilweise bezahlt"
+
+msgid "Payment"
+msgstr "Zahlung"
+
 msgid "Payment management"
 msgstr "Zahlungsverwaltung"
+
+msgid "Payment title"
+msgstr "Bezeichnung der Zahlung"
 
 msgid "People"
 msgstr "Personen"
 
-msgid "Plan work on a board and decide separately which tasks customers may see."
-msgstr "Planen Sie Arbeiten auf einem Board und legen Sie für jede Aufgabe fest, ob Kunden sie sehen dürfen."
+msgid "Plan partial and final payments and record when they were paid."
+msgstr "Planen Sie Teil- und Schlusszahlungen und dokumentieren Sie deren Zahlung."
 
 msgid "Planned"
 msgstr "Geplant"
@@ -491,8 +623,14 @@ msgstr "Geplant"
 msgid "Please enter a comment."
 msgstr "Bitte geben Sie einen Kommentar ein."
 
+msgid "Please enter a payment title."
+msgstr "Bitte geben Sie eine Bezeichnung für die Zahlung ein."
+
 msgid "Please enter a project name."
 msgstr "Bitte geben Sie einen Projektnamen ein."
+
+msgid "Please enter a project step title."
+msgstr "Bitte geben Sie einen Titel für den Projektschritt ein."
 
 msgid "Please enter a task title."
 msgstr "Bitte geben Sie einen Aufgabentitel ein."
@@ -527,23 +665,47 @@ msgstr "Projekt- und Korrekturverwaltung"
 msgid "Project color"
 msgstr "Projektfarbe"
 
+msgid "Project documents"
+msgstr "Projektdokumente"
+
+msgid "Project history"
+msgstr "Projektverlauf"
+
 msgid "Project name"
 msgstr "Projektname"
+
+msgid "Project overview"
+msgstr "Projektübersicht"
+
+msgid "Project part"
+msgstr "Projektteil"
+
+msgid "Project part / step"
+msgstr "Projektteil / Schritt"
 
 msgid "Project participants"
 msgstr "Projektbeteiligte"
 
+msgid "Project parts"
+msgstr "Projektteile"
+
 msgid "Project permissions"
 msgstr "Projektberechtigungen"
+
+msgid "Project phase"
+msgstr "Projektphase"
 
 msgid "Project report: %s"
 msgstr "Projektbericht: %s"
 
+msgid "Project start"
+msgstr "Projektstart"
+
+msgid "Project steps"
+msgstr "Projektschritte"
+
 msgid "Projects"
 msgstr "Projekte"
-
-msgid "Projects & corrections"
-msgstr "Projekte & Korrekturen"
 
 msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
 msgstr "Projekte, Korrekturen, kundensichtbare Aufgaben, Verträge, Abonnements und Zahlungen sind vom Support Desk getrennt."
@@ -575,11 +737,23 @@ msgstr "Liest Projektdaten und bereitet geprüfte Importentwürfe vor. Änderung
 msgid "Ready for review"
 msgstr "Zur Prüfung bereit"
 
+msgid "Reference"
+msgstr "Referenz"
+
+msgid "Related project step"
+msgstr "Zugehöriger Projektschritt"
+
+msgid "Remove document from project"
+msgstr "Dokument aus dem Projekt entfernen"
+
 msgid "Remove due date"
 msgstr "Fälligkeitsdatum entfernen"
 
 msgid "Remove file from task"
 msgstr "Datei von der Aufgabe entfernen"
+
+msgid "Remove this document from the project? The file remains available in the Media Library."
+msgstr "Dieses Dokument aus dem Projekt entfernen? Die Datei bleibt in der Mediathek verfügbar."
 
 msgid "Remove this file from the task? The file remains available in the Media Library."
 msgstr "Diese Datei von der Aufgabe entfernen? Die Datei bleibt in der Mediathek verfügbar."
@@ -608,14 +782,23 @@ msgstr "Prüfen Sie Korrekturen aus Dokumenten, Tabellen oder MCP, bevor sie in 
 msgid "Review imported tasks"
 msgstr "Importierte Aufgaben prüfen"
 
+msgid "Revised offer"
+msgstr "Überarbeitetes Angebot"
+
 msgid "Role in project"
 msgstr "Rolle im Projekt"
 
 msgid "Running it again can create duplicate tasks or repeat comments and updates."
 msgstr "Ein erneuter Durchlauf kann doppelte Aufgaben erzeugen oder Kommentare und Aktualisierungen wiederholen."
 
+msgid "Save payment"
+msgstr "Zahlung speichern"
+
 msgid "Save project"
 msgstr "Projekt speichern"
+
+msgid "Save project step"
+msgstr "Projektschritt speichern"
 
 msgid "Save task"
 msgstr "Aufgabe speichern"
@@ -647,6 +830,9 @@ msgstr "Wählen Sie eine Datei für den Import aus."
 msgid "Select at least one file."
 msgstr "Wählen Sie mindestens eine Datei aus."
 
+msgid "Select at least one project document."
+msgstr "Wählen Sie mindestens ein Projektdokument aus."
+
 msgid "Select one or more files or drag them here."
 msgstr "Wählen Sie eine oder mehrere Dateien aus oder ziehen Sie sie hierher."
 
@@ -668,8 +854,14 @@ msgstr "Überspringen"
 msgid "Source"
 msgstr "Quelle"
 
+msgid "Split the project into independently responsible areas."
+msgstr "Teilen Sie das Projekt in eigenständig verantwortete Bereiche."
+
 msgid "Status"
 msgstr "Status"
+
+msgid "Step type"
+msgstr "Art des Projektschritts"
 
 msgid "Submit a new task"
 msgstr "Neue Aufgabe einreichen"
@@ -682,6 +874,9 @@ msgstr "Aufgabe einreichen"
 
 msgid "Subscription management"
 msgstr "Abonnementverwaltung"
+
+msgid "Target completion"
+msgstr "Geplanter Abschluss"
 
 msgid "Task"
 msgstr "Aufgabe"
@@ -697,6 +892,9 @@ msgstr "Aufgabentitel"
 
 msgid "Tasks"
 msgstr "Aufgaben"
+
+msgid "Tasks and corrections"
+msgstr "Aufgaben und Korrekturen"
 
 msgid "The CSV file could not be read."
 msgstr "Die CSV-Datei konnte nicht gelesen werden."
@@ -734,6 +932,9 @@ msgstr "Die Checkliste wurde aktualisiert."
 msgid "The comment was added."
 msgstr "Der Kommentar wurde hinzugefügt."
 
+msgid "The document was removed from the project. The media file was retained."
+msgstr "Das Dokument wurde aus dem Projekt entfernt. Die Mediendatei blieb erhalten."
+
 msgid "The file link could not be removed."
 msgstr "Die Dateiverknüpfung konnte nicht entfernt werden."
 
@@ -752,6 +953,12 @@ msgstr "Der Importentwurf konnte nicht erstellt werden."
 msgid "The import draft does not exist."
 msgstr "Der Importentwurf ist nicht vorhanden."
 
+msgid "The payment could not be added."
+msgstr "Die Zahlung konnte nicht hinzugefügt werden."
+
+msgid "The payment was added."
+msgstr "Die Zahlung wurde hinzugefügt."
+
 msgid "The project and its related records were deleted permanently."
 msgstr "Das Projekt und seine verknüpften Datensätze wurden endgültig gelöscht."
 
@@ -767,8 +974,20 @@ msgstr "Das Projekt konnte nicht erstellt werden."
 msgid "The project could not be updated."
 msgstr "Das Projekt konnte nicht aktualisiert werden."
 
+msgid "The project document could not be removed."
+msgstr "Das Projektdokument konnte nicht entfernt werden."
+
+msgid "The project document does not exist."
+msgstr "Das Projektdokument ist nicht vorhanden."
+
 msgid "The project does not exist."
 msgstr "Das Projekt ist nicht vorhanden."
+
+msgid "The project step could not be added."
+msgstr "Der Projektschritt konnte nicht hinzugefügt werden."
+
+msgid "The project step was added."
+msgstr "Der Projektschritt wurde hinzugefügt."
 
 msgid "The project was created."
 msgstr "Das Projekt wurde erstellt."
@@ -839,6 +1058,12 @@ msgstr "Diese Aufgabe ist nicht verfügbar."
 msgid "Title"
 msgstr "Titel"
 
+msgid "Total budget"
+msgstr "Gesamtbudget"
+
+msgid "Track offers, orders, phases, acceptance, and other milestones chronologically."
+msgstr "Verfolgen Sie Angebote, Aufträge, Phasen, Abnahme und weitere Meilensteine chronologisch."
+
 msgid "Trash"
 msgstr "Papierkorb"
 
@@ -865,6 +1090,9 @@ msgstr "Hochladen und prüfen"
 
 msgid "Upload corrections or tasks"
 msgstr "Korrekturen oder Aufgaben hochladen"
+
+msgid "Upload documents"
+msgstr "Dokumente hochladen"
 
 msgid "Upload files"
 msgstr "Dateien hochladen"
@@ -911,8 +1139,20 @@ msgstr "hat einen Checklistenpunkt hinzugefügt."
 msgid "added a comment."
 msgstr "hat einen Kommentar hinzugefügt."
 
+msgid "added a payment to the plan."
+msgstr "hat eine Zahlung zum Plan hinzugefügt."
+
+msgid "added a project step."
+msgstr "hat einen Projektschritt hinzugefügt."
+
 msgid "added files."
 msgstr "hat Dateien hinzugefügt."
+
+msgid "added project documents."
+msgstr "hat Projektdokumente hinzugefügt."
+
+msgid "created the project."
+msgstr "hat das Projekt erstellt."
 
 msgid "created the task."
 msgstr "hat die Aufgabe erstellt."
@@ -923,6 +1163,9 @@ msgstr "hat die Aufgabe nach „%s“ verschoben."
 msgid "moved the task."
 msgstr "hat die Aufgabe verschoben."
 
+msgid "removed a document from the project."
+msgstr "hat ein Dokument aus dem Projekt entfernt."
+
 msgid "removed a file from the task."
 msgstr "hat eine Datei von der Aufgabe entfernt."
 
@@ -931,6 +1174,9 @@ msgstr "Aufgaben ausgewählt"
 
 msgid "updated the checklist."
 msgstr "hat die Checkliste aktualisiert."
+
+msgid "updated the project information."
+msgstr "hat die Projektinformationen aktualisiert."
 
 msgid "updated the task."
 msgstr "hat die Aufgabe aktualisiert."
