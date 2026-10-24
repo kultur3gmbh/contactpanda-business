@@ -89,6 +89,9 @@ GERMAN.update({
     "Prepare a Business import draft": "Business-Importentwurf vorbereiten", "Prepare a Business project report": "Business-Projektbericht vorbereiten",
     "Projects, tasks, reviewed imports, and customer reports.": "Projekte, Aufgaben, geprüfte Importe und Kundenberichte.",
     "Read Business project": "Business-Projekt lesen", "Search Business tasks": "Business-Aufgaben durchsuchen",
+	"Apply values to selected rows": "Werte auf ausgewählte Zeilen anwenden", "Bulk edit selected tasks": "Ausgewählte Aufgaben gemeinsam bearbeiten",
+	"Do not change": "Nicht ändern", "Due date": "Fälligkeitsdatum", "Remove due date": "Fälligkeitsdatum entfernen",
+	"Set due date": "Fälligkeitsdatum festlegen", "tasks selected": "Aufgaben ausgewählt",
 })
 
 
@@ -102,8 +105,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.4\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.4\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.5\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.5\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]
