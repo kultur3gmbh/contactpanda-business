@@ -94,6 +94,65 @@ GERMAN.update({
 	"Set due date": "Fälligkeitsdatum festlegen", "tasks selected": "Aufgaben ausgewählt",
 })
 
+GERMAN.update({
+    "%1$d of %2$d": "%1$d von %2$d",
+    "%d files could not be uploaded.": "%d Dateien konnten nicht hochgeladen werden.",
+    "%d files were added.": "%d Dateien wurden hinzugefügt.",
+    "%d runs": "%d Durchläufe",
+    "Activity": "Aktivität",
+    "Add": "Hinzufügen",
+    "Add checklist item …": "Checklistenpunkt hinzufügen …",
+    "Add files": "Dateien hinzufügen",
+    "Add task": "Aufgabe hinzufügen",
+    "added a checklist item.": "hat einen Checklistenpunkt hinzugefügt.",
+    "added a comment.": "hat einen Kommentar hinzugefügt.",
+    "added files.": "hat Dateien hinzugefügt.",
+    "Applied": "Durchgeführt",
+    "Checklist": "Checkliste",
+    "Comments & activity": "Kommentare & Aktivität",
+    "Confirm the warning before running an applied import again.": "Bestätigen Sie den Warnhinweis, bevor Sie einen bereits durchgeführten Import erneut ausführen.",
+    "created the task.": "hat die Aufgabe erstellt.",
+    "Download file": "Datei herunterladen",
+    "Edit task details": "Aufgabendetails bearbeiten",
+    "Enter a checklist item.": "Geben Sie einen Checklistenpunkt ein.",
+    "Enter a task title …": "Aufgabentitel eingeben …",
+    "Files": "Dateien",
+    "I understand the warning and want to run this import again.": "Ich habe den Warnhinweis verstanden und möchte diesen Import erneut ausführen.",
+    "Last run: %1$s. Number of runs: %2$d.": "Letzter Durchlauf: %1$s. Anzahl der Durchläufe: %2$d.",
+    "Mark checklist item complete": "Checklistenpunkt als erledigt markieren",
+    "Mark checklist item incomplete": "Checklistenpunkt als offen markieren",
+    "moved the task.": "hat die Aufgabe verschoben.",
+    "moved the task to “%s”.": "hat die Aufgabe nach „%s“ verschoben.",
+    "No activity has been recorded yet.": "Es wurde noch keine Aktivität aufgezeichnet.",
+    "No checklist items have been added yet.": "Es wurden noch keine Checklistenpunkte hinzugefügt.",
+    "No description has been added.": "Es wurde noch keine Beschreibung hinzugefügt.",
+    "No files have been attached yet.": "Es wurden noch keine Dateien angehängt.",
+    "One file could not be uploaded.": "Eine Datei konnte nicht hochgeladen werden.",
+    "One file was added.": "Eine Datei wurde hinzugefügt.",
+    "Ready for review": "Zur Prüfung bereit",
+    "Remove file from task": "Datei von der Aufgabe entfernen",
+    "Remove this file from the task? The file remains available in the Media Library.": "Diese Datei von der Aufgabe entfernen? Die Datei bleibt in der Mediathek verfügbar.",
+    "removed a file from the task.": "hat eine Datei von der Aufgabe entfernt.",
+    "Running it again can create duplicate tasks or repeat comments and updates.": "Ein erneuter Durchlauf kann doppelte Aufgaben erzeugen oder Kommentare und Aktualisierungen wiederholen.",
+    "Select at least one file.": "Wählen Sie mindestens eine Datei aus.",
+    "Select one or more files.": "Wählen Sie eine oder mehrere Dateien aus.",
+    "Select one or more files or drag them here.": "Wählen Sie eine oder mehrere Dateien aus oder ziehen Sie sie hierher.",
+    "Task title": "Aufgabentitel",
+    "The checklist could not be updated.": "Die Checkliste konnte nicht aktualisiert werden.",
+    "The checklist item could not be added.": "Der Checklistenpunkt konnte nicht hinzugefügt werden.",
+    "The checklist item was added.": "Der Checklistenpunkt wurde hinzugefügt.",
+    "The checklist was updated.": "Die Checkliste wurde aktualisiert.",
+    "The file link could not be removed.": "Die Dateiverknüpfung konnte nicht entfernt werden.",
+    "The file was removed from the task. It remains in the Media Library.": "Die Datei wurde von der Aufgabe entfernt. Sie bleibt in der Mediathek verfügbar.",
+    "This import has already been applied.": "Dieser Import wurde bereits durchgeführt.",
+    "This import has already been applied. Do you really want to run it again?": "Dieser Import wurde bereits durchgeführt. Möchten Sie ihn wirklich erneut ausführen?",
+    "Unknown time": "Unbekannter Zeitpunkt",
+    "updated the checklist.": "hat die Checkliste aktualisiert.",
+    "updated the task.": "hat die Aufgabe aktualisiert.",
+    "Upload files": "Dateien hochladen",
+    "Write a comment …": "Kommentar schreiben …",
+})
+
 
 def quote(value):
     return '"' + value.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n') + '"'
@@ -105,8 +164,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.5\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.5\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.6\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.6\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]
