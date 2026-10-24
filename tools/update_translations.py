@@ -49,6 +49,44 @@ GERMAN = {
     "You do not have permission.": "Sie haben keine Berechtigung.",
 }
 
+GERMAN.update({
+    "%d%% match": "%d %% Übereinstimmung",
+    "A Business license is required": "Eine Business-Lizenz ist erforderlich",
+    "A valid ContactPanda Business license is required.": "Eine gültige ContactPanda-Business-Lizenz ist erforderlich.",
+    "Activate a valid ContactPanda Business license to use projects, tasks, imports, reports, and the Business MCP interface.": "Aktivieren Sie eine gültige ContactPanda-Business-Lizenz, um Projekte, Aufgaben, Importe, Berichte und die Business-MCP-Schnittstelle zu verwenden.",
+    "Add area": "Teilbereich hinzufügen", "Add as comment": "Als Kommentar hinzufügen", "All assignees": "Alle Zuständigen", "All projects": "Alle Projekte", "All statuses": "Alle Status",
+    "Apply selected tasks": "Ausgewählte Aufgaben übernehmen", "Area": "Teilbereich", "Area name": "Name des Teilbereichs", "Assigned projects": "Zugeordnete Projekte", "Assignee": "Zuständig",
+    "Assignee and due date": "Zuständigkeit und Fälligkeit", "Back to imports": "Zurück zu den Importen", "Back to tasks": "Zurück zu den Aufgaben", "Board filters": "Board-Filter",
+    "CSV, Excel, Word, text, and MCP imports always open a review list before anything is added to the live task board.": "CSV-, Excel-, Word-, Text- und MCP-Importe öffnen immer zuerst eine Prüfliste, bevor etwas in das Aufgaben-Board übernommen wird.",
+    "Color": "Farbe", "Copy of %s": "Kopie von %s", "Create a review draft from extracted document items. This does not create or modify live tasks.": "Erstellt aus erkannten Dokumenteinträgen einen Prüfentwurf. Dadurch werden keine aktiven Aufgaben angelegt oder verändert.",
+    "Create new task": "Neue Aufgabe erstellen", "Created": "Erstellt", "Customer response": "Kundenrückmeldung", "Delete permanently": "Endgültig löschen", "Delete project permanently": "Projekt endgültig löschen",
+    "Duplicate task": "Aufgabe duplizieren", "Enter an area name.": "Geben Sie einen Namen für den Teilbereich ein.", "Existing task": "Bestehende Aufgabe", "Import action": "Importaktion",
+    "Import complete: %1$d tasks created, %2$d comments added, %3$d tasks updated.": "Import abgeschlossen: %1$d Aufgaben erstellt, %2$d Kommentare hinzugefügt, %3$d Aufgaben aktualisiert.",
+    "Import drafts": "Importentwürfe", "Import tasks": "Aufgaben importieren", "List Business projects and open task counts.": "Listet Business-Projekte und die Anzahl offener Aufgaben auf.",
+    "Manage project areas": "Projekt-Teilbereiche verwalten", "Move project to trash": "Projekt in den Papierkorb verschieben", "Move task to trash": "Aufgabe in den Papierkorb verschieben", "My tasks": "Meine Aufgaben",
+    "No area": "Kein Teilbereich", "No import drafts are available.": "Es sind keine Importentwürfe vorhanden.", "No project is currently assigned to this customer.": "Diesem Kunden ist derzeit kein Projekt zugeordnet.", "No tasks were found.": "Es wurden keine Aufgaben gefunden.",
+    "Nothing is written to the task board until you confirm this list.": "In das Aufgaben-Board wird nichts übernommen, bevor Sie diese Liste bestätigen.", "Open existing task": "Bestehende Aufgabe öffnen", "Open license settings": "Lizenzeinstellungen öffnen", "Open review": "Prüfung öffnen",
+    "Original source text": "Ursprünglicher Quelltext", "PDF / print report": "PDF-/Druckbericht", "Prepare links for a customer-visible HTML/PDF print view and editable Word report.": "Bereitet Links für eine kundensichtbare HTML-/PDF-Druckansicht und einen bearbeitbaren Word-Bericht vor.",
+    "Print or save as PDF": "Drucken oder als PDF speichern", "Project and area": "Projekt und Teilbereich", "Project report: %s": "Projektbericht: %s", "Provide at least one task for review.": "Stellen Sie mindestens eine Aufgabe zur Prüfung bereit.",
+    "Read one project with areas and tasks.": "Liest ein Projekt mit Teilbereichen und Aufgaben.", "Read project data and prepare reviewed import drafts. Changes are applied only after manual confirmation in WordPress.": "Liest Projektdaten und bereitet geprüfte Importentwürfe vor. Änderungen werden erst nach manueller Bestätigung in WordPress übernommen.",
+    "Reset filters": "Filter zurücksetzen", "Responsible person": "Verantwortliche Person", "Restore": "Wiederherstellen", "Restore project": "Projekt wiederherstellen",
+    "Review corrections from documents, spreadsheets, or MCP before adding them to projects.": "Prüfen Sie Korrekturen aus Dokumenten, Tabellen oder MCP, bevor sie in Projekte übernommen werden.", "Review imported tasks": "Importierte Aufgaben prüfen",
+    "Search and manage tasks across all projects.": "Suchen und verwalten Sie Aufgaben projektübergreifend.", "Search tasks": "Aufgaben durchsuchen", "Search tasks by project, area, assignee, or status.": "Sucht Aufgaben nach Projekt, Teilbereich, Zuständigkeit oder Status.",
+    "Select a file to import.": "Wählen Sie eine Datei für den Import aus.", "Select project": "Projekt auswählen", "Skip": "Überspringen", "Source": "Quelle",
+    "The CSV file could not be read.": "Die CSV-Datei konnte nicht gelesen werden.", "The Excel workbook could not be opened.": "Die Excel-Arbeitsmappe konnte nicht geöffnet werden.", "The PHP ZIP extension is required to import Word or Excel files.": "Für den Import von Word- oder Excel-Dateien ist die PHP-ZIP-Erweiterung erforderlich.",
+    "The Word document contains no readable text.": "Das Word-Dokument enthält keinen lesbaren Text.", "The Word document could not be opened.": "Das Word-Dokument konnte nicht geöffnet werden.", "The file was parsed. Review the tasks before importing them.": "Die Datei wurde verarbeitet. Prüfen Sie die Aufgaben vor der Übernahme.",
+    "The first Excel sheet could not be read.": "Das erste Excel-Tabellenblatt konnte nicht gelesen werden.", "The import draft could not be created.": "Der Importentwurf konnte nicht erstellt werden.", "The import draft does not exist.": "Der Importentwurf ist nicht vorhanden.",
+    "The project and its related records were deleted permanently.": "Das Projekt und seine verknüpften Datensätze wurden endgültig gelöscht.", "The project area could not be added.": "Der Projekt-Teilbereich konnte nicht hinzugefügt werden.", "The project area was added.": "Der Projekt-Teilbereich wurde hinzugefügt.",
+    "The project does not exist.": "Das Projekt ist nicht vorhanden.", "The project was moved to the trash.": "Das Projekt wurde in den Papierkorb verschoben.", "The project was restored.": "Das Projekt wurde wiederhergestellt.", "The requested project action is invalid.": "Die angeforderte Projektaktion ist ungültig.",
+    "The requested task action is invalid.": "Die angeforderte Aufgabenaktion ist ungültig.", "The task does not exist.": "Die Aufgabe ist nicht vorhanden.", "The task was deleted permanently.": "Die Aufgabe wurde endgültig gelöscht.", "The task was duplicated.": "Die Aufgabe wurde dupliziert.", "The task was restored.": "Die Aufgabe wurde wiederhergestellt.",
+    "This action also affects related records. Do you want to continue?": "Diese Aktion betrifft auch verknüpfte Datensätze. Möchten Sie fortfahren?", "This file type is not supported for direct import.": "Dieser Dateityp wird für den direkten Import nicht unterstützt.", "Trash": "Papierkorb",
+    "Unassigned": "Nicht zugeordnet", "Update existing task": "Bestehende Aufgabe aktualisieren", "Upload and review": "Hochladen und prüfen", "Upload corrections or tasks": "Korrekturen oder Aufgaben hochladen", "Use": "Übernehmen", "View task": "Aufgabe ansehen", "Without area": "Ohne Teilbereich", "Word report": "Word-Bericht",
+    "A valid ContactPanda Business license is required. Activate the license in the ContactPanda settings and try again.": "Eine gültige ContactPanda-Business-Lizenz ist erforderlich. Aktivieren Sie die Lizenz in den ContactPanda-Einstellungen und versuchen Sie es erneut.",
+    "Business license required": "Business-Lizenz erforderlich", "Business MCP interface": "Business-MCP-Schnittstelle", "Created: %s": "Erstellt: %s", "No importable tasks were found in the file.": "In der Datei wurden keine importierbaren Aufgaben gefunden.", "Reopen completed task": "Erledigte Aufgabe wieder öffnen",
+    "The PHP ZIP extension is required to create a Word report.": "Für die Erstellung eines Word-Berichts ist die PHP-ZIP-Erweiterung erforderlich.", "The Word report could not be created.": "Der Word-Bericht konnte nicht erstellt werden.",
+    "Use a WordPress application password to read projects and tasks or to create import drafts. MCP never applies a draft without confirmation in WordPress.": "Verwenden Sie ein WordPress-Anwendungspasswort, um Projekte und Aufgaben zu lesen oder Importentwürfe anzulegen. MCP übernimmt einen Entwurf niemals ohne Bestätigung in WordPress.",
+})
+
 
 def quote(value):
     return '"' + value.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n') + '"'
@@ -60,8 +98,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.1\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.1\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.2\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.2\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]
