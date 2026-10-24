@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 final class ContactPanda_Business_Schema {
-	const VERSION = '1.2.0';
+	const VERSION = '1.3.0';
 	const OPTION = 'contactpanda_business_db_version';
 
 	public static function table_names() {
@@ -11,10 +11,13 @@ final class ContactPanda_Business_Schema {
 		return array(
 			'projects'    => $wpdb->prefix . 'cp_business_projects',
 			'participants'=> $wpdb->prefix . 'cp_business_project_participants',
+			'areas'       => $wpdb->prefix . 'cp_business_project_areas',
 			'tasks'       => $wpdb->prefix . 'cp_business_tasks',
 			'comments'    => $wpdb->prefix . 'cp_business_task_comments',
 			'attachments' => $wpdb->prefix . 'cp_business_task_attachments',
 			'events'      => $wpdb->prefix . 'cp_business_task_events',
+			'imports'     => $wpdb->prefix . 'cp_business_imports',
+			'import_items'=> $wpdb->prefix . 'cp_business_import_items',
 		);
 	}
 
@@ -56,10 +59,26 @@ final class ContactPanda_Business_Schema {
 				created_at datetime NOT NULL,
 				PRIMARY KEY  (id), UNIQUE KEY project_entity (project_id,entity_type,entity_id), KEY entity_lookup (entity_type,entity_id), KEY project_role (project_id,participant_role)
 			) $c;",
+			"CREATE TABLE {$t['areas']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				project_id bigint(20) unsigned NOT NULL,
+				name varchar(190) NOT NULL,
+				description longtext NULL,
+				color varchar(7) NOT NULL DEFAULT '#3d5cf5',
+				assigned_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				visibility varchar(20) NOT NULL DEFAULT 'customer',
+				status varchar(30) NOT NULL DEFAULT 'active',
+				sort_order int(11) NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				updated_at datetime NOT NULL,
+				deleted_at datetime DEFAULT NULL,
+				PRIMARY KEY  (id), KEY project_status (project_id,status), KEY assigned_user_id (assigned_user_id)
+			) $c;",
 			"CREATE TABLE {$t['tasks']} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				uuid char(36) NOT NULL,
 				project_id bigint(20) unsigned NOT NULL,
+				area_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				support_ticket_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				title varchar(255) NOT NULL,
 				description longtext NULL,
@@ -77,7 +96,9 @@ final class ContactPanda_Business_Schema {
 				updated_at datetime NOT NULL,
 				completed_at datetime DEFAULT NULL,
 				deleted_at datetime DEFAULT NULL,
-				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY project_board (project_id,board_column,sort_order), KEY due_at (due_at), KEY support_ticket_id (support_ticket_id)
+				revision bigint(20) unsigned NOT NULL DEFAULT 1,
+				source_hash char(64) NOT NULL DEFAULT '',
+				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY project_board (project_id,board_column,sort_order), KEY area_id (area_id), KEY assigned_user_id (assigned_user_id), KEY due_at (due_at), KEY support_ticket_id (support_ticket_id), KEY source_hash (source_hash)
 			) $c;",
 			"CREATE TABLE {$t['comments']} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -108,6 +129,38 @@ final class ContactPanda_Business_Schema {
 				details_json longtext NULL,
 				created_at datetime NOT NULL,
 				PRIMARY KEY  (id), KEY task_created (task_id,created_at), KEY project_created (project_id,created_at)
+			) $c;",
+			"CREATE TABLE {$t['imports']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				uuid char(36) NOT NULL,
+				source_type varchar(30) NOT NULL,
+				source_name varchar(255) NOT NULL DEFAULT '',
+				attachment_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				status varchar(30) NOT NULL DEFAULT 'review',
+				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				updated_at datetime NOT NULL,
+				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY status_created (status,created_at)
+			) $c;",
+			"CREATE TABLE {$t['import_items']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				import_id bigint(20) unsigned NOT NULL,
+				source_key varchar(190) NOT NULL DEFAULT '',
+				source_text longtext NULL,
+				title varchar(255) NOT NULL,
+				description longtext NULL,
+				project_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				area_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				assigned_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				priority varchar(20) NOT NULL DEFAULT 'normal',
+				due_at datetime DEFAULT NULL,
+				visibility varchar(20) NOT NULL DEFAULT 'customer',
+				match_task_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				match_score tinyint(3) unsigned NOT NULL DEFAULT 0,
+				import_action varchar(30) NOT NULL DEFAULT 'create',
+				selected tinyint(1) unsigned NOT NULL DEFAULT 1,
+				created_at datetime NOT NULL,
+				PRIMARY KEY  (id), UNIQUE KEY import_source (import_id,source_key), KEY import_id (import_id), KEY match_task_id (match_task_id)
 			) $c;",
 		);
 		foreach ( $sql as $statement ) dbDelta( $statement );
