@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.4\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.5\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d open / %2$d total"
 msgstr ""
@@ -56,6 +56,9 @@ msgstr ""
 msgid "Apply selected tasks"
 msgstr ""
 
+msgid "Apply values to selected rows"
+msgstr ""
+
 msgid "Archived"
 msgstr ""
 
@@ -93,6 +96,9 @@ msgid "Back to tasks"
 msgstr ""
 
 msgid "Board filters"
+msgstr ""
+
+msgid "Bulk edit selected tasks"
 msgstr ""
 
 msgid "Business MCP interface"
@@ -203,10 +209,16 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+msgid "Do not change"
+msgstr ""
+
 msgid "Done"
 msgstr ""
 
 msgid "Due by"
+msgstr ""
+
+msgid "Due date"
 msgstr ""
 
 msgid "Due today"
@@ -476,6 +488,9 @@ msgstr ""
 msgid "Read project data and prepare reviewed import drafts. Changes are applied only after manual confirmation in WordPress."
 msgstr ""
 
+msgid "Remove due date"
+msgstr ""
+
 msgid "Reopen completed task"
 msgstr ""
 
@@ -537,6 +552,9 @@ msgid "Select participants"
 msgstr ""
 
 msgid "Select project"
+msgstr ""
+
+msgid "Set due date"
 msgstr ""
 
 msgid "Skip"
@@ -744,4 +762,7 @@ msgid "Word report"
 msgstr ""
 
 msgid "You do not have permission."
+msgstr ""
+
+msgid "tasks selected"
 msgstr ""

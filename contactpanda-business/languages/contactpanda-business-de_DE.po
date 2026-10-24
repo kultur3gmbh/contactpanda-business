@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.4\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.5\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d open / %2$d total"
 msgstr "%1$d offen / %2$d gesamt"
@@ -56,6 +56,9 @@ msgstr "Alle Status"
 msgid "Apply selected tasks"
 msgstr "Ausgewählte Aufgaben übernehmen"
 
+msgid "Apply values to selected rows"
+msgstr "Werte auf ausgewählte Zeilen anwenden"
+
 msgid "Archived"
 msgstr "Archiviert"
 
@@ -94,6 +97,9 @@ msgstr "Zurück zu den Aufgaben"
 
 msgid "Board filters"
 msgstr "Board-Filter"
+
+msgid "Bulk edit selected tasks"
+msgstr "Ausgewählte Aufgaben gemeinsam bearbeiten"
 
 msgid "Business MCP interface"
 msgstr "Business-MCP-Schnittstelle"
@@ -203,11 +209,17 @@ msgstr "Projekt endgültig löschen"
 msgid "Description"
 msgstr "Beschreibung"
 
+msgid "Do not change"
+msgstr "Nicht ändern"
+
 msgid "Done"
 msgstr "Erledigt"
 
 msgid "Due by"
 msgstr "Zu erledigen bis"
+
+msgid "Due date"
+msgstr "Fälligkeitsdatum"
 
 msgid "Due today"
 msgstr "Heute fällig"
@@ -476,6 +488,9 @@ msgstr "Nur lesen"
 msgid "Read project data and prepare reviewed import drafts. Changes are applied only after manual confirmation in WordPress."
 msgstr "Liest Projektdaten und bereitet geprüfte Importentwürfe vor. Änderungen werden erst nach manueller Bestätigung in WordPress übernommen."
 
+msgid "Remove due date"
+msgstr "Fälligkeitsdatum entfernen"
+
 msgid "Reopen completed task"
 msgstr "Erledigte Aufgabe wieder öffnen"
 
@@ -538,6 +553,9 @@ msgstr "Beteiligte auswählen"
 
 msgid "Select project"
 msgstr "Projekt auswählen"
+
+msgid "Set due date"
+msgstr "Fälligkeitsdatum festlegen"
 
 msgid "Skip"
 msgstr "Überspringen"
@@ -745,3 +763,6 @@ msgstr "Word-Bericht"
 
 msgid "You do not have permission."
 msgstr "Sie haben keine Berechtigung."
+
+msgid "tasks selected"
+msgstr "Aufgaben ausgewählt"
