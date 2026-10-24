@@ -21,6 +21,54 @@
 	document.addEventListener('keydown', (event) => {
 		const card = event.target.closest('[data-cpb-task-card]');
 		if (card && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); card.click(); }
+		if (event.key === 'Escape') document.querySelectorAll('.cpb-modal:not([hidden])').forEach((modal) => modal.setAttribute('hidden', ''));
+	});
+	const taskToOpen = new URLSearchParams(window.location.search).get('open_task');
+	if (taskToOpen) {
+		const modal = document.getElementById(`cpb-task-${String(taskToOpen).replace(/\D/g, '')}`);
+		if (modal) {
+			modal.hidden = false;
+			const cleanUrl = new URL(window.location.href);
+			cleanUrl.searchParams.delete('open_task');
+			window.history.replaceState({}, '', cleanUrl.toString());
+		}
+	}
+
+	document.querySelectorAll('[data-cpb-inline-task-open]').forEach((button) => {
+		button.addEventListener('click', () => {
+			const form = document.getElementById(button.dataset.cpbInlineTaskOpen);
+			if (!form) return;
+			form.hidden = false;
+			button.hidden = true;
+			form.querySelector('textarea')?.focus();
+		});
+	});
+	document.querySelectorAll('[data-cpb-inline-task-cancel]').forEach((button) => {
+		button.addEventListener('click', () => {
+			const form = button.closest('.cpb-inline-task-form');
+			if (!form) return;
+			form.hidden = true;
+			form.reset();
+			const trigger = document.querySelector(`[data-cpb-inline-task-open="${form.id}"]`);
+			if (trigger) trigger.hidden = false;
+		});
+	});
+
+	document.querySelectorAll('[data-cpb-task-files]').forEach((input) => {
+		const form = input.closest('form');
+		const selection = form?.querySelector('[data-cpb-file-selection]');
+		const submit = form?.querySelector('[data-cpb-file-submit]');
+		input.addEventListener('change', () => {
+			const files = Array.from(input.files || []);
+			if (selection) selection.textContent = files.length ? files.map((file) => file.name).join(', ') : (window.contactPandaBusiness?.selectFiles || 'Select one or more files.');
+			if (submit) submit.disabled = files.length === 0;
+		});
+	});
+
+	document.querySelectorAll('[data-cpb-import-apply-form][data-cpb-import-repeat-warning]').forEach((form) => {
+		form.addEventListener('submit', (event) => {
+			if (!form.querySelector('[data-cpb-confirm-repeat]')?.checked || !window.confirm(form.dataset.cpbImportRepeatWarning)) event.preventDefault();
+		});
 	});
 
 	document.querySelectorAll('[data-cpb-participant-picker]').forEach((picker) => {
