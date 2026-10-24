@@ -4,7 +4,7 @@ Tags: contactpanda, projects, corrections, kanban, customer-portal
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.8.5
+Stable tag: 0.8.6
 License: GPLv2 or later
 
 Independent business administration and project management for ContactPanda.
@@ -14,6 +14,12 @@ Independent business administration and project management for ContactPanda.
 ContactPanda Business provides project and correction management with customer-visible and internal tasks, structured document imports, reports, and an authenticated MCP interface.
 
 == Changelog ==
+
+= 0.8.6 =
+* Introduces a compact Trello-inspired task dialog with project data, description, comments, activity, and task editing in one workspace.
+* Adds multiple file attachments, task checklists with progress, and direct task creation inside every board column.
+* Moves task status and compact duplicate/trash controls to the card edge to use board space more efficiently.
+* Records completed imports with date, time, and run count and requires an explicit warning confirmation before applying one again.
 
 = 0.8.5 =
 * Adds selection-aware bulk editing to reviewed imports for project, area, assignee, priority, due date, visibility, and import action.
