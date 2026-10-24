@@ -53,6 +53,22 @@
 			if (trigger) trigger.hidden = false;
 		});
 	});
+	document.querySelectorAll('[data-cpb-inline-edit-open]').forEach((trigger) => {
+		const open = () => {
+			const editor = document.getElementById(trigger.dataset.cpbInlineEditOpen);
+			if (!editor) return;
+			editor.hidden = false;
+			editor.querySelector('input,textarea,select')?.focus();
+		};
+		trigger.addEventListener('click', open);
+		trigger.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(); } });
+	});
+	document.querySelectorAll('[data-cpb-inline-edit-cancel]').forEach((button) => {
+		button.addEventListener('click', () => {
+			const editor = document.getElementById(button.dataset.cpbInlineEditCancel);
+			if (editor) editor.hidden = true;
+		});
+	});
 
 	document.querySelectorAll('[data-cpb-task-files]').forEach((input) => {
 		const form = input.closest('form');
