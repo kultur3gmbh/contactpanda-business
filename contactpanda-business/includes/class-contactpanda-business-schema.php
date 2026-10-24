@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 final class ContactPanda_Business_Schema {
-	const VERSION = '1.4.0';
+	const VERSION = '1.5.0';
 	const OPTION = 'contactpanda_business_db_version';
 
 	public static function table_names() {
@@ -19,6 +19,9 @@ final class ContactPanda_Business_Schema {
 			'events'      => $wpdb->prefix . 'cp_business_task_events',
 			'imports'     => $wpdb->prefix . 'cp_business_imports',
 			'import_items'=> $wpdb->prefix . 'cp_business_import_items',
+			'project_steps'=> $wpdb->prefix . 'cp_business_project_steps',
+			'project_documents'=> $wpdb->prefix . 'cp_business_project_documents',
+			'payments'    => $wpdb->prefix . 'cp_business_project_payments',
 		);
 	}
 
@@ -43,6 +46,11 @@ final class ContactPanda_Business_Schema {
 				color varchar(7) NOT NULL DEFAULT '#3d5cf5',
 				status varchar(30) NOT NULL DEFAULT 'active',
 				visibility varchar(20) NOT NULL DEFAULT 'customer',
+				start_date date DEFAULT NULL,
+				target_end_date date DEFAULT NULL,
+				budget_total decimal(18,2) NOT NULL DEFAULT 0.00,
+				currency char(3) NOT NULL DEFAULT 'EUR',
+				financing_notes longtext NULL,
 				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
 				created_at datetime NOT NULL,
 				updated_at datetime NOT NULL,
@@ -176,6 +184,59 @@ final class ContactPanda_Business_Schema {
 				selected tinyint(1) unsigned NOT NULL DEFAULT 1,
 				created_at datetime NOT NULL,
 				PRIMARY KEY  (id), UNIQUE KEY import_source (import_id,source_key), KEY import_id (import_id), KEY match_task_id (match_task_id)
+			) $c;",
+			"CREATE TABLE {$t['project_steps']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				project_id bigint(20) unsigned NOT NULL,
+				area_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				title varchar(255) NOT NULL,
+				description longtext NULL,
+				step_type varchar(40) NOT NULL DEFAULT 'phase',
+				status varchar(30) NOT NULL DEFAULT 'planned',
+				due_at date DEFAULT NULL,
+				completed_at datetime DEFAULT NULL,
+				amount decimal(18,2) NOT NULL DEFAULT 0.00,
+				currency char(3) NOT NULL DEFAULT 'EUR',
+				sort_order int(11) NOT NULL DEFAULT 0,
+				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				updated_at datetime NOT NULL,
+				deleted_at datetime DEFAULT NULL,
+				PRIMARY KEY  (id), KEY project_order (project_id,sort_order,id), KEY area_id (area_id), KEY status_due (status,due_at)
+			) $c;",
+			"CREATE TABLE {$t['project_documents']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				project_id bigint(20) unsigned NOT NULL,
+				step_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				attachment_id bigint(20) unsigned NOT NULL,
+				document_type varchar(40) NOT NULL DEFAULT 'other',
+				title varchar(255) NOT NULL DEFAULT '',
+				notes longtext NULL,
+				document_date date DEFAULT NULL,
+				visibility varchar(20) NOT NULL DEFAULT 'internal',
+				uploaded_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				deleted_at datetime DEFAULT NULL,
+				PRIMARY KEY  (id), KEY project_created (project_id,created_at), KEY step_id (step_id), KEY attachment_id (attachment_id)
+			) $c;",
+			"CREATE TABLE {$t['payments']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				project_id bigint(20) unsigned NOT NULL,
+				area_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				step_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				title varchar(255) NOT NULL,
+				amount decimal(18,2) NOT NULL DEFAULT 0.00,
+				paid_amount decimal(18,2) NOT NULL DEFAULT 0.00,
+				currency char(3) NOT NULL DEFAULT 'EUR',
+				due_at date DEFAULT NULL,
+				paid_at datetime DEFAULT NULL,
+				status varchar(30) NOT NULL DEFAULT 'planned',
+				reference varchar(190) NOT NULL DEFAULT '',
+				notes longtext NULL,
+				created_at datetime NOT NULL,
+				updated_at datetime NOT NULL,
+				deleted_at datetime DEFAULT NULL,
+				PRIMARY KEY  (id), KEY project_due (project_id,due_at), KEY status (status), KEY step_id (step_id)
 			) $c;",
 		);
 		foreach ( $sql as $statement ) dbDelta( $statement );

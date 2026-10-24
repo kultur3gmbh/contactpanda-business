@@ -13,7 +13,7 @@ final class ContactPanda_Business_Admin {
 		add_menu_page( __( 'ContactPanda Business', 'contactpanda-business' ), __( 'ContactPanda Business', 'contactpanda-business' ), 'manage_options', 'contactpanda-business', array( __CLASS__, 'overview' ), $icon, 3.2 );
 		add_submenu_page( 'contactpanda-business', __( 'Overview', 'contactpanda-business' ), __( 'Overview', 'contactpanda-business' ), 'manage_options', 'contactpanda-business', array( __CLASS__, 'overview' ) );
 		if ( ! contactpanda_business_module_entitled( 'project_management' ) ) return;
-		add_submenu_page( 'contactpanda-business', __( 'Projects & corrections', 'contactpanda-business' ), __( 'Projects & corrections', 'contactpanda-business' ), 'manage_options', 'contactpanda-business-projects', array( 'ContactPanda_Business_Projects', 'render' ) );
+		add_submenu_page( 'contactpanda-business', __( 'Projects', 'contactpanda-business' ), __( 'Projects', 'contactpanda-business' ), 'manage_options', 'contactpanda-business-projects', array( 'ContactPanda_Business_Projects', 'render' ) );
 		add_submenu_page( 'contactpanda-business', __( 'Tasks', 'contactpanda-business' ), __( 'Tasks', 'contactpanda-business' ), 'manage_options', 'contactpanda-business-tasks', array( 'ContactPanda_Business_Workspace', 'render_tasks' ) );
 		add_submenu_page( 'contactpanda-business', __( 'Import tasks', 'contactpanda-business' ), __( 'Import tasks', 'contactpanda-business' ), 'manage_options', 'contactpanda-business-import', array( 'ContactPanda_Business_Imports', 'render' ) );
 	}
