@@ -23,7 +23,7 @@ final class ContactPanda_Business_Admin {
 		wp_enqueue_style( 'contactpanda-business-admin', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-admin.css', array(), CONTACTPANDA_BUSINESS_VERSION );
 		if ( false === strpos( $hook, 'contactpanda-business' ) ) return;
 		wp_enqueue_script( 'contactpanda-business-admin', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-admin.js', array(), CONTACTPANDA_BUSINESS_VERSION, true );
-		wp_localize_script( 'contactpanda-business-admin', 'contactPandaBusiness', array( 'ajaxUrl' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce( 'contactpanda_business_move_task' ), 'currentUserId' => get_current_user_id(), 'selectParticipants' => __( 'Select participants', 'contactpanda-business' ), 'moveFailed' => __( 'The task could not be moved.', 'contactpanda-business' ) ) );
+		wp_localize_script( 'contactpanda-business-admin', 'contactPandaBusiness', array( 'ajaxUrl' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce( 'contactpanda_business_move_task' ), 'currentUserId' => get_current_user_id(), 'selectParticipants' => __( 'Select participants', 'contactpanda-business' ), 'selectFiles' => __( 'Select one or more files.', 'contactpanda-business' ), 'moveFailed' => __( 'The task could not be moved.', 'contactpanda-business' ) ) );
 	}
 
 	public static function overview() {

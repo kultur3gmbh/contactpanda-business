@@ -21,9 +21,13 @@ final class ContactPanda_Business_Imports {
 	private static function render_upload() {
 		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $imports = $wpdb->get_results( "SELECT * FROM `{$t['imports']}` ORDER BY created_at DESC LIMIT 50", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		echo '<section class="cpb-card"><h2>' . esc_html__( 'Upload corrections or tasks', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'CSV, Excel, Word, text, and MCP imports always open a review list before anything is added to the live task board.', 'contactpanda-business' ) . '</p><form method="post" enctype="multipart/form-data" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="contactpanda_business_upload_import">'; wp_nonce_field( 'contactpanda_business_upload_import' ); echo '<input type="file" name="import_file" accept=".csv,.xlsx,.docx,.txt" required> <button class="button button-primary">' . esc_html__( 'Upload and review', 'contactpanda-business' ) . '</button></form></section>';
-		echo '<section class="cpb-card"><h2>' . esc_html__( 'Import drafts', 'contactpanda-business' ) . '</h2><table class="widefat striped"><thead><tr><th>' . esc_html__( 'Source', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Status', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Created', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Actions', 'contactpanda-business' ) . '</th></tr></thead><tbody>';
-		if ( ! $imports ) echo '<tr><td colspan="4">' . esc_html__( 'No import drafts are available.', 'contactpanda-business' ) . '</td></tr>';
-		foreach ( $imports as $import ) echo '<tr><td>' . esc_html( $import['source_name'] ?: $import['source_type'] ) . '</td><td>' . esc_html( $import['status'] ) . '</td><td>' . esc_html( get_date_from_gmt( $import['created_at'], get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) ) . '</td><td><a class="button" href="' . esc_url( add_query_arg( array( 'page' => 'contactpanda-business-import', 'import_id' => $import['id'] ), admin_url( 'admin.php' ) ) ) . '">' . esc_html__( 'Open review', 'contactpanda-business' ) . '</a></td></tr>';
+		echo '<section class="cpb-card"><h2>' . esc_html__( 'Import drafts', 'contactpanda-business' ) . '</h2><table class="widefat striped"><thead><tr><th>' . esc_html__( 'Source', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Status', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Created', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Applied', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Actions', 'contactpanda-business' ) . '</th></tr></thead><tbody>';
+		if ( ! $imports ) echo '<tr><td colspan="5">' . esc_html__( 'No import drafts are available.', 'contactpanda-business' ) . '</td></tr>';
+		foreach ( $imports as $import ) {
+			$applied = ! empty( $import['applied_at'] ) ? get_date_from_gmt( $import['applied_at'], get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) : '—';
+			if ( ! empty( $import['apply_count'] ) && (int) $import['apply_count'] > 1 ) $applied .= ' · ' . sprintf( __( '%d runs', 'contactpanda-business' ), absint( $import['apply_count'] ) );
+			echo '<tr><td>' . esc_html( $import['source_name'] ?: $import['source_type'] ) . '</td><td><span class="cpb-status is-' . esc_attr( 'applied' === $import['status'] ? 'active' : 'on_hold' ) . '">' . esc_html( self::status_label( $import['status'] ) ) . '</span></td><td>' . esc_html( get_date_from_gmt( $import['created_at'], get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) ) . '</td><td>' . esc_html( $applied ) . '</td><td><a class="button" href="' . esc_url( add_query_arg( array( 'page' => 'contactpanda-business-import', 'import_id' => $import['id'] ), admin_url( 'admin.php' ) ) ) . '">' . esc_html__( 'Open review', 'contactpanda-business' ) . '</a></td></tr>';
+		}
 		echo '</tbody></table></section>';
 	}
 
@@ -35,7 +39,13 @@ final class ContactPanda_Business_Imports {
 		$areas = $wpdb->get_results( "SELECT id,project_id,name FROM `{$t['areas']}` WHERE deleted_at IS NULL ORDER BY name", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$users = get_users( array( 'orderby' => 'display_name' ) );
 		$selected_count = array_sum( array_map( 'absint', wp_list_pluck( $items, 'selected' ) ) );
-		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=contactpanda-business-import' ) ) . '">← ' . esc_html__( 'Back to imports', 'contactpanda-business' ) . '</a></p><section class="cpb-card"><h2>' . esc_html__( 'Review imported tasks', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Nothing is written to the task board until you confirm this list.', 'contactpanda-business' ) . '</p><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="contactpanda_business_apply_import"><input type="hidden" name="import_id" value="' . esc_attr( $import_id ) . '">'; wp_nonce_field( 'contactpanda_business_apply_import_' . $import_id );
+		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=contactpanda-business-import' ) ) . '">← ' . esc_html__( 'Back to imports', 'contactpanda-business' ) . '</a></p><section class="cpb-card"><h2>' . esc_html__( 'Review imported tasks', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Nothing is written to the task board until you confirm this list.', 'contactpanda-business' ) . '</p>';
+		$is_repeat = 'applied' === $import['status'] || ! empty( $import['apply_count'] );
+		if ( $is_repeat ) {
+			$applied_label = ! empty( $import['applied_at'] ) ? get_date_from_gmt( $import['applied_at'], get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) : __( 'Unknown time', 'contactpanda-business' );
+			echo '<div class="notice notice-warning inline cpb-import-repeat-notice"><p><strong>' . esc_html__( 'This import has already been applied.', 'contactpanda-business' ) . '</strong> ' . esc_html( sprintf( __( 'Last run: %1$s. Number of runs: %2$d.', 'contactpanda-business' ), $applied_label, max( 1, absint( $import['apply_count'] ) ) ) ) . '</p><p>' . esc_html__( 'Running it again can create duplicate tasks or repeat comments and updates.', 'contactpanda-business' ) . '</p></div>';
+		}
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" data-cpb-import-apply-form' . ( $is_repeat ? ' data-cpb-import-repeat-warning="' . esc_attr__( 'This import has already been applied. Do you really want to run it again?', 'contactpanda-business' ) . '"' : '' ) . '><input type="hidden" name="action" value="contactpanda_business_apply_import"><input type="hidden" name="import_id" value="' . esc_attr( $import_id ) . '">'; wp_nonce_field( 'contactpanda_business_apply_import_' . $import_id );
 		echo '<div class="cpb-import-bulk" data-cpb-import-bulk><div class="cpb-import-bulk-heading"><h3>' . esc_html__( 'Bulk edit selected tasks', 'contactpanda-business' ) . '</h3><p><strong data-cpb-import-selected-count>' . esc_html( $selected_count ) . '</strong> ' . esc_html__( 'tasks selected', 'contactpanda-business' ) . '</p></div><div class="cpb-import-bulk-grid"><label><span>' . esc_html__( 'Project', 'contactpanda-business' ) . '</span><select data-cpb-import-bulk-project><option value="">' . esc_html__( 'Do not change', 'contactpanda-business' ) . '</option>';
 		foreach ( $projects as $project ) echo '<option value="' . esc_attr( $project['id'] ) . '">' . esc_html( $project['name'] ) . '</option>';
 		echo '</select></label><label><span>' . esc_html__( 'Area', 'contactpanda-business' ) . '</span><select data-cpb-import-bulk-area disabled><option value="">' . esc_html__( 'Do not change', 'contactpanda-business' ) . '</option><option value="0">' . esc_html__( 'No area', 'contactpanda-business' ) . '</option>';
@@ -60,7 +70,9 @@ final class ContactPanda_Business_Imports {
 			if ( $item['match_task_id'] ) echo '<label><input type="checkbox" name="items[' . esc_attr( $item['id'] ) . '][reopen]" value="1"> ' . esc_html__( 'Reopen completed task', 'contactpanda-business' ) . '</label>';
 			echo '</td></tr>';
 		}
-		echo '</tbody></table></div><p><button class="button button-primary">' . esc_html__( 'Apply selected tasks', 'contactpanda-business' ) . '</button></p></form></section>';
+		echo '</tbody></table></div>';
+		if ( $is_repeat ) echo '<p class="cpb-repeat-confirm"><label><input type="checkbox" name="confirm_repeat" value="1" required data-cpb-confirm-repeat> <strong>' . esc_html__( 'I understand the warning and want to run this import again.', 'contactpanda-business' ) . '</strong></label></p>';
+		echo '<p><button class="button button-primary">' . esc_html__( 'Apply selected tasks', 'contactpanda-business' ) . '</button></p></form></section>';
 	}
 
 	public static function upload() {
@@ -91,6 +103,10 @@ final class ContactPanda_Business_Imports {
 
 	public static function apply() {
 		self::guard(); $import_id = absint( $_POST['import_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_apply_import_' . $import_id ); global $wpdb; $t = ContactPanda_Business_Schema::table_names();
+		$import = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM `{$t['imports']}` WHERE id=%d", $import_id ), ARRAY_A );
+		if ( ! $import ) self::redirect( false, __( 'The import draft does not exist.', 'contactpanda-business' ) );
+		$is_repeat = 'applied' === $import['status'] || ! empty( $import['apply_count'] );
+		if ( $is_repeat && empty( $_POST['confirm_repeat'] ) ) self::redirect( false, __( 'Confirm the warning before running an applied import again.', 'contactpanda-business' ), $import_id );
 		$posted = isset( $_POST['items'] ) && is_array( $_POST['items'] ) ? wp_unslash( $_POST['items'] ) : array(); $created = 0; $comments = 0; $updated = 0;
 		foreach ( $posted as $item_id => $values ) {
 			$item = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM `{$t['import_items']}` WHERE id=%d AND import_id=%d", absint( $item_id ), $import_id ), ARRAY_A ); if ( ! $item ) continue;
@@ -106,7 +122,10 @@ final class ContactPanda_Business_Imports {
 			if ( ! $project_id || ! $wpdb->get_var( $wpdb->prepare( "SELECT id FROM `{$t['projects']}` WHERE id=%d AND deleted_at IS NULL", $project_id ) ) ) continue;
 			$wpdb->insert( $t['tasks'], array( 'uuid' => wp_generate_uuid4(), 'project_id' => $project_id, 'area_id' => $area_id, 'title' => $title, 'description' => $description, 'board_column' => 'open', 'open_status' => 'new', 'progress' => 0, 'priority' => $priority, 'assigned_user_id' => $assigned, 'due_at' => $due, 'visibility' => $visibility, 'created_by' => get_current_user_id(), 'created_at' => $now, 'updated_at' => $now, 'source_hash' => hash( 'sha256', strtolower( $project_id . '|' . $title . '|' . $description ) ) ) ); if ( $wpdb->insert_id ) $created++;
 		}
-		$wpdb->update( $t['imports'], array( 'status' => 'applied', 'updated_at' => current_time( 'mysql', true ) ), array( 'id' => $import_id ) ); self::redirect( true, sprintf( __( 'Import complete: %1$d tasks created, %2$d comments added, %3$d tasks updated.', 'contactpanda-business' ), $created, $comments, $updated ), $import_id );
+		$applied_at = current_time( 'mysql', true );
+		$history = array( 'status' => 'applied', 'applied_at' => $applied_at, 'apply_count' => max( 0, absint( $import['apply_count'] ?? 0 ) ) + 1, 'updated_at' => $applied_at );
+		if ( empty( $import['first_applied_at'] ) ) $history['first_applied_at'] = $applied_at;
+		$wpdb->update( $t['imports'], $history, array( 'id' => $import_id ) ); self::redirect( true, sprintf( __( 'Import complete: %1$d tasks created, %2$d comments added, %3$d tasks updated.', 'contactpanda-business' ), $created, $comments, $updated ), $import_id );
 	}
 
 	private static function parse_file( $path, $ext ) {
@@ -147,6 +166,7 @@ final class ContactPanda_Business_Imports {
 
 	private static function find_match( $title, $description, $project_id ) { global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $where = 'deleted_at IS NULL'; $args = array(); if ( $project_id ) { $where .= ' AND project_id=%d'; $args[] = $project_id; } $rows = $args ? $wpdb->get_results( $wpdb->prepare( "SELECT id,title,description FROM `{$t['tasks']}` WHERE $where ORDER BY updated_at DESC LIMIT 300", $args ), ARRAY_A ) : $wpdb->get_results( "SELECT id,title,description FROM `{$t['tasks']}` WHERE $where ORDER BY updated_at DESC LIMIT 300", ARRAY_A ); $needle = strtolower( remove_accents( trim( $title . ' ' . $description ) ) ); $best = array( 'id' => 0, 'score' => 0 ); foreach ( $rows as $row ) { $haystack = strtolower( remove_accents( trim( $row['title'] . ' ' . $row['description'] ) ) ); similar_text( $needle, $haystack, $score ); if ( $score > $best['score'] ) $best = array( 'id' => absint( $row['id'] ), 'score' => min( 100, (int) round( $score ) ) ); } return $best['score'] >= 60 ? $best : array( 'id' => 0, 'score' => 0 ); }
 	private static function priority( $value ) { $value = sanitize_key( $value ); return in_array( $value, array( 'low', 'normal', 'high', 'urgent' ), true ) ? $value : 'normal'; }
+	private static function status_label( $status ) { return 'applied' === $status ? __( 'Applied', 'contactpanda-business' ) : __( 'Ready for review', 'contactpanda-business' ); }
 	private static function date_value( $value ) { $value = sanitize_text_field( $value ); if ( ! $value ) return null; $timestamp = strtotime( $value ); return $timestamp ? gmdate( 'Y-m-d H:i:s', $timestamp ) : null; }
 	private static function header() { echo '<div class="wrap contactpanda-wrap contactpanda-business-wrap"><header class="contactpanda-heading"><div><p class="contactpanda-eyebrow">CONTACTPANDA BUSINESS</p><h1>' . esc_html__( 'Import tasks', 'contactpanda-business' ) . '</h1><p>' . esc_html__( 'Review corrections from documents, spreadsheets, or MCP before adding them to projects.', 'contactpanda-business' ) . '</p></div></header>'; $notice = get_transient( self::NOTICE . get_current_user_id() ); if ( is_array( $notice ) ) { delete_transient( self::NOTICE . get_current_user_id() ); echo '<div class="notice notice-' . ( $notice['success'] ? 'success' : 'error' ) . ' is-dismissible"><p>' . esc_html( $notice['message'] ) . '</p></div>'; } }
 	private static function redirect( $success, $message, $import_id = 0 ) { set_transient( self::NOTICE . get_current_user_id(), array( 'success' => $success, 'message' => $message ), MINUTE_IN_SECONDS ); $args = array( 'page' => 'contactpanda-business-import' ); if ( $import_id ) $args['import_id'] = $import_id; wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) ); exit; }

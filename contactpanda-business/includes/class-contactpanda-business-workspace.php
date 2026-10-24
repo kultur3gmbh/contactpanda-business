@@ -101,7 +101,7 @@ final class ContactPanda_Business_Workspace {
 		elseif ( 'restore' === $action ) $wpdb->update( $t['projects'], array( 'deleted_at' => null ), array( 'id' => $id ) );
 		elseif ( 'delete' === $action ) {
 			$task_ids = $wpdb->get_col( $wpdb->prepare( "SELECT id FROM `{$t['tasks']}` WHERE project_id=%d", $id ) );
-			if ( $task_ids ) { $ids = implode( ',', array_map( 'absint', $task_ids ) ); $wpdb->query( "DELETE FROM `{$t['comments']}` WHERE task_id IN ($ids)" ); $wpdb->query( "DELETE FROM `{$t['attachments']}` WHERE task_id IN ($ids)" ); } // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- integer-only identifiers.
+			if ( $task_ids ) { $ids = implode( ',', array_map( 'absint', $task_ids ) ); $wpdb->query( "DELETE FROM `{$t['comments']}` WHERE task_id IN ($ids)" ); $wpdb->query( "DELETE FROM `{$t['attachments']}` WHERE task_id IN ($ids)" ); $wpdb->query( "DELETE FROM `{$t['checklist']}` WHERE task_id IN ($ids)" ); } // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- integer-only identifiers.
 			$wpdb->delete( $t['events'], array( 'project_id' => $id ) ); $wpdb->delete( $t['participants'], array( 'project_id' => $id ) ); $wpdb->delete( $t['areas'], array( 'project_id' => $id ) ); $wpdb->delete( $t['tasks'], array( 'project_id' => $id ) ); $wpdb->delete( $t['projects'], array( 'id' => $id ) );
 		}
 		else self::redirect( false, __( 'The requested project action is invalid.', 'contactpanda-business' ), 'projects' );
@@ -115,9 +115,13 @@ final class ContactPanda_Business_Workspace {
 		if ( 'trash' === $action ) $wpdb->update( $t['tasks'], array( 'deleted_at' => current_time( 'mysql', true ), 'updated_at' => current_time( 'mysql', true ) ), array( 'id' => $id ) );
 		elseif ( 'restore' === $action ) $wpdb->update( $t['tasks'], array( 'deleted_at' => null, 'updated_at' => current_time( 'mysql', true ) ), array( 'id' => $id ) );
 		elseif ( 'duplicate' === $action ) {
-			unset( $task['id'], $task['completed_at'], $task['deleted_at'] ); $task['uuid'] = wp_generate_uuid4(); $task['title'] = sprintf( __( 'Copy of %s', 'contactpanda-business' ), $task['title'] ); $task['created_by'] = get_current_user_id(); $task['created_at'] = current_time( 'mysql', true ); $task['updated_at'] = $task['created_at']; $task['revision'] = 1; $task['source_hash'] = '';
-			$wpdb->insert( $t['tasks'], $task );
-		} elseif ( 'delete' === $action ) { $wpdb->delete( $t['comments'], array( 'task_id' => $id ) ); $wpdb->delete( $t['attachments'], array( 'task_id' => $id ) ); $wpdb->delete( $t['events'], array( 'task_id' => $id ) ); $wpdb->delete( $t['tasks'], array( 'id' => $id ) ); }
+			$source_id = $id; unset( $task['id'], $task['completed_at'], $task['deleted_at'] ); $task['uuid'] = wp_generate_uuid4(); $task['title'] = sprintf( __( 'Copy of %s', 'contactpanda-business' ), $task['title'] ); $task['created_by'] = get_current_user_id(); $task['created_at'] = current_time( 'mysql', true ); $task['updated_at'] = $task['created_at']; $task['revision'] = 1; $task['source_hash'] = '';
+			$wpdb->insert( $t['tasks'], $task ); $new_task_id = (int) $wpdb->insert_id;
+			if ( $new_task_id ) {
+				foreach ( $wpdb->get_results( $wpdb->prepare( "SELECT attachment_id,visibility FROM `{$t['attachments']}` WHERE task_id=%d", $source_id ), ARRAY_A ) as $attachment ) $wpdb->insert( $t['attachments'], array( 'task_id' => $new_task_id, 'attachment_id' => absint( $attachment['attachment_id'] ), 'visibility' => $attachment['visibility'], 'uploaded_by' => get_current_user_id(), 'created_at' => current_time( 'mysql', true ) ) );
+				foreach ( $wpdb->get_results( $wpdb->prepare( "SELECT title,sort_order FROM `{$t['checklist']}` WHERE task_id=%d ORDER BY sort_order,id", $source_id ), ARRAY_A ) as $item ) $wpdb->insert( $t['checklist'], array( 'task_id' => $new_task_id, 'title' => $item['title'], 'sort_order' => (int) $item['sort_order'], 'created_by' => get_current_user_id(), 'created_at' => current_time( 'mysql', true ) ) );
+			}
+		} elseif ( 'delete' === $action ) { $wpdb->delete( $t['comments'], array( 'task_id' => $id ) ); $wpdb->delete( $t['attachments'], array( 'task_id' => $id ) ); $wpdb->delete( $t['checklist'], array( 'task_id' => $id ) ); $wpdb->delete( $t['events'], array( 'task_id' => $id ) ); $wpdb->delete( $t['tasks'], array( 'id' => $id ) ); }
 		else self::redirect( false, __( 'The requested task action is invalid.', 'contactpanda-business' ), 'tasks' );
 		$return_project_id = absint( $_POST['return_project_id'] ?? 0 );
 		self::redirect( true, 'duplicate' === $action ? __( 'The task was duplicated.', 'contactpanda-business' ) : ( 'restore' === $action ? __( 'The task was restored.', 'contactpanda-business' ) : ( 'delete' === $action ? __( 'The task was deleted permanently.', 'contactpanda-business' ) : __( 'The task was moved to the trash.', 'contactpanda-business' ) ) ), $return_project_id ? 'projects' : 'tasks', $return_project_id );

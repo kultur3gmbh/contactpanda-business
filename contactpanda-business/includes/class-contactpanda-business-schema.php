@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 final class ContactPanda_Business_Schema {
-	const VERSION = '1.3.0';
+	const VERSION = '1.4.0';
 	const OPTION = 'contactpanda_business_db_version';
 
 	public static function table_names() {
@@ -15,6 +15,7 @@ final class ContactPanda_Business_Schema {
 			'tasks'       => $wpdb->prefix . 'cp_business_tasks',
 			'comments'    => $wpdb->prefix . 'cp_business_task_comments',
 			'attachments' => $wpdb->prefix . 'cp_business_task_attachments',
+			'checklist'   => $wpdb->prefix . 'cp_business_task_checklist',
 			'events'      => $wpdb->prefix . 'cp_business_task_events',
 			'imports'     => $wpdb->prefix . 'cp_business_imports',
 			'import_items'=> $wpdb->prefix . 'cp_business_import_items',
@@ -120,6 +121,17 @@ final class ContactPanda_Business_Schema {
 				created_at datetime NOT NULL,
 				PRIMARY KEY  (id), KEY task_id (task_id)
 			) $c;",
+			"CREATE TABLE {$t['checklist']} (
+				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				task_id bigint(20) unsigned NOT NULL,
+				title varchar(255) NOT NULL,
+				is_complete tinyint(1) unsigned NOT NULL DEFAULT 0,
+				sort_order int(11) NOT NULL DEFAULT 0,
+				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
+				created_at datetime NOT NULL,
+				completed_at datetime DEFAULT NULL,
+				PRIMARY KEY  (id), KEY task_order (task_id,sort_order,id)
+			) $c;",
 			"CREATE TABLE {$t['events']} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				project_id bigint(20) unsigned NOT NULL DEFAULT 0,
@@ -137,6 +149,9 @@ final class ContactPanda_Business_Schema {
 				source_name varchar(255) NOT NULL DEFAULT '',
 				attachment_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				status varchar(30) NOT NULL DEFAULT 'review',
+				first_applied_at datetime DEFAULT NULL,
+				applied_at datetime DEFAULT NULL,
+				apply_count int(11) unsigned NOT NULL DEFAULT 0,
 				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
 				created_at datetime NOT NULL,
 				updated_at datetime NOT NULL,
