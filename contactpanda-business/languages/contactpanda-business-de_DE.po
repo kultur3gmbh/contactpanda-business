@@ -1,9 +1,21 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.5\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.6\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%1$d of %2$d"
+msgstr "%1$d von %2$d"
 
 msgid "%1$d open / %2$d total"
 msgstr "%1$d offen / %2$d gesamt"
+
+msgid "%d files could not be uploaded."
+msgstr "%d Dateien konnten nicht hochgeladen werden."
+
+msgid "%d files were added."
+msgstr "%d Dateien wurden hinzugefügt."
+
+msgid "%d runs"
+msgstr "%d Durchläufe"
 
 msgid "%d%% match"
 msgstr "%d %% Übereinstimmung"
@@ -29,14 +41,29 @@ msgstr "Aktivieren Sie eine gültige ContactPanda-Business-Lizenz, um Projekte, 
 msgid "Active"
 msgstr "Aktiv"
 
+msgid "Activity"
+msgstr "Aktivität"
+
+msgid "Add"
+msgstr "Hinzufügen"
+
 msgid "Add area"
 msgstr "Teilbereich hinzufügen"
 
 msgid "Add as comment"
 msgstr "Als Kommentar hinzufügen"
 
+msgid "Add checklist item …"
+msgstr "Checklistenpunkt hinzufügen …"
+
 msgid "Add comment"
 msgstr "Kommentar hinzufügen"
+
+msgid "Add files"
+msgstr "Dateien hinzufügen"
+
+msgid "Add task"
+msgstr "Aufgabe hinzufügen"
 
 msgid "Agency"
 msgstr "Agentur"
@@ -52,6 +79,9 @@ msgstr "Alle Projekte"
 
 msgid "All statuses"
 msgstr "Alle Status"
+
+msgid "Applied"
+msgstr "Durchgeführt"
 
 msgid "Apply selected tasks"
 msgstr "Ausgewählte Aufgaben übernehmen"
@@ -119,6 +149,9 @@ msgstr "CSV-, Excel-, Word-, Text- und MCP-Importe öffnen immer zuerst eine Pr�
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Checklist"
+msgstr "Checkliste"
+
 msgid "Close"
 msgstr "Schließen"
 
@@ -134,11 +167,17 @@ msgstr "Kommentar"
 msgid "Comments"
 msgstr "Kommentare"
 
+msgid "Comments & activity"
+msgstr "Kommentare & Aktivität"
+
 msgid "Companies"
 msgstr "Firmen"
 
 msgid "Completed"
 msgstr "Abgeschlossen"
+
+msgid "Confirm the warning before running an applied import again."
+msgstr "Bestätigen Sie den Warnhinweis, bevor Sie einen bereits durchgeführten Import erneut ausführen."
 
 msgid "Contact person"
 msgstr "Ansprechperson"
@@ -215,6 +254,9 @@ msgstr "Nicht ändern"
 msgid "Done"
 msgstr "Erledigt"
 
+msgid "Download file"
+msgstr "Datei herunterladen"
+
 msgid "Due by"
 msgstr "Zu erledigen bis"
 
@@ -233,14 +275,29 @@ msgstr "Aufgabe duplizieren"
 msgid "Edit project"
 msgstr "Projekt bearbeiten"
 
+msgid "Edit task details"
+msgstr "Aufgabendetails bearbeiten"
+
+msgid "Enter a checklist item."
+msgstr "Geben Sie einen Checklistenpunkt ein."
+
+msgid "Enter a task title …"
+msgstr "Aufgabentitel eingeben …"
+
 msgid "Enter an area name."
 msgstr "Geben Sie einen Namen für den Teilbereich ein."
 
 msgid "Existing task"
 msgstr "Bestehende Aufgabe"
 
+msgid "Files"
+msgstr "Dateien"
+
 msgid "High"
 msgstr "Hoch"
+
+msgid "I understand the warning and want to run this import again."
+msgstr "Ich habe den Warnhinweis verstanden und möchte diesen Import erneut ausführen."
 
 msgid "Import action"
 msgstr "Importaktion"
@@ -269,6 +326,9 @@ msgstr "Nur intern"
 msgid "Invalid task movement."
 msgstr "Ungültige Aufgabenverschiebung."
 
+msgid "Last run: %1$s. Number of runs: %2$d."
+msgstr "Letzter Durchlauf: %1$s. Anzahl der Durchläufe: %2$d."
+
 msgid "List Business projects"
 msgstr "Business-Projekte auflisten"
 
@@ -286,6 +346,12 @@ msgstr "Projekt-Teilbereiche verwalten"
 
 msgid "Manage task"
 msgstr "Aufgabe verwalten"
+
+msgid "Mark checklist item complete"
+msgstr "Checklistenpunkt als erledigt markieren"
+
+msgid "Mark checklist item incomplete"
+msgstr "Checklistenpunkt als offen markieren"
 
 msgid "Move project to trash"
 msgstr "Projekt in den Papierkorb verschieben"
@@ -305,14 +371,26 @@ msgstr "Meine Aufgaben"
 msgid "New"
 msgstr "Neu"
 
+msgid "No activity has been recorded yet."
+msgstr "Es wurde noch keine Aktivität aufgezeichnet."
+
 msgid "No area"
 msgstr "Kein Teilbereich"
+
+msgid "No checklist items have been added yet."
+msgstr "Es wurden noch keine Checklistenpunkte hinzugefügt."
 
 msgid "No comments yet."
 msgstr "Noch keine Kommentare."
 
+msgid "No description has been added."
+msgstr "Es wurde noch keine Beschreibung hinzugefügt."
+
 msgid "No due date"
 msgstr "Kein Fälligkeitsdatum"
+
+msgid "No files have been attached yet."
+msgstr "Es wurden noch keine Dateien angehängt."
 
 msgid "No import drafts are available."
 msgstr "Es sind keine Importentwürfe vorhanden."
@@ -346,6 +424,12 @@ msgstr "In das Aufgaben-Board wird nichts übernommen, bevor Sie diese Liste bes
 
 msgid "On hold"
 msgstr "Ruhend"
+
+msgid "One file could not be uploaded."
+msgstr "Eine Datei konnte nicht hochgeladen werden."
+
+msgid "One file was added."
+msgstr "Eine Datei wurde hinzugefügt."
 
 msgid "Open"
 msgstr "Offen"
@@ -488,8 +572,17 @@ msgstr "Nur lesen"
 msgid "Read project data and prepare reviewed import drafts. Changes are applied only after manual confirmation in WordPress."
 msgstr "Liest Projektdaten und bereitet geprüfte Importentwürfe vor. Änderungen werden erst nach manueller Bestätigung in WordPress übernommen."
 
+msgid "Ready for review"
+msgstr "Zur Prüfung bereit"
+
 msgid "Remove due date"
 msgstr "Fälligkeitsdatum entfernen"
+
+msgid "Remove file from task"
+msgstr "Datei von der Aufgabe entfernen"
+
+msgid "Remove this file from the task? The file remains available in the Media Library."
+msgstr "Diese Datei von der Aufgabe entfernen? Die Datei bleibt in der Mediathek verfügbar."
 
 msgid "Reopen completed task"
 msgstr "Erledigte Aufgabe wieder öffnen"
@@ -517,6 +610,9 @@ msgstr "Importierte Aufgaben prüfen"
 
 msgid "Role in project"
 msgstr "Rolle im Projekt"
+
+msgid "Running it again can create duplicate tasks or repeat comments and updates."
+msgstr "Ein erneuter Durchlauf kann doppelte Aufgaben erzeugen oder Kommentare und Aktualisierungen wiederholen."
 
 msgid "Save project"
 msgstr "Projekt speichern"
@@ -547,6 +643,15 @@ msgstr "Sucht Aufgaben nach Projekt, Teilbereich, Zuständigkeit oder Status."
 
 msgid "Select a file to import."
 msgstr "Wählen Sie eine Datei für den Import aus."
+
+msgid "Select at least one file."
+msgstr "Wählen Sie mindestens eine Datei aus."
+
+msgid "Select one or more files or drag them here."
+msgstr "Wählen Sie eine oder mehrere Dateien aus oder ziehen Sie sie hierher."
+
+msgid "Select one or more files."
+msgstr "Wählen Sie eine oder mehrere Dateien aus."
 
 msgid "Select participants"
 msgstr "Beteiligte auswählen"
@@ -587,6 +692,9 @@ msgstr "Aufgabendetails"
 msgid "Task not found."
 msgstr "Aufgabe nicht gefunden."
 
+msgid "Task title"
+msgstr "Aufgabentitel"
+
 msgid "Tasks"
 msgstr "Aufgaben"
 
@@ -611,11 +719,29 @@ msgstr "Das Word-Dokument konnte nicht geöffnet werden."
 msgid "The Word report could not be created."
 msgstr "Der Word-Bericht konnte nicht erstellt werden."
 
+msgid "The checklist could not be updated."
+msgstr "Die Checkliste konnte nicht aktualisiert werden."
+
+msgid "The checklist item could not be added."
+msgstr "Der Checklistenpunkt konnte nicht hinzugefügt werden."
+
+msgid "The checklist item was added."
+msgstr "Der Checklistenpunkt wurde hinzugefügt."
+
+msgid "The checklist was updated."
+msgstr "Die Checkliste wurde aktualisiert."
+
 msgid "The comment was added."
 msgstr "Der Kommentar wurde hinzugefügt."
 
+msgid "The file link could not be removed."
+msgstr "Die Dateiverknüpfung konnte nicht entfernt werden."
+
 msgid "The file was parsed. Review the tasks before importing them."
 msgstr "Die Datei wurde verarbeitet. Prüfen Sie die Aufgaben vor der Übernahme."
+
+msgid "The file was removed from the task. It remains in the Media Library."
+msgstr "Die Datei wurde von der Aufgabe entfernt. Sie bleibt in der Mediathek verfügbar."
 
 msgid "The first Excel sheet could not be read."
 msgstr "Das erste Excel-Tabellenblatt konnte nicht gelesen werden."
@@ -695,6 +821,12 @@ msgstr "Diese Aktion betrifft auch verknüpfte Datensätze. Möchten Sie fortfah
 msgid "This file type is not supported for direct import."
 msgstr "Dieser Dateityp wird für den direkten Import nicht unterstützt."
 
+msgid "This import has already been applied."
+msgstr "Dieser Import wurde bereits durchgeführt."
+
+msgid "This import has already been applied. Do you really want to run it again?"
+msgstr "Dieser Import wurde bereits durchgeführt. Möchten Sie ihn wirklich erneut ausführen?"
+
 msgid "This project does not exist."
 msgstr "Dieses Projekt existiert nicht."
 
@@ -713,6 +845,9 @@ msgstr "Papierkorb"
 msgid "Unassigned"
 msgstr "Nicht zugeordnet"
 
+msgid "Unknown time"
+msgstr "Unbekannter Zeitpunkt"
+
 msgid "Unnamed company"
 msgstr "Firma ohne Namen"
 
@@ -730,6 +865,9 @@ msgstr "Hochladen und prüfen"
 
 msgid "Upload corrections or tasks"
 msgstr "Korrekturen oder Aufgaben hochladen"
+
+msgid "Upload files"
+msgstr "Dateien hochladen"
 
 msgid "Urgent"
 msgstr "Dringend"
@@ -761,8 +899,38 @@ msgstr "Ohne Teilbereich"
 msgid "Word report"
 msgstr "Word-Bericht"
 
+msgid "Write a comment …"
+msgstr "Kommentar schreiben …"
+
 msgid "You do not have permission."
 msgstr "Sie haben keine Berechtigung."
 
+msgid "added a checklist item."
+msgstr "hat einen Checklistenpunkt hinzugefügt."
+
+msgid "added a comment."
+msgstr "hat einen Kommentar hinzugefügt."
+
+msgid "added files."
+msgstr "hat Dateien hinzugefügt."
+
+msgid "created the task."
+msgstr "hat die Aufgabe erstellt."
+
+msgid "moved the task to “%s”."
+msgstr "hat die Aufgabe nach „%s“ verschoben."
+
+msgid "moved the task."
+msgstr "hat die Aufgabe verschoben."
+
+msgid "removed a file from the task."
+msgstr "hat eine Datei von der Aufgabe entfernt."
+
 msgid "tasks selected"
 msgstr "Aufgaben ausgewählt"
+
+msgid "updated the checklist."
+msgstr "hat die Checkliste aktualisiert."
+
+msgid "updated the task."
+msgstr "hat die Aufgabe aktualisiert."
