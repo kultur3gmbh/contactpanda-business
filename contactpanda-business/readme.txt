@@ -4,7 +4,7 @@ Tags: contactpanda, projects, corrections, kanban, customer-portal
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.8.9
+Stable tag: 0.8.10
 License: GPLv2 or later
 
 Independent business administration and project management for ContactPanda.
@@ -14,6 +14,10 @@ Independent business administration and project management for ContactPanda.
 ContactPanda Business provides project and correction management with customer-visible and internal tasks, structured document imports, reports, and an authenticated MCP interface.
 
 == Changelog ==
+
+= 0.8.10 =
+* Aligns Business with the verified ContactPanda Basic 0.8.10 release archive and update metadata.
+* Retains every individually licensed Business module as valid access to Business maintenance releases.
 
 = 0.8.9 =
 * Uses the corrected package-update authorization supplied by ContactPanda Basic 0.8.9.
