@@ -2,21 +2,21 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Project, correction, customer, contract, subscription, and payment management for ContactPanda.
- * Version: 0.8.15
+ * Version: 0.8.20
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: contactpanda
- * Requires ContactPanda: 0.8.15
+ * Requires ContactPanda: 0.8.20
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.15' );
-define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.15' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.20' );
+define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.20' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
@@ -133,5 +133,5 @@ add_action( 'wp_enqueue_scripts', 'contactpanda_business_frontend_assets' );
 
 function contactpanda_business_dependency_notice() {
 	if ( ! current_user_can( 'activate_plugins' ) ) return;
-	echo '<div class="notice notice-error"><p>' . esc_html( sprintf( __( 'ContactPanda Business requires ContactPanda Basic %s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION ) ) . '</p></div>';
+	echo '<div class="notice notice-error"><p>' . esc_html( sprintf( __( 'ContactPanda Business requires ContactPanda %s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION ) ) . '</p></div>';
 }

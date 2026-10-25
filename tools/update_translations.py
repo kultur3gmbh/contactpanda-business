@@ -13,12 +13,12 @@ GERMAN = {
     "A Business task was created from the support request.": "Aus dem Hilfeersuchen wurde eine Business-Aufgabe erstellt.",
     "Agency": "Agentur", "Assign one or more customer accounts, people or companies and define their role in the project.": "Ordnen Sie ein oder mehrere Kundenkonten, Personen oder Firmen zu und legen Sie deren Rolle im Projekt fest.",
     "Actions": "Aktionen", "Active": "Aktiv", "Add comment": "Kommentar hinzufügen", "All": "Alle",
-    "Archived": "Archiviert", "Automatic ContactPanda Business updates require a current ContactPanda Basic installation.": "Automatische Aktualisierungen für ContactPanda Business erfordern eine aktuelle Installation von ContactPanda Basic.",
+    "Archived": "Archiviert", "Automatic ContactPanda Business updates require a current ContactPanda Basic installation.": "Automatische Aktualisierungen für ContactPanda Business erfordern eine aktuelle Installation von ContactPanda.",
     "Back to board": "Zurück zum Board", "Back to projects": "Zurück zu den Projekten", "Business overview": "Business-Übersicht",
     "Business task": "Business-Aufgabe", "Cancel": "Abbrechen", "Close": "Schließen", "Column": "Spalte", "Comment": "Kommentar", "Comments": "Kommentare",
     "Companies": "Firmen", "Company ID": "Firmen-ID", "Completed": "Abgeschlossen", "Contact person": "Ansprechperson", "ContactPanda Business": "ContactPanda Business",
     "ContactPanda Business could not create all required tables.": "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen.",
-    "ContactPanda Business requires ContactPanda Basic 0.8.1 or newer.": "ContactPanda Business erfordert ContactPanda Basic 0.8.1 oder neuer.",
+    "ContactPanda Business requires ContactPanda %s or newer.": "ContactPanda Business erfordert ContactPanda %s oder neuer.",
     "Contract management": "Vertragsverwaltung", "Create a Business project before converting this support request into a task.": "Erstellen Sie zuerst ein Business-Projekt, bevor Sie dieses Hilfeersuchen in eine Aufgabe umwandeln.",
     "Create project": "Projekt erstellen", "Create task": "Aufgabe erstellen", "Create task from request": "Aufgabe aus Anfrage erstellen",
     "Created from Support Desk request #%d.": "Aus dem Hilfeersuchen #%d erstellt.", "Customer": "Kunde", "Customer account": "Kundenkonto", "Customer accounts with portal access": "Kundenkonten mit Portalzugang",
@@ -213,8 +213,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.15\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.15\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.20\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.20\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]

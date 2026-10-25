@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.15\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.20\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
@@ -134,9 +134,6 @@ msgstr "Zuständig"
 msgid "Assignee and due date"
 msgstr "Zuständigkeit und Fälligkeit"
 
-msgid "Automatic ContactPanda Business updates require a current ContactPanda Basic installation."
-msgstr "Automatische Aktualisierungen für ContactPanda Business erfordern eine aktuelle Installation von ContactPanda Basic."
-
 msgid "Back to board"
 msgstr "Zurück zum Board"
 
@@ -233,8 +230,8 @@ msgstr "ContactPanda Business"
 msgid "ContactPanda Business could not create all required tables."
 msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen."
 
-msgid "ContactPanda Business requires ContactPanda Basic %s or newer."
-msgstr "ContactPanda Business requires ContactPanda Basic %s or newer."
+msgid "ContactPanda Business requires ContactPanda %s or newer."
+msgstr "ContactPanda Business erfordert ContactPanda %s oder neuer."
 
 msgid "Contract"
 msgstr "Vertrag"
