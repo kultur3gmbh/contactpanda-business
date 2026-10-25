@@ -20,8 +20,10 @@ final class ContactPanda_Business_MCP {
 
 	public static function boot() {
 		self::register_ability_hooks();
+		// Retain the legacy Business route as a compatibility alias. New clients
+		// discover every family tool through ContactPanda's central MCP endpoint.
 		add_action( 'rest_api_init', array( __CLASS__, 'register_route' ) );
-		if ( class_exists( 'ContactPanda_Plus_MCP' ) ) { add_filter( 'contactpanda_plus_mcp_tools', array( __CLASS__, 'extend_tools' ) ); add_filter( 'contactpanda_plus_mcp_tool_call', array( __CLASS__, 'extend_call' ), 10, 3 ); }
+		if ( class_exists( 'ContactPanda_MCP' ) ) { add_filter( 'contactpanda_mcp_tools', array( __CLASS__, 'extend_tools' ) ); add_filter( 'contactpanda_mcp_tool_call', array( __CLASS__, 'extend_call' ), 10, 3 ); }
 		if ( did_action( 'wp_abilities_api_init' ) ) self::register_abilities();
 	}
 
