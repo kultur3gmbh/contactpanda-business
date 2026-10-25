@@ -21,5 +21,13 @@ for translation_file in \
   contactpanda-business/languages/contactpanda-business-de_DE_formal.mo; do
   [[ -f "$translation_file" ]] || { echo "Missing German translation file: $translation_file" >&2; status=1; }
 done
+if [[ -e contactpanda-business/includes/class-contactpanda-business-updater.php ]]; then
+  echo "Business must use the protected updater supplied centrally by ContactPanda Basic." >&2
+  status=1
+fi
+if ! grep -q "contactpanda_customer_portal_tabs" contactpanda-business/includes/class-contactpanda-business-projects.php; then
+  echo "Business must extend the shared ContactPanda customer portal." >&2
+  status=1
+fi
 [[ "$status" -eq 0 ]] || exit "$status"
 echo "ContactPanda Business checks passed."

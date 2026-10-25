@@ -2,26 +2,25 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Project, correction, customer, contract, subscription, and payment management for ContactPanda.
- * Version: 0.8.11
+ * Version: 0.8.15
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: contactpanda
- * Requires ContactPanda: 0.8.11
+ * Requires ContactPanda: 0.8.15
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.11' );
-define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.11' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.15' );
+define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.15' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
 
-require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-updater.php';
 require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-mcp.php';
 
 // Register Abilities API hooks before secure MCP plugins initialize the registry.
@@ -126,7 +125,9 @@ function contactpanda_business_license_required() {
 }
 
 function contactpanda_business_frontend_assets() {
-	if ( function_exists( 'is_account_page' ) && is_account_page() ) wp_enqueue_style( 'contactpanda-business-account', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-account.css', array(), CONTACTPANDA_BUSINESS_VERSION );
+	$is_account = function_exists( 'is_account_page' ) && is_account_page();
+	$is_portal  = class_exists( 'ContactPanda_Customer_Portal' ) && ContactPanda_Customer_Portal::is_portal_page();
+	if ( $is_account || $is_portal ) wp_enqueue_style( 'contactpanda-business-account', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-account.css', array(), CONTACTPANDA_BUSINESS_VERSION );
 }
 add_action( 'wp_enqueue_scripts', 'contactpanda_business_frontend_assets' );
 

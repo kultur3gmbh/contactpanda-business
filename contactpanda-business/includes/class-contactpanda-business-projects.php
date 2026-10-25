@@ -25,10 +25,22 @@ final class ContactPanda_Business_Projects {
 		add_action( 'init', array( __CLASS__, 'endpoint' ) );
 		add_filter( 'woocommerce_account_menu_items', array( __CLASS__, 'account_menu' ) );
 		add_action( 'woocommerce_account_projekte-korrekturen_endpoint', array( __CLASS__, 'account_page' ) );
+		add_filter( 'contactpanda_customer_portal_tabs', array( __CLASS__, 'customer_portal_tabs' ), 30, 2 );
 		add_action( 'admin_post_contactpanda_business_customer_task', array( __CLASS__, 'customer_task' ) );
 		add_action( 'admin_post_contactpanda_business_customer_comment', array( __CLASS__, 'customer_comment' ) );
 		add_action( 'admin_post_contactpanda_business_customer_update_task', array( __CLASS__, 'customer_update_task' ) );
 		add_action( 'contactpanda_plus_customer_detail', array( __CLASS__, 'customer_projects' ), 10, 5 );
+	}
+
+	/** Add customer-visible projects to the shared, WooCommerce-independent portal. */
+	public static function customer_portal_tabs( $tabs, $identity = array() ) {
+		unset( $identity );
+		$tabs['projects'] = array(
+			'label'    => __( 'Projects', 'contactpanda-business' ),
+			'callback' => array( __CLASS__, 'account_page' ),
+			'priority' => 50,
+		);
+		return $tabs;
 	}
 
 	public static function customer_projects( $contact_id, $customer, $contact, $editable ) {
@@ -688,7 +700,7 @@ final class ContactPanda_Business_Projects {
 			if ( ! $task || ! self::customer_can( (int) $task['project_id'], $user_id, 'read' ) ) { echo '<p>' . esc_html__( 'This task is not available.', 'contactpanda-business' ) . '</p>'; return; }
 			$access = self::customer_access_level( (int) $task['project_id'], $user_id );
 			$comments = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM `{$t['comments']}` WHERE task_id=%d AND visibility='customer' ORDER BY created_at", $task_id ), ARRAY_A );
-			echo '<div class="cpb-account"><p><a href="' . esc_url( wc_get_account_endpoint_url( 'projekte-korrekturen' ) ) . '">← ' . esc_html__( 'Back to projects', 'contactpanda-business' ) . '</a></p><h2>' . esc_html( $task['title'] ) . '</h2><p>' . nl2br( esc_html( $task['description'] ) ) . '</p><p><strong>' . esc_html__( 'Progress', 'contactpanda-business' ) . ':</strong> ' . esc_html( $task['progress'] ) . '% · ' . esc_html( self::columns()[ $task['board_column']] ?? $task['board_column'] ) . '</p>';
+			echo '<div class="cpb-account"><p><a href="' . esc_url( self::account_url() ) . '">← ' . esc_html__( 'Back to projects', 'contactpanda-business' ) . '</a></p><h2>' . esc_html( $task['title'] ) . '</h2><p>' . nl2br( esc_html( $task['description'] ) ) . '</p><p><strong>' . esc_html__( 'Progress', 'contactpanda-business' ) . ':</strong> ' . esc_html( $task['progress'] ) . '% · ' . esc_html( self::columns()[ $task['board_column']] ?? $task['board_column'] ) . '</p>';
 			foreach ( $comments as $comment ) { $author = get_userdata( (int) $comment['author_user_id'] ); echo '<article class="cpb-comment"><header><strong>' . esc_html( $author ? $author->display_name : __( 'Customer', 'contactpanda-business' ) ) . '</strong><time>' . esc_html( get_date_from_gmt( $comment['created_at'], get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) ) . '</time></header><p>' . nl2br( esc_html( $comment['body'] ) ) . '</p></article>'; }
 			if ( in_array( $access, array( 'write', 'manage' ), true ) ) { echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="contactpanda_business_customer_comment"><input type="hidden" name="task_id" value="' . esc_attr( $task_id ) . '">'; wp_nonce_field( 'contactpanda_business_customer_comment_' . $task_id ); echo '<p><label>' . esc_html__( 'Comment', 'contactpanda-business' ) . '<textarea name="body" rows="5" required></textarea></label></p><button class="button">' . esc_html__( 'Add comment', 'contactpanda-business' ) . '</button></form>'; }
 			if ( 'manage' === $access ) { echo '<h3>' . esc_html__( 'Manage task', 'contactpanda-business' ) . '</h3><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="contactpanda_business_customer_update_task"><input type="hidden" name="task_id" value="' . esc_attr( $task_id ) . '">'; wp_nonce_field( 'contactpanda_business_customer_update_task_' . $task_id ); echo '<p><label>' . esc_html__( 'Column', 'contactpanda-business' ) . '<select name="board_column">'; foreach ( self::columns() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '"' . selected( $task['board_column'], $key, false ) . '>' . esc_html( $label ) . '</option>'; echo '</select></label></p><p><label>' . esc_html__( 'Open status', 'contactpanda-business' ) . '<select name="open_status">'; foreach ( self::open_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '"' . selected( $task['open_status'], $key, false ) . '>' . esc_html( $label ) . '</option>'; echo '</select></label></p><p><label>' . esc_html__( 'Progress', 'contactpanda-business' ) . '<input type="number" min="0" max="100" name="progress" value="' . esc_attr( $task['progress'] ) . '"></label></p><button class="button">' . esc_html__( 'Update task', 'contactpanda-business' ) . '</button></form>'; }
@@ -702,7 +714,7 @@ final class ContactPanda_Business_Projects {
 		foreach ( $projects as $project ) {
 			$access = self::customer_access_level( (int) $project['id'], $user_id ); echo '<section><h3>' . esc_html( $project['name'] ) . '</h3><p><small>' . esc_html( self::access_levels()[ $access ] ?? '' ) . '</small></p>';
 			$tasks = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM `{$t['tasks']}` WHERE project_id=%d AND visibility='customer' AND deleted_at IS NULL ORDER BY updated_at DESC", $project['id'] ), ARRAY_A );
-			if ( $tasks ) { echo '<ul class="cpb-account-tasks">'; foreach ( $tasks as $task ) { $url = add_query_arg( 'business_task', absint( $task['id'] ), wc_get_account_endpoint_url( 'projekte-korrekturen' ) ); echo '<li><a href="' . esc_url( $url ) . '"><strong>' . esc_html( $task['title'] ) . '</strong></a><span>' . esc_html( self::columns()[ $task['board_column']] ?? $task['board_column'] ) . ' · ' . esc_html( $task['progress'] ) . '%</span></li>'; } echo '</ul>'; }
+			if ( $tasks ) { echo '<ul class="cpb-account-tasks">'; foreach ( $tasks as $task ) { $url = self::account_url( absint( $task['id'] ) ); echo '<li><a href="' . esc_url( $url ) . '"><strong>' . esc_html( $task['title'] ) . '</strong></a><span>' . esc_html( self::columns()[ $task['board_column']] ?? $task['board_column'] ) . ' · ' . esc_html( $task['progress'] ) . '%</span></li>'; } echo '</ul>'; }
 			if ( in_array( $access, array( 'write', 'manage' ), true ) ) { echo '<details><summary>' . esc_html__( 'Submit a new task', 'contactpanda-business' ) . '</summary><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="contactpanda_business_customer_task"><input type="hidden" name="project_id" value="' . esc_attr( $project['id'] ) . '">'; wp_nonce_field( 'contactpanda_business_customer_task_' . $project['id'] ); echo '<p><label>' . esc_html__( 'Title', 'contactpanda-business' ) . '<input name="title" required></label></p><p><label>' . esc_html__( 'Description', 'contactpanda-business' ) . '<textarea name="description" rows="5" required></textarea></label></p><button class="button">' . esc_html__( 'Submit task', 'contactpanda-business' ) . '</button></form></details>'; }
 			echo '</section>';
 		}
@@ -712,15 +724,15 @@ final class ContactPanda_Business_Projects {
 	public static function customer_task() {
 		if ( ! is_user_logged_in() ) auth_redirect(); $project_id = absint( $_POST['project_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_customer_task_' . $project_id );
 		if ( ! self::customer_can( $project_id, get_current_user_id(), 'write' ) ) wp_die( esc_html__( 'You do not have permission.', 'contactpanda-business' ), '', array( 'response' => 403 ) );
-		$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) ); $description = sanitize_textarea_field( wp_unslash( $_POST['description'] ?? '' ) ); if ( '' === $title || '' === $description ) { wp_safe_redirect( wc_get_account_endpoint_url( 'projekte-korrekturen' ) ); exit; }
-		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $now = current_time( 'mysql', true ); $wpdb->insert( $t['tasks'], array( 'uuid' => wp_generate_uuid4(), 'project_id' => $project_id, 'title' => $title, 'description' => $description, 'board_column' => 'open', 'open_status' => 'new', 'priority' => 'normal', 'visibility' => 'customer', 'created_by' => get_current_user_id(), 'created_at' => $now, 'updated_at' => $now ) ); self::event( $project_id, (int) $wpdb->insert_id, 'customer_task_created', array() ); wp_safe_redirect( wc_get_account_endpoint_url( 'projekte-korrekturen' ) ); exit;
+		$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) ); $description = sanitize_textarea_field( wp_unslash( $_POST['description'] ?? '' ) ); if ( '' === $title || '' === $description ) { wp_safe_redirect( self::account_url() ); exit; }
+		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $now = current_time( 'mysql', true ); $wpdb->insert( $t['tasks'], array( 'uuid' => wp_generate_uuid4(), 'project_id' => $project_id, 'title' => $title, 'description' => $description, 'board_column' => 'open', 'open_status' => 'new', 'priority' => 'normal', 'visibility' => 'customer', 'created_by' => get_current_user_id(), 'created_at' => $now, 'updated_at' => $now ) ); self::event( $project_id, (int) $wpdb->insert_id, 'customer_task_created', array() ); wp_safe_redirect( self::account_url() ); exit;
 	}
 
 	public static function customer_comment() {
 		if ( ! is_user_logged_in() ) auth_redirect(); $task_id = absint( $_POST['task_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_customer_comment_' . $task_id ); $body = sanitize_textarea_field( wp_unslash( $_POST['body'] ?? '' ) ); global $wpdb; $t = ContactPanda_Business_Schema::table_names();
 		$task = $wpdb->get_row( $wpdb->prepare( "SELECT x.id,x.project_id FROM `{$t['tasks']}` x JOIN `{$t['projects']}` p ON p.id=x.project_id WHERE x.id=%d AND x.visibility='customer' AND x.deleted_at IS NULL AND p.visibility='customer' AND p.deleted_at IS NULL", $task_id ), ARRAY_A );
 		if ( ! $task || '' === $body || ! self::customer_can( (int) $task['project_id'], get_current_user_id(), 'write' ) ) wp_die( esc_html__( 'This task is not available.', 'contactpanda-business' ), '', array( 'response' => 403 ) );
-		$wpdb->insert( $t['comments'], array( 'task_id' => $task_id, 'visibility' => 'customer', 'author_user_id' => get_current_user_id(), 'body' => $body, 'created_at' => current_time( 'mysql', true ) ) ); self::event( (int) $task['project_id'], $task_id, 'customer_comment_added', array() ); $url = add_query_arg( 'business_task', $task_id, wc_get_account_endpoint_url( 'projekte-korrekturen' ) ); wp_safe_redirect( $url ); exit;
+		$wpdb->insert( $t['comments'], array( 'task_id' => $task_id, 'visibility' => 'customer', 'author_user_id' => get_current_user_id(), 'body' => $body, 'created_at' => current_time( 'mysql', true ) ) ); self::event( (int) $task['project_id'], $task_id, 'customer_comment_added', array() ); wp_safe_redirect( self::account_url( $task_id ) ); exit;
 	}
 
 	public static function customer_update_task() {
@@ -731,7 +743,15 @@ final class ContactPanda_Business_Projects {
 		$open = sanitize_key( wp_unslash( $_POST['open_status'] ?? '' ) ); if ( ! isset( self::open_statuses()[ $open ] ) ) $open = 'new';
 		$progress = min( 100, absint( $_POST['progress'] ?? 0 ) );
 		$wpdb->update( $t['tasks'], array( 'board_column' => $column, 'open_status' => $open, 'progress' => $progress, 'completed_at' => 'done' === $column ? current_time( 'mysql', true ) : null, 'updated_at' => current_time( 'mysql', true ) ), array( 'id' => $task_id ) );
-		self::event( (int) $task['project_id'], $task_id, 'customer_task_updated', array( 'column' => $column, 'progress' => $progress ) ); $url = add_query_arg( 'business_task', $task_id, wc_get_account_endpoint_url( 'projekte-korrekturen' ) ); wp_safe_redirect( $url ); exit;
+		self::event( (int) $task['project_id'], $task_id, 'customer_task_updated', array( 'column' => $column, 'progress' => $progress ) ); wp_safe_redirect( self::account_url( $task_id ) ); exit;
+	}
+
+	private static function account_url( $task_id = 0 ) {
+		if ( class_exists( 'ContactPanda_Customer_Portal' ) && ContactPanda_Customer_Portal::is_configured() ) {
+			return ContactPanda_Customer_Portal::tab_url( 'projects', $task_id ? array( 'business_task' => absint( $task_id ) ) : array() );
+		}
+		$url = function_exists( 'wc_get_account_endpoint_url' ) ? wc_get_account_endpoint_url( 'projekte-korrekturen' ) : home_url( '/' );
+		return $task_id ? add_query_arg( 'business_task', absint( $task_id ), $url ) : $url;
 	}
 
 	private static function participant_picker( $type, $label, $options, $selected = array() ) {
