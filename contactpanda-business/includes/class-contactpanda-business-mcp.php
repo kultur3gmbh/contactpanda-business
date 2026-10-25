@@ -6,6 +6,8 @@ defined( 'ABSPATH' ) || exit;
 final class ContactPanda_Business_MCP {
 	const ROUTE = 'contactpanda-business/v1';
 	const AUDIT_OPTION = 'contactpanda_business_mcp_audit';
+	const CATEGORY = 'contactpanda-business';
+	const FALLBACK_CATEGORY = 'site';
 	private static $ability_hooks_registered = false;
 
 	/** Register discovery hooks before another plugin initializes the lazy registry. */
@@ -20,6 +22,7 @@ final class ContactPanda_Business_MCP {
 		self::register_ability_hooks();
 		add_action( 'rest_api_init', array( __CLASS__, 'register_route' ) );
 		if ( class_exists( 'ContactPanda_Plus_MCP' ) ) { add_filter( 'contactpanda_plus_mcp_tools', array( __CLASS__, 'extend_tools' ) ); add_filter( 'contactpanda_plus_mcp_tool_call', array( __CLASS__, 'extend_call' ), 10, 3 ); }
+		if ( did_action( 'wp_abilities_api_init' ) ) self::register_abilities();
 	}
 
 	public static function register_route() { register_rest_route( self::ROUTE, '/mcp', array( 'methods' => WP_REST_Server::CREATABLE, 'callback' => array( __CLASS__, 'handle' ), 'permission_callback' => array( __CLASS__, 'allowed' ) ) ); }
@@ -30,9 +33,9 @@ final class ContactPanda_Business_MCP {
 	 * MCP connectors. Older WordPress versions continue to use the REST route.
 	 */
 	public static function register_ability_category() {
-		if ( ! function_exists( 'wp_register_ability_category' ) || ! contactpanda_business_module_entitled( 'project_management' ) ) return;
+		if ( ! function_exists( 'wp_register_ability_category' ) ) return;
 		wp_register_ability_category(
-			'contactpanda-business',
+			self::CATEGORY,
 			array(
 				'label'       => __( 'ContactPanda Business', 'contactpanda-business' ),
 				'description' => __( 'Projects, tasks, reviewed imports, and customer reports.', 'contactpanda-business' ),
@@ -41,21 +44,23 @@ final class ContactPanda_Business_MCP {
 	}
 
 	public static function register_abilities() {
-		if ( ! function_exists( 'wp_register_ability' ) || ! contactpanda_business_module_entitled( 'project_management' ) ) return;
+		if ( ! function_exists( 'wp_register_ability' ) ) return;
 
 		$read_meta = array(
 			'public'       => true,
 			'show_in_rest' => true,
+			'mcp'          => array( 'type' => 'tool', 'public' => true ),
 			'annotations'  => array( 'readonly' => true, 'destructive' => false, 'idempotent' => true ),
 		);
 		$stage_meta = array(
 			'public'       => true,
 			'show_in_rest' => true,
+			'mcp'          => array( 'type' => 'tool', 'public' => true ),
 			'annotations'  => array( 'readonly' => false, 'destructive' => false, 'idempotent' => false ),
 		);
 		$output_schema = array( 'type' => 'object', 'additionalProperties' => true );
 
-		wp_register_ability(
+		self::register_ability(
 			'contactpanda-business/projects-list',
 			array(
 				'label'               => __( 'List Business projects', 'contactpanda-business' ),
@@ -77,7 +82,7 @@ final class ContactPanda_Business_MCP {
 			)
 		);
 
-		wp_register_ability(
+		self::register_ability(
 			'contactpanda-business/project-get',
 			array(
 				'label'               => __( 'Read Business project', 'contactpanda-business' ),
@@ -99,7 +104,7 @@ final class ContactPanda_Business_MCP {
 			)
 		);
 
-		wp_register_ability(
+		self::register_ability(
 			'contactpanda-business/tasks-search',
 			array(
 				'label'               => __( 'Search Business tasks', 'contactpanda-business' ),
@@ -125,7 +130,7 @@ final class ContactPanda_Business_MCP {
 			)
 		);
 
-		wp_register_ability(
+		self::register_ability(
 			'contactpanda-business/import-stage',
 			array(
 				'label'               => __( 'Prepare a Business import draft', 'contactpanda-business' ),
@@ -167,7 +172,7 @@ final class ContactPanda_Business_MCP {
 			)
 		);
 
-		wp_register_ability(
+		self::register_ability(
 			'contactpanda-business/report-prepare',
 			array(
 				'label'               => __( 'Prepare a Business project report', 'contactpanda-business' ),
@@ -185,6 +190,18 @@ final class ContactPanda_Business_MCP {
 				'meta'                => $read_meta,
 			)
 		);
+	}
+
+	private static function register_ability( $name, $args ) {
+		$args['category'] = function_exists( 'wp_has_ability_category' ) && wp_has_ability_category( self::CATEGORY ) ? self::CATEGORY : self::FALLBACK_CATEGORY;
+		if ( doing_action( 'wp_abilities_api_init' ) ) {
+			wp_register_ability( $name, $args );
+			return;
+		}
+		if ( class_exists( 'WP_Abilities_Registry' ) ) {
+			$registry = WP_Abilities_Registry::get_instance();
+			if ( $registry && ! $registry->is_registered( $name ) ) $registry->register( $name, $args );
+		}
 	}
 
 	public static function ability_projects_list( $input = array() ) { return self::ability_call( 'contactpanda_business_projects_list', $input ); }

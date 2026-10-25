@@ -95,6 +95,26 @@ GERMAN.update({
 })
 
 GERMAN.update({
+    "Back to project list": "Zurück zur Projektliste",
+    "Click to add financing details.": "Klicken Sie, um Finanzierungsdetails hinzuzufügen.",
+    "Click to add notes or comments.": "Klicken Sie, um Notizen oder Anmerkungen hinzuzufügen.",
+    "Customer comments": "Kundenkommentare",
+    "Edit value": "Wert bearbeiten",
+    "No.": "Nr.",
+    "No customer-visible tasks are available.": "Es sind keine kundensichtbaren Aufgaben vorhanden.",
+    "Notes and comments": "Notizen und Anmerkungen",
+    "Project end": "Projektende",
+    "Project settings": "Projekteinstellungen",
+    "Save": "Speichern",
+    "Status / solution": "Status / Lösung",
+    "The project field could not be saved.": "Das Projektfeld konnte nicht gespeichert werden.",
+    "The project field was saved.": "Das Projektfeld wurde gespeichert.",
+    "The selected project status is invalid.": "Der gewählte Projektstatus ist ungültig.",
+    "This project field cannot be edited here.": "Dieses Projektfeld kann hier nicht bearbeitet werden.",
+    "To-do / correction": "Aufgabe / Korrektur",
+})
+
+GERMAN.update({
     "%1$d of %2$d": "%1$d von %2$d",
     "%d files could not be uploaded.": "%d Dateien konnten nicht hochgeladen werden.",
     "%d files were added.": "%d Dateien wurden hinzugefügt.",
@@ -193,8 +213,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.10\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.10\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.11\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.11\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]

@@ -7,6 +7,7 @@ final class ContactPanda_Business_Projects {
 
 	public static function boot() {
 		add_action( 'admin_post_contactpanda_business_save_project', array( __CLASS__, 'save_project' ) );
+		add_action( 'admin_post_contactpanda_business_save_project_field', array( __CLASS__, 'save_project_field' ) );
 		add_action( 'admin_post_contactpanda_business_save_task', array( __CLASS__, 'save_task' ) );
 		add_action( 'admin_post_contactpanda_business_add_comment', array( __CLASS__, 'add_comment' ) );
 		add_action( 'admin_post_contactpanda_business_upload_task_files', array( __CLASS__, 'upload_task_files' ) );
@@ -130,8 +131,8 @@ final class ContactPanda_Business_Projects {
 		$selected = $is_edit ? self::project_participants( $project_id ) : array();
 		echo '<div id="' . esc_attr( $modal_id ) . '" class="cpb-modal" hidden><div class="cpb-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="' . esc_attr( $modal_id . '-title' ) . '"><button type="button" class="cpb-modal-close" data-cpb-close aria-label="' . esc_attr__( 'Close', 'contactpanda-business' ) . '">&times;</button><h2 id="' . esc_attr( $modal_id . '-title' ) . '">' . esc_html( $title ) . '</h2><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-form"><input type="hidden" name="action" value="contactpanda_business_save_project"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '">'; wp_nonce_field( 'contactpanda_business_save_project' );
 		echo '<label><span>' . esc_html__( 'Project name', 'contactpanda-business' ) . '</span><input name="name" value="' . esc_attr( $project['name'] ?? '' ) . '" required></label><label><span>' . esc_html__( 'Description', 'contactpanda-business' ) . '</span><textarea name="description" rows="5">' . esc_textarea( $project['description'] ?? '' ) . '</textarea></label>';
-		echo '<div class="cpb-form-grid"><label><span>' . esc_html__( 'Project color', 'contactpanda-business' ) . '</span><input type="color" name="color" value="' . esc_attr( self::clean_color( $project['color'] ?? '' ) ) . '"></label><label><span>' . esc_html__( 'Status', 'contactpanda-business' ) . '</span><select name="status">'; foreach ( self::project_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '"' . selected( $project['status'] ?? 'active', $key, false ) . '>' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Visibility', 'contactpanda-business' ) . '</span><select name="visibility"><option value="customer"' . selected( $project['visibility'] ?? 'customer', 'customer', false ) . '>' . esc_html__( 'Visible to customer', 'contactpanda-business' ) . '</option><option value="internal"' . selected( $project['visibility'] ?? 'customer', 'internal', false ) . '>' . esc_html__( 'Internal only', 'contactpanda-business' ) . '</option></select></label><label><span>' . esc_html__( 'Project start', 'contactpanda-business' ) . '</span><input type="date" name="start_date" value="' . esc_attr( $project['start_date'] ?? '' ) . '"></label><label><span>' . esc_html__( 'Target completion', 'contactpanda-business' ) . '</span><input type="date" name="target_end_date" value="' . esc_attr( $project['target_end_date'] ?? '' ) . '"></label><label><span>' . esc_html__( 'Total budget', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="budget_total" value="' . esc_attr( $project['budget_total'] ?? '0.00' ) . '"></label><label><span>' . esc_html__( 'Currency', 'contactpanda-business' ) . '</span><input name="currency" maxlength="3" value="' . esc_attr( $project['currency'] ?? 'EUR' ) . '"></label></div>';
-		echo '<label><span>' . esc_html__( 'Financing notes', 'contactpanda-business' ) . '</span><textarea name="financing_notes" rows="4">' . esc_textarea( $project['financing_notes'] ?? '' ) . '</textarea></label><h3>' . esc_html__( 'Project participants', 'contactpanda-business' ) . '</h3><p class="description">' . esc_html__( 'Assign one or more customer accounts, people or companies and define their role in the project.', 'contactpanda-business' ) . '</p>';
+		echo '<div class="cpb-form-grid"><label><span>' . esc_html__( 'Project color', 'contactpanda-business' ) . '</span><input type="color" name="color" value="' . esc_attr( self::clean_color( $project['color'] ?? '' ) ) . '"></label><label><span>' . esc_html__( 'Status', 'contactpanda-business' ) . '</span><select name="status">'; foreach ( self::project_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '"' . selected( $project['status'] ?? 'active', $key, false ) . '>' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Progress', 'contactpanda-business' ) . '</span><input type="number" min="0" max="100" name="progress" value="' . esc_attr( $project['progress'] ?? 0 ) . '"></label><label><span>' . esc_html__( 'Visibility', 'contactpanda-business' ) . '</span><select name="visibility"><option value="customer"' . selected( $project['visibility'] ?? 'customer', 'customer', false ) . '>' . esc_html__( 'Visible to customer', 'contactpanda-business' ) . '</option><option value="internal"' . selected( $project['visibility'] ?? 'customer', 'internal', false ) . '>' . esc_html__( 'Internal only', 'contactpanda-business' ) . '</option></select></label><label><span>' . esc_html__( 'Project start', 'contactpanda-business' ) . '</span><input type="date" name="start_date" value="' . esc_attr( $project['start_date'] ?? '' ) . '"></label><label><span>' . esc_html__( 'Target completion', 'contactpanda-business' ) . '</span><input type="date" name="target_end_date" value="' . esc_attr( $project['target_end_date'] ?? '' ) . '"></label><label><span>' . esc_html__( 'Total budget', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="budget_total" value="' . esc_attr( $project['budget_total'] ?? '0.00' ) . '"></label><label><span>' . esc_html__( 'Currency', 'contactpanda-business' ) . '</span><input name="currency" maxlength="3" value="' . esc_attr( $project['currency'] ?? 'EUR' ) . '"></label></div>';
+		echo '<label><span>' . esc_html__( 'Financing notes', 'contactpanda-business' ) . '</span><textarea name="financing_notes" rows="4">' . esc_textarea( $project['financing_notes'] ?? '' ) . '</textarea></label><label><span>' . esc_html__( 'Notes and comments', 'contactpanda-business' ) . '</span><textarea name="notes" rows="4">' . esc_textarea( $project['notes'] ?? '' ) . '</textarea></label><h3>' . esc_html__( 'Project participants', 'contactpanda-business' ) . '</h3><p class="description">' . esc_html__( 'Assign one or more customer accounts, people or companies and define their role in the project.', 'contactpanda-business' ) . '</p>';
 		self::participant_picker( 'user', __( 'Customer accounts with portal access', 'contactpanda-business' ), self::user_options(), $selected['user'] ?? array() );
 		self::participant_picker( 'person', __( 'People', 'contactpanda-business' ), self::person_options(), $selected['person'] ?? array() );
 		self::participant_picker( 'company', __( 'Companies', 'contactpanda-business' ), self::company_options(), $selected['company'] ?? array() );
@@ -145,7 +146,9 @@ final class ContactPanda_Business_Projects {
 		$report_base = admin_url( 'admin-post.php?action=contactpanda_business_export_report&project_id=' . $project_id );
 		$tab = sanitize_key( wp_unslash( $_GET['project_tab'] ?? 'general' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only tab.
 		if ( ! in_array( $tab, array( 'general', 'tasks' ), true ) ) $tab = 'general';
-		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=contactpanda-business-projects' ) ) . '">← ' . esc_html__( 'Back to projects', 'contactpanda-business' ) . '</a></p><div class="cpb-project-heading" style="--cpb-project-color:' . esc_attr( self::clean_color( $project['color'] ?? '' ) ) . '"><button type="button" class="cpb-project-editable" data-cpb-open="cpb-edit-project" aria-label="' . esc_attr__( 'Edit project', 'contactpanda-business' ) . '"><h2>' . esc_html( $project['name'] ) . '</h2><p>' . esc_html( $project['description'] ?: __( 'Click to add a project description.', 'contactpanda-business' ) ) . '</p><p class="cpb-project-participants">' . esc_html( self::participant_summary( $project_id ) ) . '</p></button><div><a class="button" target="_blank" href="' . esc_url( wp_nonce_url( $report_base . '&format=html', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'PDF / print report', 'contactpanda-business' ) . '</a> <a class="button" href="' . esc_url( wp_nonce_url( $report_base . '&format=docx', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'Word report', 'contactpanda-business' ) . '</a></div></div>';
+		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=contactpanda-business-projects' ) ) . '">← ' . esc_html__( 'Back to project list', 'contactpanda-business' ) . '</a></p><div class="cpb-project-heading" style="--cpb-project-color:' . esc_attr( self::clean_color( $project['color'] ?? '' ) ) . '"><div class="cpb-project-title-wrap"><button type="button" class="cpb-project-editable" data-cpb-inline-edit-open="cpb-project-name-editor"><h2>' . esc_html( $project['name'] ) . '</h2></button>';
+		self::project_field_form( $project_id, 'name', $project['name'], 'text', 'cpb-project-name-editor' );
+		echo '<p class="cpb-project-participants">' . esc_html( self::participant_summary( $project_id ) ) . '</p><button type="button" class="button button-small" data-cpb-open="cpb-edit-project">' . esc_html__( 'Project settings', 'contactpanda-business' ) . '</button></div><div><a class="button" target="_blank" href="' . esc_url( wp_nonce_url( $report_base . '&format=html', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'PDF / print report', 'contactpanda-business' ) . '</a> <a class="button" href="' . esc_url( wp_nonce_url( $report_base . '&format=docx', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'Word report', 'contactpanda-business' ) . '</a></div></div>';
 		self::project_modal( $project );
 		$base = add_query_arg( array( 'page' => 'contactpanda-business-projects', 'project' => $project_id ), admin_url( 'admin.php' ) );
 		echo '<nav class="nav-tab-wrapper cpb-project-tabs"><a class="nav-tab ' . ( 'general' === $tab ? 'nav-tab-active' : '' ) . '" href="' . esc_url( add_query_arg( 'project_tab', 'general', $base ) ) . '">' . esc_html__( 'General information', 'contactpanda-business' ) . '</a><a class="nav-tab ' . ( 'tasks' === $tab ? 'nav-tab-active' : '' ) . '" href="' . esc_url( add_query_arg( 'project_tab', 'tasks', $base ) ) . '">' . esc_html__( 'Tasks and corrections', 'contactpanda-business' ) . '</a></nav>';
@@ -175,41 +178,47 @@ final class ContactPanda_Business_Projects {
 		$events = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM `{$t['events']}` WHERE project_id=%d AND task_id=0 ORDER BY created_at DESC LIMIT 25", $project_id ), ARRAY_A );
 		$currency = self::clean_currency( $project['currency'] ?? 'EUR' );
 		echo '<div class="cpb-project-overview">';
-		echo '<section class="cpb-card cpb-project-summary"><div class="cpb-section-heading"><h2>' . esc_html__( 'Project overview', 'contactpanda-business' ) . '</h2><button type="button" class="button cpb-icon-button" data-cpb-open="cpb-edit-project" aria-label="' . esc_attr__( 'Edit project', 'contactpanda-business' ) . '"><span class="dashicons dashicons-edit" aria-hidden="true"></span></button></div><div class="cpb-summary-grid">';
-		self::summary_item( __( 'Status', 'contactpanda-business' ), self::project_statuses()[ $project['status'] ] ?? $project['status'] );
-		self::summary_item( __( 'Project start', 'contactpanda-business' ), self::short_date( $project['start_date'] ?? '' ) );
-		self::summary_item( __( 'Target completion', 'contactpanda-business' ), self::short_date( $project['target_end_date'] ?? '' ) );
-		self::summary_item( __( 'Total budget', 'contactpanda-business' ), self::money( $project['budget_total'] ?? 0, $currency ) );
-		echo '</div><div class="cpb-project-copy"><h3>' . esc_html__( 'Description', 'contactpanda-business' ) . '</h3><button type="button" data-cpb-open="cpb-edit-project">' . nl2br( esc_html( $project['description'] ?: __( 'Click to add a project description.', 'contactpanda-business' ) ) ) . '</button><h3>' . esc_html__( 'Financing and notes', 'contactpanda-business' ) . '</h3><button type="button" data-cpb-open="cpb-edit-project">' . nl2br( esc_html( $project['financing_notes'] ?: __( 'Click to add financing details and internal notes.', 'contactpanda-business' ) ) ) . '</button></div></section>';
+		echo '<section class="cpb-card cpb-project-summary"><div class="cpb-section-heading"><h2>' . esc_html__( 'Project overview', 'contactpanda-business' ) . '</h2></div><div class="cpb-summary-grid">';
+		self::project_field_card( $project, 'start_date', __( 'Project start', 'contactpanda-business' ), self::short_date( $project['start_date'] ?? '' ), 'date' );
+		self::project_field_card( $project, 'target_end_date', __( 'Project end', 'contactpanda-business' ), self::short_date( $project['target_end_date'] ?? '' ), 'date' );
+		self::project_field_card( $project, 'status', __( 'Status', 'contactpanda-business' ), self::project_statuses()[ $project['status'] ] ?? $project['status'], 'status' );
+		self::project_field_card( $project, 'progress', __( 'Progress', 'contactpanda-business' ), absint( $project['progress'] ?? 0 ) . '%', 'number' );
+		self::project_field_card( $project, 'budget_total', __( 'Total budget', 'contactpanda-business' ), self::money( $project['budget_total'] ?? 0, $currency ), 'money' );
+		echo '</div></section><div class="cpb-project-section-grid">';
+		self::project_text_section( $project, 'description', __( 'Description', 'contactpanda-business' ), __( 'Click to add a project description.', 'contactpanda-business' ), 'cpb-project-description' );
 
-		echo '<section class="cpb-card"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Project parts', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Split the project into independently responsible areas.', 'contactpanda-business' ) . '</p></div></div><div class="cpb-area-list">';
+		echo '<section class="cpb-card cpb-project-parts"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Project parts', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Split the project into independently responsible areas.', 'contactpanda-business' ) . '</p></div></div><div class="cpb-area-list">';
 		if ( ! $areas ) echo '<span class="cpb-empty">' . esc_html__( 'No project parts have been created yet.', 'contactpanda-business' ) . '</span>';
 		foreach ( $areas as $area ) { $user = $area['assigned_user_id'] ? get_userdata( (int) $area['assigned_user_id'] ) : null; echo '<span class="cpb-area-chip"><span class="cpb-project-color" style="--cpb-project-color:' . esc_attr( self::clean_color( $area['color'] ) ) . '"></span><strong>' . esc_html( $area['name'] ) . '</strong>' . ( $user ? ' · ' . esc_html( $user->display_name ) : '' ) . '</span>'; }
 		echo '</div><details class="cpb-add-panel"><summary><span class="dashicons dashicons-plus-alt2" aria-hidden="true"></span>' . esc_html__( 'Add project part', 'contactpanda-business' ) . '</summary><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-form-grid"><input type="hidden" name="action" value="contactpanda_business_save_area"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '">'; wp_nonce_field( 'contactpanda_business_save_area_' . $project_id );
 		echo '<label><span>' . esc_html__( 'Area name', 'contactpanda-business' ) . '</span><input name="name" required></label><label><span>' . esc_html__( 'Color', 'contactpanda-business' ) . '</span><input type="color" name="color" value="#3d5cf5"></label><label><span>' . esc_html__( 'Responsible person', 'contactpanda-business' ) . '</span><select name="assigned_user_id">' . ContactPanda_Business_Workspace::assignee_options() . '</select></label><p><button class="button button-primary">' . esc_html__( 'Add area', 'contactpanda-business' ) . '</button></p></form></details></section>';
 
-		echo '<section class="cpb-card"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Project steps', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Track offers, orders, phases, acceptance, and other milestones chronologically.', 'contactpanda-business' ) . '</p></div></div><div class="cpb-timeline">';
+		echo '<section class="cpb-card cpb-project-steps"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Project steps', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Track offers, orders, phases, acceptance, and other milestones chronologically.', 'contactpanda-business' ) . '</p></div></div><div class="cpb-timeline">';
 		if ( ! $steps ) echo '<p class="cpb-empty">' . esc_html__( 'No project steps have been created yet.', 'contactpanda-business' ) . '</p>';
 		foreach ( $steps as $step ) echo '<article class="cpb-timeline-item is-' . esc_attr( $step['status'] ) . '"><span></span><div><header><strong>' . esc_html( $step['title'] ) . '</strong><small>' . esc_html( self::step_types()[ $step['step_type'] ] ?? $step['step_type'] ) . '</small></header><p>' . esc_html( $step['description'] ) . '</p><footer>' . esc_html( self::short_date( $step['due_at'] ) ) . ( $step['area_name'] ? ' · ' . esc_html( $step['area_name'] ) : '' ) . ( (float) $step['amount'] > 0 ? ' · ' . esc_html( self::money( $step['amount'], $step['currency'] ) ) : '' ) . ' · <span class="cpb-status is-' . esc_attr( $step['status'] ) . '">' . esc_html( self::step_statuses()[ $step['status'] ] ?? $step['status'] ) . '</span></footer></div></article>';
 		echo '</div><details class="cpb-add-panel"><summary><span class="dashicons dashicons-plus-alt2" aria-hidden="true"></span>' . esc_html__( 'Add project step', 'contactpanda-business' ) . '</summary><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-form"><input type="hidden" name="action" value="contactpanda_business_save_project_step"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '"><input type="hidden" name="currency" value="' . esc_attr( $currency ) . '">'; wp_nonce_field( 'contactpanda_business_save_project_step_' . $project_id );
 		echo '<div class="cpb-form-grid"><label><span>' . esc_html__( 'Title', 'contactpanda-business' ) . '</span><input name="title" required></label><label><span>' . esc_html__( 'Step type', 'contactpanda-business' ) . '</span><select name="step_type">'; foreach ( self::step_types() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Status', 'contactpanda-business' ) . '</span><select name="status">'; foreach ( self::step_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Project part', 'contactpanda-business' ) . '</span><select name="area_id">' . ContactPanda_Business_Workspace::area_options( $project_id ) . '</select></label><label><span>' . esc_html__( 'Due date', 'contactpanda-business' ) . '</span><input type="date" name="due_at"></label><label><span>' . esc_html__( 'Amount', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="amount"></label></div><label><span>' . esc_html__( 'Description', 'contactpanda-business' ) . '</span><textarea name="description" rows="3"></textarea></label><button class="button button-primary">' . esc_html__( 'Save project step', 'contactpanda-business' ) . '</button></form></details></section>';
 
-		echo '<section class="cpb-card"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Project documents', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Keep offers, contracts, order confirmations, invoices, and other files with their context.', 'contactpanda-business' ) . '</p></div></div><div class="cpb-document-list">';
+		echo '<section class="cpb-card cpb-project-documents"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Project documents', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Keep offers, contracts, order confirmations, invoices, and other files with their context.', 'contactpanda-business' ) . '</p></div></div><div class="cpb-document-list">';
 		if ( ! $documents ) echo '<p class="cpb-empty">' . esc_html__( 'No project documents have been added yet.', 'contactpanda-business' ) . '</p>';
 		foreach ( $documents as $document ) self::project_document( $document );
 		echo '</div><details class="cpb-add-panel"><summary><span class="dashicons dashicons-plus-alt2" aria-hidden="true"></span>' . esc_html__( 'Add project documents', 'contactpanda-business' ) . '</summary><form method="post" enctype="multipart/form-data" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-form"><input type="hidden" name="action" value="contactpanda_business_upload_project_documents"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '">'; wp_nonce_field( 'contactpanda_business_upload_project_documents_' . $project_id );
 		echo '<div class="cpb-form-grid"><label><span>' . esc_html__( 'Document type', 'contactpanda-business' ) . '</span><select name="document_type">'; foreach ( self::document_types() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Document date', 'contactpanda-business' ) . '</span><input type="date" name="document_date"></label><label><span>' . esc_html__( 'Related project step', 'contactpanda-business' ) . '</span><select name="step_id"><option value="0">' . esc_html__( 'No project step', 'contactpanda-business' ) . '</option>'; foreach ( $steps as $step ) echo '<option value="' . esc_attr( $step['id'] ) . '">' . esc_html( $step['title'] ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Visibility', 'contactpanda-business' ) . '</span><select name="visibility"><option value="internal">' . esc_html__( 'Internal only', 'contactpanda-business' ) . '</option><option value="customer">' . esc_html__( 'Visible to customer', 'contactpanda-business' ) . '</option></select></label></div><label><span>' . esc_html__( 'Files', 'contactpanda-business' ) . '</span><input type="file" name="project_files[]" multiple required></label><label><span>' . esc_html__( 'Notes', 'contactpanda-business' ) . '</span><textarea name="notes" rows="3"></textarea></label><button class="button button-primary">' . esc_html__( 'Upload documents', 'contactpanda-business' ) . '</button></form></details></section>';
 
-		echo '<section class="cpb-card"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Financing and payment plan', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Plan partial and final payments and record when they were paid.', 'contactpanda-business' ) . '</p></div></div><div class="cpb-table-scroll"><table class="widefat striped"><thead><tr><th>' . esc_html__( 'Payment', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Project part / step', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Due date', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Amount', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Paid', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Status', 'contactpanda-business' ) . '</th></tr></thead><tbody>';
+		echo '<section class="cpb-card cpb-project-financing"><div class="cpb-section-heading"><div><h2>' . esc_html__( 'Financing and payment plan', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Plan partial and final payments and record when they were paid.', 'contactpanda-business' ) . '</p></div></div>';
+		self::project_inline_text( $project, 'financing_notes', __( 'Financing notes', 'contactpanda-business' ), __( 'Click to add financing details.', 'contactpanda-business' ) );
+		echo '<div class="cpb-table-scroll"><table class="widefat striped"><thead><tr><th>' . esc_html__( 'Payment', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Project part / step', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Due date', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Amount', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Paid', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Status', 'contactpanda-business' ) . '</th></tr></thead><tbody>';
 		if ( ! $payments ) echo '<tr><td colspan="6" class="cpb-empty">' . esc_html__( 'No payments have been planned yet.', 'contactpanda-business' ) . '</td></tr>';
 		foreach ( $payments as $payment ) echo '<tr><td><strong>' . esc_html( $payment['title'] ) . '</strong><br><small>' . esc_html( $payment['reference'] ) . '</small></td><td>' . esc_html( $payment['area_name'] ?: $payment['step_title'] ?: '—' ) . '</td><td>' . esc_html( self::short_date( $payment['due_at'] ) ) . '</td><td>' . esc_html( self::money( $payment['amount'], $payment['currency'] ) ) . '</td><td>' . esc_html( self::money( $payment['paid_amount'], $payment['currency'] ) ) . ( $payment['paid_at'] ? '<br><small>' . esc_html( self::short_date( $payment['paid_at'] ) ) . '</small>' : '' ) . '</td><td><span class="cpb-status is-' . esc_attr( $payment['status'] ) . '">' . esc_html( self::payment_statuses()[ $payment['status'] ] ?? $payment['status'] ) . '</span></td></tr>';
 		echo '</tbody></table></div><details class="cpb-add-panel"><summary><span class="dashicons dashicons-plus-alt2" aria-hidden="true"></span>' . esc_html__( 'Add payment', 'contactpanda-business' ) . '</summary><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-form"><input type="hidden" name="action" value="contactpanda_business_save_project_payment"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '"><input type="hidden" name="currency" value="' . esc_attr( $currency ) . '">'; wp_nonce_field( 'contactpanda_business_save_project_payment_' . $project_id );
 		echo '<div class="cpb-form-grid"><label><span>' . esc_html__( 'Payment title', 'contactpanda-business' ) . '</span><input name="title" required></label><label><span>' . esc_html__( 'Amount', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="amount" required></label><label><span>' . esc_html__( 'Due date', 'contactpanda-business' ) . '</span><input type="date" name="due_at"></label><label><span>' . esc_html__( 'Status', 'contactpanda-business' ) . '</span><select name="status">'; foreach ( self::payment_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Paid amount', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="paid_amount"></label><label><span>' . esc_html__( 'Paid date', 'contactpanda-business' ) . '</span><input type="date" name="paid_at"></label><label><span>' . esc_html__( 'Project part', 'contactpanda-business' ) . '</span><select name="area_id">' . ContactPanda_Business_Workspace::area_options( $project_id ) . '</select></label><label><span>' . esc_html__( 'Related project step', 'contactpanda-business' ) . '</span><select name="step_id"><option value="0">' . esc_html__( 'No project step', 'contactpanda-business' ) . '</option>'; foreach ( $steps as $step ) echo '<option value="' . esc_attr( $step['id'] ) . '">' . esc_html( $step['title'] ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Reference', 'contactpanda-business' ) . '</span><input name="reference"></label></div><label><span>' . esc_html__( 'Notes', 'contactpanda-business' ) . '</span><textarea name="notes" rows="3"></textarea></label><button class="button button-primary">' . esc_html__( 'Save payment', 'contactpanda-business' ) . '</button></form></details></section>';
 
-		echo '<section class="cpb-card"><div class="cpb-section-heading"><h2>' . esc_html__( 'Project history', 'contactpanda-business' ) . '</h2></div><ol class="cpb-activity-list cpb-project-history">';
+		echo '<section class="cpb-card cpb-project-history-card"><div class="cpb-section-heading"><h2>' . esc_html__( 'Project history', 'contactpanda-business' ) . '</h2></div><ol class="cpb-activity-list cpb-project-history">';
 		if ( ! $events ) echo '<li class="cpb-empty">' . esc_html__( 'No project activity has been recorded yet.', 'contactpanda-business' ) . '</li>';
 		foreach ( $events as $event ) { $actor = $event['actor_user_id'] ? get_userdata( (int) $event['actor_user_id'] ) : null; echo '<li><span class="cpb-activity-avatar">' . esc_html( strtoupper( substr( $actor ? $actor->display_name : 'CP', 0, 1 ) ) ) . '</span><div><strong>' . esc_html( $actor ? $actor->display_name : 'ContactPanda' ) . '</strong> ' . esc_html( self::event_label( $event['event_type'], $event['details_json'] ) ) . '<time>' . esc_html( get_date_from_gmt( $event['created_at'], get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ) ) . '</time></div></li>'; }
-		echo '</ol></section></div>';
+		echo '</ol></section>';
+		self::project_text_section( $project, 'notes', __( 'Notes and comments', 'contactpanda-business' ), __( 'Click to add notes or comments.', 'contactpanda-business' ), 'cpb-project-notes' );
+		echo '</div></div>';
 	}
 
 	private static function new_task_modal( $project_id ) {
@@ -312,6 +321,44 @@ final class ContactPanda_Business_Projects {
 
 	private static function summary_item( $label, $value ) {
 		echo '<div><small>' . esc_html( $label ) . '</small><strong>' . esc_html( $value ?: '—' ) . '</strong></div>';
+	}
+
+	private static function project_field_card( $project, $field, $label, $display, $type ) {
+		$editor_id = 'cpb-project-field-' . absint( $project['id'] ) . '-' . sanitize_html_class( $field );
+		echo '<div class="cpb-project-field"><button type="button" class="cpb-project-field-value" data-cpb-inline-edit-open="' . esc_attr( $editor_id ) . '"><small>' . esc_html( $label ) . '</small><strong>' . esc_html( $display ?: '—' ) . '</strong></button>';
+		self::project_field_form( absint( $project['id'] ), $field, $project[ $field ] ?? '', $type, $editor_id, $project['currency'] ?? 'EUR' );
+		echo '</div>';
+	}
+
+	private static function project_text_section( $project, $field, $label, $empty_text, $class_name ) {
+		echo '<section class="cpb-card ' . esc_attr( $class_name ) . '"><div class="cpb-section-heading"><h2>' . esc_html( $label ) . '</h2></div>';
+		self::project_inline_text( $project, $field, $label, $empty_text );
+		echo '</section>';
+	}
+
+	private static function project_inline_text( $project, $field, $label, $empty_text ) {
+		$editor_id = 'cpb-project-field-' . absint( $project['id'] ) . '-' . sanitize_html_class( $field );
+		echo '<button type="button" class="cpb-project-text-value" data-cpb-inline-edit-open="' . esc_attr( $editor_id ) . '">' . nl2br( esc_html( $project[ $field ] ?? '' ) ) . ( empty( $project[ $field ] ) ? '<span class="cpb-empty">' . esc_html( $empty_text ) . '</span>' : '' ) . '</button>';
+		self::project_field_form( absint( $project['id'] ), $field, $project[ $field ] ?? '', 'textarea', $editor_id );
+	}
+
+	private static function project_field_form( $project_id, $field, $value, $type, $editor_id, $currency = 'EUR' ) {
+		echo '<form id="' . esc_attr( $editor_id ) . '" method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-project-field-editor" hidden><input type="hidden" name="action" value="contactpanda_business_save_project_field"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '"><input type="hidden" name="field" value="' . esc_attr( $field ) . '">';
+		wp_nonce_field( 'contactpanda_business_save_project_field_' . $project_id . '_' . $field );
+		if ( 'textarea' === $type ) {
+			echo '<textarea name="value" rows="6" aria-label="' . esc_attr__( 'Edit value', 'contactpanda-business' ) . '">' . esc_textarea( $value ) . '</textarea>';
+		} elseif ( 'status' === $type ) {
+			echo '<select name="value" aria-label="' . esc_attr__( 'Edit value', 'contactpanda-business' ) . '">';
+			foreach ( self::project_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '"' . selected( $value, $key, false ) . '>' . esc_html( $label ) . '</option>';
+			echo '</select>';
+		} elseif ( 'money' === $type ) {
+			echo '<div class="cpb-project-money-editor"><input type="number" min="0" step="0.01" name="value" value="' . esc_attr( $value ) . '"><input name="currency" maxlength="3" value="' . esc_attr( self::clean_currency( $currency ) ) . '" aria-label="' . esc_attr__( 'Currency', 'contactpanda-business' ) . '"></div>';
+		} else {
+			$input_type = in_array( $type, array( 'date', 'number', 'text' ), true ) ? $type : 'text';
+			$extra = 'number' === $input_type ? ' min="0" max="100"' : '';
+			echo '<input type="' . esc_attr( $input_type ) . '" name="value" value="' . esc_attr( $value ) . '"' . $extra . ' aria-label="' . esc_attr__( 'Edit value', 'contactpanda-business' ) . '">';
+		}
+		echo '<div class="cpb-project-field-actions"><button class="button button-primary">' . esc_html__( 'Save', 'contactpanda-business' ) . '</button><button type="button" class="button" data-cpb-inline-edit-cancel="' . esc_attr( $editor_id ) . '">' . esc_html__( 'Cancel', 'contactpanda-business' ) . '</button></div></form>';
 	}
 
 	private static function project_document( $document ) {
@@ -448,7 +495,7 @@ final class ContactPanda_Business_Projects {
 		$project_id = absint( $_POST['project_id'] ?? 0 );
 		$selected = self::posted_participants();
 		$status = sanitize_key( wp_unslash( $_POST['status'] ?? 'active' ) ); if ( ! isset( self::project_statuses()[ $status ] ) ) $status = 'active';
-		$data = array( 'contact_id' => self::first_participant_id( $selected, 'person' ), 'company_id' => self::first_participant_id( $selected, 'company' ), 'customer_user_id' => self::first_participant_id( $selected, 'user' ), 'name' => $name, 'description' => sanitize_textarea_field( wp_unslash( $_POST['description'] ?? '' ) ), 'color' => self::clean_color( $_POST['color'] ?? '' ), 'status' => $status, 'visibility' => self::clean_visibility( $_POST['visibility'] ?? 'customer' ), 'start_date' => self::clean_date( $_POST['start_date'] ?? '' ), 'target_end_date' => self::clean_date( $_POST['target_end_date'] ?? '' ), 'budget_total' => self::decimal( $_POST['budget_total'] ?? 0 ), 'currency' => self::clean_currency( $_POST['currency'] ?? 'EUR' ), 'financing_notes' => sanitize_textarea_field( wp_unslash( $_POST['financing_notes'] ?? '' ) ), 'updated_at' => $now );
+		$data = array( 'contact_id' => self::first_participant_id( $selected, 'person' ), 'company_id' => self::first_participant_id( $selected, 'company' ), 'customer_user_id' => self::first_participant_id( $selected, 'user' ), 'name' => $name, 'description' => sanitize_textarea_field( wp_unslash( $_POST['description'] ?? '' ) ), 'color' => self::clean_color( $_POST['color'] ?? '' ), 'status' => $status, 'progress' => min( 100, absint( $_POST['progress'] ?? 0 ) ), 'visibility' => self::clean_visibility( $_POST['visibility'] ?? 'customer' ), 'start_date' => self::clean_date( $_POST['start_date'] ?? '' ), 'target_end_date' => self::clean_date( $_POST['target_end_date'] ?? '' ), 'budget_total' => self::decimal( $_POST['budget_total'] ?? 0 ), 'currency' => self::clean_currency( $_POST['currency'] ?? 'EUR' ), 'financing_notes' => sanitize_textarea_field( wp_unslash( $_POST['financing_notes'] ?? '' ) ), 'notes' => sanitize_textarea_field( wp_unslash( $_POST['notes'] ?? '' ) ), 'updated_at' => $now );
 		if ( $project_id ) {
 			$exists = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM `{$t['projects']}` WHERE id=%d AND deleted_at IS NULL", $project_id ) );
 			if ( ! $exists || false === $wpdb->update( $t['projects'], $data, array( 'id' => $project_id ) ) ) self::redirect( false, __( 'The project could not be updated.', 'contactpanda-business' ), $project_id );
@@ -459,6 +506,52 @@ final class ContactPanda_Business_Projects {
 		$wpdb->insert( $t['projects'], $data ); $project_id = (int) $wpdb->insert_id;
 		if ( ! $project_id ) self::redirect( false, __( 'The project could not be created.', 'contactpanda-business' ) );
 		self::save_participants( $project_id, $selected, $now ); self::event( $project_id, 0, 'project_created', array( 'name' => $name, 'participant_count' => count( $selected ) ) ); self::redirect( true, __( 'The project was created.', 'contactpanda-business' ), $project_id );
+	}
+
+	public static function save_project_field() {
+		self::guard();
+		$project_id = absint( $_POST['project_id'] ?? 0 );
+		$field = sanitize_key( wp_unslash( $_POST['field'] ?? '' ) );
+		check_admin_referer( 'contactpanda_business_save_project_field_' . $project_id . '_' . $field );
+		global $wpdb;
+		$t = ContactPanda_Business_Schema::table_names();
+		if ( ! $project_id || ! $wpdb->get_var( $wpdb->prepare( "SELECT id FROM `{$t['projects']}` WHERE id=%d AND deleted_at IS NULL", $project_id ) ) ) self::redirect( false, __( 'The project does not exist.', 'contactpanda-business' ), $project_id );
+		$raw = wp_unslash( $_POST['value'] ?? '' );
+		$data = array();
+		switch ( $field ) {
+			case 'name':
+				$value = sanitize_text_field( $raw );
+				if ( '' === $value ) self::redirect( false, __( 'Please enter a project name.', 'contactpanda-business' ), $project_id );
+				$data['name'] = $value;
+				break;
+			case 'description':
+			case 'financing_notes':
+			case 'notes':
+				$data[ $field ] = sanitize_textarea_field( $raw );
+				break;
+			case 'status':
+				$value = sanitize_key( $raw );
+				if ( ! isset( self::project_statuses()[ $value ] ) ) self::redirect( false, __( 'The selected project status is invalid.', 'contactpanda-business' ), $project_id );
+				$data['status'] = $value;
+				break;
+			case 'progress':
+				$data['progress'] = min( 100, absint( $raw ) );
+				break;
+			case 'start_date':
+			case 'target_end_date':
+				$data[ $field ] = self::clean_date( $raw );
+				break;
+			case 'budget_total':
+				$data['budget_total'] = self::decimal( $raw );
+				$data['currency'] = self::clean_currency( $_POST['currency'] ?? 'EUR' );
+				break;
+			default:
+				self::redirect( false, __( 'This project field cannot be edited here.', 'contactpanda-business' ), $project_id );
+		}
+		$data['updated_at'] = current_time( 'mysql', true );
+		$updated = $wpdb->update( $t['projects'], $data, array( 'id' => $project_id ) );
+		if ( false !== $updated ) self::event( $project_id, 0, 'project_updated', array( 'field' => $field ) );
+		self::redirect( false !== $updated, false !== $updated ? __( 'The project field was saved.', 'contactpanda-business' ) : __( 'The project field could not be saved.', 'contactpanda-business' ), $project_id );
 	}
 
 	public static function save_task() {

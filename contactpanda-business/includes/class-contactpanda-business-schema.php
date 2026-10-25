@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 final class ContactPanda_Business_Schema {
-	const VERSION = '1.5.0';
+	const VERSION = '1.6.0';
 	const OPTION = 'contactpanda_business_db_version';
 
 	public static function table_names() {
@@ -45,12 +45,14 @@ final class ContactPanda_Business_Schema {
 				description longtext NULL,
 				color varchar(7) NOT NULL DEFAULT '#3d5cf5',
 				status varchar(30) NOT NULL DEFAULT 'active',
+				progress tinyint(3) unsigned NOT NULL DEFAULT 0,
 				visibility varchar(20) NOT NULL DEFAULT 'customer',
 				start_date date DEFAULT NULL,
 				target_end_date date DEFAULT NULL,
 				budget_total decimal(18,2) NOT NULL DEFAULT 0.00,
 				currency char(3) NOT NULL DEFAULT 'EUR',
 				financing_notes longtext NULL,
+				notes longtext NULL,
 				created_by bigint(20) unsigned NOT NULL DEFAULT 0,
 				created_at datetime NOT NULL,
 				updated_at datetime NOT NULL,

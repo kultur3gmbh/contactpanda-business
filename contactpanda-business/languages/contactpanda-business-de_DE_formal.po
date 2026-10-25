@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.10\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.11\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
@@ -143,6 +143,9 @@ msgstr "Zurück zum Board"
 msgid "Back to imports"
 msgstr "Zurück zu den Importen"
 
+msgid "Back to project list"
+msgstr "Zurück zur Projektliste"
+
 msgid "Back to projects"
 msgstr "Zurück zu den Projekten"
 
@@ -188,8 +191,11 @@ msgstr "Klicken Sie, um eine Beschreibung hinzuzufügen."
 msgid "Click to add a project description."
 msgstr "Klicken Sie, um eine Projektbeschreibung hinzuzufügen."
 
-msgid "Click to add financing details and internal notes."
-msgstr "Klicken Sie, um Finanzierungsdetails und interne Notizen hinzuzufügen."
+msgid "Click to add financing details."
+msgstr "Klicken Sie, um Finanzierungsdetails hinzuzufügen."
+
+msgid "Click to add notes or comments."
+msgstr "Klicken Sie, um Notizen oder Anmerkungen hinzuzufügen."
 
 msgid "Close"
 msgstr "Schließen"
@@ -227,8 +233,8 @@ msgstr "ContactPanda Business"
 msgid "ContactPanda Business could not create all required tables."
 msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen."
 
-msgid "ContactPanda Business requires ContactPanda Basic 0.8.1 or newer."
-msgstr "ContactPanda Business erfordert ContactPanda Basic 0.8.1 oder neuer."
+msgid "ContactPanda Business requires ContactPanda Basic %s or newer."
+msgstr "ContactPanda Business requires ContactPanda Basic %s or newer."
 
 msgid "Contract"
 msgstr "Vertrag"
@@ -281,6 +287,9 @@ msgstr "Kundenkonto"
 msgid "Customer accounts with portal access"
 msgstr "Kundenkonten mit Portalzugang"
 
+msgid "Customer comments"
+msgstr "Kundenkommentare"
+
 msgid "Customer management"
 msgstr "Kundenverwaltung"
 
@@ -332,6 +341,9 @@ msgstr "Aufgabe duplizieren"
 msgid "Edit project"
 msgstr "Projekt bearbeiten"
 
+msgid "Edit value"
+msgstr "Wert bearbeiten"
+
 msgid "Enter a checklist item."
 msgstr "Geben Sie einen Checklistenpunkt ein."
 
@@ -349,9 +361,6 @@ msgstr "Dateien"
 
 msgid "Final payment"
 msgstr "Schlusszahlung"
-
-msgid "Financing and notes"
-msgstr "Finanzierung und Notizen"
 
 msgid "Financing and payment plan"
 msgstr "Finanzierungs- und Zahlungsplan"
@@ -461,6 +470,9 @@ msgstr "Es wurden noch keine Checklistenpunkte hinzugefügt."
 msgid "No comments yet."
 msgstr "Noch keine Kommentare."
 
+msgid "No customer-visible tasks are available."
+msgstr "Es sind keine kundensichtbaren Aufgaben vorhanden."
+
 msgid "No due date"
 msgstr "Kein Fälligkeitsdatum"
 
@@ -506,6 +518,9 @@ msgstr "Es wurden noch keine Projekte erstellt."
 msgid "No tasks were found."
 msgstr "Es wurden keine Aufgaben gefunden."
 
+msgid "No."
+msgstr "Nr."
+
 msgid "Normal"
 msgstr "Normal"
 
@@ -514,6 +529,9 @@ msgstr "Nicht zugeordnet"
 
 msgid "Notes"
 msgstr "Notizen"
+
+msgid "Notes and comments"
+msgstr "Notizen und Anmerkungen"
 
 msgid "Nothing is written to the task board until you confirm this list."
 msgstr "In das Aufgaben-Board wird nichts übernommen, bevor Sie diese Liste bestätigen."
@@ -668,6 +686,9 @@ msgstr "Projektfarbe"
 msgid "Project documents"
 msgstr "Projektdokumente"
 
+msgid "Project end"
+msgstr "Projektende"
+
 msgid "Project history"
 msgstr "Projektverlauf"
 
@@ -697,6 +718,9 @@ msgstr "Projektphase"
 
 msgid "Project report: %s"
 msgstr "Projektbericht: %s"
+
+msgid "Project settings"
+msgstr "Projekteinstellungen"
 
 msgid "Project start"
 msgstr "Projektstart"
@@ -791,6 +815,9 @@ msgstr "Rolle im Projekt"
 msgid "Running it again can create duplicate tasks or repeat comments and updates."
 msgstr "Ein erneuter Durchlauf kann doppelte Aufgaben erzeugen oder Kommentare und Aktualisierungen wiederholen."
 
+msgid "Save"
+msgstr "Speichern"
+
 msgid "Save payment"
 msgstr "Zahlung speichern"
 
@@ -859,6 +886,9 @@ msgstr "Teilen Sie das Projekt in eigenständig verantwortete Bereiche."
 
 msgid "Status"
 msgstr "Status"
+
+msgid "Status / solution"
+msgstr "Status / Lösung"
 
 msgid "Step type"
 msgstr "Art des Projektschritts"
@@ -983,6 +1013,12 @@ msgstr "Das Projektdokument ist nicht vorhanden."
 msgid "The project does not exist."
 msgstr "Das Projekt ist nicht vorhanden."
 
+msgid "The project field could not be saved."
+msgstr "Das Projektfeld konnte nicht gespeichert werden."
+
+msgid "The project field was saved."
+msgstr "Das Projektfeld wurde gespeichert."
+
 msgid "The project step could not be added."
 msgstr "Der Projektschritt konnte nicht hinzugefügt werden."
 
@@ -1006,6 +1042,9 @@ msgstr "Die angeforderte Projektaktion ist ungültig."
 
 msgid "The requested task action is invalid."
 msgstr "Die angeforderte Aufgabenaktion ist ungültig."
+
+msgid "The selected project status is invalid."
+msgstr "Der gewählte Projektstatus ist ungültig."
 
 msgid "The support request could not be converted."
 msgstr "Das Hilfeersuchen konnte nicht umgewandelt werden."
@@ -1049,6 +1088,9 @@ msgstr "Dieser Import wurde bereits durchgeführt. Möchten Sie ihn wirklich ern
 msgid "This project does not exist."
 msgstr "Dieses Projekt existiert nicht."
 
+msgid "This project field cannot be edited here."
+msgstr "Dieses Projektfeld kann hier nicht bearbeitet werden."
+
 msgid "This task does not exist."
 msgstr "Diese Aufgabe existiert nicht."
 
@@ -1057,6 +1099,9 @@ msgstr "Diese Aufgabe ist nicht verfügbar."
 
 msgid "Title"
 msgstr "Titel"
+
+msgid "To-do / correction"
+msgstr "Aufgabe / Korrektur"
 
 msgid "Total budget"
 msgstr "Gesamtbudget"
