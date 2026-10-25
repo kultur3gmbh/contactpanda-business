@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.30\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.40\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
@@ -230,14 +230,11 @@ msgstr "ContactPanda Business"
 msgid "ContactPanda Business could not create all required tables."
 msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen."
 
-msgid "ContactPanda Business requires ContactPanda %s or newer."
-msgstr "ContactPanda Business erfordert ContactPanda %s oder neuer."
+msgid "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer."
+msgstr "ContactPanda Business erfordert ContactPanda %1$s und ContactPanda Pro %2$s oder neuer."
 
 msgid "Contract"
 msgstr "Vertrag"
-
-msgid "Contract management"
-msgstr "Vertragsverwaltung"
 
 msgid "Copy of %s"
 msgstr "Kopie von %s"
@@ -287,9 +284,6 @@ msgstr "Kundenkonten mit Portalzugang"
 msgid "Customer comments"
 msgstr "Kundenkommentare"
 
-msgid "Customer management"
-msgstr "Kundenverwaltung"
-
 msgid "Customer response"
 msgstr "Kundenrückmeldung"
 
@@ -316,6 +310,9 @@ msgstr "Erledigt"
 
 msgid "Download file"
 msgstr "Datei herunterladen"
+
+msgid "Draft"
+msgstr "Draft"
 
 msgid "Due"
 msgstr "Fällig"
@@ -404,6 +401,9 @@ msgstr "Ungültige Aufgabenverschiebung."
 msgid "Invoice"
 msgstr "Rechnung"
 
+msgid "Invoice #%d"
+msgstr "Rechnung Nr. %d"
+
 msgid "Keep offers, contracts, order confirmations, invoices, and other files with their context."
 msgstr "Verwalten Sie Angebote, Verträge, Auftragsbestätigungen, Rechnungen und weitere Dateien mit ihrem Zusammenhang."
 
@@ -412,6 +412,9 @@ msgstr "Verwalten Sie Projektinformationen, Dokumente, Finanzen, Aufgaben und de
 
 msgid "Last run: %1$s. Number of runs: %2$d."
 msgstr "Letzter Durchlauf: %1$s. Anzahl der Durchläufe: %2$d."
+
+msgid "Linked Pro invoice"
+msgstr "Verknüpfte Pro-Rechnung"
 
 msgid "List Business projects"
 msgstr "Business-Projekte auflisten"
@@ -481,6 +484,9 @@ msgstr "Es sind keine Importentwürfe vorhanden."
 
 msgid "No importable tasks were found in the file."
 msgstr "In der Datei wurden keine importierbaren Aufgaben gefunden."
+
+msgid "No invoice linked"
+msgstr "Keine Rechnung verknüpft"
 
 msgid "No matching records are available."
 msgstr "Es sind keine passenden Datensätze verfügbar."
@@ -620,9 +626,6 @@ msgstr "Teilweise bezahlt"
 msgid "Payment"
 msgstr "Zahlung"
 
-msgid "Payment management"
-msgstr "Zahlungsverwaltung"
-
 msgid "Payment title"
 msgstr "Bezeichnung der Zahlung"
 
@@ -727,9 +730,6 @@ msgstr "Projektschritte"
 
 msgid "Projects"
 msgstr "Projekte"
-
-msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
-msgstr "Projekte, Korrekturen, kundensichtbare Aufgaben, Verträge, Abonnements und Zahlungen sind vom Support Desk getrennt."
 
 msgid "Projects, tasks, reviewed imports, and customer reports."
 msgstr "Projekte, Aufgaben, geprüfte Importe und Kundenberichte."
@@ -898,9 +898,6 @@ msgstr "Reichen Sie neue Aufgaben ein und verfolgen Sie den sichtbaren Fortschri
 
 msgid "Submit task"
 msgstr "Aufgabe einreichen"
-
-msgid "Subscription management"
-msgstr "Abonnementverwaltung"
 
 msgid "Target completion"
 msgstr "Geplanter Abschluss"

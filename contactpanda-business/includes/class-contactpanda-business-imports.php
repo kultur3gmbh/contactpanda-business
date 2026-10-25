@@ -98,6 +98,7 @@ final class ContactPanda_Business_Imports {
 			$match = $provided_match ? array( 'id' => $provided_match, 'score' => 100 ) : self::find_match( $title, $description, $project_id );
 			$wpdb->insert( $t['import_items'], array( 'import_id' => $import_id, 'source_key' => sanitize_text_field( $row['source_key'] ?? (string) $index ), 'source_text' => sanitize_textarea_field( $row['source_text'] ?? $description ), 'title' => $title, 'description' => $description, 'project_id' => $project_id, 'area_id' => absint( $row['area_id'] ?? 0 ), 'assigned_user_id' => absint( $row['assigned_user_id'] ?? 0 ), 'priority' => self::priority( $row['priority'] ?? 'normal' ), 'due_at' => self::date_value( $row['due_at'] ?? '' ), 'visibility' => 'internal' === sanitize_key( $row['visibility'] ?? '' ) ? 'internal' : 'customer', 'match_task_id' => absint( $match['id'] ?? 0 ), 'match_score' => absint( $match['score'] ?? 0 ), 'import_action' => ! empty( $match['id'] ) ? 'comment' : 'create', 'selected' => 1, 'created_at' => $now ) );
 		}
+		ContactPanda_Business_Access::audit( 'import_staged', 'project_import', $import_id, array(), array( 'source_type' => sanitize_key( $source_type ), 'row_count' => min( 1000, count( (array) $rows ) ) ) );
 		return $import_id;
 	}
 
@@ -125,7 +126,9 @@ final class ContactPanda_Business_Imports {
 		$applied_at = current_time( 'mysql', true );
 		$history = array( 'status' => 'applied', 'applied_at' => $applied_at, 'apply_count' => max( 0, absint( $import['apply_count'] ?? 0 ) ) + 1, 'updated_at' => $applied_at );
 		if ( empty( $import['first_applied_at'] ) ) $history['first_applied_at'] = $applied_at;
-		$wpdb->update( $t['imports'], $history, array( 'id' => $import_id ) ); self::redirect( true, sprintf( __( 'Import complete: %1$d tasks created, %2$d comments added, %3$d tasks updated.', 'contactpanda-business' ), $created, $comments, $updated ), $import_id );
+		$wpdb->update( $t['imports'], $history, array( 'id' => $import_id ) );
+		ContactPanda_Business_Access::audit( 'import_applied', 'project_import', $import_id, array(), array( 'created' => $created, 'comments' => $comments, 'updated' => $updated, 'apply_count' => $history['apply_count'] ) );
+		self::redirect( true, sprintf( __( 'Import complete: %1$d tasks created, %2$d comments added, %3$d tasks updated.', 'contactpanda-business' ), $created, $comments, $updated ), $import_id );
 	}
 
 	private static function parse_file( $path, $ext ) {
@@ -170,5 +173,9 @@ final class ContactPanda_Business_Imports {
 	private static function date_value( $value ) { $value = sanitize_text_field( $value ); if ( ! $value ) return null; $timestamp = strtotime( $value ); return $timestamp ? gmdate( 'Y-m-d H:i:s', $timestamp ) : null; }
 	private static function header() { echo '<div class="wrap contactpanda-wrap contactpanda-business-wrap"><header class="contactpanda-heading"><div><p class="contactpanda-eyebrow">CONTACTPANDA BUSINESS</p><h1>' . esc_html__( 'Import tasks', 'contactpanda-business' ) . '</h1><p>' . esc_html__( 'Review corrections from documents, spreadsheets, or MCP before adding them to projects.', 'contactpanda-business' ) . '</p></div></header>'; $notice = get_transient( self::NOTICE . get_current_user_id() ); if ( is_array( $notice ) ) { delete_transient( self::NOTICE . get_current_user_id() ); echo '<div class="notice notice-' . ( $notice['success'] ? 'success' : 'error' ) . ' is-dismissible"><p>' . esc_html( $notice['message'] ) . '</p></div>'; } }
 	private static function redirect( $success, $message, $import_id = 0 ) { set_transient( self::NOTICE . get_current_user_id(), array( 'success' => $success, 'message' => $message ), MINUTE_IN_SECONDS ); $args = array( 'page' => 'contactpanda-business-import' ); if ( $import_id ) $args['import_id'] = $import_id; wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) ); exit; }
-	private static function guard() { if ( ! contactpanda_business_module_entitled( 'project_management' ) ) wp_die( esc_html__( 'A valid ContactPanda Business license is required.', 'contactpanda-business' ), '', array( 'response' => 403 ) ); if ( ! current_user_can( 'manage_options' ) ) wp_die( esc_html__( 'You do not have permission.', 'contactpanda-business' ), '', array( 'response' => 403 ) ); return true; }
+	private static function guard() {
+		if ( ! contactpanda_business_module_entitled( 'project_management' ) ) wp_die( esc_html__( 'A valid ContactPanda Business license is required.', 'contactpanda-business' ), '', array( 'response' => 403 ) );
+		if ( ! ContactPanda_Business_Access::can( 'manage', 'project_import' ) ) wp_die( esc_html__( 'You do not have permission.', 'contactpanda-business' ), '', array( 'response' => 403 ) );
+		return true;
+	}
 }

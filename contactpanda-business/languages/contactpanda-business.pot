@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.30\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.40\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d of %2$d"
 msgstr ""
@@ -230,13 +230,10 @@ msgstr ""
 msgid "ContactPanda Business could not create all required tables."
 msgstr ""
 
-msgid "ContactPanda Business requires ContactPanda %s or newer."
+msgid "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer."
 msgstr ""
 
 msgid "Contract"
-msgstr ""
-
-msgid "Contract management"
 msgstr ""
 
 msgid "Copy of %s"
@@ -287,9 +284,6 @@ msgstr ""
 msgid "Customer comments"
 msgstr ""
 
-msgid "Customer management"
-msgstr ""
-
 msgid "Customer response"
 msgstr ""
 
@@ -315,6 +309,9 @@ msgid "Done"
 msgstr ""
 
 msgid "Download file"
+msgstr ""
+
+msgid "Draft"
 msgstr ""
 
 msgid "Due"
@@ -404,6 +401,9 @@ msgstr ""
 msgid "Invoice"
 msgstr ""
 
+msgid "Invoice #%d"
+msgstr ""
+
 msgid "Keep offers, contracts, order confirmations, invoices, and other files with their context."
 msgstr ""
 
@@ -411,6 +411,9 @@ msgid "Keep project information, documents, finances, tasks, and customer-visibl
 msgstr ""
 
 msgid "Last run: %1$s. Number of runs: %2$d."
+msgstr ""
+
+msgid "Linked Pro invoice"
 msgstr ""
 
 msgid "List Business projects"
@@ -480,6 +483,9 @@ msgid "No import drafts are available."
 msgstr ""
 
 msgid "No importable tasks were found in the file."
+msgstr ""
+
+msgid "No invoice linked"
 msgstr ""
 
 msgid "No matching records are available."
@@ -620,9 +626,6 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-msgid "Payment management"
-msgstr ""
-
 msgid "Payment title"
 msgstr ""
 
@@ -726,9 +729,6 @@ msgid "Project steps"
 msgstr ""
 
 msgid "Projects"
-msgstr ""
-
-msgid "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk."
 msgstr ""
 
 msgid "Projects, tasks, reviewed imports, and customer reports."
@@ -897,9 +897,6 @@ msgid "Submit new tasks and follow customer-visible progress."
 msgstr ""
 
 msgid "Submit task"
-msgstr ""
-
-msgid "Subscription management"
 msgstr ""
 
 msgid "Target completion"

@@ -1,5 +1,7 @@
 # ContactPanda Business
 
-Business administration extensions for ContactPanda. Version 0.8.0 introduces the independent project and correction-management foundation with a customer-visible board.
+ContactPanda Business is the project and work-management extension built on the ContactPanda Pro commercial foundation. It provides projects, tasks, phases, responsibilities, due dates, reminders, time tracking, budgets, files, customer collaboration, corrections, approvals, capacity planning, and project reports.
 
-Basic owns the shared customer portal and the WordPress-user-to-person identity. Business contributes the customer-visible Projects tab through the public portal extension point. Its WooCommerce My Account endpoint remains only a compatibility adapter; projects do not require WooCommerce and no profile or consent data is duplicated in Business.
+Business requires compatible Basic and Pro installations. Historical Business-owned customer, contract, subscription, payment, and software-licensing module claims have been removed; those shared services belong to Pro. The staged transition is documented in [the target architecture](docs/TARGET-ARCHITECTURE.md).
+
+Basic owns contact identity and the WordPress-user-to-person link. Pro owns customer authorization and the shared commercial portal services. Business contributes only explicitly released project, task, correction, file, and approval views. Its WooCommerce My Account endpoint remains a compatibility adapter; no profile, consent, customer, contract, or payment model is duplicated in Business.

@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 final class ContactPanda_Business_Schema {
-	const VERSION = '1.6.0';
+	const VERSION = '1.7.0';
 	const OPTION = 'contactpanda_business_db_version';
 
 	public static function table_names() {
@@ -41,6 +41,7 @@ final class ContactPanda_Business_Schema {
 				contact_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				company_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				customer_user_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				pro_customer_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				name varchar(190) NOT NULL,
 				description longtext NULL,
 				color varchar(7) NOT NULL DEFAULT '#3d5cf5',
@@ -57,18 +58,19 @@ final class ContactPanda_Business_Schema {
 				created_at datetime NOT NULL,
 				updated_at datetime NOT NULL,
 				deleted_at datetime DEFAULT NULL,
-				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY status (status), KEY customer_user_id (customer_user_id)
+				PRIMARY KEY  (id), UNIQUE KEY uuid (uuid), KEY status (status), KEY customer_user_id (customer_user_id), KEY pro_customer_id (pro_customer_id)
 			) $c;",
 			"CREATE TABLE {$t['participants']} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				project_id bigint(20) unsigned NOT NULL,
 				entity_type varchar(20) NOT NULL,
 				entity_id bigint(20) unsigned NOT NULL,
+				pro_customer_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				participant_role varchar(30) NOT NULL DEFAULT 'participant',
 				access_level varchar(20) NOT NULL DEFAULT 'read',
 				is_primary tinyint(1) unsigned NOT NULL DEFAULT 0,
 				created_at datetime NOT NULL,
-				PRIMARY KEY  (id), UNIQUE KEY project_entity (project_id,entity_type,entity_id), KEY entity_lookup (entity_type,entity_id), KEY project_role (project_id,participant_role)
+				PRIMARY KEY  (id), UNIQUE KEY project_entity (project_id,entity_type,entity_id), KEY entity_lookup (entity_type,entity_id), KEY pro_customer_id (pro_customer_id), KEY project_role (project_id,participant_role)
 			) $c;",
 			"CREATE TABLE {$t['areas']} (
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -210,6 +212,8 @@ final class ContactPanda_Business_Schema {
 				id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				project_id bigint(20) unsigned NOT NULL,
 				step_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				pro_payment_id bigint(20) unsigned NOT NULL DEFAULT 0,
+				pro_invoice_id bigint(20) unsigned NOT NULL DEFAULT 0,
 				attachment_id bigint(20) unsigned NOT NULL,
 				document_type varchar(40) NOT NULL DEFAULT 'other',
 				title varchar(255) NOT NULL DEFAULT '',
@@ -238,12 +242,13 @@ final class ContactPanda_Business_Schema {
 				created_at datetime NOT NULL,
 				updated_at datetime NOT NULL,
 				deleted_at datetime DEFAULT NULL,
-				PRIMARY KEY  (id), KEY project_due (project_id,due_at), KEY status (status), KEY step_id (step_id)
+				PRIMARY KEY  (id), KEY project_due (project_id,due_at), KEY status (status), KEY step_id (step_id), KEY pro_payment_id (pro_payment_id), KEY pro_invoice_id (pro_invoice_id)
 			) $c;",
 		);
 		foreach ( $sql as $statement ) dbDelta( $statement );
 		foreach ( $t as $table ) if ( $table !== $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) ) ) return new WP_Error( 'contactpanda_business_schema', __( 'ContactPanda Business could not create all required tables.', 'contactpanda-business' ) );
 		self::migrate_legacy_participants( $t );
+		self::link_pro_customers();
 		update_option( self::OPTION, self::VERSION, false );
 		return true;
 	}
@@ -273,6 +278,29 @@ final class ContactPanda_Business_Schema {
 						array( 'project_id' => absint( $project['id'] ), 'entity_type' => 'user', 'entity_id' => $participant[1] )
 					);
 				}
+			}
+		}
+	}
+
+	/** Link customer-facing project participants to Pro without copying identity data. */
+	public static function link_pro_customers() {
+		if ( ! class_exists( 'ContactPanda_Pro_Commercial' ) ) return;
+		global $wpdb;
+		$tables = self::table_names();
+		$participants = $wpdb->get_results( "SELECT id,project_id,entity_type,entity_id,participant_role,is_primary FROM `{$tables['participants']}` WHERE pro_customer_id=0 AND participant_role IN ('customer','customer_account','agency')", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Internal prefix-safe table name.
+		foreach ( (array) $participants as $participant ) {
+			$contact_id = 'person' === $participant['entity_type'] ? absint( $participant['entity_id'] ) : 0;
+			$company_id = 'company' === $participant['entity_type'] ? absint( $participant['entity_id'] ) : 0;
+			$user_id = 'user' === $participant['entity_type'] ? absint( $participant['entity_id'] ) : 0;
+			if ( $user_id && class_exists( 'ContactPanda_Identity' ) ) {
+				$identity = ContactPanda_Identity::resolve_user( $user_id, true );
+				if ( ! is_wp_error( $identity ) ) $contact_id = absint( $identity['id'] ?? 0 );
+			}
+			$customer_id = ContactPanda_Pro_Commercial::ensure_customer( $contact_id, $company_id, $user_id, 'contactpanda_business', 'participant:' . absint( $participant['id'] ) );
+			if ( is_wp_error( $customer_id ) ) continue;
+			$wpdb->update( $tables['participants'], array( 'pro_customer_id' => absint( $customer_id ) ), array( 'id' => absint( $participant['id'] ) ) );
+			if ( ! empty( $participant['is_primary'] ) ) {
+				$wpdb->query( $wpdb->prepare( "UPDATE `{$tables['projects']}` SET pro_customer_id=%d WHERE id=%d AND pro_customer_id=0", absint( $customer_id ), absint( $participant['project_id'] ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Internal prefix-safe table name.
 			}
 		}
 	}

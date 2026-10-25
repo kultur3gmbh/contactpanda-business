@@ -29,7 +29,7 @@ final class ContactPanda_Business_Projects {
 		add_action( 'admin_post_contactpanda_business_customer_task', array( __CLASS__, 'customer_task' ) );
 		add_action( 'admin_post_contactpanda_business_customer_comment', array( __CLASS__, 'customer_comment' ) );
 		add_action( 'admin_post_contactpanda_business_customer_update_task', array( __CLASS__, 'customer_update_task' ) );
-		add_action( 'contactpanda_plus_customer_detail', array( __CLASS__, 'customer_projects' ), 10, 5 );
+		add_action( 'contactpanda_pro_customer_detail', array( __CLASS__, 'customer_projects' ), 10, 4 );
 	}
 
 	/** Add customer-visible projects to the shared, WooCommerce-independent portal. */
@@ -49,10 +49,17 @@ final class ContactPanda_Business_Projects {
 		$contact_id = absint( $contact_id );
 		$user_id = absint( $customer['user_id'] ?? 0 );
 		$company_id = absint( $customer['company_id'] ?? 0 );
+		$pro_customer_id = absint( $customer['id'] ?? 0 );
 		$participant_conditions = array( "(x.entity_type='person' AND x.entity_id=%d)" );
 		$participant_args = array( $contact_id );
 		$legacy_conditions = array( 'p.contact_id=%d' );
 		$legacy_args = array( $contact_id );
+		if ( $pro_customer_id ) {
+			$participant_conditions[] = 'x.pro_customer_id=%d';
+			$participant_args[] = $pro_customer_id;
+			$legacy_conditions[] = 'p.pro_customer_id=%d';
+			$legacy_args[] = $pro_customer_id;
+		}
 		if ( $user_id ) {
 			$participant_conditions[] = "(x.entity_type='user' AND x.entity_id=%d)";
 			$participant_args[] = $user_id;
@@ -91,9 +98,11 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function render() {
-		self::guard();
 		$project_id = absint( $_GET['project'] ?? 0 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only route.
 		$task_id = absint( $_GET['task'] ?? 0 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only route.
+		if ( $task_id ) self::guard( 'view', 'task', $task_id );
+		elseif ( $project_id ) self::guard( 'view', 'project', $project_id );
+		else self::guard( 'view', 'project' );
 		self::header();
 		if ( $task_id ) self::render_task( $task_id );
 		elseif ( $project_id ) self::render_board( $project_id );
@@ -119,7 +128,8 @@ final class ContactPanda_Business_Projects {
 		$rows = $args ? $wpdb->get_results( $wpdb->prepare( $sql, $args ), ARRAY_A ) : $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- prepared values and internal tables.
 		echo '<div class="cpb-toolbar"><form method="get"><input type="hidden" name="page" value="contactpanda-business-projects">' . ( $trash ? '<input type="hidden" name="trash" value="1">' : '' ) . '<label class="screen-reader-text" for="cpb-project-search">' . esc_html__( 'Search projects', 'contactpanda-business' ) . '</label><input id="cpb-project-search" type="search" name="s" value="' . esc_attr( $search ) . '" placeholder="' . esc_attr__( 'Search projects', 'contactpanda-business' ) . '"><select name="project_status"><option value="">' . esc_html__( 'All', 'contactpanda-business' ) . '</option>';
 		foreach ( self::project_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '"' . selected( $status, $key, false ) . '>' . esc_html( $label ) . '</option>';
-		echo '</select><button class="button" aria-label="' . esc_attr__( 'Search', 'contactpanda-business' ) . '"><span class="dashicons dashicons-search" aria-hidden="true"></span></button></form><div><a class="button" href="' . esc_url( add_query_arg( array( 'page' => 'contactpanda-business-projects', 'trash' => $trash ? 0 : 1 ), admin_url( 'admin.php' ) ) ) . '">' . esc_html( $trash ? __( 'Back to projects', 'contactpanda-business' ) : __( 'Trash', 'contactpanda-business' ) ) . '</a> ' . ( $trash ? '' : '<button type="button" class="button button-primary" data-cpb-open="cpb-new-project">' . esc_html__( 'Create project', 'contactpanda-business' ) . '</button>' ) . '</div></div>';
+		$create_button = ! $trash && ContactPanda_Business_Access::can( 'create', 'project' ) ? '<button type="button" class="button button-primary" data-cpb-open="cpb-new-project">' . esc_html__( 'Create project', 'contactpanda-business' ) . '</button>' : '';
+		echo '</select><button class="button" aria-label="' . esc_attr__( 'Search', 'contactpanda-business' ) . '"><span class="dashicons dashicons-search" aria-hidden="true"></span></button></form><div><a class="button" href="' . esc_url( add_query_arg( array( 'page' => 'contactpanda-business-projects', 'trash' => $trash ? 0 : 1 ), admin_url( 'admin.php' ) ) ) . '">' . esc_html( $trash ? __( 'Back to projects', 'contactpanda-business' ) : __( 'Trash', 'contactpanda-business' ) ) . '</a> ' . $create_button . '</div></div>';
 		self::project_modal();
 		echo '<section class="cpb-card"><table class="widefat striped"><thead><tr><th>' . esc_html__( 'Project', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Project participants', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Tasks', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Visibility', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Actions', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Status', 'contactpanda-business' ) . '</th></tr></thead><tbody>';
 		if ( ! $rows ) echo '<tr><td colspan="6" class="cpb-empty">' . esc_html__( 'No projects have been created yet.', 'contactpanda-business' ) . '</td></tr>';
@@ -160,7 +170,9 @@ final class ContactPanda_Business_Projects {
 		if ( ! in_array( $tab, array( 'general', 'tasks' ), true ) ) $tab = 'general';
 		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=contactpanda-business-projects' ) ) . '">← ' . esc_html__( 'Back to project list', 'contactpanda-business' ) . '</a></p><div class="cpb-project-heading" style="--cpb-project-color:' . esc_attr( self::clean_color( $project['color'] ?? '' ) ) . '"><div class="cpb-project-title-wrap"><button type="button" class="cpb-project-editable" data-cpb-inline-edit-open="cpb-project-name-editor"><h2>' . esc_html( $project['name'] ) . '</h2></button>';
 		self::project_field_form( $project_id, 'name', $project['name'], 'text', 'cpb-project-name-editor' );
-		echo '<p class="cpb-project-participants">' . esc_html( self::participant_summary( $project_id ) ) . '</p><button type="button" class="button button-small" data-cpb-open="cpb-edit-project">' . esc_html__( 'Project settings', 'contactpanda-business' ) . '</button></div><div><a class="button" target="_blank" href="' . esc_url( wp_nonce_url( $report_base . '&format=html', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'PDF / print report', 'contactpanda-business' ) . '</a> <a class="button" href="' . esc_url( wp_nonce_url( $report_base . '&format=docx', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'Word report', 'contactpanda-business' ) . '</a></div></div>';
+		$settings_button = ContactPanda_Business_Access::can( 'edit', 'project', $project_id ) ? '<button type="button" class="button button-small" data-cpb-open="cpb-edit-project">' . esc_html__( 'Project settings', 'contactpanda-business' ) . '</button>' : '';
+		$report_buttons = ContactPanda_Business_Access::can( 'export', 'project', $project_id ) ? '<a class="button" target="_blank" href="' . esc_url( wp_nonce_url( $report_base . '&format=html', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'PDF / print report', 'contactpanda-business' ) . '</a> <a class="button" href="' . esc_url( wp_nonce_url( $report_base . '&format=docx', 'contactpanda_business_export_report_' . $project_id ) ) . '">' . esc_html__( 'Word report', 'contactpanda-business' ) . '</a>' : '';
+		echo '<p class="cpb-project-participants">' . esc_html( self::participant_summary( $project_id ) ) . '</p>' . $settings_button . '</div><div>' . $report_buttons . '</div></div>';
 		self::project_modal( $project );
 		$base = add_query_arg( array( 'page' => 'contactpanda-business-projects', 'project' => $project_id ), admin_url( 'admin.php' ) );
 		echo '<nav class="nav-tab-wrapper cpb-project-tabs"><a class="nav-tab ' . ( 'general' === $tab ? 'nav-tab-active' : '' ) . '" href="' . esc_url( add_query_arg( 'project_tab', 'general', $base ) ) . '">' . esc_html__( 'General information', 'contactpanda-business' ) . '</a><a class="nav-tab ' . ( 'tasks' === $tab ? 'nav-tab-active' : '' ) . '" href="' . esc_url( add_query_arg( 'project_tab', 'tasks', $base ) ) . '">' . esc_html__( 'Tasks and corrections', 'contactpanda-business' ) . '</a></nav>';
@@ -172,7 +184,7 @@ final class ContactPanda_Business_Projects {
 			echo '<section class="cpb-column" data-cpb-column="' . esc_attr( $key ) . '"><header><h3>' . esc_html( $label ) . '</h3><span>' . esc_html( count( array_filter( $tasks, static function ( $task ) use ( $key ) { return $key === $task['board_column']; } ) ) ) . '</span></header><div class="cpb-column-body">';
 			foreach ( $tasks as $task ) if ( $key === $task['board_column'] ) self::task_card( $task );
 			echo '</div>';
-			if ( in_array( $key, array( 'open', 'in_progress' ), true ) ) self::inline_task_form( $project_id, $key );
+			if ( in_array( $key, array( 'open', 'in_progress' ), true ) && ContactPanda_Business_Access::can( 'create', 'task' ) ) self::inline_task_form( $project_id, $key );
 			echo '</section>';
 		}
 		echo '</div>';
@@ -221,9 +233,9 @@ final class ContactPanda_Business_Projects {
 		self::project_inline_text( $project, 'financing_notes', __( 'Financing notes', 'contactpanda-business' ), __( 'Click to add financing details.', 'contactpanda-business' ) );
 		echo '<div class="cpb-table-scroll"><table class="widefat striped"><thead><tr><th>' . esc_html__( 'Payment', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Project part / step', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Due date', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Amount', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Paid', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Status', 'contactpanda-business' ) . '</th></tr></thead><tbody>';
 		if ( ! $payments ) echo '<tr><td colspan="6" class="cpb-empty">' . esc_html__( 'No payments have been planned yet.', 'contactpanda-business' ) . '</td></tr>';
-		foreach ( $payments as $payment ) echo '<tr><td><strong>' . esc_html( $payment['title'] ) . '</strong><br><small>' . esc_html( $payment['reference'] ) . '</small></td><td>' . esc_html( $payment['area_name'] ?: $payment['step_title'] ?: '—' ) . '</td><td>' . esc_html( self::short_date( $payment['due_at'] ) ) . '</td><td>' . esc_html( self::money( $payment['amount'], $payment['currency'] ) ) . '</td><td>' . esc_html( self::money( $payment['paid_amount'], $payment['currency'] ) ) . ( $payment['paid_at'] ? '<br><small>' . esc_html( self::short_date( $payment['paid_at'] ) ) . '</small>' : '' ) . '</td><td><span class="cpb-status is-' . esc_attr( $payment['status'] ) . '">' . esc_html( self::payment_statuses()[ $payment['status'] ] ?? $payment['status'] ) . '</span></td></tr>';
+		foreach ( $payments as $payment ) echo '<tr><td><strong>' . esc_html( $payment['title'] ) . '</strong><br><small>' . esc_html( $payment['reference'] ) . ( $payment['pro_invoice_id'] ? ' · ' . esc_html( sprintf( __( 'Invoice #%d', 'contactpanda-business' ), absint( $payment['pro_invoice_id'] ) ) ) : '' ) . '</small></td><td>' . esc_html( $payment['area_name'] ?: $payment['step_title'] ?: '—' ) . '</td><td>' . esc_html( self::short_date( $payment['due_at'] ) ) . '</td><td>' . esc_html( self::money( $payment['amount'], $payment['currency'] ) ) . '</td><td>' . esc_html( self::money( $payment['paid_amount'], $payment['currency'] ) ) . ( $payment['paid_at'] ? '<br><small>' . esc_html( self::short_date( $payment['paid_at'] ) ) . '</small>' : '' ) . '</td><td><span class="cpb-status is-' . esc_attr( $payment['status'] ) . '">' . esc_html( self::payment_statuses()[ $payment['status'] ] ?? $payment['status'] ) . '</span></td></tr>';
 		echo '</tbody></table></div><details class="cpb-add-panel"><summary><span class="dashicons dashicons-plus-alt2" aria-hidden="true"></span>' . esc_html__( 'Add payment', 'contactpanda-business' ) . '</summary><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-form"><input type="hidden" name="action" value="contactpanda_business_save_project_payment"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '"><input type="hidden" name="currency" value="' . esc_attr( $currency ) . '">'; wp_nonce_field( 'contactpanda_business_save_project_payment_' . $project_id );
-		echo '<div class="cpb-form-grid"><label><span>' . esc_html__( 'Payment title', 'contactpanda-business' ) . '</span><input name="title" required></label><label><span>' . esc_html__( 'Amount', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="amount" required></label><label><span>' . esc_html__( 'Due date', 'contactpanda-business' ) . '</span><input type="date" name="due_at"></label><label><span>' . esc_html__( 'Status', 'contactpanda-business' ) . '</span><select name="status">'; foreach ( self::payment_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Paid amount', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="paid_amount"></label><label><span>' . esc_html__( 'Paid date', 'contactpanda-business' ) . '</span><input type="date" name="paid_at"></label><label><span>' . esc_html__( 'Project part', 'contactpanda-business' ) . '</span><select name="area_id">' . ContactPanda_Business_Workspace::area_options( $project_id ) . '</select></label><label><span>' . esc_html__( 'Related project step', 'contactpanda-business' ) . '</span><select name="step_id"><option value="0">' . esc_html__( 'No project step', 'contactpanda-business' ) . '</option>'; foreach ( $steps as $step ) echo '<option value="' . esc_attr( $step['id'] ) . '">' . esc_html( $step['title'] ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Reference', 'contactpanda-business' ) . '</span><input name="reference"></label></div><label><span>' . esc_html__( 'Notes', 'contactpanda-business' ) . '</span><textarea name="notes" rows="3"></textarea></label><button class="button button-primary">' . esc_html__( 'Save payment', 'contactpanda-business' ) . '</button></form></details></section>';
+		echo '<div class="cpb-form-grid"><label><span>' . esc_html__( 'Payment title', 'contactpanda-business' ) . '</span><input name="title" required></label><label><span>' . esc_html__( 'Amount', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="amount" required></label><label><span>' . esc_html__( 'Due date', 'contactpanda-business' ) . '</span><input type="date" name="due_at"></label><label><span>' . esc_html__( 'Status', 'contactpanda-business' ) . '</span><select name="status">'; foreach ( self::payment_statuses() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Paid amount', 'contactpanda-business' ) . '</span><input type="number" min="0" step="0.01" name="paid_amount"></label><label><span>' . esc_html__( 'Paid date', 'contactpanda-business' ) . '</span><input type="date" name="paid_at"></label><label><span>' . esc_html__( 'Project part', 'contactpanda-business' ) . '</span><select name="area_id">' . ContactPanda_Business_Workspace::area_options( $project_id ) . '</select></label><label><span>' . esc_html__( 'Related project step', 'contactpanda-business' ) . '</span><select name="step_id"><option value="0">' . esc_html__( 'No project step', 'contactpanda-business' ) . '</option>'; foreach ( $steps as $step ) echo '<option value="' . esc_attr( $step['id'] ) . '">' . esc_html( $step['title'] ) . '</option>'; echo '</select></label><label><span>' . esc_html__( 'Linked Pro invoice', 'contactpanda-business' ) . '</span><select name="pro_invoice_id"><option value="0">' . esc_html__( 'No invoice linked', 'contactpanda-business' ) . '</option>' . self::pro_invoice_options() . '</select></label><label><span>' . esc_html__( 'Reference', 'contactpanda-business' ) . '</span><input name="reference"></label></div><label><span>' . esc_html__( 'Notes', 'contactpanda-business' ) . '</span><textarea name="notes" rows="3"></textarea></label><button class="button button-primary">' . esc_html__( 'Save payment', 'contactpanda-business' ) . '</button></form></details></section>';
 
 		echo '<section class="cpb-card cpb-project-history-card"><div class="cpb-section-heading"><h2>' . esc_html__( 'Project history', 'contactpanda-business' ) . '</h2></div><ol class="cpb-activity-list cpb-project-history">';
 		if ( ! $events ) echo '<li class="cpb-empty">' . esc_html__( 'No project activity has been recorded yet.', 'contactpanda-business' ) . '</li>';
@@ -437,8 +449,8 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function save_project_step() {
-		self::guard();
 		$project_id = absint( $_POST['project_id'] ?? 0 );
+		self::guard( 'edit', 'project', $project_id );
 		check_admin_referer( 'contactpanda_business_save_project_step_' . $project_id );
 		$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) );
 		if ( ! $project_id || '' === $title ) self::redirect( false, __( 'Please enter a project step title.', 'contactpanda-business' ), $project_id );
@@ -452,8 +464,8 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function save_project_payment() {
-		self::guard();
 		$project_id = absint( $_POST['project_id'] ?? 0 );
+		self::guard( 'edit', 'project', $project_id );
 		check_admin_referer( 'contactpanda_business_save_project_payment_' . $project_id );
 		$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) );
 		if ( ! $project_id || '' === $title ) self::redirect( false, __( 'Please enter a payment title.', 'contactpanda-business' ), $project_id );
@@ -461,14 +473,16 @@ final class ContactPanda_Business_Projects {
 		$status = sanitize_key( wp_unslash( $_POST['status'] ?? 'planned' ) ); if ( ! isset( self::payment_statuses()[ $status ] ) ) $status = 'planned';
 		$paid_at = self::clean_date( $_POST['paid_at'] ?? '' ); if ( $paid_at ) $paid_at .= ' 00:00:00';
 		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $now = current_time( 'mysql', true );
-		$inserted = $wpdb->insert( $t['payments'], array( 'project_id' => $project_id, 'area_id' => self::project_area_id( $project_id, $_POST['area_id'] ?? 0 ), 'step_id' => self::project_step_id( $project_id, $_POST['step_id'] ?? 0 ), 'title' => $title, 'amount' => self::decimal( $_POST['amount'] ?? 0 ), 'paid_amount' => self::decimal( $_POST['paid_amount'] ?? 0 ), 'currency' => self::clean_currency( $_POST['currency'] ?? 'EUR' ), 'due_at' => self::clean_date( $_POST['due_at'] ?? '' ), 'paid_at' => $paid_at, 'status' => $status, 'reference' => sanitize_text_field( wp_unslash( $_POST['reference'] ?? '' ) ), 'notes' => sanitize_textarea_field( wp_unslash( $_POST['notes'] ?? '' ) ), 'created_at' => $now, 'updated_at' => $now ) );
+		$pro_invoice_id = self::valid_pro_invoice_id( $_POST['pro_invoice_id'] ?? 0 );
+		$inserted = $wpdb->insert( $t['payments'], array( 'project_id' => $project_id, 'area_id' => self::project_area_id( $project_id, $_POST['area_id'] ?? 0 ), 'step_id' => self::project_step_id( $project_id, $_POST['step_id'] ?? 0 ), 'pro_invoice_id' => $pro_invoice_id, 'title' => $title, 'amount' => self::decimal( $_POST['amount'] ?? 0 ), 'paid_amount' => self::decimal( $_POST['paid_amount'] ?? 0 ), 'currency' => self::clean_currency( $_POST['currency'] ?? 'EUR' ), 'due_at' => self::clean_date( $_POST['due_at'] ?? '' ), 'paid_at' => $paid_at, 'status' => $status, 'reference' => sanitize_text_field( wp_unslash( $_POST['reference'] ?? '' ) ), 'notes' => sanitize_textarea_field( wp_unslash( $_POST['notes'] ?? '' ) ), 'created_at' => $now, 'updated_at' => $now ) );
 		if ( $inserted ) self::event( $project_id, 0, 'project_payment_added', array( 'title' => $title, 'amount' => self::decimal( $_POST['amount'] ?? 0 ) ) );
+		if ( $inserted ) do_action( 'contactpanda_business_project_payment_created', absint( $wpdb->insert_id ), $project_id, $pro_invoice_id );
 		self::redirect( (bool) $inserted, $inserted ? __( 'The payment was added.', 'contactpanda-business' ) : __( 'The payment could not be added.', 'contactpanda-business' ), $project_id );
 	}
 
 	public static function upload_project_documents() {
-		self::guard();
 		$project_id = absint( $_POST['project_id'] ?? 0 );
+		self::guard( 'edit', 'project', $project_id );
 		check_admin_referer( 'contactpanda_business_upload_project_documents_' . $project_id );
 		if ( ! self::project_exists( $project_id ) ) self::redirect( false, __( 'The project does not exist.', 'contactpanda-business' ) );
 		$files = $_FILES['project_files'] ?? array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- WordPress validates each media upload.
@@ -491,20 +505,20 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function remove_project_document() {
-		self::guard();
 		$row_id = absint( $_POST['document_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_remove_project_document_' . $row_id );
 		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $project_id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT project_id FROM `{$t['project_documents']}` WHERE id=%d AND deleted_at IS NULL", $row_id ) );
 		if ( ! $project_id ) self::redirect( false, __( 'The project document does not exist.', 'contactpanda-business' ) );
+		self::guard( 'edit', 'project', $project_id );
 		$updated = $wpdb->update( $t['project_documents'], array( 'deleted_at' => current_time( 'mysql', true ) ), array( 'id' => $row_id ) );
 		if ( $updated ) self::event( $project_id, 0, 'project_document_removed', array( 'document_id' => $row_id ) );
 		self::redirect( false !== $updated, false !== $updated ? __( 'The document was removed from the project. The media file was retained.', 'contactpanda-business' ) : __( 'The project document could not be removed.', 'contactpanda-business' ), $project_id );
 	}
 
 	public static function save_project() {
-		self::guard(); check_admin_referer( 'contactpanda_business_save_project' );
+		$project_id = absint( $_POST['project_id'] ?? 0 );
+		self::guard( $project_id ? 'edit' : 'create', 'project', $project_id ); check_admin_referer( 'contactpanda_business_save_project' );
 		$name = sanitize_text_field( wp_unslash( $_POST['name'] ?? '' ) ); if ( '' === $name ) self::redirect( false, __( 'Please enter a project name.', 'contactpanda-business' ) );
 		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $now = current_time( 'mysql', true );
-		$project_id = absint( $_POST['project_id'] ?? 0 );
 		$selected = self::posted_participants();
 		$status = sanitize_key( wp_unslash( $_POST['status'] ?? 'active' ) ); if ( ! isset( self::project_statuses()[ $status ] ) ) $status = 'active';
 		$data = array( 'contact_id' => self::first_participant_id( $selected, 'person' ), 'company_id' => self::first_participant_id( $selected, 'company' ), 'customer_user_id' => self::first_participant_id( $selected, 'user' ), 'name' => $name, 'description' => sanitize_textarea_field( wp_unslash( $_POST['description'] ?? '' ) ), 'color' => self::clean_color( $_POST['color'] ?? '' ), 'status' => $status, 'progress' => min( 100, absint( $_POST['progress'] ?? 0 ) ), 'visibility' => self::clean_visibility( $_POST['visibility'] ?? 'customer' ), 'start_date' => self::clean_date( $_POST['start_date'] ?? '' ), 'target_end_date' => self::clean_date( $_POST['target_end_date'] ?? '' ), 'budget_total' => self::decimal( $_POST['budget_total'] ?? 0 ), 'currency' => self::clean_currency( $_POST['currency'] ?? 'EUR' ), 'financing_notes' => sanitize_textarea_field( wp_unslash( $_POST['financing_notes'] ?? '' ) ), 'notes' => sanitize_textarea_field( wp_unslash( $_POST['notes'] ?? '' ) ), 'updated_at' => $now );
@@ -521,8 +535,8 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function save_project_field() {
-		self::guard();
 		$project_id = absint( $_POST['project_id'] ?? 0 );
+		self::guard( 'edit', 'project', $project_id );
 		$field = sanitize_key( wp_unslash( $_POST['field'] ?? '' ) );
 		check_admin_referer( 'contactpanda_business_save_project_field_' . $project_id . '_' . $field );
 		global $wpdb;
@@ -567,29 +581,33 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function save_task() {
-		self::guard(); $project_id = absint( $_POST['project_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_save_task_' . $project_id );
-		$task_id = absint( $_POST['task_id'] ?? 0 ); $title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) ); if ( ! $project_id || '' === $title ) self::redirect( false, __( 'Please enter a task title.', 'contactpanda-business' ), $project_id );
+		$project_id = absint( $_POST['project_id'] ?? 0 ); $task_id = absint( $_POST['task_id'] ?? 0 );
+		self::guard( $task_id ? 'edit' : 'create', 'task', $task_id ); check_admin_referer( 'contactpanda_business_save_task_' . $project_id );
+		$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) ); if ( ! $project_id || '' === $title ) self::redirect( false, __( 'Please enter a task title.', 'contactpanda-business' ), $project_id );
 		$column = sanitize_key( wp_unslash( $_POST['board_column'] ?? 'open' ) ); if ( ! isset( self::columns()[ $column ] ) ) $column = 'open';
 		$open = sanitize_key( wp_unslash( $_POST['open_status'] ?? 'new' ) ); if ( ! isset( self::open_statuses()[ $open ] ) ) $open = 'new';
 		$due = sanitize_text_field( wp_unslash( $_POST['due_at'] ?? '' ) ); $due = $due ? gmdate( 'Y-m-d H:i:s', strtotime( $due ) ) : null;
 		global $wpdb; $t = ContactPanda_Business_Schema::table_names();
+		$requested_assignee = absint( $_POST['assigned_user_id'] ?? 0 );
+		$current_assignee = $task_id ? absint( $wpdb->get_var( $wpdb->prepare( "SELECT assigned_user_id FROM `{$t['tasks']}` WHERE id=%d", $task_id ) ) ) : 0;
+		if ( $requested_assignee !== $current_assignee ) self::guard( 'assign', 'task', $task_id );
 		$area_id = absint( $_POST['area_id'] ?? 0 );
 		if ( $area_id && ! $wpdb->get_var( $wpdb->prepare( "SELECT id FROM `{$t['areas']}` WHERE id=%d AND project_id=%d AND deleted_at IS NULL", $area_id, $project_id ) ) ) $area_id = 0;
-		$data = array( 'project_id' => $project_id, 'area_id' => $area_id, 'assigned_user_id' => absint( $_POST['assigned_user_id'] ?? 0 ), 'title' => $title, 'description' => sanitize_textarea_field( wp_unslash( $_POST['description'] ?? '' ) ), 'board_column' => $column, 'open_status' => $open, 'progress' => min( 100, absint( $_POST['progress'] ?? 0 ) ), 'priority' => self::clean_priority( $_POST['priority'] ?? 'normal' ), 'due_at' => $due, 'visibility' => self::clean_visibility( $_POST['visibility'] ?? 'customer' ), 'updated_at' => current_time( 'mysql', true ), 'completed_at' => 'done' === $column ? current_time( 'mysql', true ) : null );
+		$data = array( 'project_id' => $project_id, 'area_id' => $area_id, 'assigned_user_id' => $requested_assignee, 'title' => $title, 'description' => sanitize_textarea_field( wp_unslash( $_POST['description'] ?? '' ) ), 'board_column' => $column, 'open_status' => $open, 'progress' => min( 100, absint( $_POST['progress'] ?? 0 ) ), 'priority' => self::clean_priority( $_POST['priority'] ?? 'normal' ), 'due_at' => $due, 'visibility' => self::clean_visibility( $_POST['visibility'] ?? 'customer' ), 'updated_at' => current_time( 'mysql', true ), 'completed_at' => 'done' === $column ? current_time( 'mysql', true ) : null );
 		$is_new = ! $task_id;
 		if ( $task_id ) { $data['revision'] = (int) $wpdb->get_var( $wpdb->prepare( "SELECT revision FROM `{$t['tasks']}` WHERE id=%d", $task_id ) ) + 1; $wpdb->update( $t['tasks'], $data, array( 'id' => $task_id, 'project_id' => $project_id ) ); } else { $data['uuid'] = wp_generate_uuid4(); $data['created_by'] = get_current_user_id(); $data['created_at'] = current_time( 'mysql', true ); $wpdb->insert( $t['tasks'], $data ); $task_id = (int) $wpdb->insert_id; }
 		self::event( $project_id, $task_id, $is_new ? 'task_created' : 'task_saved', array( 'column' => $column, 'progress' => $data['progress'] ) ); self::redirect( true, __( 'The task was saved.', 'contactpanda-business' ), $project_id, empty( $_POST['return_to_board'] ) ? $task_id : 0, ! empty( $_POST['open_modal'] ) ? $task_id : 0 );
 	}
 
 	public static function add_comment() {
-		self::guard(); $task_id = absint( $_POST['task_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_add_comment_' . $task_id ); $body = sanitize_textarea_field( wp_unslash( $_POST['body'] ?? '' ) ); if ( ! $task_id || '' === $body ) self::redirect( false, __( 'Please enter a comment.', 'contactpanda-business' ) );
+		$task_id = absint( $_POST['task_id'] ?? 0 ); self::guard( 'comment', 'task', $task_id ); check_admin_referer( 'contactpanda_business_add_comment_' . $task_id ); $body = sanitize_textarea_field( wp_unslash( $_POST['body'] ?? '' ) ); if ( ! $task_id || '' === $body ) self::redirect( false, __( 'Please enter a comment.', 'contactpanda-business' ) );
 		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $project_id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT project_id FROM `{$t['tasks']}` WHERE id=%d", $task_id ) );
 		$wpdb->insert( $t['comments'], array( 'task_id' => $task_id, 'visibility' => ! empty( $_POST['internal'] ) ? 'internal' : 'customer', 'author_user_id' => get_current_user_id(), 'body' => $body, 'created_at' => current_time( 'mysql', true ) ) ); self::event( $project_id, $task_id, 'comment_added', array() ); self::redirect( true, __( 'The comment was added.', 'contactpanda-business' ), $project_id, empty( $_POST['return_to_board'] ) ? $task_id : 0, ! empty( $_POST['return_to_board'] ) ? $task_id : 0 );
 	}
 
 	public static function upload_task_files() {
-		self::guard();
 		$task_id = absint( $_POST['task_id'] ?? 0 );
+		self::guard( 'edit', 'task', $task_id );
 		check_admin_referer( 'contactpanda_business_upload_task_files_' . $task_id );
 		global $wpdb;
 		$t = ContactPanda_Business_Schema::table_names();
@@ -625,8 +643,8 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function remove_task_file() {
-		self::guard();
 		$task_id = absint( $_POST['task_id'] ?? 0 );
+		self::guard( 'edit', 'task', $task_id );
 		$row_id = absint( $_POST['attachment_row_id'] ?? 0 );
 		check_admin_referer( 'contactpanda_business_remove_task_file_' . $row_id );
 		global $wpdb;
@@ -639,8 +657,8 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function add_checklist_item() {
-		self::guard();
 		$task_id = absint( $_POST['task_id'] ?? 0 );
+		self::guard( 'edit', 'task', $task_id );
 		check_admin_referer( 'contactpanda_business_add_checklist_item_' . $task_id );
 		$title = sanitize_text_field( wp_unslash( $_POST['title'] ?? '' ) );
 		global $wpdb;
@@ -654,8 +672,8 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function toggle_checklist_item() {
-		self::guard();
 		$task_id = absint( $_POST['task_id'] ?? 0 );
+		self::guard( 'edit', 'task', $task_id );
 		$item_id = absint( $_POST['item_id'] ?? 0 );
 		check_admin_referer( 'contactpanda_business_toggle_checklist_item_' . $item_id );
 		global $wpdb;
@@ -668,11 +686,12 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function trash_task() {
-		self::guard(); $task_id = absint( $_POST['task_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_trash_task_' . $task_id ); global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $project_id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT project_id FROM `{$t['tasks']}` WHERE id=%d", $task_id ) ); $wpdb->update( $t['tasks'], array( 'deleted_at' => current_time( 'mysql', true ) ), array( 'id' => $task_id ) ); self::event( $project_id, $task_id, 'task_trashed', array() ); self::redirect( true, __( 'The task was moved to the trash.', 'contactpanda-business' ), $project_id );
+		$task_id = absint( $_POST['task_id'] ?? 0 ); self::guard( 'delete', 'task', $task_id ); check_admin_referer( 'contactpanda_business_trash_task_' . $task_id ); global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $project_id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT project_id FROM `{$t['tasks']}` WHERE id=%d", $task_id ) ); $wpdb->update( $t['tasks'], array( 'deleted_at' => current_time( 'mysql', true ) ), array( 'id' => $task_id ) ); self::event( $project_id, $task_id, 'task_trashed', array() ); self::redirect( true, __( 'The task was moved to the trash.', 'contactpanda-business' ), $project_id );
 	}
 
 	public static function move_task() {
-		self::guard(); check_ajax_referer( 'contactpanda_business_move_task', 'nonce' ); $task_id = absint( $_POST['task_id'] ?? 0 ); $column = sanitize_key( wp_unslash( $_POST['column'] ?? '' ) ); if ( ! $task_id || ! isset( self::columns()[ $column ] ) ) wp_send_json_error( array( 'message' => __( 'Invalid task movement.', 'contactpanda-business' ) ), 400 );
+		check_ajax_referer( 'contactpanda_business_move_task', 'nonce' ); $task_id = absint( $_POST['task_id'] ?? 0 ); $column = sanitize_key( wp_unslash( $_POST['column'] ?? '' ) ); if ( ! $task_id || ! isset( self::columns()[ $column ] ) ) wp_send_json_error( array( 'message' => __( 'Invalid task movement.', 'contactpanda-business' ) ), 400 );
+		if ( ! contactpanda_business_module_entitled( 'project_management' ) || ! ContactPanda_Business_Access::can( 'edit', 'task', $task_id ) ) wp_send_json_error( array( 'message' => __( 'You do not have permission.', 'contactpanda-business' ) ), 403 );
 		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $task = $wpdb->get_row( $wpdb->prepare( "SELECT project_id FROM `{$t['tasks']}` WHERE id=%d AND deleted_at IS NULL", $task_id ), ARRAY_A ); if ( ! $task ) wp_send_json_error( array( 'message' => __( 'Task not found.', 'contactpanda-business' ) ), 404 );
 		$updated = $wpdb->update( $t['tasks'], array( 'board_column' => $column, 'completed_at' => 'done' === $column ? current_time( 'mysql', true ) : null, 'updated_at' => current_time( 'mysql', true ) ), array( 'id' => $task_id ) );
 		if ( false === $updated ) wp_send_json_error( array( 'message' => __( 'The task could not be moved.', 'contactpanda-business' ) ), 500 );
@@ -680,14 +699,14 @@ final class ContactPanda_Business_Projects {
 	}
 
 	public static function support_ticket_box( $ticket ) {
-		if ( ! current_user_can( 'manage_options' ) ) return; global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $projects = $wpdb->get_results( "SELECT id,name FROM `{$t['projects']}` WHERE deleted_at IS NULL AND status='active' ORDER BY name", ARRAY_A );
+		if ( ! contactpanda_business_module_entitled( 'project_management' ) || ! ContactPanda_Business_Access::can( 'create', 'task' ) ) return; global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $projects = $wpdb->get_results( "SELECT id,name FROM `{$t['projects']}` WHERE deleted_at IS NULL AND status='active' ORDER BY name", ARRAY_A );
 		echo '<section class="contactpanda-card"><h2>' . esc_html__( 'Business task', 'contactpanda-business' ) . '</h2>';
 		if ( ! $projects ) { echo '<p>' . esc_html__( 'Create a Business project before converting this support request into a task.', 'contactpanda-business' ) . '</p></section>'; return; }
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="contactpanda_business_from_support"><input type="hidden" name="ticket_id" value="' . esc_attr( $ticket['id'] ) . '">'; wp_nonce_field( 'contactpanda_business_from_support_' . $ticket['id'] ); echo '<label><span>' . esc_html__( 'Project', 'contactpanda-business' ) . '</span><select name="project_id">'; foreach ( $projects as $project ) echo '<option value="' . esc_attr( $project['id'] ) . '">' . esc_html( $project['name'] ) . '</option>'; echo '</select></label><p><button class="button">' . esc_html__( 'Create task from request', 'contactpanda-business' ) . '</button></p></form></section>';
 	}
 
 	public static function from_support() {
-		self::guard(); $ticket_id = absint( $_POST['ticket_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_from_support_' . $ticket_id ); $project_id = absint( $_POST['project_id'] ?? 0 ); if ( ! $ticket_id || ! $project_id || ! class_exists( 'ContactPanda_Pro_Schema' ) ) self::redirect( false, __( 'The support request could not be converted.', 'contactpanda-business' ), $project_id );
+		self::guard( 'create', 'task' ); $ticket_id = absint( $_POST['ticket_id'] ?? 0 ); check_admin_referer( 'contactpanda_business_from_support_' . $ticket_id ); $project_id = absint( $_POST['project_id'] ?? 0 ); if ( ! $ticket_id || ! $project_id || ! class_exists( 'ContactPanda_Pro_Schema' ) ) self::redirect( false, __( 'The support request could not be converted.', 'contactpanda-business' ), $project_id );
 		global $wpdb; $pt = ContactPanda_Pro_Schema::table_names(); $ticket = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM `{$pt['support_tickets']}` WHERE id=%d", $ticket_id ), ARRAY_A ); if ( ! $ticket ) self::redirect( false, __( 'The support request could not be found.', 'contactpanda-business' ), $project_id );
 		$t = ContactPanda_Business_Schema::table_names(); $now = current_time( 'mysql', true ); $wpdb->insert( $t['tasks'], array( 'uuid' => wp_generate_uuid4(), 'project_id' => $project_id, 'support_ticket_id' => $ticket_id, 'title' => $ticket['subject'], 'description' => sprintf( __( 'Created from Support Desk request #%d.', 'contactpanda-business' ), $ticket_id ), 'board_column' => 'open', 'open_status' => 'new', 'priority' => self::clean_priority( $ticket['priority'] ), 'visibility' => 'customer', 'created_by' => get_current_user_id(), 'created_at' => $now, 'updated_at' => $now ) ); self::event( $project_id, (int) $wpdb->insert_id, 'task_created_from_support', array( 'ticket_id' => $ticket_id ) ); self::redirect( true, __( 'A Business task was created from the support request.', 'contactpanda-business' ), $project_id, (int) $wpdb->insert_id );
 	}
@@ -830,12 +849,38 @@ final class ContactPanda_Business_Projects {
 	}
 
 	private static function save_participants( $project_id, $participants, $created_at, $replace = false ) {
-		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $primary = array();
+		global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $primary = array(); $primary_pro_customer_id = 0;
 		if ( $replace ) $wpdb->delete( $t['participants'], array( 'project_id' => absint( $project_id ) ) );
 		foreach ( $participants as $participant ) {
 			$type = $participant['type']; $is_primary = empty( $primary[ $type ] ) ? 1 : 0; $primary[ $type ] = true;
-			$wpdb->insert( $t['participants'], array( 'project_id' => absint( $project_id ), 'entity_type' => $type, 'entity_id' => absint( $participant['id'] ), 'participant_role' => $participant['role'], 'access_level' => $participant['access'], 'is_primary' => $is_primary, 'created_at' => $created_at ) );
+			$pro_customer_id = self::participant_pro_customer_id( $participant );
+			if ( ! $primary_pro_customer_id && $pro_customer_id && in_array( $participant['role'], array( 'customer', 'customer_account' ), true ) ) $primary_pro_customer_id = $pro_customer_id;
+			$wpdb->insert( $t['participants'], array( 'project_id' => absint( $project_id ), 'entity_type' => $type, 'entity_id' => absint( $participant['id'] ), 'pro_customer_id' => $pro_customer_id, 'participant_role' => $participant['role'], 'access_level' => $participant['access'], 'is_primary' => $is_primary, 'created_at' => $created_at ) );
 		}
+		$wpdb->update( $t['projects'], array( 'pro_customer_id' => $primary_pro_customer_id ), array( 'id' => absint( $project_id ) ) );
+	}
+
+	private static function participant_pro_customer_id( $participant ) {
+		if ( ! class_exists( 'ContactPanda_Pro_Commercial' ) || ! in_array( $participant['role'], array( 'customer', 'customer_account', 'agency' ), true ) ) return 0;
+		$type = $participant['type']; $id = absint( $participant['id'] ); $contact_id = 'person' === $type ? $id : 0; $company_id = 'company' === $type ? $id : 0; $user_id = 'user' === $type ? $id : 0;
+		if ( $user_id && class_exists( 'ContactPanda_Identity' ) ) { $identity = ContactPanda_Identity::resolve_user( $user_id, true ); if ( ! is_wp_error( $identity ) ) $contact_id = absint( $identity['id'] ?? 0 ); }
+		$customer_id = ContactPanda_Pro_Commercial::ensure_customer( $contact_id, $company_id, $user_id, 'contactpanda_business', $type . ':' . $id );
+		return is_wp_error( $customer_id ) ? 0 : absint( $customer_id );
+	}
+
+	private static function pro_invoice_options() {
+		if ( ! class_exists( 'ContactPanda_Pro_Schema' ) ) return '';
+		global $wpdb; $table = ContactPanda_Pro_Schema::table_names()['invoices'];
+		$rows = $wpdb->get_results( "SELECT id,invoice_number,status,gross_total,currency FROM `{$table}` ORDER BY updated_at DESC LIMIT 500", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Internal prefix-safe table name.
+		$html = '';
+		foreach ( (array) $rows as $row ) $html .= '<option value="' . esc_attr( $row['id'] ) . '">' . esc_html( ( $row['invoice_number'] ?: __( 'Draft', 'contactpanda-business' ) . ' #' . $row['id'] ) . ' · ' . self::money( $row['gross_total'], $row['currency'] ) . ' · ' . $row['status'] ) . '</option>';
+		return $html;
+	}
+
+	private static function valid_pro_invoice_id( $invoice_id ) {
+		$invoice_id = absint( $invoice_id ); if ( ! $invoice_id || ! class_exists( 'ContactPanda_Pro_Schema' ) ) return 0;
+		global $wpdb; $table = ContactPanda_Pro_Schema::table_names()['invoices'];
+		return absint( $wpdb->get_var( $wpdb->prepare( "SELECT id FROM `{$table}` WHERE id=%d", $invoice_id ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Internal prefix-safe table name.
 	}
 
 	private static function project_participants( $project_id ) {
@@ -899,7 +944,14 @@ final class ContactPanda_Business_Projects {
 		return isset( $weights[ $current ], $weights[ $required ] ) && $weights[ $current ] >= $weights[ $required ];
 	}
 
-	private static function event( $project_id, $task_id, $type, $details ) { global $wpdb; $t = ContactPanda_Business_Schema::table_names(); $wpdb->insert( $t['events'], array( 'project_id' => $project_id, 'task_id' => $task_id, 'event_type' => $type, 'actor_user_id' => get_current_user_id(), 'details_json' => wp_json_encode( $details ), 'created_at' => current_time( 'mysql', true ) ) ); }
+	private static function event( $project_id, $task_id, $type, $details ) {
+		global $wpdb;
+		$t = ContactPanda_Business_Schema::table_names();
+		$wpdb->insert( $t['events'], array( 'project_id' => $project_id, 'task_id' => $task_id, 'event_type' => $type, 'actor_user_id' => get_current_user_id(), 'details_json' => wp_json_encode( $details ), 'created_at' => current_time( 'mysql', true ) ) );
+		$resource_type = $task_id ? 'task' : 'project';
+		$resource_id = $task_id ?: $project_id;
+		ContactPanda_Business_Access::audit( $type, $resource_type, $resource_id, array(), (array) $details, array( 'project_id' => absint( $project_id ) ) );
+	}
 	private static function redirect( $success, $message, $project_id = 0, $task_id = 0, $open_task_id = 0 ) { set_transient( self::NOTICE . get_current_user_id(), array( 'success' => $success, 'message' => $message ), MINUTE_IN_SECONDS ); $args = array( 'page' => 'contactpanda-business-projects' ); if ( $project_id ) { $args['project'] = $project_id; $action = sanitize_key( wp_unslash( $_REQUEST['action'] ?? '' ) ); if ( $task_id || $open_task_id || preg_match( '/(task|comment|checklist)/', $action ) ) $args['project_tab'] = 'tasks'; } if ( $task_id ) $args['task'] = $task_id; if ( $open_task_id ) $args['open_task'] = $open_task_id; wp_safe_redirect( add_query_arg( $args, admin_url( 'admin.php' ) ) ); exit; }
 	private static function task_url( $id ) { return add_query_arg( array( 'page' => 'contactpanda-business-projects', 'task' => absint( $id ) ), admin_url( 'admin.php' ) ); }
 	private static function due_label( $date ) { if ( ! $date ) return __( 'No due date', 'contactpanda-business' ); $time = strtotime( $date . ' UTC' ); $today = strtotime( gmdate( 'Y-m-d' ) . ' UTC' ); if ( $time < time() ) return sprintf( __( 'Overdue: %s', 'contactpanda-business' ), wp_date( get_option( 'date_format' ), $time ) ); if ( gmdate( 'Y-m-d', $time ) === gmdate( 'Y-m-d', $today ) ) return __( 'Due today', 'contactpanda-business' ); if ( gmdate( 'Y-m-d', $time ) === gmdate( 'Y-m-d', strtotime( '+1 day', $today ) ) ) return __( 'Due tomorrow', 'contactpanda-business' ); return wp_date( get_option( 'date_format' ), $time ); }
@@ -928,5 +980,8 @@ final class ContactPanda_Business_Projects {
 	private static function step_statuses() { return array( 'planned' => __( 'Planned', 'contactpanda-business' ), 'in_progress' => __( 'In progress', 'contactpanda-business' ), 'completed' => __( 'Completed', 'contactpanda-business' ), 'cancelled' => __( 'Cancelled', 'contactpanda-business' ) ); }
 	private static function payment_statuses() { return array( 'planned' => __( 'Planned', 'contactpanda-business' ), 'due' => __( 'Due', 'contactpanda-business' ), 'partial' => __( 'Partially paid', 'contactpanda-business' ), 'paid' => __( 'Paid', 'contactpanda-business' ), 'overdue' => __( 'Overdue', 'contactpanda-business' ), 'cancelled' => __( 'Cancelled', 'contactpanda-business' ) ); }
 	private static function document_types() { return array( 'offer' => __( 'Offer', 'contactpanda-business' ), 'contract' => __( 'Contract', 'contactpanda-business' ), 'order_confirmation' => __( 'Order confirmation', 'contactpanda-business' ), 'invoice' => __( 'Invoice', 'contactpanda-business' ), 'acceptance' => __( 'Acceptance document', 'contactpanda-business' ), 'briefing' => __( 'Briefing', 'contactpanda-business' ), 'correspondence' => __( 'Correspondence', 'contactpanda-business' ), 'other' => __( 'Other document', 'contactpanda-business' ) ); }
-	private static function guard() { if ( ! current_user_can( 'manage_options' ) ) wp_die( esc_html__( 'You do not have permission.', 'contactpanda-business' ), '', array( 'response' => 403 ) ); }
+	private static function guard( $action = 'view', $resource_type = 'business', $resource_id = 0 ) {
+		if ( ! contactpanda_business_module_entitled( 'project_management' ) ) wp_die( esc_html__( 'A valid ContactPanda Business license is required.', 'contactpanda-business' ), '', array( 'response' => 403 ) );
+		if ( ! ContactPanda_Business_Access::can( $action, $resource_type, $resource_id ) ) wp_die( esc_html__( 'You do not have permission.', 'contactpanda-business' ), '', array( 'response' => 403 ) );
+	}
 }

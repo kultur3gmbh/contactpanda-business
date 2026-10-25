@@ -19,6 +19,7 @@ GERMAN = {
     "Companies": "Firmen", "Company ID": "Firmen-ID", "Completed": "Abgeschlossen", "Contact person": "Ansprechperson", "ContactPanda Business": "ContactPanda Business",
     "ContactPanda Business could not create all required tables.": "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen.",
     "ContactPanda Business requires ContactPanda %s or newer.": "ContactPanda Business erfordert ContactPanda %s oder neuer.",
+    "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer.": "ContactPanda Business erfordert ContactPanda %1$s und ContactPanda Pro %2$s oder neuer.",
     "Contract management": "Vertragsverwaltung", "Create a Business project before converting this support request into a task.": "Erstellen Sie zuerst ein Business-Projekt, bevor Sie dieses Hilfeersuchen in eine Aufgabe umwandeln.",
     "Create project": "Projekt erstellen", "Create task": "Aufgabe erstellen", "Create task from request": "Aufgabe aus Anfrage erstellen",
     "Created from Support Desk request #%d.": "Aus dem Hilfeersuchen #%d erstellt.", "Customer": "Kunde", "Customer account": "Kundenkonto", "Customer accounts with portal access": "Kundenkonten mit Portalzugang",
@@ -182,7 +183,8 @@ GERMAN.update({
     "Click to add financing details and internal notes.": "Klicken Sie, um Finanzierungsdetails und interne Notizen hinzuzufügen.",
     "Contract": "Vertrag", "Correspondence": "Korrespondenz", "Currency": "Währung", "Document date": "Dokumentdatum", "Document type": "Dokumenttyp",
     "Final payment": "Schlusszahlung", "Financing and notes": "Finanzierung und Notizen", "Financing and payment plan": "Finanzierungs- und Zahlungsplan", "Financing notes": "Finanzierungsnotizen",
-    "General information": "Allgemeine Informationen", "Invoice": "Rechnung", "Keep offers, contracts, order confirmations, invoices, and other files with their context.": "Verwalten Sie Angebote, Verträge, Auftragsbestätigungen, Rechnungen und weitere Dateien mit ihrem Zusammenhang.",
+    "General information": "Allgemeine Informationen", "Invoice": "Rechnung", "Invoice #%d": "Rechnung Nr. %d", "Keep offers, contracts, order confirmations, invoices, and other files with their context.": "Verwalten Sie Angebote, Verträge, Auftragsbestätigungen, Rechnungen und weitere Dateien mit ihrem Zusammenhang.",
+    "Linked Pro invoice": "Verknüpfte Pro-Rechnung", "No invoice linked": "Keine Rechnung verknüpft",
     "Keep project information, documents, finances, tasks, and customer-visible progress together.": "Verwalten Sie Projektinformationen, Dokumente, Finanzen, Aufgaben und den kundensichtbaren Fortschritt gemeinsam.",
     "No payments have been planned yet.": "Es wurden noch keine Zahlungen geplant.", "No project activity has been recorded yet.": "Es wurde noch keine Projektaktivität aufgezeichnet.",
     "No project documents have been added yet.": "Es wurden noch keine Projektdokumente hinzugefügt.", "No project parts have been created yet.": "Es wurden noch keine Projektteile angelegt.", "Project parts": "Projektteile", "Overdue": "Überfällig",
@@ -213,8 +215,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.30\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.30\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.40\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.40\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]
