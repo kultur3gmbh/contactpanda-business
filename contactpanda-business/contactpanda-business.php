@@ -2,23 +2,23 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Project, task, correction, import, and customer report management for ContactPanda Pro.
- * Version: 0.8.41
+ * Version: 0.8.42
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: contactpanda, contactpanda-pro
- * Requires ContactPanda: 0.8.41
- * Requires ContactPanda Pro: 0.8.41
+ * Requires ContactPanda: 0.8.42
+ * Requires ContactPanda Pro: 0.8.42
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.41' );
-define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.41' );
-define( 'CONTACTPANDA_BUSINESS_MIN_PRO_VERSION', '0.8.41' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.42' );
+define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.42' );
+define( 'CONTACTPANDA_BUSINESS_MIN_PRO_VERSION', '0.8.42' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
