@@ -215,8 +215,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.40\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.40\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.41\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.41\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]
