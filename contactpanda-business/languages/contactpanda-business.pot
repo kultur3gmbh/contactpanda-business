@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.48\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.51\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d of %2$d"
 msgstr ""
@@ -27,6 +27,9 @@ msgid "A Business license is required"
 msgstr ""
 
 msgid "A Business task was created from the support request."
+msgstr ""
+
+msgid "A quieter overview, clearer product navigation, and shared feedback paths make daily project work easier to understand."
 msgstr ""
 
 msgid "A valid ContactPanda Business license is required."
@@ -230,9 +233,6 @@ msgstr ""
 msgid "ContactPanda Business could not create all required tables."
 msgstr ""
 
-msgid "ContactPanda Business product overview"
-msgstr ""
-
 msgid "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer."
 msgstr ""
 
@@ -288,6 +288,9 @@ msgid "Customer comments"
 msgstr ""
 
 msgid "Customer response"
+msgstr ""
+
+msgid "Dashboard"
 msgstr ""
 
 msgid "Delete permanently"
@@ -459,6 +462,9 @@ msgid "My tasks"
 msgstr ""
 
 msgid "New"
+msgstr ""
+
+msgid "New in this version"
 msgstr ""
 
 msgid "No activity has been recorded yet."
@@ -1109,6 +1115,9 @@ msgstr ""
 msgid "Track offers, orders, phases, acceptance, and other milestones chronologically."
 msgstr ""
 
+msgid "Track projects, responsibilities, corrections, files, and customer-visible progress without losing the connection to ContactPanda people and companies."
+msgstr ""
+
 msgid "Trash"
 msgstr ""
 
@@ -1176,6 +1185,9 @@ msgid "Write a comment …"
 msgstr ""
 
 msgid "You do not have permission."
+msgstr ""
+
+msgid "Your project workspace"
 msgstr ""
 
 msgid "added a checklist item."

@@ -207,6 +207,15 @@ GERMAN.update({
 })
 
 
+GERMAN.update({
+    "A quieter overview, clearer product navigation, and shared feedback paths make daily project work easier to understand.": "Eine ruhigere Übersicht, klarere Produktnavigation und gemeinsame Rückmeldewege machen die tägliche Projektarbeit leichter verständlich.",
+    "Draft": "Entwurf",
+    "New in this version": "Neu in dieser Version",
+    "Track projects, responsibilities, corrections, files, and customer-visible progress without losing the connection to ContactPanda people and companies.": "Verfolgen Sie Projekte, Zuständigkeiten, Korrekturen, Dateien und kundensichtbare Fortschritte, ohne die Verbindung zu ContactPanda-Personen und -Firmen zu verlieren.",
+    "Your project workspace": "Ihr Projektarbeitsbereich",
+})
+
+
 def quote(value):
     return '"' + value.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n') + '"'
 
@@ -217,8 +226,10 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.48\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.48\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+version_match = re.search(r"^\s*\* Version:\s*([^\s]+)", (SOURCE / "contactpanda-business.php").read_text(encoding="utf-8"), re.MULTILINE)
+version = version_match.group(1) if version_match else "0.0.0"
+header = f"Project-Id-Version: ContactPanda Business {version}\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote(f"Project-Id-Version: ContactPanda Business {version}\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]
