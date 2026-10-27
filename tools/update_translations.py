@@ -53,7 +53,10 @@ GERMAN = {
 }
 
 GERMAN.update({
-	"Business now follows the coordinated 0.8.52 family dependency and protected-update contract.": "Business folgt jetzt dem abgestimmten Abhängigkeits- und geschützten Update-Vertrag der Produktfamilie 0.8.52.",
+    "ContactPanda Business requires the active ContactPanda Basic version %s or newer.": "ContactPanda Business benötigt die aktive ContactPanda-Basic-Version %s oder neuer.",
+    "ContactPanda Business requires the active ContactPanda Pro version %s or newer.": "ContactPanda Business benötigt die aktive ContactPanda-Pro-Version %s oder neuer.",
+    "ContactPanda dependencies required": "ContactPanda-Abhängigkeiten erforderlich",
+	"Business follows the coordinated family dependency and protected-update contract.": "Business folgt dem abgestimmten Abhängigkeits- und geschützten Update-Vertrag der Produktfamilie.",
     "%d%% match": "%d %% Übereinstimmung",
     "A Business license is required": "Eine Business-Lizenz ist erforderlich",
     "A valid ContactPanda Business license is required.": "Eine gültige ContactPanda-Business-Lizenz ist erforderlich.",

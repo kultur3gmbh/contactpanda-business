@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.52\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.53\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
@@ -161,11 +161,11 @@ msgstr "Ausgewählte Aufgaben gemeinsam bearbeiten"
 msgid "Business MCP interface"
 msgstr "Business-MCP-Schnittstelle"
 
+msgid "Business follows the coordinated family dependency and protected-update contract."
+msgstr "Business folgt dem abgestimmten Abhängigkeits- und geschützten Update-Vertrag der Produktfamilie."
+
 msgid "Business license required"
 msgstr "Business-Lizenz erforderlich"
-
-msgid "Business now follows the coordinated 0.8.52 family dependency and protected-update contract."
-msgstr "Business folgt jetzt dem abgestimmten Abhängigkeits- und geschützten Update-Vertrag der Produktfamilie 0.8.52."
 
 msgid "Business overview"
 msgstr "Business-Übersicht"
@@ -235,6 +235,15 @@ msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstelle
 
 msgid "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer."
 msgstr "ContactPanda Business erfordert ContactPanda %1$s und ContactPanda Pro %2$s oder neuer."
+
+msgid "ContactPanda Business requires the active ContactPanda Basic version %s or newer."
+msgstr "ContactPanda Business benötigt die aktive ContactPanda-Basic-Version %s oder neuer."
+
+msgid "ContactPanda Business requires the active ContactPanda Pro version %s or newer."
+msgstr "ContactPanda Business benötigt die aktive ContactPanda-Pro-Version %s oder neuer."
+
+msgid "ContactPanda dependencies required"
+msgstr "ContactPanda-Abhängigkeiten erforderlich"
 
 msgid "Contract"
 msgstr "Vertrag"

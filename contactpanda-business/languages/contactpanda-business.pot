@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.52\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.53\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d of %2$d"
 msgstr ""
@@ -161,10 +161,10 @@ msgstr ""
 msgid "Business MCP interface"
 msgstr ""
 
-msgid "Business license required"
+msgid "Business follows the coordinated family dependency and protected-update contract."
 msgstr ""
 
-msgid "Business now follows the coordinated 0.8.52 family dependency and protected-update contract."
+msgid "Business license required"
 msgstr ""
 
 msgid "Business overview"
@@ -234,6 +234,15 @@ msgid "ContactPanda Business could not create all required tables."
 msgstr ""
 
 msgid "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer."
+msgstr ""
+
+msgid "ContactPanda Business requires the active ContactPanda Basic version %s or newer."
+msgstr ""
+
+msgid "ContactPanda Business requires the active ContactPanda Pro version %s or newer."
+msgstr ""
+
+msgid "ContactPanda dependencies required"
 msgstr ""
 
 msgid "Contract"

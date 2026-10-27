@@ -2,23 +2,23 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Project, task, correction, import, and customer report management for ContactPanda Pro.
- * Version: 0.8.52
+ * Version: 0.8.53
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: contactpanda, contactpanda-pro
- * Requires ContactPanda: 0.8.52
- * Requires ContactPanda Pro: 0.8.52
+ * Requires ContactPanda: 0.8.53
+ * Requires ContactPanda Pro: 0.8.53
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.52' );
-define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.52' );
-define( 'CONTACTPANDA_BUSINESS_MIN_PRO_VERSION', '0.8.52' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.53' );
+define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.53' );
+define( 'CONTACTPANDA_BUSINESS_MIN_PRO_VERSION', '0.8.53' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
@@ -44,6 +44,10 @@ function contactpanda_business_module_entitled( $module ) {
 }
 
 function contactpanda_business_activate() {
+	$dependency = contactpanda_business_dependency_error();
+	if ( is_wp_error( $dependency ) ) {
+		wp_die( esc_html( $dependency->get_error_message() ), esc_html__( 'ContactPanda dependencies required', 'contactpanda-business' ), array( 'back_link' => true ) );
+	}
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-schema.php';
 	ContactPanda_Business_Schema::install();
 	ContactPanda_Business_Access::register_capabilities();
@@ -52,6 +56,23 @@ function contactpanda_business_activate() {
 }
 register_activation_hook( __FILE__, 'contactpanda_business_activate' );
 register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
+
+/** Return a dependency error before activation mutates any Business-owned data. */
+function contactpanda_business_dependency_error() {
+	if ( ! defined( 'CONTACTPANDA_VERSION' ) || version_compare( CONTACTPANDA_VERSION, CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION, '<' ) || ! class_exists( 'ContactPanda_Plugin' ) ) {
+		return new WP_Error(
+			'contactpanda_business_basic_required',
+			sprintf( __( 'ContactPanda Business requires the active ContactPanda Basic version %s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION )
+		);
+	}
+	if ( ! defined( 'CONTACTPANDA_PRO_VERSION' ) || version_compare( CONTACTPANDA_PRO_VERSION, CONTACTPANDA_BUSINESS_MIN_PRO_VERSION, '<' ) || ! class_exists( 'ContactPanda_Pro_Access' ) ) {
+		return new WP_Error(
+			'contactpanda_business_pro_required',
+			sprintf( __( 'ContactPanda Business requires the active ContactPanda Pro version %s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_PRO_VERSION )
+		);
+	}
+	return true;
+}
 
 function contactpanda_business_boot() {
 	load_plugin_textdomain( 'contactpanda-business', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
