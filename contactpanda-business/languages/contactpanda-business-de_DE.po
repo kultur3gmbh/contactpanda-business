@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.51\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.52\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
@@ -28,9 +28,6 @@ msgstr "Eine Business-Lizenz ist erforderlich"
 
 msgid "A Business task was created from the support request."
 msgstr "Aus dem Hilfeersuchen wurde eine Business-Aufgabe erstellt."
-
-msgid "A quieter overview, clearer product navigation, and shared feedback paths make daily project work easier to understand."
-msgstr "Eine ruhigere Übersicht, klarere Produktnavigation und gemeinsame Rückmeldewege machen die tägliche Projektarbeit leichter verständlich."
 
 msgid "A valid ContactPanda Business license is required."
 msgstr "Eine gültige ContactPanda-Business-Lizenz ist erforderlich."
@@ -166,6 +163,9 @@ msgstr "Business-MCP-Schnittstelle"
 
 msgid "Business license required"
 msgstr "Business-Lizenz erforderlich"
+
+msgid "Business now follows the coordinated 0.8.52 family dependency and protected-update contract."
+msgstr "Business folgt jetzt dem abgestimmten Abhängigkeits- und geschützten Update-Vertrag der Produktfamilie 0.8.52."
 
 msgid "Business overview"
 msgstr "Business-Übersicht"
