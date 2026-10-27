@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.47\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.48\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
@@ -229,6 +229,9 @@ msgstr "ContactPanda Business"
 
 msgid "ContactPanda Business could not create all required tables."
 msgstr "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen."
+
+msgid "ContactPanda Business product overview"
+msgstr "ContactPanda Business Produktübersicht"
 
 msgid "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer."
 msgstr "ContactPanda Business erfordert ContactPanda %1$s und ContactPanda Pro %2$s oder neuer."
@@ -727,6 +730,9 @@ msgstr "Projektstart"
 
 msgid "Project steps"
 msgstr "Projektschritte"
+
+msgid "Project: %s"
+msgstr "Projekt: %s"
 
 msgid "Projects"
 msgstr "Projekte"

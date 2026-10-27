@@ -16,6 +16,7 @@ GERMAN = {
     "Archived": "Archiviert", "Automatic ContactPanda Business updates require a current ContactPanda Basic installation.": "Automatische Aktualisierungen für ContactPanda Business erfordern eine aktuelle Installation von ContactPanda.",
     "Back to board": "Zurück zum Board", "Back to projects": "Zurück zu den Projekten", "Business overview": "Business-Übersicht",
     "Business task": "Business-Aufgabe", "Cancel": "Abbrechen", "Close": "Schließen", "Column": "Spalte", "Comment": "Kommentar", "Comments": "Kommentare",
+    "ContactPanda Business product overview": "ContactPanda Business Produktübersicht",
     "Companies": "Firmen", "Company ID": "Firmen-ID", "Completed": "Abgeschlossen", "Contact person": "Ansprechperson", "ContactPanda Business": "ContactPanda Business",
     "ContactPanda Business could not create all required tables.": "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen.",
     "ContactPanda Business requires ContactPanda %s or newer.": "ContactPanda Business erfordert ContactPanda %s oder neuer.",
@@ -36,6 +37,7 @@ GERMAN = {
     "Planned": "Geplant", "Please enter a comment.": "Bitte geben Sie einen Kommentar ein.", "Please enter a project name.": "Bitte geben Sie einen Projektnamen ein.",
     "People": "Personen", "Please enter a task title.": "Bitte geben Sie einen Aufgabentitel ein.", "Priority": "Priorität", "Progress": "Fortschritt", "Project": "Projekt",
     "Project and correction management": "Projekt- und Korrekturverwaltung", "Project color": "Projektfarbe", "Project name": "Projektname", "Project participants": "Projektbeteiligte", "Project permissions": "Projektberechtigungen", "Projects": "Projekte",
+    "Project: %s": "Projekt: %s",
     "Projects & corrections": "Projekte & Korrekturen", "Projects, corrections, customer-visible tasks, contracts, subscriptions, and payments are separated from the Support Desk.": "Projekte, Korrekturen, kundensichtbare Aufgaben, Verträge, Abonnements und Zahlungen sind vom Support Desk getrennt.",
     "Question": "Rückfrage", "Read and write": "Lesen und schreiben", "Read only": "Nur lesen", "Review": "Zur Kontrolle", "Role in project": "Rolle im Projekt", "Save project": "Projekt speichern", "Save task": "Aufgabe speichern", "Search": "Suchen",
     "Search participants": "Beteiligte suchen", "Search projects": "Projekte durchsuchen", "Select participants": "Beteiligte auswählen", "Status": "Status", "Submit a new task": "Neue Aufgabe einreichen",
@@ -215,8 +217,8 @@ for path in SOURCE.rglob("*.php"):
     strings.update(match.replace("\\'", "'") for match in pattern.findall(path.read_text(encoding="utf-8")))
 
 LANG.mkdir(exist_ok=True)
-header = "Project-Id-Version: ContactPanda Business 0.8.47\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
-pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.47\nContent-Type: text/plain; charset=UTF-8\n"), ""]
+header = "Project-Id-Version: ContactPanda Business 0.8.48\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+pot = ['msgid ""', 'msgstr ""', quote("Project-Id-Version: ContactPanda Business 0.8.48\nContent-Type: text/plain; charset=UTF-8\n"), ""]
 po = ['msgid ""', 'msgstr ""', quote(header), ""]
 for msgid in sorted(strings):
     pot += [f"msgid {quote(msgid)}", 'msgstr ""', ""]

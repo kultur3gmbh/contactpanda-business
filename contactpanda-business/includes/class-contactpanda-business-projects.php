@@ -30,6 +30,67 @@ final class ContactPanda_Business_Projects {
 		add_action( 'admin_post_contactpanda_business_customer_comment', array( __CLASS__, 'customer_comment' ) );
 		add_action( 'admin_post_contactpanda_business_customer_update_task', array( __CLASS__, 'customer_update_task' ) );
 		add_action( 'contactpanda_pro_customer_detail', array( __CLASS__, 'customer_projects' ), 10, 4 );
+		add_filter( 'contactpanda_pro_support_customer_relations', array( __CLASS__, 'support_customer_relations' ), 10, 2 );
+	}
+
+	/**
+	 * Add customer-visible Business projects to the Support Desk relation picker.
+	 *
+	 * The Support Desk supplies only the selected customer's stable identities. This
+	 * keeps the picker customer-specific and prevents unrelated projects from being
+	 * exposed in the administration or customer portal.
+	 */
+	public static function support_customer_relations( $relations, $context ) {
+		global $wpdb;
+		$contact_id = absint( $context['contact_id'] ?? 0 );
+		$user_id = absint( $context['user_id'] ?? 0 );
+		$company_id = absint( $context['company_id'] ?? 0 );
+		$pro_customer_id = absint( $context['pro_customer_id'] ?? 0 );
+		if ( ! $contact_id && ! $user_id && ! $company_id && ! $pro_customer_id ) return $relations;
+
+		$t = ContactPanda_Business_Schema::table_names();
+		$legacy_conditions = array();
+		$legacy_args = array();
+		$participant_conditions = array();
+		$participant_args = array();
+		if ( $contact_id ) {
+			$legacy_conditions[] = 'p.contact_id=%d';
+			$legacy_args[] = $contact_id;
+			$participant_conditions[] = "(x.entity_type='person' AND x.entity_id=%d)";
+			$participant_args[] = $contact_id;
+		}
+		if ( $user_id ) {
+			$legacy_conditions[] = 'p.customer_user_id=%d';
+			$legacy_args[] = $user_id;
+			$participant_conditions[] = "(x.entity_type='user' AND x.entity_id=%d)";
+			$participant_args[] = $user_id;
+		}
+		if ( $company_id ) {
+			$legacy_conditions[] = 'p.company_id=%d';
+			$legacy_args[] = $company_id;
+			$participant_conditions[] = "(x.entity_type='company' AND x.entity_id=%d)";
+			$participant_args[] = $company_id;
+		}
+		if ( $pro_customer_id ) {
+			$legacy_conditions[] = 'p.pro_customer_id=%d';
+			$legacy_args[] = $pro_customer_id;
+			$participant_conditions[] = 'x.pro_customer_id=%d';
+			$participant_args[] = $pro_customer_id;
+		}
+
+		$where = array();
+		if ( $legacy_conditions ) $where[] = '(' . implode( ' OR ', $legacy_conditions ) . ')';
+		if ( $participant_conditions ) $where[] = "EXISTS (SELECT 1 FROM `{$t['participants']}` x WHERE x.project_id=p.id AND (" . implode( ' OR ', $participant_conditions ) . '))';
+		$sql = "SELECT DISTINCT p.id,p.name FROM `{$t['projects']}` p WHERE p.deleted_at IS NULL AND p.visibility='customer' AND (" . implode( ' OR ', $where ) . ') ORDER BY p.updated_at DESC';
+		$projects = $wpdb->get_results( $wpdb->prepare( $sql, array_merge( $legacy_args, $participant_args ) ), ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Prefix-safe internal tables and prepared identity values.
+		foreach ( (array) $projects as $project ) {
+			$relations[] = array(
+				'type'  => 'project',
+				'id'    => (string) absint( $project['id'] ),
+				'label' => sprintf( __( 'Project: %s', 'contactpanda-business' ), sanitize_text_field( $project['name'] ) ),
+			);
+		}
+		return $relations;
 	}
 
 	/** Add customer-visible projects to the shared, WooCommerce-independent portal. */
