@@ -96,6 +96,7 @@ final class ContactPanda_Business_Projects {
 	/** Add customer-visible projects to the shared, WooCommerce-independent portal. */
 	public static function customer_portal_tabs( $tabs, $identity = array() ) {
 		unset( $identity );
+		if ( ! self::customer_has_projects( get_current_user_id() ) ) return $tabs;
 		$tabs['projects'] = array(
 			'label'    => __( 'Projects', 'contactpanda-business' ),
 			'callback' => array( __CLASS__, 'account_page' ),
@@ -152,9 +153,8 @@ final class ContactPanda_Business_Projects {
 	public static function endpoint() { add_rewrite_endpoint( 'projekte-korrekturen', EP_ROOT | EP_PAGES ); }
 
 	public static function account_menu( $items ) {
-		$logout = $items['customer-logout'] ?? null; unset( $items['customer-logout'] );
+		if ( ! self::customer_has_projects( get_current_user_id() ) ) return $items;
 		$items['projekte-korrekturen'] = __( 'Projects', 'contactpanda-business' );
-		if ( null !== $logout ) $items['customer-logout'] = $logout;
 		return $items;
 	}
 
@@ -1003,6 +1003,19 @@ final class ContactPanda_Business_Projects {
 	private static function customer_can( $project_id, $user_id, $required ) {
 		$weights = array( 'read' => 1, 'write' => 2, 'manage' => 3 ); $current = self::customer_access_level( $project_id, $user_id );
 		return isset( $weights[ $current ], $weights[ $required ] ) && $weights[ $current ] >= $weights[ $required ];
+	}
+
+	/** Account navigation should advertise only projects this customer can open. */
+	private static function customer_has_projects( $user_id ) {
+		$user_id = absint( $user_id );
+		if ( ! $user_id ) return false;
+		global $wpdb;
+		$t = ContactPanda_Business_Schema::table_names();
+		$project_ids = $wpdb->get_col( "SELECT id FROM `{$t['projects']}` WHERE deleted_at IS NULL AND visibility='customer' ORDER BY id DESC" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Prefix-safe internal table and no external values.
+		foreach ( (array) $project_ids as $project_id ) {
+			if ( self::customer_can( absint( $project_id ), $user_id, 'read' ) ) return true;
+		}
+		return false;
 	}
 
 	private static function event( $project_id, $task_id, $type, $details ) {
