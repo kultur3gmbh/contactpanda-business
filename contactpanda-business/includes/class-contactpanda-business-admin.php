@@ -15,12 +15,19 @@ final class ContactPanda_Business_Admin {
 		if ( ! contactpanda_business_module_entitled( 'project_management' ) ) return;
 		add_submenu_page( 'contactpanda-business', __( 'Projects', 'contactpanda-business' ), __( 'Projects', 'contactpanda-business' ), 'contactpanda_projects_view', 'contactpanda-business-projects', array( 'ContactPanda_Business_Projects', 'render' ) );
 		add_submenu_page( 'contactpanda-business', __( 'Tasks', 'contactpanda-business' ), __( 'Tasks', 'contactpanda-business' ), 'contactpanda_tasks_view', 'contactpanda-business-tasks', array( 'ContactPanda_Business_Workspace', 'render_tasks' ) );
+		if ( contactpanda_business_module_entitled( 'support_desk' ) ) {
+			add_submenu_page( 'contactpanda-business', __( 'Support Desk', 'contactpanda-business' ), __( 'Support Desk', 'contactpanda-business' ), 'contactpanda_support_view', 'contactpanda-business-support', array( 'ContactPanda_Pro_Helpdesk', 'render' ) );
+		}
 		add_submenu_page( 'contactpanda-business', __( 'Import tasks', 'contactpanda-business' ), __( 'Import tasks', 'contactpanda-business' ), 'contactpanda_project_imports_manage', 'contactpanda-business-import', array( 'ContactPanda_Business_Imports', 'render' ) );
 	}
 
 	public static function assets( $hook ) {
 		if ( false === strpos( $hook, 'contactpanda' ) ) return;
 		wp_enqueue_style( 'contactpanda-business-admin', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-admin.css', array(), CONTACTPANDA_BUSINESS_VERSION );
+		if ( false !== strpos( $hook, 'contactpanda-business-support' ) ) {
+			wp_enqueue_style( 'contactpanda-business-support', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-support.css', array( 'contactpanda-business-admin' ), CONTACTPANDA_BUSINESS_VERSION );
+			wp_enqueue_script( 'contactpanda-business-support', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-support.js', array(), CONTACTPANDA_BUSINESS_VERSION, true );
+		}
 		if ( false === strpos( $hook, 'contactpanda-business' ) ) return;
 		wp_enqueue_script( 'contactpanda-business-admin', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-admin.js', array(), CONTACTPANDA_BUSINESS_VERSION, true );
 		wp_localize_script( 'contactpanda-business-admin', 'contactPandaBusiness', array( 'ajaxUrl' => admin_url( 'admin-ajax.php' ), 'nonce' => wp_create_nonce( 'contactpanda_business_move_task' ), 'currentUserId' => get_current_user_id(), 'selectParticipants' => __( 'Select participants', 'contactpanda-business' ), 'selectFiles' => __( 'Select one or more files.', 'contactpanda-business' ), 'moveFailed' => __( 'The task could not be moved.', 'contactpanda-business' ) ) );

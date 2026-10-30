@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.64\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.77\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d of %2$d"
 msgstr ""
@@ -233,13 +233,13 @@ msgstr ""
 msgid "ContactPanda Business could not create all required tables."
 msgstr ""
 
-msgid "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer."
+msgid "ContactPanda Business requires ContactPanda Basic %1$s and ContactPanda Plus %2$s or newer."
 msgstr ""
 
 msgid "ContactPanda Business requires the active ContactPanda Basic version %s or newer."
 msgstr ""
 
-msgid "ContactPanda Business requires the active ContactPanda Pro version %s or newer."
+msgid "ContactPanda Business requires the active ContactPanda Plus version %s or newer."
 msgstr ""
 
 msgid "ContactPanda dependencies required"
@@ -294,6 +294,9 @@ msgid "Customer accounts with portal access"
 msgstr ""
 
 msgid "Customer comments"
+msgstr ""
+
+msgid "Customer management"
 msgstr ""
 
 msgid "Customer response"
@@ -918,6 +921,9 @@ msgid "Submit new tasks and follow customer-visible progress."
 msgstr ""
 
 msgid "Submit task"
+msgstr ""
+
+msgid "Support Desk"
 msgstr ""
 
 msgid "Target completion"

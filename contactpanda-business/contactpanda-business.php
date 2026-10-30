@@ -1,24 +1,24 @@
 <?php
 /**
  * Plugin Name: ContactPanda Business
- * Description: Project, task, correction, import, and customer report management for ContactPanda Pro.
- * Version: 0.8.75
+ * Description: Professional CRM, support, project, task, correction, import, and customer workspace for ContactPanda.
+ * Version: 0.8.77
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 7.4
- * Requires Plugins: contactpanda, contactpanda-pro
- * Requires ContactPanda: 0.8.75
- * Requires ContactPanda Pro: 0.8.75
+ * Requires Plugins: contactpanda, contactpanda-plus
+ * Requires ContactPanda: 0.8.77
+ * Requires ContactPanda Plus: 0.8.77
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.75' );
-define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.75' );
-define( 'CONTACTPANDA_BUSINESS_MIN_PRO_VERSION', '0.8.75' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.77' );
+define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.77' );
+define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.77' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
@@ -32,6 +32,8 @@ ContactPanda_Business_MCP::register_ability_hooks();
 function contactpanda_business_license_modules( $modules ) {
 	$modules['business']                = __( 'ContactPanda Business', 'contactpanda-business' );
 	$modules['project_management']      = __( 'Project and correction management', 'contactpanda-business' );
+	$modules['support_desk']            = __( 'Support Desk', 'contactpanda-business' );
+	$modules['customer_management']     = __( 'Customer management', 'contactpanda-business' );
 	return $modules;
 }
 add_filter( 'contactpanda_license_modules', 'contactpanda_business_license_modules' );
@@ -41,17 +43,24 @@ function contactpanda_business_license_product( $products ) {
 		'label'       => __( 'ContactPanda Business', 'contactpanda-business' ),
 		'entitlement' => 'business',
 		'version'     => CONTACTPANDA_BUSINESS_VERSION,
-		'modules'     => array( 'project_management' ),
+		'modules'     => array( 'project_management', 'support_desk', 'customer_management' ),
 	);
 	return $products;
 }
 add_filter( 'contactpanda_license_products', 'contactpanda_business_license_product' );
 
 function contactpanda_business_module_entitled( $module ) {
-	return function_exists( 'contactpanda_pro_module_entitled' )
-		&& contactpanda_pro_module_entitled( 'pro' )
-		&& class_exists( 'ContactPanda_License' )
-		&& ( ContactPanda_License::entitled( 'business' ) || ContactPanda_License::entitled( $module ) );
+	return class_exists( 'ContactPanda_License' )
+		&& ( ContactPanda_License::entitled( 'business' ) || ContactPanda_License::entitled( 'pro' ) || ContactPanda_License::entitled( $module ) );
+}
+
+// Preserve the established internal support extension points while Business
+// becomes the sole owner of the former Pro CRM and helpdesk features.
+if ( ! function_exists( 'contactpanda_pro_module_entitled' ) ) {
+	function contactpanda_pro_module_entitled( $module ) { return contactpanda_business_module_entitled( $module ); }
+}
+if ( ! function_exists( 'contactpanda_pro_any_entitled' ) ) {
+	function contactpanda_pro_any_entitled() { return contactpanda_business_module_entitled( 'business' ); }
 }
 
 function contactpanda_business_activate() {
@@ -60,9 +69,14 @@ function contactpanda_business_activate() {
 		wp_die( esc_html( $dependency->get_error_message() ), esc_html__( 'ContactPanda dependencies required', 'contactpanda-business' ), array( 'back_link' => true ) );
 	}
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-schema.php';
+	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-schema.php';
+	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-access.php';
+	ContactPanda_Pro_Schema::install();
+	ContactPanda_Pro_Access::register_capabilities();
 	ContactPanda_Business_Schema::install();
 	ContactPanda_Business_Access::register_capabilities();
 	add_rewrite_endpoint( 'projekte-korrekturen', EP_ROOT | EP_PAGES );
+	add_rewrite_endpoint( 'hilfe-support', EP_ROOT | EP_PAGES );
 	flush_rewrite_rules();
 }
 register_activation_hook( __FILE__, 'contactpanda_business_activate' );
@@ -76,10 +90,10 @@ function contactpanda_business_dependency_error() {
 			sprintf( __( 'ContactPanda Business requires the active ContactPanda Basic version %s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION )
 		);
 	}
-	if ( ! defined( 'CONTACTPANDA_PRO_VERSION' ) || version_compare( CONTACTPANDA_PRO_VERSION, CONTACTPANDA_BUSINESS_MIN_PRO_VERSION, '<' ) || ! class_exists( 'ContactPanda_Pro_Access' ) ) {
+	if ( ! defined( 'CONTACTPANDA_PLUS_VERSION' ) || version_compare( CONTACTPANDA_PLUS_VERSION, CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION, '<' ) ) {
 		return new WP_Error(
-			'contactpanda_business_pro_required',
-			sprintf( __( 'ContactPanda Business requires the active ContactPanda Pro version %s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_PRO_VERSION )
+			'contactpanda_business_plus_required',
+			sprintf( __( 'ContactPanda Business requires the active ContactPanda Plus version %s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION )
 		);
 	}
 	return true;
@@ -87,11 +101,18 @@ function contactpanda_business_dependency_error() {
 
 function contactpanda_business_boot() {
 	load_plugin_textdomain( 'contactpanda-business', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-	ContactPanda_Business_Access::boot();
-	if ( ! defined( 'CONTACTPANDA_VERSION' ) || version_compare( CONTACTPANDA_VERSION, CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION, '<' ) || ! defined( 'CONTACTPANDA_PRO_VERSION' ) || version_compare( CONTACTPANDA_PRO_VERSION, CONTACTPANDA_BUSINESS_MIN_PRO_VERSION, '<' ) || ! class_exists( 'ContactPanda_Pro_Access' ) ) {
+	load_plugin_textdomain( 'contactpanda-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	if ( ! defined( 'CONTACTPANDA_VERSION' ) || version_compare( CONTACTPANDA_VERSION, CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION, '<' ) || ! defined( 'CONTACTPANDA_PLUS_VERSION' ) || version_compare( CONTACTPANDA_PLUS_VERSION, CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION, '<' ) ) {
 		add_action( 'admin_notices', 'contactpanda_business_dependency_notice' );
 		return;
 	}
+	if ( ! class_exists( 'ContactPanda_Pro_Schema' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-schema.php';
+	if ( ! class_exists( 'ContactPanda_Pro_Access' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-access.php';
+	if ( ! class_exists( 'ContactPanda_Pro_Helpdesk' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-helpdesk.php';
+	if ( ! class_exists( 'ContactPanda_Pro_MCP' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-mcp.php';
+	ContactPanda_Pro_Schema::maybe_upgrade();
+	ContactPanda_Pro_Access::boot();
+	ContactPanda_Business_Access::boot();
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-schema.php';
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-projects.php';
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-admin.php';
@@ -99,6 +120,8 @@ function contactpanda_business_boot() {
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-imports.php';
 	ContactPanda_Business_Schema::maybe_upgrade();
 	ContactPanda_Business_Schema::link_pro_customers();
+	if ( contactpanda_business_module_entitled( 'support_desk' ) ) ContactPanda_Pro_Helpdesk::boot();
+	ContactPanda_Pro_MCP::boot();
 	if ( contactpanda_business_module_entitled( 'project_management' ) ) {
 		ContactPanda_Business_Projects::boot();
 		ContactPanda_Business_Workspace::boot();
@@ -164,11 +187,14 @@ function contactpanda_business_license_required() {
 function contactpanda_business_frontend_assets() {
 	$is_account = function_exists( 'is_account_page' ) && is_account_page();
 	$is_portal  = class_exists( 'ContactPanda_Customer_Portal' ) && ContactPanda_Customer_Portal::is_portal_page();
-	if ( $is_account || $is_portal ) wp_enqueue_style( 'contactpanda-business-account', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-account.css', array(), CONTACTPANDA_BUSINESS_VERSION );
+	if ( $is_account || $is_portal ) {
+		wp_enqueue_style( 'contactpanda-business-account', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-account.css', array(), CONTACTPANDA_BUSINESS_VERSION );
+		wp_enqueue_style( 'contactpanda-business-support-account', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-support-account.css', array( 'contactpanda-business-account' ), CONTACTPANDA_BUSINESS_VERSION );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'contactpanda_business_frontend_assets' );
 
 function contactpanda_business_dependency_notice() {
 	if ( ! current_user_can( 'activate_plugins' ) ) return;
-	echo '<div class="notice notice-error"><p>' . esc_html( sprintf( __( 'ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION, CONTACTPANDA_BUSINESS_MIN_PRO_VERSION ) ) . '</p></div>';
+	echo '<div class="notice notice-error"><p>' . esc_html( sprintf( __( 'ContactPanda Business requires ContactPanda Basic %1$s and ContactPanda Plus %2$s or newer.', 'contactpanda-business' ), CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION, CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION ) ) . '</p></div>';
 }

@@ -1,0 +1,1146 @@
+.contactpanda-pro-module-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 18px;
+}
+.contactpanda-pro-product-visual{display:flex;align-items:center;justify-content:center;overflow:hidden;padding:18px;background:#f8fafc}.contactpanda-pro-product-visual img{display:block;width:min(100%,780px);height:auto;max-height:420px;object-fit:contain}
+.contactpanda-pro-dashboard-intro{display:flex;align-items:center;gap:18px}.contactpanda-pro-dashboard-intro img{width:48px;height:48px;object-fit:contain}.contactpanda-pro-dashboard-intro h2{margin:0 0 4px}.contactpanda-pro-dashboard-intro p{margin:0;color:#5b6778}.contactpanda-pro-release-news,.contactpanda-pro-feedback{grid-column:1/-1}.contactpanda-pro-release-news ul{margin:10px 0 0 18px}
+.contactpanda-pro-dashboard-intro img{width:64px;height:64px}
+
+.contactpanda-pro-customer-heading {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.contactpanda-pro-customer-summary {
+	display: grid;
+	gap: 14px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	margin: 0 0 20px;
+}
+
+.contactpanda-pro-customer-summary section {
+	background: #f8fafc;
+	border: 1px solid #dfe5eb;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	min-width: 0;
+	padding: 16px;
+}
+
+.contactpanda-pro-customer-summary section > span {
+	color: #68788a;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.contactpanda-pro-customer-summary section > strong {
+	color: #273748;
+	font-size: 15px;
+	overflow-wrap: anywhere;
+}
+
+@media (max-width: 782px) {
+	.contactpanda-pro-customer-summary {
+		grid-template-columns: 1fr;
+	}
+}
+
+.contactpanda-pro-module {
+	margin: 0;
+}
+
+.contactpanda-pro-card-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.contactpanda-pro-card-heading h2 {
+	margin: 0;
+}
+
+.contactpanda-pro-status {
+	display: inline-flex;
+	align-items: center;
+	min-height: 28px;
+	padding: 2px 10px;
+	border-radius: 999px;
+	font-weight: 600;
+}
+
+.contactpanda-pro-status.is-active,
+.contactpanda-pro-status.is-paid,
+.contactpanda-pro-status.is-issued {
+	color: #176b3a;
+	background: #e6f5ec;
+}
+
+.contactpanda-pro-status.is-paused,
+.contactpanda-pro-status.is-pending,
+.contactpanda-pro-status.is-draft,
+.contactpanda-pro-status.is-payment_due {
+	color: #7a5511;
+	background: #fff4d6;
+}
+
+.contactpanda-pro-status.is-inactive,
+.contactpanda-pro-status.is-ended,
+.contactpanda-pro-status.is-archived,
+.contactpanda-pro-status.is-cancelled {
+	color: #5c6670;
+	background: #edf0f2;
+}
+
+.contactpanda-pro-toolbar,
+.contactpanda-pro-section-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	margin: 0 0 16px;
+}
+
+.contactpanda-pro-section-heading {
+	margin-top: 24px;
+}
+
+.contactpanda-pro-section-heading h2,
+.contactpanda-pro-section-heading p {
+	margin: 0 0 4px;
+}
+
+.contactpanda-pro-toolbar form,
+.contactpanda-pro-row-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.contactpanda-pro-toolbar input[type="search"] {
+	width: min(420px, 55vw);
+}
+
+.contactpanda-pro-list {
+	overflow-x: auto;
+}
+
+.contactpanda-pro-list table {
+	border: 0;
+}
+
+.contactpanda-pro-list th,
+.contactpanda-pro-list td {
+	vertical-align: middle;
+}
+
+.contactpanda-pro-icon-button {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	width: 38px;
+	min-width: 38px;
+	height: 38px;
+	padding: 0 !important;
+	border: 1px solid #c8d0d8;
+	border-radius: 7px;
+	color: #425466;
+	background: #e8edf1;
+	cursor: pointer;
+}
+
+.contactpanda-pro-icon-button:hover,
+.contactpanda-pro-icon-button:focus {
+	color: #24364a;
+	border-color: #9aa9b7;
+	background: #dbe2e8;
+}
+
+.contactpanda-pro-icon-button.is-danger {
+	color: #a5262e;
+}
+
+.contactpanda-pro-modal[hidden] {
+	display: none;
+}
+
+.contactpanda-pro-modal {
+	position: fixed;
+	z-index: 100100;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	padding: 28px;
+}
+
+.contactpanda-pro-modal-backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(22, 31, 40, .64);
+}
+
+.contactpanda-pro-modal-dialog {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	width: min(980px, 96vw);
+	max-height: 92vh;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 24px 70px rgba(12, 24, 38, .3);
+}
+
+.contactpanda-pro-modal-dialog > header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	padding: 22px 24px;
+	border-bottom: 1px solid #dfe5eb;
+}
+
+.contactpanda-pro-modal-dialog > header h2 {
+	margin: 0;
+}
+
+.contactpanda-pro-modal-body {
+	overflow: auto;
+	padding: 24px;
+}
+
+.contactpanda-pro-modal-body form,
+.contactpanda-pro-modal-body label {
+	display: grid;
+	gap: 6px;
+}
+
+.contactpanda-pro-modal-body form {
+	gap: 16px;
+}
+
+.contactpanda-pro-modal-body label > span {
+	font-weight: 600;
+	color: #526274;
+}
+
+.contactpanda-pro-modal-body input,
+.contactpanda-pro-modal-body select,
+.contactpanda-pro-modal-body textarea {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: none;
+}
+
+.contactpanda-pro-form-row {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+	gap: 14px;
+}
+
+.contactpanda-pro-template-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 16px;
+	margin: 18px 0;
+}
+
+.contactpanda-pro-template-card-link {
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
+.contactpanda-pro-template-card-link:focus,
+.contactpanda-pro-template-card-link:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+.contactpanda-pro-template-card:has(.contactpanda-pro-template-card-link:hover),
+.contactpanda-pro-template-card:has(.contactpanda-pro-template-card-link:focus-visible) {
+	border-color: #3154db;
+	box-shadow: 0 0 0 1px #3154db;
+}
+
+.contactpanda-pro-template-columns {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px 18px;
+	margin: 8px 0 16px;
+}
+
+.contactpanda-pro-color-chip {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #c8d0d9;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+
+.contactpanda-pro-template-card .contactpanda-pro-row-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.contactpanda-invoice-builder {
+	margin-top: 20px;
+}
+
+.contactpanda-invoice-builder-layout {
+	display: grid;
+	grid-template-columns: 190px minmax(660px, 1fr) minmax(360px, 420px);
+	gap: 18px;
+	align-items: start;
+	margin: 18px 0;
+}
+
+.contactpanda-invoice-block-library,
+.contactpanda-invoice-inspector {
+	position: sticky;
+	top: 48px;
+	padding: 14px;
+	border: 1px solid #dfe5eb;
+	border-radius: 10px;
+	background: #f7f9fb;
+}
+
+/* Element-specific controls use the native hidden state even inside grid/flex labels. */
+.contactpanda-invoice-inspector [hidden] {
+	display: none !important;
+}
+
+.contactpanda-invoice-block-library h3,
+.contactpanda-invoice-inspector h3 {
+	margin: 0 0 10px;
+}
+
+.contactpanda-invoice-inspector-heading {
+	display: flex;
+	align-items: end;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 12px;
+}
+
+.contactpanda-invoice-inspector-heading small {
+	display: block;
+	margin-bottom: 2px;
+	color: #667585;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+}
+
+.contactpanda-invoice-inspector-heading h3 {
+	margin: 0;
+}
+
+.contactpanda-invoice-inspector-tabs {
+	display: grid;
+	grid-template-columns: repeat(3,minmax(0,1fr));
+	gap: 5px;
+	margin: 0 0 14px;
+	padding: 4px;
+	border-radius: 8px;
+	background: #e8edf2;
+}
+
+.contactpanda-invoice-inspector-tabs button {
+	min-height: 34px;
+	padding: 6px 8px;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: #425365;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.contactpanda-invoice-inspector-tabs button:is(:hover,:focus) {
+	color: #263547;
+	background: rgb(255 255 255 / 60%);
+}
+
+.contactpanda-invoice-inspector-tabs button.is-active {
+	color: #fff;
+	background: #3154db;
+	box-shadow: 0 1px 3px rgb(28 39 49 / 18%);
+}
+
+.contactpanda-invoice-inspector-panel[hidden] {
+	display: none!important;
+}
+
+.contactpanda-invoice-inspector-panel.is-active {
+	display: block;
+}
+
+.contactpanda-invoice-inspector-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 5px;
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 1px solid #dfe5eb;
+}
+
+.contactpanda-invoice-block-choice {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin: 0 0 7px;
+	padding: 8px 10px;
+	border: 1px solid #cbd5df;
+	border-radius: 6px;
+	color: #263547;
+	background: #fff;
+	text-align: left;
+	cursor: grab;
+}
+
+.contactpanda-invoice-block-choice:hover,
+.contactpanda-invoice-block-choice:focus {
+	border-color: #3154db;
+	box-shadow: 0 0 0 1px #3154db;
+}
+
+.contactpanda-invoice-block-choice .dashicons {
+	margin-right: 8px;
+}
+
+.contactpanda-invoice-page-shell {
+	min-width: 0;
+	padding: 22px;
+	overflow: auto;
+	border-radius: 10px;
+	background: #d9dfe6;
+}
+
+.contactpanda-invoice-page {
+	position: relative;
+	box-sizing: border-box;
+	margin: 0 auto;
+	overflow: hidden;
+	box-shadow: 0 3px 18px rgb(28 39 49 / 18%);
+	background-color: #fff;
+	background-image: linear-gradient(to right, rgb(84 101 118 / 10%) 1px, transparent 1px), linear-gradient(to bottom, rgb(84 101 118 / 10%) 1px, transparent 1px), linear-gradient(to right, transparent calc(var(--contactpanda-invoice-center-x) - 1px), rgb(49 84 219 / 26%) var(--contactpanda-invoice-center-x), transparent calc(var(--contactpanda-invoice-center-x) + 1px)), linear-gradient(to bottom, transparent calc(var(--contactpanda-invoice-center-y) - 1px), rgb(49 84 219 / 26%) var(--contactpanda-invoice-center-y), transparent calc(var(--contactpanda-invoice-center-y) + 1px));
+	background-position: var(--contactpanda-invoice-center-x) var(--contactpanda-invoice-center-y), var(--contactpanda-invoice-center-x) var(--contactpanda-invoice-center-y), 0 0, 0 0;
+	background-size: var(--contactpanda-invoice-grid) var(--contactpanda-invoice-grid), var(--contactpanda-invoice-grid) var(--contactpanda-invoice-grid), 100% 100%, 100% 100%;
+	transition: width .18s ease, height .18s ease;
+}
+.contactpanda-invoice-page::after {
+	position: absolute;
+	z-index: 1;
+	top: var(--contactpanda-invoice-margin-top,45px);
+	right: var(--contactpanda-invoice-margin-right,45px);
+	bottom: var(--contactpanda-invoice-margin-bottom,45px);
+	left: var(--contactpanda-invoice-margin-left,45px);
+	border: 1px dashed rgb(49 84 219 / 24%);
+	pointer-events: none;
+	content: "";
+}
+
+.contactpanda-invoice-empty {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	width: 100%;
+	margin: 0;
+	color: #6a7785;
+	text-align: center;
+}
+
+.contactpanda-invoice-canvas-block {
+	position: absolute;
+	z-index: 2;
+	box-sizing: border-box;
+	min-width: 30px;
+	min-height: 18px;
+	overflow: visible;
+	border-style: solid;
+	border-radius: 4px;
+	white-space: normal;
+	cursor: move;
+	touch-action: none;
+}
+
+.contactpanda-invoice-canvas-block:hover {
+	border-color: #8191a2;
+}
+
+.contactpanda-invoice-canvas-block.is-selected {
+	border-color: #3154db;
+	box-shadow: 0 0 0 2px rgb(49 84 219 / 15%);
+}
+
+.contactpanda-invoice-drag-handle {
+	position: absolute;
+	top: -11px;
+	right: -7px;
+	display: none;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	color: #fff;
+	background: #526274;
+	font-size: 14px;
+	line-height: 20px;
+	cursor: grab;
+}
+
+.contactpanda-invoice-block-content {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.contactpanda-invoice-block-content img {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.contactpanda-invoice-block-actions {
+	position: absolute;
+	z-index: 4;
+	top: -13px;
+	left: 4px;
+	display: none;
+	gap: 3px;
+}
+
+.contactpanda-invoice-canvas-block:is(:hover,.is-selected) .contactpanda-invoice-block-actions { display: flex; }
+.contactpanda-invoice-block-actions button {
+	display: grid;
+	place-items: center;
+	box-sizing: border-box;
+	width: 22px;
+	height: 22px;
+	padding: 0;
+	border: 1px solid #b8c2cc;
+	border-radius: 50%;
+	background: #eef1f4;
+	color: #465463;
+	cursor: pointer;
+}
+.contactpanda-invoice-block-actions button:last-child { color: #a52a2a; }
+.contactpanda-invoice-block-actions .dashicons { width: 14px; height: 14px; font-size: 14px; }
+
+.contactpanda-invoice-resize-handle {
+	position: absolute;
+	z-index: 4;
+	right: -6px;
+	bottom: -6px;
+	display: none;
+	box-sizing: border-box;
+	width: 13px;
+	height: 13px;
+	border: 2px solid #fff;
+	border-radius: 3px;
+	background: #3154db;
+	box-shadow: 0 0 0 1px #3154db;
+	cursor: nwse-resize;
+}
+.contactpanda-invoice-canvas-block:is(:hover,.is-selected) .contactpanda-invoice-resize-handle { display: block; }
+
+.contactpanda-invoice-canvas-block.is-selected .contactpanda-invoice-drag-handle,
+.contactpanda-invoice-canvas-block:hover .contactpanda-invoice-drag-handle {
+	display: block;
+}
+
+.contactpanda-invoice-canvas-block table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	font-size: inherit;
+}
+
+.contactpanda-invoice-canvas-block th,
+.contactpanda-invoice-canvas-block td {
+	padding: 6px;
+	border: 1px solid rgb(28 39 49 / 15%);
+	overflow-wrap: anywhere;
+}
+
+.contactpanda-invoice-canvas-block th {
+	color: #fff;
+}
+
+.contactpanda-invoice-table-group td {
+	background: rgb(66 83 181 / 10%);
+	font-weight: 600;
+}
+
+.contactpanda-invoice-table-subtotal td {
+	border-top-width: 2px;
+	font-weight: 600;
+	text-align: right;
+}
+
+.contactpanda-invoice-field-grid {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	width: 100%;
+	height: 100%;
+}
+
+.contactpanda-invoice-data-field {
+	display: grid;
+	box-sizing: border-box;
+	min-width: 0;
+	padding: 1px 4px;
+}
+
+.contactpanda-invoice-field-break {
+	display: block;
+	flex-basis: 100%;
+	height: 0;
+}
+
+.contactpanda-invoice-data-field small {
+	display: block;
+	color: #667585;
+	font-size: .72em;
+}
+
+.contactpanda-invoice-summary {
+	display: grid;
+	gap: 3px;
+	width: 100%;
+}
+
+.contactpanda-invoice-summary-row {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.contactpanda-invoice-summary-row.is-strong {
+	padding-top: 4px;
+	border-top: 1px solid currentColor;
+	font-weight: 700;
+}
+
+.contactpanda-invoice-spacer-line {
+	display: block;
+	width: 100%;
+	border-top: 1px dashed #aab4bf;
+}
+
+.contactpanda-invoice-inspector label,
+.contactpanda-invoice-table-settings {
+	display: grid;
+	gap: 5px;
+	margin-bottom: 12px;
+}
+
+.contactpanda-invoice-inspector label>span,
+.contactpanda-invoice-structure-settings h4 {
+	color: #526274;
+	font-size: 12px;
+	font-weight: 650;
+}
+
+.contactpanda-invoice-inspector :is(input,select,textarea) {
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+.contactpanda-invoice-grid-controls {
+	display: flex;
+	align-items: end;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin: 14px 0 0;
+	padding: 12px 14px;
+	border: 1px solid #dfe5eb;
+	border-radius: 8px;
+	background: #f7f9fb;
+}
+.contactpanda-invoice-grid-controls label { display: grid; gap: 5px; }
+.contactpanda-invoice-grid-controls label>span { color: #526274; font-size: 12px; font-weight: 600; }
+.contactpanda-invoice-grid-controls input[type=number] { width: 100px; }
+.contactpanda-invoice-grid-controls .contactpanda-invoice-check { display: flex; align-items: center; min-height: 30px; }
+.contactpanda-invoice-measurements { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.contactpanda-invoice-advanced-fields { overflow: visible; }
+.contactpanda-invoice-structure-settings {
+	margin: 14px 0;
+	padding: 14px 0;
+	border-top: 1px solid #dfe5eb;
+	border-bottom: 1px solid #dfe5eb;
+}
+.contactpanda-invoice-structure-settings[hidden] { display: none; }
+.contactpanda-invoice-structure-settings h4 { margin: 0 0 10px; }
+.contactpanda-invoice-structure-list { display: grid; gap: 8px; }
+.contactpanda-invoice-structure-row {
+	display: grid;
+	grid-template-columns: 18px minmax(0,1fr);
+	gap: 7px;
+	padding: 9px;
+	border: 1px solid #dfe5eb;
+	border-radius: 7px;
+	background: #f7f9fb;
+}
+.contactpanda-invoice-structure-row.is-dragging { opacity: .48; }
+.contactpanda-invoice-structure-drag { align-self: start; color: #68778a; cursor: grab; margin-top: 8px; }
+.contactpanda-invoice-structure-row > :not(.contactpanda-invoice-structure-drag) { grid-column: 2; }
+.contactpanda-invoice-structure-main {
+	display: grid;
+	grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+	gap: 6px;
+}
+.contactpanda-invoice-structure-affixes {
+	display: grid;
+	grid-template-columns: repeat(2,minmax(0,1fr));
+	gap: 6px;
+}
+.contactpanda-invoice-structure-affixes label { margin: 0; }
+.contactpanda-invoice-structure-meta {
+	display: flex;
+	align-items: end;
+	flex-wrap: wrap;
+	gap: 7px;
+}
+.contactpanda-invoice-structure-meta > label { width: 132px; margin: 0; }
+.contactpanda-invoice-structure-meta > label.contactpanda-invoice-inline-check { align-items: flex-start; display: flex; gap: 7px; width: auto; }
+.contactpanda-invoice-structure-meta > label.contactpanda-invoice-inline-check input { flex: 0 0 auto; margin-top: 2px; }
+.contactpanda-invoice-structure-meta > select { width: auto; min-width: 145px; }
+.contactpanda-invoice-structure-actions { display: inline-flex; gap: 3px; margin-left: auto; }
+.contactpanda-invoice-structure-actions .contactpanda-pro-icon-button { width: 29px; min-width: 29px; height: 29px; }
+.contactpanda-invoice-structure-actions .dashicons { width: 15px; height: 15px; font-size: 15px; }
+.contactpanda-invoice-structure-add {
+	display: grid;
+	grid-template-columns: minmax(0,1fr) auto;
+	gap: 7px;
+	margin-top: 9px;
+}
+.contactpanda-invoice-structure-add .button { display: inline-flex; align-items: center; gap: 5px; }
+.contactpanda-invoice-inline-check {
+	display: inline-flex !important;
+	align-items: center;
+	width: auto !important;
+	min-height: 29px;
+	margin: 0 !important;
+}
+.contactpanda-invoice-inline-check input { width: auto; }
+.contactpanda-invoice-group-controls { display: grid; gap: 9px; margin-top: 12px; }
+.contactpanda-invoice-image-settings .contactpanda-image-picker { min-width: 0; }
+.contactpanda-invoice-focus-stage { position:relative; height:150px; margin:0 0 12px; overflow:hidden; border:1px solid #cbd5df; border-radius:7px; background:#eef1f4; cursor:crosshair; touch-action:none; }
+.contactpanda-invoice-focus-stage[hidden] { display:none; }
+.contactpanda-invoice-focus-stage img { display:block; width:100%; height:100%; object-fit:cover; }
+.contactpanda-invoice-focus-stage span { position:absolute; width:18px; height:18px; border:3px solid #fff; border-radius:50%; box-shadow:0 0 0 2px #3154db; transform:translate(-50%,-50%); pointer-events:none; }
+.contactpanda-invoice-separator { display:block; width:100%; }
+.contactpanda-invoice-qr-details { display:block; margin-top:4px; font-size:.78em; line-height:1.35; text-align:left; }
+.contactpanda-invoice-rich-toolbar { display:flex; gap:4px; margin-bottom:4px; }
+.contactpanda-invoice-rich-toolbar button { display:grid; place-items:center; width:30px; height:30px; padding:0; border:1px solid #aeb9c5; border-radius:5px; background:#f2f4f6; color:#263747; cursor:pointer; }
+.contactpanda-invoice-rich-toolbar button:hover,.contactpanda-invoice-rich-toolbar button:focus-visible { border-color:#3154db; color:#3154db; }
+
+.contactpanda-invoice-inspector label > span {
+	color: #526274;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.contactpanda-invoice-inspector input,
+.contactpanda-invoice-inspector select,
+.contactpanda-invoice-inspector textarea {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: none;
+}
+
+.contactpanda-invoice-color-row,
+.contactpanda-invoice-table-settings {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+	gap: 10px;
+	overflow: visible;
+}
+
+.contactpanda-invoice-table-settings {
+	grid-template-columns: 1fr;
+}
+
+@media (max-width: 1500px) {
+	.contactpanda-invoice-builder-layout {
+		grid-template-columns: 180px minmax(580px, 1fr);
+	}
+
+	.contactpanda-invoice-inspector {
+		position: relative;
+		top: auto;
+		grid-column: 1 / -1;
+		width: auto;
+	}
+}
+
+@media (max-width: 980px) {
+	.contactpanda-invoice-builder-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.contactpanda-invoice-block-library,
+	.contactpanda-invoice-inspector {
+		position: relative;
+		top: auto;
+	}
+
+	.contactpanda-invoice-color-row,
+	.contactpanda-invoice-measurements {
+		grid-template-columns: 1fr;
+	}
+}
+
+.contactpanda-invoice-builder-actions {
+	position: sticky;
+	bottom: 0;
+	z-index: 3;
+	margin: 0 -20px -20px;
+	padding: 14px 20px;
+	border-top: 1px solid #dfe5eb;
+	background: rgb(255 255 255 / 94%);
+}
+
+.contactpanda-pro-modal-body footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin: 8px -24px -24px;
+	padding: 18px 24px;
+	border-top: 1px solid #dfe5eb;
+	background: #f7f9fb;
+}
+
+.contactpanda-pro-provider-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 14px;
+}
+
+.contactpanda-pro-provider {
+	padding: 18px;
+	border: 1px solid #dfe5eb;
+	border-radius: 10px;
+	background: #fff;
+}
+
+.contactpanda-pro-provider h3 {
+	margin-top: 0;
+}
+
+html.contactpanda-pro-modal-open {
+	overflow: hidden;
+}
+
+.contactpanda-ticket-status.is-new { color: #1d4ed8; background: #dbeafe; }
+.contactpanda-ticket-status.is-open { color: #0369a1; background: #e0f2fe; }
+.contactpanda-ticket-status.is-in_progress { color: #9a4d00; background: #fff0d6; }
+.contactpanda-ticket-status.is-waiting_support { color: #a61b1b; background: #fee2e2; }
+.contactpanda-ticket-status.is-waiting_customer { color: #6d28d9; background: #ede9fe; }
+.contactpanda-ticket-status.is-answered { color: #0f766e; background: #ccfbf1; }
+.contactpanda-ticket-status.is-resolved { color: #176b3a; background: #e6f5ec; }
+.contactpanda-ticket-status.is-closed { color: #475569; background: #e2e8f0; }
+
+.contactpanda-helpdesk-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin: 0 0 16px;
+}
+
+.contactpanda-helpdesk-toolbar form {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.contactpanda-helpdesk-toolbar input[type="search"] {
+	width: min(430px, 55vw);
+}
+
+.contactpanda-helpdesk-new[hidden],
+.contactpanda-helpdesk-new-person[hidden] {
+	display: none;
+}
+
+.contactpanda-helpdesk-form {
+	display: block;
+}
+
+.contactpanda-helpdesk-form-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 20px;
+}
+
+.contactpanda-helpdesk-form-column,
+.contactpanda-helpdesk-form-bottom {
+	display: grid;
+	align-content: start;
+	gap: 14px;
+}
+
+.contactpanda-helpdesk-form-column {
+	padding: 18px;
+	border: 1px solid #dfe5eb;
+	border-radius: 10px;
+	background: #f8fafc;
+}
+
+.contactpanda-helpdesk-form-column h3 {
+	margin: 0;
+}
+
+.contactpanda-helpdesk-form-bottom {
+	grid-template-columns: minmax(0, 1fr) minmax(260px, .4fr);
+	margin-top: 20px;
+}
+
+.contactpanda-helpdesk-loading {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 72px;
+	margin: 0;
+}
+
+.contactpanda-helpdesk-loading .spinner {
+	float: none;
+	margin: 0;
+}
+
+.contactpanda-helpdesk-form label,
+.contactpanda-helpdesk-sidebar-form label,
+.contactpanda-helpdesk-source-form label {
+	display: grid;
+	gap: 5px;
+}
+
+.contactpanda-helpdesk-form label > span,
+.contactpanda-helpdesk-sidebar-form label > span,
+.contactpanda-helpdesk-source-form label > span {
+	color: #526274;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.contactpanda-helpdesk-form input,
+.contactpanda-helpdesk-form select,
+.contactpanda-helpdesk-form textarea,
+.contactpanda-helpdesk-sidebar-form select,
+.contactpanda-helpdesk-source-form input,
+.contactpanda-helpdesk-source-form select {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: none;
+}
+
+.contactpanda-helpdesk-form > footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 18px;
+	padding-top: 14px;
+	border-top: 1px solid #dfe5eb;
+}
+
+.contactpanda-helpdesk-person small {
+	color: #657487;
+}
+
+.contactpanda-helpdesk-context {
+	display: grid;
+	gap: 14px;
+}
+
+.contactpanda-helpdesk-context p {
+	margin: 5px 0 0;
+	color: #657487;
+}
+.contactpanda-helpdesk-counts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.contactpanda-helpdesk-counts span{padding:4px 8px;border-radius:999px;background:#e8edf3;color:#344454}.contactpanda-helpdesk-related-control{display:flex;align-items:center;gap:6px}.contactpanda-helpdesk-related-control select{flex:1}.contactpanda-helpdesk-relation-preview{padding:12px;border:1px solid #cbd5e1;border-radius:8px;background:#fff}.contactpanda-helpdesk-relation-preview[hidden]{display:none}
+.contactpanda-invoice-qr-preview{display:grid;place-items:center;height:100%;min-height:70px;gap:2px;border:2px dashed currentColor}.contactpanda-invoice-qr-preview .dashicons{font-size:32px;width:32px;height:32px}.contactpanda-invoice-qr-preview small{display:block}
+
+.contactpanda-helpdesk-related-card {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin: 16px 0;
+	padding: 12px 14px;
+	border: 1px solid #dfe5eb;
+	border-radius: 8px;
+	background: #f8fafc;
+}
+
+.contactpanda-helpdesk-related-card .dashicons {
+	color: #3154db;
+}
+
+.contactpanda-helpdesk-related-card p {
+	margin: 2px 0 0;
+	color: #526274;
+}
+
+.contactpanda-helpdesk-new-person > p {
+	grid-column: 1 / -1;
+	margin: 0;
+	color: #657487;
+}
+
+.contactpanda-helpdesk-detail {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 320px;
+	gap: 20px;
+	align-items: start;
+}
+
+.contactpanda-helpdesk-thread,
+.contactpanda-helpdesk-sidebar-form {
+	display: grid;
+	gap: 12px;
+}
+
+.contactpanda-helpdesk-message-card {
+	padding: 14px 16px;
+	border: 1px solid #dfe5eb;
+	border-left: 4px solid #708090;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.contactpanda-helpdesk-message-card.is-outbound {
+	margin-left: 45px;
+	border-left-color: #3154db;
+	background: #f5f7ff;
+}
+
+.contactpanda-helpdesk-message-card.is-internal {
+	border-left-color: #d79b16;
+	background: #fff9e8;
+}
+
+.contactpanda-helpdesk-message-card header {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	color: #526274;
+	font-size: 12px;
+}
+
+.contactpanda-helpdesk-meta {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 7px 12px;
+}
+
+.contactpanda-helpdesk-meta dt {
+	font-weight: 700;
+}
+
+.contactpanda-helpdesk-meta dd {
+	margin: 0;
+}
+
+.contactpanda-helpdesk-source-form {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+	align-items: end;
+	gap: 10px;
+}
+
+.contactpanda-helpdesk-person {
+	align-content: start;
+}
+
+.contactpanda-helpdesk-new-person {
+	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 12px;
+	padding: 14px;
+	border: 1px solid #dfe5eb;
+	border-radius: 8px;
+	background: #f8fafc;
+}
+
+@media (max-width: 782px) {
+	.contactpanda-pro-toolbar,
+	.contactpanda-pro-section-heading {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.contactpanda-pro-toolbar input[type="search"] {
+		width: 100%;
+	}
+
+	.contactpanda-pro-modal {
+		padding: 8px;
+	}
+
+	.contactpanda-pro-modal-dialog {
+		width: 100%;
+		max-height: 96vh;
+		border-radius: 10px;
+	}
+
+	.contactpanda-helpdesk-detail,
+	.contactpanda-helpdesk-form-grid,
+	.contactpanda-helpdesk-form-bottom,
+	.contactpanda-helpdesk-source-form,
+	.contactpanda-helpdesk-new-person,
+	.contactpanda-helpdesk-context {
+		grid-template-columns: 1fr;
+	}
+
+	.contactpanda-invoice-builder-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.contactpanda-invoice-block-library,
+	.contactpanda-invoice-inspector {
+		position: static;
+	}
+
+	.contactpanda-invoice-block-library {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 7px;
+	}
+
+	.contactpanda-invoice-block-library h3,
+	.contactpanda-invoice-block-library p {
+		grid-column: 1 / -1;
+	}
+
+	.contactpanda-invoice-block-choice {
+		margin: 0;
+	}
+
+	.contactpanda-invoice-page-shell {
+		padding: 10px;
+	}
+
+	.contactpanda-invoice-page,
+	.contactpanda-invoice-page.is-landscape {
+		width: 100%;
+		min-height: 620px;
+	}
+
+	.contactpanda-helpdesk-message-card.is-outbound {
+		margin-left: 0;
+	}
+}
+.contactpanda-helpdesk-points{display:grid;gap:14px;margin-top:20px}.contactpanda-helpdesk-points>h3,.contactpanda-helpdesk-points>p{margin:0}.contactpanda-helpdesk-points>article{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(280px,1.5fr);gap:14px;padding:16px;border:1px solid #dfe5eb;border-radius:8px;background:#f8fafb}.contactpanda-helpdesk-points>article label{display:grid;gap:6px}.contactpanda-helpdesk-points>article textarea{width:100%}.contactpanda-helpdesk-points .button-link-delete{justify-self:end}@media(max-width:782px){.contactpanda-helpdesk-points>article{grid-template-columns:1fr}}

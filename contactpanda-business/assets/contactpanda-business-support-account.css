@@ -1,0 +1,145 @@
+.contactpanda-support-account {
+	display: grid;
+	gap: 22px;
+}
+
+.contactpanda-support-account-heading h2,
+.contactpanda-support-account-heading p {
+	margin-top: 0;
+}
+
+.contactpanda-support-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	border-bottom: 1px solid #d7dee6;
+}
+
+.contactpanda-support-tabs a {
+	margin-bottom: -1px;
+	padding: 11px 16px;
+	border: 1px solid transparent;
+	border-radius: 7px 7px 0 0;
+	text-decoration: none;
+}
+
+.contactpanda-support-tabs a.is-active {
+	border-color: #d7dee6;
+	border-bottom-color: #fff;
+	background: #fff;
+	font-weight: 700;
+}
+
+.contactpanda-support-ticket-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+}
+
+.contactpanda-support-ticket-heading h3 { margin: 0; }
+
+.contactpanda-ticket-status {
+	display: inline-flex;
+	align-items: center;
+	min-height: 25px;
+	padding: 3px 9px;
+	border-radius: 999px;
+	font-size: .82em;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.contactpanda-ticket-status.is-new { color: #1d4ed8; background: #dbeafe; }
+.contactpanda-ticket-status.is-open { color: #0369a1; background: #e0f2fe; }
+.contactpanda-ticket-status.is-in_progress { color: #9a4d00; background: #fff0d6; }
+.contactpanda-ticket-status.is-waiting_support { color: #a61b1b; background: #fee2e2; }
+.contactpanda-ticket-status.is-waiting_customer { color: #6d28d9; background: #ede9fe; }
+.contactpanda-ticket-status.is-answered { color: #0f766e; background: #ccfbf1; }
+.contactpanda-ticket-status.is-resolved { color: #176b3a; background: #e6f5ec; }
+.contactpanda-ticket-status.is-closed { color: #475569; background: #e2e8f0; }
+
+.contactpanda-support-empty {
+	padding: 22px;
+	border: 1px solid #dfe5eb;
+	border-radius: 10px;
+	background: #fff;
+}
+
+.contactpanda-support-empty p { margin-top: 0; }
+
+.contactpanda-support-new {
+	padding: 20px;
+	border: 1px solid #dfe5eb;
+	border-radius: 10px;
+	background: #fff;
+}
+
+.contactpanda-support-new form {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.contactpanda-support-new label,
+.contactpanda-support-reply label {
+	display: grid;
+	gap: 6px;
+}
+
+.contactpanda-support-new input,
+.contactpanda-support-new select,
+.contactpanda-support-new textarea,
+.contactpanda-support-reply textarea {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.contactpanda-support-new .contactpanda-support-message,
+.contactpanda-support-new .contactpanda-support-related,
+.contactpanda-support-new button {
+	grid-column: 1 / -1;
+}
+
+.contactpanda-support-related small {
+	color: #667085;
+}
+
+.contactpanda-support-thread,
+.contactpanda-support-reply {
+	display: grid;
+	gap: 12px;
+}
+
+.contactpanda-support-thread article {
+	padding: 14px;
+	border: 1px solid #dfe5eb;
+	border-left: 4px solid #607080;
+	border-radius: 8px;
+}
+
+.contactpanda-support-thread article.is-support {
+	margin-left: 32px;
+	border-left-color: #3154db;
+	background: #f5f7ff;
+}
+
+.contactpanda-support-thread time {
+	float: right;
+	color: #667085;
+	font-size: .85em;
+}
+
+@media (max-width: 620px) {
+	.contactpanda-support-new form {
+		grid-template-columns: 1fr;
+	}
+
+	.contactpanda-support-thread article.is-support {
+		margin-left: 0;
+	}
+
+	.contactpanda-support-tabs a { flex: 1 1 100%; border-radius: 6px; }
+	.contactpanda-support-tabs a.is-active { border-bottom-color: #d7dee6; }
+	.contactpanda-support-ticket-heading { align-items: flex-start; flex-direction: column; }
+}

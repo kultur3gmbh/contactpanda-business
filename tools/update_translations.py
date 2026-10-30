@@ -217,6 +217,10 @@ GERMAN.update({
     "New in this version": "Neu in dieser Version",
     "Track projects, responsibilities, corrections, files, and customer-visible progress without losing the connection to ContactPanda people and companies.": "Verfolgen Sie Projekte, Zuständigkeiten, Korrekturen, Dateien und kundensichtbare Fortschritte, ohne die Verbindung zu ContactPanda-Personen und -Firmen zu verlieren.",
     "Your project workspace": "Ihr Projektarbeitsbereich",
+    "ContactPanda Business requires the active ContactPanda Plus version %s or newer.": "ContactPanda Business erfordert die aktive ContactPanda-Plus-Version %s oder neuer.",
+    "ContactPanda Business requires ContactPanda Basic %1$s and ContactPanda Plus %2$s or newer.": "ContactPanda Business erfordert ContactPanda Basic %1$s und ContactPanda Plus %2$s oder neuer.",
+    "Customer management": "Kundenverwaltung",
+    "Support Desk": "Support-Desk",
 })
 
 
