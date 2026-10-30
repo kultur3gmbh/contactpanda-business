@@ -2,23 +2,23 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Professional CRM, support, project, task, correction, import, and customer workspace for ContactPanda.
- * Version: 0.8.77
+ * Version: 0.8.78
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Requires Plugins: contactpanda, contactpanda-plus
- * Requires ContactPanda: 0.8.77
- * Requires ContactPanda Plus: 0.8.77
+ * Requires ContactPanda: 0.8.78
+ * Requires ContactPanda Plus: 0.8.78
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.77' );
-define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.77' );
-define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.77' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.78' );
+define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.8.78' );
+define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.78' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
@@ -54,14 +54,23 @@ function contactpanda_business_module_entitled( $module ) {
 		&& ( ContactPanda_License::entitled( 'business' ) || ContactPanda_License::entitled( 'pro' ) || ContactPanda_License::entitled( $module ) );
 }
 
-// Preserve the established internal support extension points while Business
-// becomes the sole owner of the former Pro CRM and helpdesk features.
-if ( ! function_exists( 'contactpanda_pro_module_entitled' ) ) {
-	function contactpanda_pro_module_entitled( $module ) { return contactpanda_business_module_entitled( $module ); }
+/**
+ * Preserve the former Pro extension points after every plugin file has loaded.
+ *
+ * Business is alphabetically loaded before an installed legacy Pro version.
+ * Defining these functions at file scope would therefore make the legacy Pro
+ * plugin redeclare them and trigger a fatal error before WordPress can finish
+ * the coordinated family update.
+ */
+function contactpanda_business_register_pro_function_compat() {
+	if ( ! function_exists( 'contactpanda_pro_module_entitled' ) ) {
+		function contactpanda_pro_module_entitled( $module ) { return contactpanda_business_module_entitled( $module ); }
+	}
+	if ( ! function_exists( 'contactpanda_pro_any_entitled' ) ) {
+		function contactpanda_pro_any_entitled() { return contactpanda_business_module_entitled( 'business' ); }
+	}
 }
-if ( ! function_exists( 'contactpanda_pro_any_entitled' ) ) {
-	function contactpanda_pro_any_entitled() { return contactpanda_business_module_entitled( 'business' ); }
-}
+add_action( 'plugins_loaded', 'contactpanda_business_register_pro_function_compat', 1 );
 
 function contactpanda_business_activate() {
 	$dependency = contactpanda_business_dependency_error();
@@ -69,8 +78,8 @@ function contactpanda_business_activate() {
 		wp_die( esc_html( $dependency->get_error_message() ), esc_html__( 'ContactPanda dependencies required', 'contactpanda-business' ), array( 'back_link' => true ) );
 	}
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-schema.php';
-	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-schema.php';
-	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-access.php';
+	if ( ! class_exists( 'ContactPanda_Pro_Schema' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-schema.php';
+	if ( ! class_exists( 'ContactPanda_Pro_Access' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-access.php';
 	ContactPanda_Pro_Schema::install();
 	ContactPanda_Pro_Access::register_capabilities();
 	ContactPanda_Business_Schema::install();
