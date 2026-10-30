@@ -15,9 +15,16 @@ final class ContactPanda_Pro_Access {
 	/** Register the initial capabilities without changing existing non-admin roles. */
 	public static function boot() {
 		add_filter( 'contactpanda_mcp_allowed', array( __CLASS__, 'allow_mcp' ), 10, 2 );
+		add_filter( 'contactpanda_role_capability_dependencies', array( __CLASS__, 'role_capability_dependencies' ) );
 		if ( self::CAPABILITY_VERSION !== (string) get_option( self::CAPABILITY_OPTION, '' ) ) {
 			self::register_capabilities();
 		}
+	}
+
+	public static function role_capability_dependencies( $map ) {
+		$map['contactpanda_manage_support'] = array_values( array_filter( self::capabilities(), static function ( $capability ) { return 0 === strpos( $capability, 'contactpanda_support_' ) || 'contactpanda_pro_access' === $capability; } ) );
+		$map['contactpanda_manage_contacts'] = array_values( array_filter( self::capabilities(), static function ( $capability ) { return 0 === strpos( $capability, 'contactpanda_customers_' ); } ) );
+		return $map;
 	}
 
 	public static function allow_mcp( $allowed, $user = null ) {

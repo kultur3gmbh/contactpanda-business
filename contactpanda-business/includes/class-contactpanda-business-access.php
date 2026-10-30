@@ -9,8 +9,14 @@ final class ContactPanda_Business_Access {
 
 	public static function boot() {
 		add_filter( 'contactpanda_pro_capability_map', array( __CLASS__, 'extend_pro_map' ) );
+		add_filter( 'contactpanda_role_capability_dependencies', array( __CLASS__, 'role_capability_dependencies' ) );
 		add_filter( 'contactpanda_mcp_allowed', array( __CLASS__, 'allow_mcp' ), 20, 2 );
 		if ( self::CAPABILITY_VERSION !== (string) get_option( self::CAPABILITY_OPTION, '' ) ) self::register_capabilities();
+	}
+
+	public static function role_capability_dependencies( $map ) {
+		$map['contactpanda_manage_projects'] = self::capabilities();
+		return $map;
 	}
 
 	public static function allow_mcp( $allowed, $user = null ) {
