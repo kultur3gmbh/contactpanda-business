@@ -37,7 +37,7 @@ final class ContactPanda_Business_Imports {
 		$items = $wpdb->get_results( $wpdb->prepare( "SELECT i.*,x.title match_title,x.board_column match_status FROM `{$t['import_items']}` i LEFT JOIN `{$t['tasks']}` x ON x.id=i.match_task_id WHERE i.import_id=%d ORDER BY i.id", $import_id ), ARRAY_A );
 		$projects = $wpdb->get_results( "SELECT id,name FROM `{$t['projects']}` WHERE deleted_at IS NULL ORDER BY name", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$areas = $wpdb->get_results( "SELECT id,project_id,name FROM `{$t['areas']}` WHERE deleted_at IS NULL ORDER BY name", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$users = get_users( array( 'orderby' => 'display_name' ) );
+		$users = get_users( array( 'orderby' => 'display_name', 'number' => 200 ) );
 		$selected_count = array_sum( array_map( 'absint', wp_list_pluck( $items, 'selected' ) ) );
 		echo '<p><a href="' . esc_url( admin_url( 'admin.php?page=contactpanda-business-import' ) ) . '">← ' . esc_html__( 'Back to imports', 'contactpanda-business' ) . '</a></p><section class="cpb-card"><h2>' . esc_html__( 'Review imported tasks', 'contactpanda-business' ) . '</h2><p>' . esc_html__( 'Nothing is written to the task board until you confirm this list.', 'contactpanda-business' ) . '</p>';
 		$is_repeat = 'applied' === $import['status'] || ! empty( $import['apply_count'] );

@@ -37,7 +37,7 @@ final class ContactPanda_Business_Workspace {
 		echo '</select><select name="task_status"><option value="">' . esc_html__( 'All statuses', 'contactpanda-business' ) . '</option>';
 		foreach ( self::columns() as $key => $label ) echo '<option value="' . esc_attr( $key ) . '"' . selected( $column, $key, false ) . '>' . esc_html( $label ) . '</option>';
 		echo '</select><select name="assigned_user_id"><option value="-1">' . esc_html__( 'All assignees', 'contactpanda-business' ) . '</option><option value="0"' . selected( $assigned, 0, false ) . '>' . esc_html__( 'Unassigned', 'contactpanda-business' ) . '</option>';
-		foreach ( get_users( array( 'orderby' => 'display_name' ) ) as $user ) echo '<option value="' . esc_attr( $user->ID ) . '"' . selected( $assigned, $user->ID, false ) . '>' . esc_html( $user->display_name ) . '</option>';
+		foreach ( get_users( array( 'orderby' => 'display_name', 'number' => 200 ) ) as $user ) echo '<option value="' . esc_attr( $user->ID ) . '"' . selected( $assigned, $user->ID, false ) . '>' . esc_html( $user->display_name ) . '</option>';
 		echo '</select><button class="button cpb-icon-button" aria-label="' . esc_attr__( 'Search', 'contactpanda-business' ) . '"><span class="dashicons dashicons-search"></span></button></form><a class="button" href="' . esc_url( add_query_arg( array( 'page' => 'contactpanda-business-tasks', 'trash' => $trash ? 0 : 1 ), admin_url( 'admin.php' ) ) ) . '">' . esc_html( $trash ? __( 'Back to tasks', 'contactpanda-business' ) : __( 'Trash', 'contactpanda-business' ) ) . '</a></div>';
 		echo '<section class="cpb-card"><table class="widefat striped"><thead><tr><th>' . esc_html__( 'Task', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Project', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Area', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Assignee', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Due by', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Progress', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Status', 'contactpanda-business' ) . '</th><th>' . esc_html__( 'Actions', 'contactpanda-business' ) . '</th></tr></thead><tbody>';
 		if ( ! $tasks ) echo '<tr><td colspan="8" class="cpb-empty">' . esc_html__( 'No tasks were found.', 'contactpanda-business' ) . '</td></tr>';
@@ -58,12 +58,12 @@ final class ContactPanda_Business_Workspace {
 		echo '<section class="cpb-card cpb-board-tools"><div class="cpb-toolbar"><div><strong>' . esc_html__( 'Board filters', 'contactpanda-business' ) . '</strong><div class="cpb-filter-options"><label><input type="checkbox" data-cpb-filter-area value="0" checked> ' . esc_html__( 'Without area', 'contactpanda-business' ) . '</label>';
 		foreach ( $areas as $area ) echo '<label><input type="checkbox" data-cpb-filter-area value="' . esc_attr( $area['id'] ) . '" checked> <span class="cpb-project-color" style="--cpb-project-color:' . esc_attr( self::clean_color( $area['color'] ) ) . '"></span>' . esc_html( $area['name'] ) . '</label>';
 		echo '</div></div><div><label><span class="screen-reader-text">' . esc_html__( 'Assignee', 'contactpanda-business' ) . '</span><select data-cpb-filter-assignee><option value="all">' . esc_html__( 'All assignees', 'contactpanda-business' ) . '</option><option value="me">' . esc_html__( 'My tasks', 'contactpanda-business' ) . '</option><option value="0">' . esc_html__( 'Unassigned', 'contactpanda-business' ) . '</option>';
-		foreach ( get_users( array( 'orderby' => 'display_name' ) ) as $user ) echo '<option value="' . esc_attr( $user->ID ) . '">' . esc_html( $user->display_name ) . '</option>';
+		foreach ( get_users( array( 'orderby' => 'display_name', 'number' => 200 ) ) as $user ) echo '<option value="' . esc_attr( $user->ID ) . '">' . esc_html( $user->display_name ) . '</option>';
 		echo '</select></label> <button type="button" class="button" data-cpb-reset-filters>' . esc_html__( 'Reset filters', 'contactpanda-business' ) . '</button></div></div><details><summary>' . esc_html__( 'Manage project areas', 'contactpanda-business' ) . '</summary><div class="cpb-area-list">';
 		foreach ( $areas as $area ) echo '<span class="cpb-area-chip"><span class="cpb-project-color" style="--cpb-project-color:' . esc_attr( self::clean_color( $area['color'] ) ) . '"></span>' . esc_html( $area['name'] ) . '</span>';
 		echo '</div><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" class="cpb-form-grid"><input type="hidden" name="action" value="contactpanda_business_save_area"><input type="hidden" name="project_id" value="' . esc_attr( $project_id ) . '">'; wp_nonce_field( 'contactpanda_business_save_area_' . $project_id );
 		echo '<label><span>' . esc_html__( 'Area name', 'contactpanda-business' ) . '</span><input name="name" required></label><label><span>' . esc_html__( 'Color', 'contactpanda-business' ) . '</span><input type="color" name="color" value="#3d5cf5"></label><label><span>' . esc_html__( 'Responsible person', 'contactpanda-business' ) . '</span><select name="assigned_user_id"><option value="0">' . esc_html__( 'Unassigned', 'contactpanda-business' ) . '</option>';
-		foreach ( get_users( array( 'orderby' => 'display_name' ) ) as $user ) echo '<option value="' . esc_attr( $user->ID ) . '">' . esc_html( $user->display_name ) . '</option>';
+		foreach ( get_users( array( 'orderby' => 'display_name', 'number' => 200 ) ) as $user ) echo '<option value="' . esc_attr( $user->ID ) . '">' . esc_html( $user->display_name ) . '</option>';
 		echo '</select></label><p><button class="button">' . esc_html__( 'Add area', 'contactpanda-business' ) . '</button></p></form></details></section>';
 	}
 
@@ -77,7 +77,7 @@ final class ContactPanda_Business_Workspace {
 
 	public static function assignee_options( $selected = 0 ) {
 		$html = '<option value="0">' . esc_html__( 'Unassigned', 'contactpanda-business' ) . '</option>';
-		foreach ( get_users( array( 'orderby' => 'display_name' ) ) as $user ) $html .= '<option value="' . esc_attr( $user->ID ) . '"' . selected( $selected, $user->ID, false ) . '>' . esc_html( $user->display_name ) . '</option>';
+		foreach ( get_users( array( 'orderby' => 'display_name', 'number' => 200 ) ) as $user ) $html .= '<option value="' . esc_attr( $user->ID ) . '"' . selected( $selected, $user->ID, false ) . '>' . esc_html( $user->display_name ) . '</option>';
 		return $html;
 	}
 

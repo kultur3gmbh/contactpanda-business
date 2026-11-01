@@ -854,7 +854,7 @@ final class ContactPanda_Business_Projects {
 
 	private static function user_options() {
 		$options = array();
-		foreach ( get_users( array( 'orderby' => 'display_name' ) ) as $user ) $options[] = array( 'id' => $user->ID, 'label' => trim( $user->display_name . ' — ' . $user->user_email ) );
+		foreach ( get_users( array( 'orderby' => 'display_name', 'number' => 200 ) ) as $user ) $options[] = array( 'id' => $user->ID, 'label' => trim( $user->display_name . ' — ' . $user->user_email ) );
 		return $options;
 	}
 
