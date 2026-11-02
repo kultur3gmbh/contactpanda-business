@@ -3,14 +3,14 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Shared authorization and audit foundation for Pro and its extensions.
+ * Shared authorization and audit foundation for ContactPanda Business.
  *
  * WordPress capabilities remain the coarse entry point. Optional resource-level
  * assignments can then narrow or extend access without changing source records.
  */
-final class ContactPanda_Pro_Access {
+final class ContactPanda_Business_Service_Access {
 	const CAPABILITY_VERSION = '1.0.0';
-	const CAPABILITY_OPTION  = 'contactpanda_pro_capability_version';
+	const CAPABILITY_OPTION  = 'contactpanda_business_service_capability_version';
 
 	/** Register the initial capabilities without changing existing non-admin roles. */
 	public static function boot() {
@@ -22,7 +22,7 @@ final class ContactPanda_Pro_Access {
 	}
 
 	public static function role_capability_dependencies( $map ) {
-		$map['contactpanda_manage_support'] = array_values( array_filter( self::capabilities(), static function ( $capability ) { return 0 === strpos( $capability, 'contactpanda_support_' ) || 'contactpanda_pro_access' === $capability; } ) );
+		$map['contactpanda_manage_support'] = array_values( array_filter( self::capabilities(), static function ( $capability ) { return 0 === strpos( $capability, 'contactpanda_support_' ) || 'contactpanda_business_service_access' === $capability; } ) );
 		$map['contactpanda_manage_contacts'] = array_values( array_filter( self::capabilities(), static function ( $capability ) { return 0 === strpos( $capability, 'contactpanda_customers_' ); } ) );
 		return $map;
 	}
@@ -38,7 +38,7 @@ final class ContactPanda_Pro_Access {
 
 	public static function capabilities() {
 		return array(
-			'contactpanda_pro_access',
+			'contactpanda_business_service_access',
 			'contactpanda_support_view',
 			'contactpanda_support_create',
 			'contactpanda_support_edit',
@@ -82,7 +82,7 @@ final class ContactPanda_Pro_Access {
 	 * Explicit resource-level denies win over allows. Administrators retain the
 	 * historical manage_options access and cannot accidentally lock themselves out.
 	 */
-	public static function can( $action, $resource_type = 'pro', $resource_id = 0, $context = array(), $user_id = 0 ) {
+	public static function can( $action, $resource_type = 'business', $resource_id = 0, $context = array(), $user_id = 0 ) {
 		$user = $user_id ? get_user_by( 'id', absint( $user_id ) ) : wp_get_current_user();
 		if ( ! $user || ! $user->exists() ) return false;
 		if ( user_can( $user, 'manage_options' ) ) return true;
@@ -97,18 +97,18 @@ final class ContactPanda_Pro_Access {
 		if ( false === $assignment ) $decision = false;
 		elseif ( true === $assignment ) $decision = true;
 
-		return (bool) apply_filters( 'contactpanda_pro_access_decision', $decision, $action, $resource_type, $resource_id, $context, $user );
+		return (bool) apply_filters( 'contactpanda_business_service_access_decision', $decision, $action, $resource_type, $resource_id, $context, $user );
 	}
 
 	public static function permission_error() {
-		return new WP_Error( 'contactpanda_pro_forbidden', __( 'You do not have permission.', 'contactpanda-pro' ), array( 'status' => 403 ) );
+		return new WP_Error( 'contactpanda_business_service_forbidden', __( 'You do not have permission.', 'contactpanda-business' ), array( 'status' => 403 ) );
 	}
 
 	public static function capability_for( $action, $resource_type ) {
 		$map = array(
 			'pro' => array(
-				'view'   => 'contactpanda_pro_access',
-				'manage' => 'contactpanda_pro_access',
+				'view'   => 'contactpanda_business_service_access',
+				'manage' => 'contactpanda_business_service_access',
 			),
 			'support_ticket' => array(
 				'view'   => 'contactpanda_support_view',
@@ -140,15 +140,15 @@ final class ContactPanda_Pro_Access {
 			'portal' => array( 'manage' => 'contactpanda_portal_manage' ),
 			'audit' => array( 'view' => 'contactpanda_audit_view' ),
 		);
-		$map = apply_filters( 'contactpanda_pro_capability_map', $map );
+		$map = apply_filters( 'contactpanda_business_service_capability_map', $map );
 		return isset( $map[ $resource_type ][ $action ] ) ? $map[ $resource_type ][ $action ] : '';
 	}
 
 	/** Store a metadata-only audit event. Callers should not pass message bodies or secrets. */
 	public static function audit( $action, $resource_type, $resource_id = 0, $before = array(), $after = array(), $context = array() ) {
 		global $wpdb;
-		$tables = ContactPanda_Pro_Schema::table_names();
-		if ( empty( $tables['audit_events'] ) || ! ContactPanda_Pro_Schema::table_exists_public( $tables['audit_events'] ) ) return false;
+		$tables = ContactPanda_Business_Service_Schema::table_names();
+		if ( empty( $tables['audit_events'] ) || ! ContactPanda_Business_Service_Schema::table_exists_public( $tables['audit_events'] ) ) return false;
 
 		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 		$ip_hash = $ip ? hash_hmac( 'sha256', $ip, wp_salt( 'auth' ) ) : '';
@@ -172,8 +172,8 @@ final class ContactPanda_Pro_Access {
 
 	private static function assignment_decision( $user, $action, $resource_type, $resource_id, $context ) {
 		global $wpdb;
-		$tables = ContactPanda_Pro_Schema::table_names();
-		if ( empty( $tables['access_assignments'] ) || ! ContactPanda_Pro_Schema::table_exists_public( $tables['access_assignments'] ) ) return null;
+		$tables = ContactPanda_Business_Service_Schema::table_names();
+		if ( empty( $tables['access_assignments'] ) || ! ContactPanda_Business_Service_Schema::table_exists_public( $tables['access_assignments'] ) ) return null;
 
 		$roles = array_values( array_filter( array_map( 'sanitize_key', (array) $user->roles ) ) );
 		$conditions = array( '(principal_type=%s AND principal_id=%d)' );
@@ -201,7 +201,7 @@ final class ContactPanda_Pro_Access {
 		if ( in_array( $scope, array( '', 'all', 'explicit' ), true ) ) return true;
 		if ( 'own' === $scope ) return absint( $context['owner_user_id'] ?? 0 ) === absint( $user->ID );
 		if ( 'assigned' === $scope ) return absint( $context['assigned_user_id'] ?? 0 ) === absint( $user->ID );
-		return (bool) apply_filters( 'contactpanda_pro_access_scope_matches', false, $scope, $user, $context );
+		return (bool) apply_filters( 'contactpanda_business_service_access_scope_matches', false, $scope, $user, $context );
 	}
 
 	private static function redact( $value, $key = '' ) {

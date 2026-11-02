@@ -4,7 +4,7 @@ Tags: contactpanda, projects, corrections, kanban, customer-portal
 Requires at least: 6.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.8.89
+Stable tag: 0.8.90
 License: GPLv2 or later
 
 Independent business administration and project management for ContactPanda.
@@ -14,6 +14,10 @@ Independent business administration and project management for ContactPanda.
 ContactPanda Business provides project and correction management with customer-visible and internal tasks, structured document imports, reports, and an authenticated MCP interface.
 
 == Changelog ==
+
+= 0.8.90 =
+* Aligns Business screens with the consolidated neutral Panda administration controls.
+* Requires ContactPanda Plus 0.8.91 for the shared family UI contract.
 
 = 0.8.89 =
 
@@ -62,9 +66,9 @@ ContactPanda Business provides project and correction management with customer-v
 
 = 0.8.77 =
 
-* Merges the former ContactPanda Pro CRM and Support Desk into ContactPanda Business.
-* Requires ContactPanda Basic and ContactPanda Plus 0.8.77 while preserving existing Pro data.
-* Removes the hidden dependency on the old Pro plugin and keeps compatibility interfaces available.
+* Consolidates CRM and Support Desk in ContactPanda Business.
+* Requires ContactPanda Basic and ContactPanda Plus 0.8.77 while preserving existing customer and support data.
+* Removes the hidden dependency on a retired intermediate plugin and keeps data compatibility interfaces available.
 
 = 0.8.75 =
 * Finalizes the ContactPanda Business product, repository, package, and protected-update naming contract.
@@ -201,9 +205,9 @@ ContactPanda Business provides project and correction management with customer-v
 * Requires the matching Basic and Pro 0.8.41 releases.
 
 = 0.8.40 =
-* Makes ContactPanda Pro the required customer, permission, contract, subscription, payment, and portal foundation for Business projects.
-* Links projects, participants, payment plans, and invoices to the shared Pro records without copying contact data or changing existing project and task identifiers.
-* Preserves all projects, tasks, comments, files, imports, reports, and customer-visible work while requiring ContactPanda and ContactPanda Pro 0.8.40.
+* Establishes the shared customer, permission, and portal foundation for Business projects.
+* Links projects and participants to shared customer records without copying contact data or changing existing project and task identifiers.
+* Preserves all projects, tasks, comments, files, imports, reports, and customer-visible work.
 
 = 0.8.30 =
 * Registers licensed project, task, import, and report tools with ContactPanda's central MCP server while retaining the previous Business route as a compatibility alias.
@@ -288,4 +292,4 @@ ContactPanda Business provides project and correction management with customer-v
 * Adds projects and a Trello-style correction board.
 * Adds open sub-statuses, progress colors, due dates, comments, and history.
 * Adds customer-visible versus internal tasks and customer task submission.
-* Adds optional conversion from ContactPanda Pro support requests.
+* Adds optional conversion from Support Desk requests.

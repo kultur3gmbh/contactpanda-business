@@ -1,6 +1,6 @@
 # ContactPanda Business
 
-ContactPanda Business is the project and work-management extension built on the ContactPanda Pro commercial foundation. It provides projects, tasks, phases, responsibilities, due dates, reminders, time tracking, budgets, files, customer collaboration, corrections, approvals, capacity planning, and project reports.
+ContactPanda Business is the CRM, support, project, and work-management extension built on ContactPanda Basic and Plus. It provides customer management, a Support Desk, projects, tasks, phases, responsibilities, due dates, reminders, time tracking, budgets, files, customer collaboration, corrections, approvals, capacity planning, and project reports.
 
 Business requires compatible Basic and Pro installations. Historical Business-owned customer, contract, subscription, payment, and software-licensing module claims have been removed; those shared services belong to Pro. The staged transition is documented in [the target architecture](docs/TARGET-ARCHITECTURE.md).
 

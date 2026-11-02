@@ -1,11 +1,14 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.84\nContent-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: ContactPanda Business 0.8.89\nContent-Type: text/plain; charset=UTF-8\n"
 
 msgid "%1$d of %2$d"
 msgstr ""
 
 msgid "%1$d open / %2$d total"
+msgstr ""
+
+msgid "%1$s has submitted a support request or reply. Open the request: %2$s"
 msgstr ""
 
 msgid "%d files could not be uploaded."
@@ -27,6 +30,9 @@ msgid "A Business license is required"
 msgstr ""
 
 msgid "A Business task was created from the support request."
+msgstr ""
+
+msgid "A customer identity is required."
 msgstr ""
 
 msgid "A valid ContactPanda Business license is required."
@@ -56,6 +62,9 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+msgid "Add another point"
+msgstr ""
+
 msgid "Add area"
 msgstr ""
 
@@ -83,6 +92,9 @@ msgstr ""
 msgid "Add project step"
 msgstr ""
 
+msgid "Add source"
+msgstr ""
+
 msgid "Add task"
 msgstr ""
 
@@ -98,10 +110,19 @@ msgstr ""
 msgid "All projects"
 msgstr ""
 
+msgid "All related records"
+msgstr ""
+
 msgid "All statuses"
 msgstr ""
 
 msgid "Amount"
+msgstr ""
+
+msgid "An MCP reply draft is ready. Please review it before sending."
+msgstr ""
+
+msgid "Answered"
 msgstr ""
 
 msgid "Applied"
@@ -128,10 +149,16 @@ msgstr ""
 msgid "Assigned projects"
 msgstr ""
 
+msgid "Assigned to"
+msgstr ""
+
 msgid "Assignee"
 msgstr ""
 
 msgid "Assignee and due date"
+msgstr ""
+
+msgid "Attachments"
 msgstr ""
 
 msgid "Back to board"
@@ -140,13 +167,22 @@ msgstr ""
 msgid "Back to imports"
 msgstr ""
 
+msgid "Back to my support requests"
+msgstr ""
+
 msgid "Back to project list"
 msgstr ""
 
 msgid "Back to projects"
 msgstr ""
 
+msgid "Back to support requests"
+msgstr ""
+
 msgid "Back to tasks"
+msgstr ""
+
+msgid "Back to the Support Desk overview"
 msgstr ""
 
 msgid "Board filters"
@@ -198,6 +234,9 @@ msgid "Click to add notes or comments."
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Closed"
 msgstr ""
 
 msgid "Color"
@@ -257,13 +296,31 @@ msgstr ""
 msgid "Create a Business project before converting this support request into a task."
 msgstr ""
 
+msgid "Create a new person"
+msgstr ""
+
+msgid "Create a request and keep the complete conversation in your customer account."
+msgstr ""
+
 msgid "Create a review draft from extracted document items. This does not create or modify live tasks."
+msgstr ""
+
+msgid "Create a support request"
+msgstr ""
+
+msgid "Create a support request and optionally create and link a new person."
 msgstr ""
 
 msgid "Create new task"
 msgstr ""
 
 msgid "Create project"
+msgstr ""
+
+msgid "Create requests"
+msgstr ""
+
+msgid "Create support request"
 msgstr ""
 
 msgid "Create task"
@@ -296,7 +353,16 @@ msgstr ""
 msgid "Customer comments"
 msgstr ""
 
+msgid "Customer context"
+msgstr ""
+
 msgid "Customer management"
+msgstr ""
+
+msgid "Customer message"
+msgstr ""
+
+msgid "Customer replies are sent through WordPress email delivery and are recorded only after successful handoff. Internal notes remain visible only to support staff."
 msgstr ""
 
 msgid "Customer response"
@@ -350,10 +416,19 @@ msgstr ""
 msgid "Duplicate task"
 msgstr ""
 
+msgid "Each point becomes a separate support request and can be processed independently."
+msgstr ""
+
 msgid "Edit project"
 msgstr ""
 
 msgid "Edit value"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Email inbox"
 msgstr ""
 
 msgid "Enter a checklist item."
@@ -365,10 +440,25 @@ msgstr ""
 msgid "Enter an area name."
 msgstr ""
 
+msgid "Event question"
+msgstr ""
+
+msgid "Events"
+msgstr ""
+
 msgid "Existing task"
 msgstr ""
 
+msgid "External shop"
+msgstr ""
+
+msgid "Feature request"
+msgstr ""
+
 msgid "Files"
+msgstr ""
+
+msgid "Filter"
 msgstr ""
 
 msgid "Final payment"
@@ -380,7 +470,22 @@ msgstr ""
 msgid "Financing notes"
 msgstr ""
 
+msgid "First name"
+msgstr ""
+
+msgid "From %1$s <%2$s> via %3$s"
+msgstr ""
+
 msgid "General information"
+msgstr ""
+
+msgid "General request"
+msgstr ""
+
+msgid "General request without a related record"
+msgstr ""
+
+msgid "Help & Support"
 msgstr ""
 
 msgid "High"
@@ -410,6 +515,9 @@ msgstr ""
 msgid "Internal comment"
 msgstr ""
 
+msgid "Internal note"
+msgstr ""
+
 msgid "Internal only"
 msgstr ""
 
@@ -428,16 +536,31 @@ msgstr ""
 msgid "Keep project information, documents, finances, tasks, and customer-visible progress together."
 msgstr ""
 
+msgid "Last name"
+msgstr ""
+
 msgid "Last run: %1$s. Number of runs: %2$d."
 msgstr ""
 
-msgid "Linked Pro invoice"
+msgid "License %s"
+msgstr ""
+
+msgid "Licenses"
+msgstr ""
+
+msgid "Linked Business invoice"
 msgstr ""
 
 msgid "List Business projects"
 msgstr ""
 
 msgid "List Business projects and open task counts."
+msgstr ""
+
+msgid "Loading customer records…"
+msgstr ""
+
+msgid "Local website"
 msgstr ""
 
 msgid "Low"
@@ -449,6 +572,9 @@ msgstr ""
 msgid "Manage project areas"
 msgstr ""
 
+msgid "Manage requests from this website and connected external shops in one source-aware inbox."
+msgstr ""
+
 msgid "Manage task"
 msgstr ""
 
@@ -456,6 +582,9 @@ msgid "Mark checklist item complete"
 msgstr ""
 
 msgid "Mark checklist item incomplete"
+msgstr ""
+
+msgid "Message"
 msgstr ""
 
 msgid "Move project to trash"
@@ -470,6 +599,9 @@ msgstr ""
 msgid "Move to trash"
 msgstr ""
 
+msgid "My support requests"
+msgstr ""
+
 msgid "My tasks"
 msgstr ""
 
@@ -477,6 +609,24 @@ msgid "New"
 msgstr ""
 
 msgid "New in this version"
+msgstr ""
+
+msgid "New person"
+msgstr ""
+
+msgid "New reply to support request #%1$d: %2$s"
+msgstr ""
+
+msgid "New request"
+msgstr ""
+
+msgid "New support request"
+msgstr ""
+
+msgid "New support request #%1$d: %2$s"
+msgstr ""
+
+msgid "No active support source is available. Please reload the page and try again."
 msgstr ""
 
 msgid "No activity has been recorded yet."
@@ -515,6 +665,9 @@ msgstr ""
 msgid "No payments have been planned yet."
 msgstr ""
 
+msgid "No person selected yet."
+msgstr ""
+
 msgid "No project activity has been recorded yet."
 msgstr ""
 
@@ -537,6 +690,9 @@ msgid "No projects are assigned to your account."
 msgstr ""
 
 msgid "No projects have been created yet."
+msgstr ""
+
+msgid "No support requests match this view."
 msgstr ""
 
 msgid "No tasks were found."
@@ -572,6 +728,9 @@ msgstr ""
 msgid "One file was added."
 msgstr ""
 
+msgid "Only your own orders, products, licenses, events, and projects are shown."
+msgstr ""
+
 msgid "Open"
 msgstr ""
 
@@ -599,10 +758,28 @@ msgstr ""
 msgid "Optional project search term."
 msgstr ""
 
+msgid "Order #%1$s · %2$s"
+msgstr ""
+
+msgid "Order #%s"
+msgstr ""
+
+msgid "Order %s"
+msgstr ""
+
 msgid "Order awarded"
 msgstr ""
 
 msgid "Order confirmation"
+msgstr ""
+
+msgid "Order question"
+msgstr ""
+
+msgid "Orders"
+msgstr ""
+
+msgid "Orders (multiple selection allowed)"
 msgstr ""
 
 msgid "Original source text"
@@ -615,6 +792,9 @@ msgid "Other milestone"
 msgstr ""
 
 msgid "Other participant"
+msgstr ""
+
+msgid "Other system"
 msgstr ""
 
 msgid "Overdue"
@@ -653,6 +833,9 @@ msgstr ""
 msgid "People"
 msgstr ""
 
+msgid "Person"
+msgstr ""
+
 msgid "Plan partial and final payments and record when they were paid."
 msgstr ""
 
@@ -660,6 +843,12 @@ msgid "Planned"
 msgstr ""
 
 msgid "Please enter a comment."
+msgstr ""
+
+msgid "Please enter a message."
+msgstr ""
+
+msgid "Please enter a name."
 msgstr ""
 
 msgid "Please enter a payment title."
@@ -671,13 +860,31 @@ msgstr ""
 msgid "Please enter a project step title."
 msgstr ""
 
+msgid "Please enter a source name."
+msgstr ""
+
+msgid "Please enter a subject and message."
+msgstr ""
+
 msgid "Please enter a task title."
+msgstr ""
+
+msgid "Please provide a title and description for at least one point."
+msgstr ""
+
+msgid "Please select a person or create a new one."
+msgstr ""
+
+msgid "Point title"
 msgstr ""
 
 msgid "Prepare a Business import draft"
 msgstr ""
 
 msgid "Prepare a Business project report"
+msgstr ""
+
+msgid "Prepare and store a reply draft. This never sends an email."
 msgstr ""
 
 msgid "Prepare links for a customer-visible HTML/PDF print view and editable Word report."
@@ -687,6 +894,18 @@ msgid "Print or save as PDF"
 msgstr ""
 
 msgid "Priority"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "Product question"
+msgstr ""
+
+msgid "Products"
+msgstr ""
+
+msgid "Products (multiple selection allowed)"
 msgstr ""
 
 msgid "Progress"
@@ -737,6 +956,9 @@ msgstr ""
 msgid "Project phase"
 msgstr ""
 
+msgid "Project question"
+msgstr ""
+
 msgid "Project report: %s"
 msgstr ""
 
@@ -761,7 +983,16 @@ msgstr ""
 msgid "Provide at least one task for review."
 msgstr ""
 
+msgid "Purchased product: %1$s (#%2$d)"
+msgstr ""
+
+msgid "Purchased product: %1$s · Product ID %2$d"
+msgstr ""
+
 msgid "Question"
+msgstr ""
+
+msgid "Re: %s"
 msgstr ""
 
 msgid "Read Business project"
@@ -773,6 +1004,9 @@ msgstr ""
 msgid "Read one project with areas and tasks."
 msgstr ""
 
+msgid "Read one support request and its customer-visible conversation."
+msgstr ""
+
 msgid "Read only"
 msgstr ""
 
@@ -782,10 +1016,16 @@ msgstr ""
 msgid "Ready for review"
 msgstr ""
 
+msgid "Record type"
+msgstr ""
+
 msgid "Reference"
 msgstr ""
 
 msgid "Related project step"
+msgstr ""
+
+msgid "Related record"
 msgstr ""
 
 msgid "Remove document from project"
@@ -806,7 +1046,34 @@ msgstr ""
 msgid "Reopen completed task"
 msgstr ""
 
+msgid "Reply or add an internal note"
+msgstr ""
+
+msgid "Reply to customer"
+msgstr ""
+
+msgid "Request"
+msgstr ""
+
+msgid "Request details"
+msgstr ""
+
+msgid "Request points"
+msgstr ""
+
+msgid "Request type"
+msgstr ""
+
+msgid "Requester"
+msgstr ""
+
+msgid "Requester email, subject, and message are required."
+msgstr ""
+
 msgid "Reset filters"
+msgstr ""
+
+msgid "Resolved"
 msgstr ""
 
 msgid "Responsible person"
@@ -839,6 +1106,9 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+msgid "Save details"
+msgstr ""
+
 msgid "Save payment"
 msgstr ""
 
@@ -866,6 +1136,15 @@ msgstr ""
 msgid "Search projects"
 msgstr ""
 
+msgid "Search subject, requester, email, or order"
+msgstr ""
+
+msgid "Search support requests"
+msgstr ""
+
+msgid "Search support requests without exposing message bodies."
+msgstr ""
+
 msgid "Search tasks"
 msgstr ""
 
@@ -873,6 +1152,15 @@ msgid "Search tasks by project, area, assignee, or status."
 msgstr ""
 
 msgid "Select a file to import."
+msgstr ""
+
+msgid "Select a person or type to search"
+msgstr ""
+
+msgid "Select a person to load their orders, purchased products, licenses, events, and projects."
+msgstr ""
+
+msgid "Select an existing person or create a new one. Matching customer records become available automatically."
 msgstr ""
 
 msgid "Select at least one file."
@@ -893,13 +1181,37 @@ msgstr ""
 msgid "Select project"
 msgstr ""
 
+msgid "Send or add to conversation"
+msgstr ""
+
+msgid "Send reply"
+msgstr ""
+
 msgid "Set due date"
+msgstr ""
+
+msgid "Shared attachments"
+msgstr ""
+
+msgid "Show details"
 msgstr ""
 
 msgid "Skip"
 msgstr ""
 
+msgid "Software and license"
+msgstr ""
+
 msgid "Source"
+msgstr ""
+
+msgid "Source name"
+msgstr ""
+
+msgid "Source type"
+msgstr ""
+
+msgid "Sources and external shops"
 msgstr ""
 
 msgid "Split the project into independently responsible areas."
@@ -911,7 +1223,13 @@ msgstr ""
 msgid "Status / solution"
 msgstr ""
 
+msgid "Status or priority is invalid."
+msgstr ""
+
 msgid "Step type"
+msgstr ""
+
+msgid "Subject"
 msgstr ""
 
 msgid "Submit a new task"
@@ -920,10 +1238,25 @@ msgstr ""
 msgid "Submit new tasks and follow customer-visible progress."
 msgstr ""
 
+msgid "Submit request"
+msgstr ""
+
 msgid "Submit task"
 msgstr ""
 
+msgid "Support"
+msgstr ""
+
 msgid "Support Desk"
+msgstr ""
+
+msgid "Support navigation"
+msgstr ""
+
+msgid "Support reply"
+msgstr ""
+
+msgid "Support request and reply text are required."
 msgstr ""
 
 msgid "Target completion"
@@ -959,6 +1292,12 @@ msgstr ""
 msgid "The PHP ZIP extension is required to import Word or Excel files."
 msgstr ""
 
+msgid "The Support Desk database could not be prepared."
+msgstr ""
+
+msgid "The Support Desk database is not ready. Please run the plugin update and try again."
+msgstr ""
+
 msgid "The Word document contains no readable text."
 msgstr ""
 
@@ -983,6 +1322,12 @@ msgstr ""
 msgid "The comment was added."
 msgstr ""
 
+msgid "The customer record could not be created."
+msgstr ""
+
+msgid "The customer records could not be loaded."
+msgstr ""
+
 msgid "The document was removed from the project. The media file was retained."
 msgstr ""
 
@@ -998,16 +1343,28 @@ msgstr ""
 msgid "The first Excel sheet could not be read."
 msgstr ""
 
+msgid "The first message could not be saved, so no incomplete request was created. Please try again."
+msgstr ""
+
 msgid "The import draft could not be created."
 msgstr ""
 
 msgid "The import draft does not exist."
 msgstr ""
 
+msgid "The internal note was added."
+msgstr ""
+
+msgid "The linked person needs a valid email address."
+msgstr ""
+
 msgid "The payment could not be added."
 msgstr ""
 
 msgid "The payment was added."
+msgstr ""
+
+msgid "The person is linked immediately and no marketing consent is granted."
 msgstr ""
 
 msgid "The project and its related records were deleted permanently."
@@ -1058,19 +1415,46 @@ msgstr ""
 msgid "The project was updated."
 msgstr ""
 
+msgid "The reply could not be sent. Nothing was added to the customer conversation."
+msgstr ""
+
+msgid "The reply was added to the conversation."
+msgstr ""
+
+msgid "The request details were saved."
+msgstr ""
+
 msgid "The requested project action is invalid."
 msgstr ""
 
 msgid "The requested task action is invalid."
 msgstr ""
 
+msgid "The selected person could not be found."
+msgstr ""
+
 msgid "The selected project status is invalid."
+msgstr ""
+
+msgid "The selected record does not belong to this customer. Please select it again."
 msgstr ""
 
 msgid "The support request could not be converted."
 msgstr ""
 
+msgid "The support request could not be created."
+msgstr ""
+
 msgid "The support request could not be found."
+msgstr ""
+
+msgid "The support request could not be saved. Please reload the page and try again."
+msgstr ""
+
+msgid "The support request does not exist."
+msgstr ""
+
+msgid "The support source was added."
 msgstr ""
 
 msgid "The task could not be moved."
@@ -1094,6 +1478,9 @@ msgstr ""
 msgid "The task was saved."
 msgstr ""
 
+msgid "These files are attached to every point in this request."
+msgstr ""
+
 msgid "This action also affects related records. Do you want to continue?"
 msgstr ""
 
@@ -1110,6 +1497,12 @@ msgid "This project does not exist."
 msgstr ""
 
 msgid "This project field cannot be edited here."
+msgstr ""
+
+msgid "This support request is not available."
+msgstr ""
+
+msgid "This support request no longer exists."
 msgstr ""
 
 msgid "This task does not exist."
@@ -1151,7 +1544,13 @@ msgstr ""
 msgid "Update existing task"
 msgstr ""
 
+msgid "Update status, priority, or assignee for a support request."
+msgstr ""
+
 msgid "Update task"
+msgstr ""
+
+msgid "Updated"
 msgstr ""
 
 msgid "Upload and review"
@@ -1175,6 +1574,9 @@ msgstr ""
 msgid "Use a WordPress application password to read projects and tasks or to create import drafts. MCP never applies a draft without confirmation in WordPress."
 msgstr ""
 
+msgid "Use sources to distinguish this website from external shops, forms, or other systems. No shop data is changed."
+msgstr ""
+
 msgid "View project"
 msgstr ""
 
@@ -1190,6 +1592,15 @@ msgstr ""
 msgid "Waiting for customer"
 msgstr ""
 
+msgid "Waiting for support"
+msgstr ""
+
+msgid "Website URL (optional)"
+msgstr ""
+
+msgid "Website or form"
+msgstr ""
+
 msgid "Without area"
 msgstr ""
 
@@ -1199,10 +1610,22 @@ msgstr ""
 msgid "Write a comment …"
 msgstr ""
 
+msgid "You"
+msgstr ""
+
 msgid "You do not have permission."
 msgstr ""
 
+msgid "You have not submitted any support requests yet."
+msgstr ""
+
 msgid "Your project workspace"
+msgstr ""
+
+msgid "Your reply"
+msgstr ""
+
+msgid "Your support request was created."
 msgstr ""
 
 msgid "added a checklist item."
@@ -1229,10 +1652,28 @@ msgstr ""
 msgid "created the task."
 msgstr ""
 
+msgid "events"
+msgstr ""
+
+msgid "licenses"
+msgstr ""
+
 msgid "moved the task to “%s”."
 msgstr ""
 
 msgid "moved the task."
+msgstr ""
+
+msgid "no linked records"
+msgstr ""
+
+msgid "orders"
+msgstr ""
+
+msgid "products"
+msgstr ""
+
+msgid "projects"
 msgstr ""
 
 msgid "removed a document from the project."

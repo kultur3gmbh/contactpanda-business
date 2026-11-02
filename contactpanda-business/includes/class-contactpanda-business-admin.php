@@ -16,7 +16,7 @@ final class ContactPanda_Business_Admin {
 		add_submenu_page( 'contactpanda-business', __( 'Projects', 'contactpanda-business' ), __( 'Projects', 'contactpanda-business' ), 'contactpanda_projects_view', 'contactpanda-business-projects', array( 'ContactPanda_Business_Projects', 'render' ) );
 		add_submenu_page( 'contactpanda-business', __( 'Tasks', 'contactpanda-business' ), __( 'Tasks', 'contactpanda-business' ), 'contactpanda_tasks_view', 'contactpanda-business-tasks', array( 'ContactPanda_Business_Workspace', 'render_tasks' ) );
 		if ( contactpanda_business_module_entitled( 'support_desk' ) ) {
-			add_submenu_page( 'contactpanda-business', __( 'Support Desk', 'contactpanda-business' ), __( 'Support Desk', 'contactpanda-business' ), 'contactpanda_support_view', 'contactpanda-business-support', array( 'ContactPanda_Pro_Helpdesk', 'render' ) );
+			add_submenu_page( 'contactpanda-business', __( 'Support Desk', 'contactpanda-business' ), __( 'Support Desk', 'contactpanda-business' ), 'contactpanda_support_view', 'contactpanda-business-support', array( 'ContactPanda_Business_Helpdesk', 'render' ) );
 		}
 		add_submenu_page( 'contactpanda-business', __( 'Import tasks', 'contactpanda-business' ), __( 'Import tasks', 'contactpanda-business' ), 'contactpanda_project_imports_manage', 'contactpanda-business-import', array( 'ContactPanda_Business_Imports', 'render' ) );
 	}

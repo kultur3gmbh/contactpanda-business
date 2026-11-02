@@ -56,7 +56,7 @@
 		resetHelpdeskContext(form, form.getAttribute('data-context-loading') || '');
 		form.dataset.contextContactId = contactId;
 		var body = new window.URLSearchParams();
-		body.set('action', 'contactpanda_pro_support_customer_context');
+		body.set('action', 'contactpanda_business_service_support_customer_context');
 		body.set('nonce', form.getAttribute('data-context-nonce') || '');
 		body.set('contact_id', contactId);
 		window.fetch(form.getAttribute('data-context-url') || window.ajaxurl, {
@@ -174,7 +174,7 @@
 	function closeModal(modal) {
 		if (!modal) return;
 		modal.hidden = true;
-		document.documentElement.classList.remove('contactpanda-pro-modal-open');
+		document.documentElement.classList.remove('contactpanda-business-service-modal-open');
 	}
 
 	function openModal(modal, record) {
@@ -198,36 +198,36 @@
 			});
 		}
 		modal.hidden = false;
-		document.documentElement.classList.add('contactpanda-pro-modal-open');
+		document.documentElement.classList.add('contactpanda-business-service-modal-open');
 		var focus = modal.querySelector('input:not([type="hidden"]), select, textarea, button');
 		if (focus) window.setTimeout(function () { focus.focus(); }, 20);
 	}
 
 	document.addEventListener('click', function (event) {
-		var opener = event.target.closest('[data-contactpanda-pro-modal-open]');
+		var opener = event.target.closest('[data-contactpanda-business-service-modal-open]');
 		if (opener) {
 			event.preventDefault();
-			var modal = document.getElementById(opener.getAttribute('data-contactpanda-pro-modal-open'));
+			var modal = document.getElementById(opener.getAttribute('data-contactpanda-business-service-modal-open'));
 			var record = {};
-			try { record = JSON.parse(opener.getAttribute('data-contactpanda-pro-record') || '{}'); } catch (ignore) {}
+			try { record = JSON.parse(opener.getAttribute('data-contactpanda-business-service-record') || '{}'); } catch (ignore) {}
 			openModal(modal, record);
 			return;
 		}
-		var closer = event.target.closest('[data-contactpanda-pro-modal-close]');
+		var closer = event.target.closest('[data-contactpanda-business-service-modal-close]');
 		if (closer) {
 			event.preventDefault();
-			closeModal(closer.closest('.contactpanda-pro-modal'));
+			closeModal(closer.closest('.contactpanda-business-service-modal'));
 		}
 	});
 
 	document.addEventListener('keydown', function (event) {
 		if (event.key !== 'Escape') return;
-		closeModal(document.querySelector('.contactpanda-pro-modal:not([hidden])'));
+		closeModal(document.querySelector('.contactpanda-business-service-modal:not([hidden])'));
 	});
 
 	/* Native selects stay accessible; typing while focused jumps to matching people. */
 	document.addEventListener('keydown', function (event) {
-		if (!event.target.matches('.contactpanda-pro-search-select') || event.ctrlKey || event.metaKey || event.altKey) return;
+		if (!event.target.matches('.contactpanda-business-service-search-select') || event.ctrlKey || event.metaKey || event.altKey) return;
 		if (event.key.length !== 1) return;
 		var select = event.target;
 		select.dataset.search = (select.dataset.search || '') + event.key.toLowerCase();
@@ -401,7 +401,7 @@
 		}
 
 		function rowButtons(kind, index, length) {
-			return '<span class="contactpanda-invoice-structure-actions"><button type="button" class="contactpanda-pro-icon-button" data-invoice-structure-move="up" data-structure-kind="' + kind + '" data-structure-index="' + index + '"' + (index === 0 ? ' disabled' : '') + ' aria-label="' + escapeHtml(label('moveUp', 'Move up')) + '"><span class="dashicons dashicons-arrow-up-alt2"></span></button><button type="button" class="contactpanda-pro-icon-button" data-invoice-structure-move="down" data-structure-kind="' + kind + '" data-structure-index="' + index + '"' + (index === length - 1 ? ' disabled' : '') + ' aria-label="' + escapeHtml(label('moveDown', 'Move down')) + '"><span class="dashicons dashicons-arrow-down-alt2"></span></button><button type="button" class="contactpanda-pro-icon-button is-danger" data-invoice-structure-remove data-structure-kind="' + kind + '" data-structure-index="' + index + '" aria-label="' + escapeHtml(label('remove', 'Remove')) + '"><span class="dashicons dashicons-trash"></span></button></span>';
+			return '<span class="contactpanda-invoice-structure-actions"><button type="button" class="contactpanda-business-service-icon-button" data-invoice-structure-move="up" data-structure-kind="' + kind + '" data-structure-index="' + index + '"' + (index === 0 ? ' disabled' : '') + ' aria-label="' + escapeHtml(label('moveUp', 'Move up')) + '"><span class="dashicons dashicons-arrow-up-alt2"></span></button><button type="button" class="contactpanda-business-service-icon-button" data-invoice-structure-move="down" data-structure-kind="' + kind + '" data-structure-index="' + index + '"' + (index === length - 1 ? ' disabled' : '') + ' aria-label="' + escapeHtml(label('moveDown', 'Move down')) + '"><span class="dashicons dashicons-arrow-down-alt2"></span></button><button type="button" class="contactpanda-business-service-icon-button is-danger" data-invoice-structure-remove data-structure-kind="' + kind + '" data-structure-index="' + index + '" aria-label="' + escapeHtml(label('remove', 'Remove')) + '"><span class="dashicons dashicons-trash"></span></button></span>';
 		}
 
 		function addControl(kind, options, used, buttonLabel) {

@@ -2,30 +2,29 @@
 
 defined( 'ABSPATH' ) || exit;
 
-/** Owns Pro service data, shared authorization/audit data, and legacy cleanup. */
-final class ContactPanda_Pro_Schema {
+/** Owns Business service, authorization, and audit data. */
+final class ContactPanda_Business_Service_Schema {
 	const VERSION = '4.2.0';
-	const VERSION_OPTION = 'contactpanda_pro_db_version';
-	const LEGACY_CLEANUP_OPTION = 'contactpanda_pro_legacy_cleanup_080';
+	const VERSION_OPTION = 'contactpanda_business_service_db_version';
 
 	public static function table_names() {
 		global $wpdb;
 		return array(
-			'support_sources'    => $wpdb->prefix . 'cp_pro_support_sources',
-			'support_tickets'    => $wpdb->prefix . 'cp_pro_support_tickets',
-			'support_messages'   => $wpdb->prefix . 'cp_pro_support_messages',
-			'customers'          => $wpdb->prefix . 'cp_pro_customers',
-			'offers'             => $wpdb->prefix . 'cp_pro_offers',
-			'tariffs'            => $wpdb->prefix . 'cp_pro_tariffs',
-			'contracts'          => $wpdb->prefix . 'cp_pro_contracts',
-			'subscriptions'      => $wpdb->prefix . 'cp_pro_subscriptions',
-			'payments'           => $wpdb->prefix . 'cp_pro_payments',
-			'payment_attempts'   => $wpdb->prefix . 'cp_pro_payment_attempts',
-			'invoices'           => $wpdb->prefix . 'cp_pro_invoices',
-			'invoice_items'      => $wpdb->prefix . 'cp_pro_invoice_items',
-			'commerce_events'    => $wpdb->prefix . 'cp_pro_commerce_events',
-			'access_assignments' => $wpdb->prefix . 'cp_pro_access_assignments',
-			'audit_events'       => $wpdb->prefix . 'cp_pro_audit_events',
+			'support_sources'    => $wpdb->prefix . 'cp_business_support_sources',
+			'support_tickets'    => $wpdb->prefix . 'cp_business_support_tickets',
+			'support_messages'   => $wpdb->prefix . 'cp_business_support_messages',
+			'customers'          => $wpdb->prefix . 'cp_business_customers',
+			'offers'             => $wpdb->prefix . 'cp_business_offers',
+			'tariffs'            => $wpdb->prefix . 'cp_business_tariffs',
+			'contracts'          => $wpdb->prefix . 'cp_business_contracts',
+			'subscriptions'      => $wpdb->prefix . 'cp_business_subscriptions',
+			'payments'           => $wpdb->prefix . 'cp_business_payments',
+			'payment_attempts'   => $wpdb->prefix . 'cp_business_payment_attempts',
+			'invoices'           => $wpdb->prefix . 'cp_business_invoices',
+			'invoice_items'      => $wpdb->prefix . 'cp_business_invoice_items',
+			'commerce_events'    => $wpdb->prefix . 'cp_business_commerce_events',
+			'access_assignments' => $wpdb->prefix . 'cp_business_access_assignments',
+			'audit_events'       => $wpdb->prefix . 'cp_business_audit_events',
 		);
 	}
 
@@ -379,48 +378,10 @@ final class ContactPanda_Pro_Schema {
 		);
 		foreach ( $sql as $statement ) dbDelta( $statement );
 		foreach ( $t as $table ) {
-			if ( ! self::table_exists( $table ) ) return new WP_Error( 'contactpanda_pro_schema_incomplete', __( 'ContactPanda Pro could not create all required tables.', 'contactpanda-pro' ) );
+			if ( ! self::table_exists( $table ) ) return new WP_Error( 'contactpanda_business_schema_incomplete', __( 'ContactPanda Business could not create all required tables.', 'contactpanda-business' ) );
 		}
-		self::remove_legacy_test_tables();
 		update_option( self::VERSION_OPTION, self::VERSION, false );
 		return true;
-	}
-
-	/**
-	 * Remove only the fixed allowlist of obsolete tables from the pre-0.8 Pro prototype.
-	 *
-	 * ContactPanda people, companies, Support Desk data and the new Business tables use
-	 * different names and can therefore never be affected by this migration.
-	 */
-	private static function remove_legacy_test_tables() {
-		if ( get_option( self::LEGACY_CLEANUP_OPTION, false ) ) return;
-		global $wpdb;
-		$suffixes = array(
-			'membership_plans',
-			'memberships',
-			'products',
-			'plans',
-			'product_mappings',
-			'external_identities',
-			'contract_events',
-			'entitlement_grants',
-		);
-		$dropped = array();
-		foreach ( $suffixes as $suffix ) {
-			$table = $wpdb->prefix . 'cp_pro_' . $suffix;
-			if ( self::table_exists( $table ) ) {
-				$wpdb->query( "DROP TABLE IF EXISTS `{$table}`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- fixed prefix-qualified internal table allowlist.
-				if ( ! self::table_exists( $table ) ) $dropped[] = $table;
-			}
-		}
-		update_option(
-			self::LEGACY_CLEANUP_OPTION,
-			array(
-				'completed_at' => current_time( 'mysql', true ),
-				'dropped'      => $dropped,
-			),
-			false
-		);
 	}
 
 	private static function table_exists( $table ) {

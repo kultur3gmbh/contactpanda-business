@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Professional CRM, support, project, task, correction, import, and customer workspace for ContactPanda.
- * Version: 0.8.89
+ * Version: 0.8.90
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
@@ -10,15 +10,15 @@
  * Requires PHP: 7.4
  * Requires Plugins: contactpanda, contactpanda-plus
  * Requires ContactPanda: 0.9.8
- * Requires ContactPanda Plus: 0.8.89
+ * Requires ContactPanda Plus: 0.8.91
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.89' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.90' );
 define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.9.8' );
-define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.89' );
+define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.91' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
@@ -32,11 +32,12 @@ function contactpanda_business_autoload( $class ) {
 		'ContactPanda_Business_MCP'      => 'includes/class-contactpanda-business-mcp.php',
 		'ContactPanda_Business_Projects' => 'includes/class-contactpanda-business-projects.php',
 		'ContactPanda_Business_Schema'   => 'includes/class-contactpanda-business-schema.php',
+		'ContactPanda_Business_Customers'=> 'includes/class-contactpanda-business-customers.php',
 		'ContactPanda_Business_Workspace'=> 'includes/class-contactpanda-business-workspace.php',
-		'ContactPanda_Pro_Access'        => 'includes/compat/class-contactpanda-pro-access.php',
-		'ContactPanda_Pro_Helpdesk'      => 'includes/compat/class-contactpanda-pro-helpdesk.php',
-		'ContactPanda_Pro_MCP'           => 'includes/compat/class-contactpanda-pro-mcp.php',
-		'ContactPanda_Pro_Schema'        => 'includes/compat/class-contactpanda-pro-schema.php',
+		'ContactPanda_Business_Service_Access' => 'includes/class-contactpanda-business-service-access.php',
+		'ContactPanda_Business_Helpdesk'       => 'includes/class-contactpanda-business-helpdesk.php',
+		'ContactPanda_Business_Service_MCP'    => 'includes/class-contactpanda-business-service-mcp.php',
+		'ContactPanda_Business_Service_Schema' => 'includes/class-contactpanda-business-service-schema.php',
 	);
 	if ( isset( $map[ $class ] ) ) require_once CONTACTPANDA_BUSINESS_DIR . $map[ $class ];
 }
@@ -68,26 +69,8 @@ add_filter( 'contactpanda_license_products', 'contactpanda_business_license_prod
 
 function contactpanda_business_module_entitled( $module ) {
 	return class_exists( 'ContactPanda_License' )
-		&& ( ContactPanda_License::entitled( 'business' ) || ContactPanda_License::entitled( 'pro' ) || ContactPanda_License::entitled( $module ) );
+		&& ( ContactPanda_License::entitled( 'business' ) || ContactPanda_License::entitled( $module ) );
 }
-
-/**
- * Preserve the former Pro extension points after every plugin file has loaded.
- *
- * Business is alphabetically loaded before an installed legacy Pro version.
- * Defining these functions at file scope would therefore make the legacy Pro
- * plugin redeclare them and trigger a fatal error before WordPress can finish
- * the coordinated family update.
- */
-function contactpanda_business_register_pro_function_compat() {
-	if ( ! function_exists( 'contactpanda_pro_module_entitled' ) ) {
-		function contactpanda_pro_module_entitled( $module ) { return contactpanda_business_module_entitled( $module ); }
-	}
-	if ( ! function_exists( 'contactpanda_pro_any_entitled' ) ) {
-		function contactpanda_pro_any_entitled() { return contactpanda_business_module_entitled( 'business' ); }
-	}
-}
-add_action( 'plugins_loaded', 'contactpanda_business_register_pro_function_compat', 1 );
 
 function contactpanda_business_activate() {
 	$dependency = contactpanda_business_dependency_error();
@@ -95,10 +78,10 @@ function contactpanda_business_activate() {
 		wp_die( esc_html( $dependency->get_error_message() ), esc_html__( 'ContactPanda dependencies required', 'contactpanda-business' ), array( 'back_link' => true ) );
 	}
 	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-schema.php';
-	if ( ! class_exists( 'ContactPanda_Pro_Schema' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-schema.php';
-	if ( ! class_exists( 'ContactPanda_Pro_Access' ) ) require_once CONTACTPANDA_BUSINESS_DIR . 'includes/compat/class-contactpanda-pro-access.php';
-	ContactPanda_Pro_Schema::install();
-	ContactPanda_Pro_Access::register_capabilities();
+	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-service-schema.php';
+	require_once CONTACTPANDA_BUSINESS_DIR . 'includes/class-contactpanda-business-service-access.php';
+	ContactPanda_Business_Service_Schema::install();
+	ContactPanda_Business_Service_Access::register_capabilities();
 	ContactPanda_Business_Schema::install();
 	ContactPanda_Business_Access::register_capabilities();
 	add_rewrite_endpoint( 'projekte-korrekturen', EP_ROOT | EP_PAGES );
@@ -127,22 +110,21 @@ function contactpanda_business_dependency_error() {
 
 function contactpanda_business_boot() {
 	load_plugin_textdomain( 'contactpanda-business', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-	load_plugin_textdomain( 'contactpanda-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	if ( ! defined( 'CONTACTPANDA_VERSION' ) || version_compare( CONTACTPANDA_VERSION, CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION, '<' ) || ! defined( 'CONTACTPANDA_PLUS_VERSION' ) || version_compare( CONTACTPANDA_PLUS_VERSION, CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION, '<' ) ) {
 		add_action( 'admin_notices', 'contactpanda_business_dependency_notice' );
 		return;
 	}
 	$is_backoffice = ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::is_backoffice();
-	if ( $is_backoffice && ( ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::may_upgrade_schema() ) ) ContactPanda_Pro_Schema::maybe_upgrade();
-	ContactPanda_Pro_Access::boot();
+	if ( $is_backoffice && ( ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::may_upgrade_schema() ) ) ContactPanda_Business_Service_Schema::maybe_upgrade();
+	ContactPanda_Business_Service_Access::boot();
 	ContactPanda_Business_Access::boot();
 	if ( $is_backoffice && ( ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::may_upgrade_schema() ) ) {
 		ContactPanda_Business_Schema::maybe_upgrade();
-		ContactPanda_Business_Schema::link_pro_customers();
+		ContactPanda_Business_Schema::link_business_customers();
 	}
-	$needs_support = ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::needs_module( array( 'contactpanda-business-support' ), array( 'contactpanda_pro_' ) );
-	if ( contactpanda_business_module_entitled( 'support_desk' ) && $needs_support ) ContactPanda_Pro_Helpdesk::boot();
-	if ( $is_backoffice && ( ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::needs_module( array( 'contactpanda-settings' ), array( 'contactpanda_pro_mcp' ) ) ) ) ContactPanda_Pro_MCP::boot();
+	$needs_support = ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::needs_module( array( 'contactpanda-business-support' ), array( 'contactpanda_business_service_' ) );
+	if ( contactpanda_business_module_entitled( 'support_desk' ) && $needs_support ) ContactPanda_Business_Helpdesk::boot();
+	if ( $is_backoffice && ( ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::needs_module( array( 'contactpanda-settings' ), array( 'contactpanda_business_service_mcp' ) ) ) ) ContactPanda_Business_Service_MCP::boot();
 	if ( contactpanda_business_module_entitled( 'project_management' ) ) {
 		$needs_projects = ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::needs_module( array( 'contactpanda-business-projects', 'contactpanda-business-support' ), array( 'contactpanda_business_save_project', 'contactpanda_business_add_', 'contactpanda_business_upload_', 'contactpanda_business_remove_', 'contactpanda_business_from_support', 'contactpanda_business_customer_' ) );
 		$needs_workspace = ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::needs_module( array( 'contactpanda-business-tasks' ), array( 'contactpanda_business_save_task', 'contactpanda_business_task_action', 'contactpanda_business_project_action' ) );

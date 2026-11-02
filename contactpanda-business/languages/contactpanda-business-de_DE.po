@@ -1,12 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ContactPanda Business 0.8.84\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+"Project-Id-Version: ContactPanda Business 0.8.89\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d of %2$d"
 msgstr "%1$d von %2$d"
 
 msgid "%1$d open / %2$d total"
 msgstr "%1$d offen / %2$d gesamt"
+
+msgid "%1$s has submitted a support request or reply. Open the request: %2$s"
+msgstr "%1$s has submitted a support request or reply. Open the request: %2$s"
 
 msgid "%d files could not be uploaded."
 msgstr "%d Dateien konnten nicht hochgeladen werden."
@@ -28,6 +31,9 @@ msgstr "Eine Business-Lizenz ist erforderlich"
 
 msgid "A Business task was created from the support request."
 msgstr "Aus dem Hilfeersuchen wurde eine Business-Aufgabe erstellt."
+
+msgid "A customer identity is required."
+msgstr "A customer identity is required."
 
 msgid "A valid ContactPanda Business license is required."
 msgstr "Eine gültige ContactPanda-Business-Lizenz ist erforderlich."
@@ -56,6 +62,9 @@ msgstr "Aktivität"
 msgid "Add"
 msgstr "Hinzufügen"
 
+msgid "Add another point"
+msgstr "Add another point"
+
 msgid "Add area"
 msgstr "Teilbereich hinzufügen"
 
@@ -83,6 +92,9 @@ msgstr "Projektteil hinzufügen"
 msgid "Add project step"
 msgstr "Projektschritt hinzufügen"
 
+msgid "Add source"
+msgstr "Add source"
+
 msgid "Add task"
 msgstr "Aufgabe hinzufügen"
 
@@ -98,11 +110,20 @@ msgstr "Alle Zuständigen"
 msgid "All projects"
 msgstr "Alle Projekte"
 
+msgid "All related records"
+msgstr "All related records"
+
 msgid "All statuses"
 msgstr "Alle Status"
 
 msgid "Amount"
 msgstr "Betrag"
+
+msgid "An MCP reply draft is ready. Please review it before sending."
+msgstr "An MCP reply draft is ready. Please review it before sending."
+
+msgid "Answered"
+msgstr "Answered"
 
 msgid "Applied"
 msgstr "Durchgeführt"
@@ -128,11 +149,17 @@ msgstr "Ordnen Sie ein oder mehrere Kundenkonten, Personen oder Firmen zu und le
 msgid "Assigned projects"
 msgstr "Zugeordnete Projekte"
 
+msgid "Assigned to"
+msgstr "Assigned to"
+
 msgid "Assignee"
 msgstr "Zuständig"
 
 msgid "Assignee and due date"
 msgstr "Zuständigkeit und Fälligkeit"
+
+msgid "Attachments"
+msgstr "Attachments"
 
 msgid "Back to board"
 msgstr "Zurück zum Board"
@@ -140,14 +167,23 @@ msgstr "Zurück zum Board"
 msgid "Back to imports"
 msgstr "Zurück zu den Importen"
 
+msgid "Back to my support requests"
+msgstr "Back to my support requests"
+
 msgid "Back to project list"
 msgstr "Zurück zur Projektliste"
 
 msgid "Back to projects"
 msgstr "Zurück zu den Projekten"
 
+msgid "Back to support requests"
+msgstr "Back to support requests"
+
 msgid "Back to tasks"
 msgstr "Zurück zu den Aufgaben"
+
+msgid "Back to the Support Desk overview"
+msgstr "Back to the Support Desk overview"
 
 msgid "Board filters"
 msgstr "Board-Filter"
@@ -199,6 +235,9 @@ msgstr "Klicken Sie, um Notizen oder Anmerkungen hinzuzufügen."
 
 msgid "Close"
 msgstr "Schließen"
+
+msgid "Closed"
+msgstr "Closed"
 
 msgid "Color"
 msgstr "Farbe"
@@ -257,14 +296,32 @@ msgstr "Korrespondenz"
 msgid "Create a Business project before converting this support request into a task."
 msgstr "Erstellen Sie zuerst ein Business-Projekt, bevor Sie dieses Hilfeersuchen in eine Aufgabe umwandeln."
 
+msgid "Create a new person"
+msgstr "Create a new person"
+
+msgid "Create a request and keep the complete conversation in your customer account."
+msgstr "Create a request and keep the complete conversation in your customer account."
+
 msgid "Create a review draft from extracted document items. This does not create or modify live tasks."
 msgstr "Erstellt aus erkannten Dokumenteinträgen einen Prüfentwurf. Dadurch werden keine aktiven Aufgaben angelegt oder verändert."
+
+msgid "Create a support request"
+msgstr "Create a support request"
+
+msgid "Create a support request and optionally create and link a new person."
+msgstr "Create a support request and optionally create and link a new person."
 
 msgid "Create new task"
 msgstr "Neue Aufgabe erstellen"
 
 msgid "Create project"
 msgstr "Projekt erstellen"
+
+msgid "Create requests"
+msgstr "Create requests"
+
+msgid "Create support request"
+msgstr "Create support request"
 
 msgid "Create task"
 msgstr "Aufgabe erstellen"
@@ -296,8 +353,17 @@ msgstr "Kundenkonten mit Portalzugang"
 msgid "Customer comments"
 msgstr "Kundenkommentare"
 
+msgid "Customer context"
+msgstr "Customer context"
+
 msgid "Customer management"
 msgstr "Kundenverwaltung"
+
+msgid "Customer message"
+msgstr "Customer message"
+
+msgid "Customer replies are sent through WordPress email delivery and are recorded only after successful handoff. Internal notes remain visible only to support staff."
+msgstr "Customer replies are sent through WordPress email delivery and are recorded only after successful handoff. Internal notes remain visible only to support staff."
 
 msgid "Customer response"
 msgstr "Kundenrückmeldung"
@@ -350,11 +416,20 @@ msgstr "Morgen fällig"
 msgid "Duplicate task"
 msgstr "Aufgabe duplizieren"
 
+msgid "Each point becomes a separate support request and can be processed independently."
+msgstr "Each point becomes a separate support request and can be processed independently."
+
 msgid "Edit project"
 msgstr "Projekt bearbeiten"
 
 msgid "Edit value"
 msgstr "Wert bearbeiten"
+
+msgid "Email address"
+msgstr "Email address"
+
+msgid "Email inbox"
+msgstr "Email inbox"
 
 msgid "Enter a checklist item."
 msgstr "Geben Sie einen Checklistenpunkt ein."
@@ -365,11 +440,26 @@ msgstr "Aufgabentitel eingeben …"
 msgid "Enter an area name."
 msgstr "Geben Sie einen Namen für den Teilbereich ein."
 
+msgid "Event question"
+msgstr "Event question"
+
+msgid "Events"
+msgstr "Events"
+
 msgid "Existing task"
 msgstr "Bestehende Aufgabe"
 
+msgid "External shop"
+msgstr "External shop"
+
+msgid "Feature request"
+msgstr "Feature request"
+
 msgid "Files"
 msgstr "Dateien"
+
+msgid "Filter"
+msgstr "Filter"
 
 msgid "Final payment"
 msgstr "Schlusszahlung"
@@ -380,8 +470,23 @@ msgstr "Finanzierungs- und Zahlungsplan"
 msgid "Financing notes"
 msgstr "Finanzierungsnotizen"
 
+msgid "First name"
+msgstr "First name"
+
+msgid "From %1$s <%2$s> via %3$s"
+msgstr "From %1$s <%2$s> via %3$s"
+
 msgid "General information"
 msgstr "Allgemeine Informationen"
+
+msgid "General request"
+msgstr "General request"
+
+msgid "General request without a related record"
+msgstr "General request without a related record"
+
+msgid "Help & Support"
+msgstr "Help & Support"
 
 msgid "High"
 msgstr "Hoch"
@@ -410,6 +515,9 @@ msgstr "Intern"
 msgid "Internal comment"
 msgstr "Interner Kommentar"
 
+msgid "Internal note"
+msgstr "Internal note"
+
 msgid "Internal only"
 msgstr "Nur intern"
 
@@ -428,17 +536,32 @@ msgstr "Verwalten Sie Angebote, Verträge, Auftragsbestätigungen, Rechnungen un
 msgid "Keep project information, documents, finances, tasks, and customer-visible progress together."
 msgstr "Verwalten Sie Projektinformationen, Dokumente, Finanzen, Aufgaben und den kundensichtbaren Fortschritt gemeinsam."
 
+msgid "Last name"
+msgstr "Last name"
+
 msgid "Last run: %1$s. Number of runs: %2$d."
 msgstr "Letzter Durchlauf: %1$s. Anzahl der Durchläufe: %2$d."
 
-msgid "Linked Pro invoice"
-msgstr "Verknüpfte Pro-Rechnung"
+msgid "License %s"
+msgstr "License %s"
+
+msgid "Licenses"
+msgstr "Licenses"
+
+msgid "Linked Business invoice"
+msgstr "Linked Business invoice"
 
 msgid "List Business projects"
 msgstr "Business-Projekte auflisten"
 
 msgid "List Business projects and open task counts."
 msgstr "Listet Business-Projekte und die Anzahl offener Aufgaben auf."
+
+msgid "Loading customer records…"
+msgstr "Loading customer records…"
+
+msgid "Local website"
+msgstr "Local website"
 
 msgid "Low"
 msgstr "Niedrig"
@@ -449,6 +572,9 @@ msgstr "Aufgaben verwalten und verschieben"
 msgid "Manage project areas"
 msgstr "Projekt-Teilbereiche verwalten"
 
+msgid "Manage requests from this website and connected external shops in one source-aware inbox."
+msgstr "Manage requests from this website and connected external shops in one source-aware inbox."
+
 msgid "Manage task"
 msgstr "Aufgabe verwalten"
 
@@ -457,6 +583,9 @@ msgstr "Checklistenpunkt als erledigt markieren"
 
 msgid "Mark checklist item incomplete"
 msgstr "Checklistenpunkt als offen markieren"
+
+msgid "Message"
+msgstr "Message"
 
 msgid "Move project to trash"
 msgstr "Projekt in den Papierkorb verschieben"
@@ -470,6 +599,9 @@ msgstr "Diese Aufgabe in den Papierkorb verschieben?"
 msgid "Move to trash"
 msgstr "In den Papierkorb verschieben"
 
+msgid "My support requests"
+msgstr "My support requests"
+
 msgid "My tasks"
 msgstr "Meine Aufgaben"
 
@@ -478,6 +610,24 @@ msgstr "Neu"
 
 msgid "New in this version"
 msgstr "Neu in dieser Version"
+
+msgid "New person"
+msgstr "New person"
+
+msgid "New reply to support request #%1$d: %2$s"
+msgstr "New reply to support request #%1$d: %2$s"
+
+msgid "New request"
+msgstr "New request"
+
+msgid "New support request"
+msgstr "New support request"
+
+msgid "New support request #%1$d: %2$s"
+msgstr "New support request #%1$d: %2$s"
+
+msgid "No active support source is available. Please reload the page and try again."
+msgstr "No active support source is available. Please reload the page and try again."
 
 msgid "No activity has been recorded yet."
 msgstr "Es wurde noch keine Aktivität aufgezeichnet."
@@ -515,6 +665,9 @@ msgstr "Es sind keine passenden Datensätze verfügbar."
 msgid "No payments have been planned yet."
 msgstr "Es wurden noch keine Zahlungen geplant."
 
+msgid "No person selected yet."
+msgstr "No person selected yet."
+
 msgid "No project activity has been recorded yet."
 msgstr "Es wurde noch keine Projektaktivität aufgezeichnet."
 
@@ -538,6 +691,9 @@ msgstr "Ihrem Konto sind keine Projekte zugeordnet."
 
 msgid "No projects have been created yet."
 msgstr "Es wurden noch keine Projekte erstellt."
+
+msgid "No support requests match this view."
+msgstr "No support requests match this view."
 
 msgid "No tasks were found."
 msgstr "Es wurden keine Aufgaben gefunden."
@@ -572,6 +728,9 @@ msgstr "Eine Datei konnte nicht hochgeladen werden."
 msgid "One file was added."
 msgstr "Eine Datei wurde hinzugefügt."
 
+msgid "Only your own orders, products, licenses, events, and projects are shown."
+msgstr "Only your own orders, products, licenses, events, and projects are shown."
+
 msgid "Open"
 msgstr "Offen"
 
@@ -599,11 +758,29 @@ msgstr "Offene Aufgaben"
 msgid "Optional project search term."
 msgstr "Optionaler Suchbegriff für Projekte."
 
+msgid "Order #%1$s · %2$s"
+msgstr "Order #%1$s · %2$s"
+
+msgid "Order #%s"
+msgstr "Order #%s"
+
+msgid "Order %s"
+msgstr "Order %s"
+
 msgid "Order awarded"
 msgstr "Auftrag vergeben"
 
 msgid "Order confirmation"
 msgstr "Auftragsbestätigung"
+
+msgid "Order question"
+msgstr "Order question"
+
+msgid "Orders"
+msgstr "Orders"
+
+msgid "Orders (multiple selection allowed)"
+msgstr "Orders (multiple selection allowed)"
 
 msgid "Original source text"
 msgstr "Ursprünglicher Quelltext"
@@ -616,6 +793,9 @@ msgstr "Weiterer Meilenstein"
 
 msgid "Other participant"
 msgstr "Weitere Beteiligte"
+
+msgid "Other system"
+msgstr "Other system"
 
 msgid "Overdue"
 msgstr "Überfällig"
@@ -653,6 +833,9 @@ msgstr "Bezeichnung der Zahlung"
 msgid "People"
 msgstr "Personen"
 
+msgid "Person"
+msgstr "Person"
+
 msgid "Plan partial and final payments and record when they were paid."
 msgstr "Planen Sie Teil- und Schlusszahlungen und dokumentieren Sie deren Zahlung."
 
@@ -661,6 +844,12 @@ msgstr "Geplant"
 
 msgid "Please enter a comment."
 msgstr "Bitte geben Sie einen Kommentar ein."
+
+msgid "Please enter a message."
+msgstr "Please enter a message."
+
+msgid "Please enter a name."
+msgstr "Please enter a name."
 
 msgid "Please enter a payment title."
 msgstr "Bitte geben Sie eine Bezeichnung für die Zahlung ein."
@@ -671,14 +860,32 @@ msgstr "Bitte geben Sie einen Projektnamen ein."
 msgid "Please enter a project step title."
 msgstr "Bitte geben Sie einen Titel für den Projektschritt ein."
 
+msgid "Please enter a source name."
+msgstr "Please enter a source name."
+
+msgid "Please enter a subject and message."
+msgstr "Please enter a subject and message."
+
 msgid "Please enter a task title."
 msgstr "Bitte geben Sie einen Aufgabentitel ein."
+
+msgid "Please provide a title and description for at least one point."
+msgstr "Please provide a title and description for at least one point."
+
+msgid "Please select a person or create a new one."
+msgstr "Please select a person or create a new one."
+
+msgid "Point title"
+msgstr "Point title"
 
 msgid "Prepare a Business import draft"
 msgstr "Business-Importentwurf vorbereiten"
 
 msgid "Prepare a Business project report"
 msgstr "Business-Projektbericht vorbereiten"
+
+msgid "Prepare and store a reply draft. This never sends an email."
+msgstr "Prepare and store a reply draft. This never sends an email."
 
 msgid "Prepare links for a customer-visible HTML/PDF print view and editable Word report."
 msgstr "Bereitet Links für eine kundensichtbare HTML-/PDF-Druckansicht und einen bearbeitbaren Word-Bericht vor."
@@ -688,6 +895,18 @@ msgstr "Drucken oder als PDF speichern"
 
 msgid "Priority"
 msgstr "Priorität"
+
+msgid "Product"
+msgstr "Product"
+
+msgid "Product question"
+msgstr "Product question"
+
+msgid "Products"
+msgstr "Products"
+
+msgid "Products (multiple selection allowed)"
+msgstr "Products (multiple selection allowed)"
 
 msgid "Progress"
 msgstr "Fortschritt"
@@ -737,6 +956,9 @@ msgstr "Projektberechtigungen"
 msgid "Project phase"
 msgstr "Projektphase"
 
+msgid "Project question"
+msgstr "Project question"
+
 msgid "Project report: %s"
 msgstr "Projektbericht: %s"
 
@@ -761,8 +983,17 @@ msgstr "Projekte, Aufgaben, geprüfte Importe und Kundenberichte."
 msgid "Provide at least one task for review."
 msgstr "Stellen Sie mindestens eine Aufgabe zur Prüfung bereit."
 
+msgid "Purchased product: %1$s (#%2$d)"
+msgstr "Purchased product: %1$s (#%2$d)"
+
+msgid "Purchased product: %1$s · Product ID %2$d"
+msgstr "Purchased product: %1$s · Product ID %2$d"
+
 msgid "Question"
 msgstr "Rückfrage"
+
+msgid "Re: %s"
+msgstr "Re: %s"
 
 msgid "Read Business project"
 msgstr "Business-Projekt lesen"
@@ -773,6 +1004,9 @@ msgstr "Lesen und schreiben"
 msgid "Read one project with areas and tasks."
 msgstr "Liest ein Projekt mit Teilbereichen und Aufgaben."
 
+msgid "Read one support request and its customer-visible conversation."
+msgstr "Read one support request and its customer-visible conversation."
+
 msgid "Read only"
 msgstr "Nur lesen"
 
@@ -782,11 +1016,17 @@ msgstr "Liest Projektdaten und bereitet geprüfte Importentwürfe vor. Änderung
 msgid "Ready for review"
 msgstr "Zur Prüfung bereit"
 
+msgid "Record type"
+msgstr "Record type"
+
 msgid "Reference"
 msgstr "Referenz"
 
 msgid "Related project step"
 msgstr "Zugehöriger Projektschritt"
+
+msgid "Related record"
+msgstr "Related record"
 
 msgid "Remove document from project"
 msgstr "Dokument aus dem Projekt entfernen"
@@ -806,8 +1046,35 @@ msgstr "Diese Datei von der Aufgabe entfernen? Die Datei bleibt in der Mediathek
 msgid "Reopen completed task"
 msgstr "Erledigte Aufgabe wieder öffnen"
 
+msgid "Reply or add an internal note"
+msgstr "Reply or add an internal note"
+
+msgid "Reply to customer"
+msgstr "Reply to customer"
+
+msgid "Request"
+msgstr "Request"
+
+msgid "Request details"
+msgstr "Request details"
+
+msgid "Request points"
+msgstr "Request points"
+
+msgid "Request type"
+msgstr "Request type"
+
+msgid "Requester"
+msgstr "Requester"
+
+msgid "Requester email, subject, and message are required."
+msgstr "Requester email, subject, and message are required."
+
 msgid "Reset filters"
 msgstr "Filter zurücksetzen"
+
+msgid "Resolved"
+msgstr "Resolved"
 
 msgid "Responsible person"
 msgstr "Verantwortliche Person"
@@ -839,6 +1106,9 @@ msgstr "Ein erneuter Durchlauf kann doppelte Aufgaben erzeugen oder Kommentare u
 msgid "Save"
 msgstr "Speichern"
 
+msgid "Save details"
+msgstr "Save details"
+
 msgid "Save payment"
 msgstr "Zahlung speichern"
 
@@ -866,6 +1136,15 @@ msgstr "Beteiligte suchen"
 msgid "Search projects"
 msgstr "Projekte durchsuchen"
 
+msgid "Search subject, requester, email, or order"
+msgstr "Search subject, requester, email, or order"
+
+msgid "Search support requests"
+msgstr "Search support requests"
+
+msgid "Search support requests without exposing message bodies."
+msgstr "Search support requests without exposing message bodies."
+
 msgid "Search tasks"
 msgstr "Aufgaben durchsuchen"
 
@@ -874,6 +1153,15 @@ msgstr "Sucht Aufgaben nach Projekt, Teilbereich, Zuständigkeit oder Status."
 
 msgid "Select a file to import."
 msgstr "Wählen Sie eine Datei für den Import aus."
+
+msgid "Select a person or type to search"
+msgstr "Select a person or type to search"
+
+msgid "Select a person to load their orders, purchased products, licenses, events, and projects."
+msgstr "Select a person to load their orders, purchased products, licenses, events, and projects."
+
+msgid "Select an existing person or create a new one. Matching customer records become available automatically."
+msgstr "Select an existing person or create a new one. Matching customer records become available automatically."
 
 msgid "Select at least one file."
 msgstr "Wählen Sie mindestens eine Datei aus."
@@ -893,14 +1181,38 @@ msgstr "Beteiligte auswählen"
 msgid "Select project"
 msgstr "Projekt auswählen"
 
+msgid "Send or add to conversation"
+msgstr "Send or add to conversation"
+
+msgid "Send reply"
+msgstr "Send reply"
+
 msgid "Set due date"
 msgstr "Fälligkeitsdatum festlegen"
+
+msgid "Shared attachments"
+msgstr "Shared attachments"
+
+msgid "Show details"
+msgstr "Show details"
 
 msgid "Skip"
 msgstr "Überspringen"
 
+msgid "Software and license"
+msgstr "Software and license"
+
 msgid "Source"
 msgstr "Quelle"
+
+msgid "Source name"
+msgstr "Source name"
+
+msgid "Source type"
+msgstr "Source type"
+
+msgid "Sources and external shops"
+msgstr "Sources and external shops"
 
 msgid "Split the project into independently responsible areas."
 msgstr "Teilen Sie das Projekt in eigenständig verantwortete Bereiche."
@@ -911,8 +1223,14 @@ msgstr "Status"
 msgid "Status / solution"
 msgstr "Status / Lösung"
 
+msgid "Status or priority is invalid."
+msgstr "Status or priority is invalid."
+
 msgid "Step type"
 msgstr "Art des Projektschritts"
+
+msgid "Subject"
+msgstr "Subject"
 
 msgid "Submit a new task"
 msgstr "Neue Aufgabe einreichen"
@@ -920,11 +1238,26 @@ msgstr "Neue Aufgabe einreichen"
 msgid "Submit new tasks and follow customer-visible progress."
 msgstr "Reichen Sie neue Aufgaben ein und verfolgen Sie den sichtbaren Fortschritt."
 
+msgid "Submit request"
+msgstr "Submit request"
+
 msgid "Submit task"
 msgstr "Aufgabe einreichen"
 
+msgid "Support"
+msgstr "Support"
+
 msgid "Support Desk"
 msgstr "Support-Desk"
+
+msgid "Support navigation"
+msgstr "Support navigation"
+
+msgid "Support reply"
+msgstr "Support reply"
+
+msgid "Support request and reply text are required."
+msgstr "Support request and reply text are required."
 
 msgid "Target completion"
 msgstr "Geplanter Abschluss"
@@ -959,6 +1292,12 @@ msgstr "Für die Erstellung eines Word-Berichts ist die PHP-ZIP-Erweiterung erfo
 msgid "The PHP ZIP extension is required to import Word or Excel files."
 msgstr "Für den Import von Word- oder Excel-Dateien ist die PHP-ZIP-Erweiterung erforderlich."
 
+msgid "The Support Desk database could not be prepared."
+msgstr "The Support Desk database could not be prepared."
+
+msgid "The Support Desk database is not ready. Please run the plugin update and try again."
+msgstr "The Support Desk database is not ready. Please run the plugin update and try again."
+
 msgid "The Word document contains no readable text."
 msgstr "Das Word-Dokument enthält keinen lesbaren Text."
 
@@ -983,6 +1322,12 @@ msgstr "Die Checkliste wurde aktualisiert."
 msgid "The comment was added."
 msgstr "Der Kommentar wurde hinzugefügt."
 
+msgid "The customer record could not be created."
+msgstr "The customer record could not be created."
+
+msgid "The customer records could not be loaded."
+msgstr "The customer records could not be loaded."
+
 msgid "The document was removed from the project. The media file was retained."
 msgstr "Das Dokument wurde aus dem Projekt entfernt. Die Mediendatei blieb erhalten."
 
@@ -998,17 +1343,29 @@ msgstr "Die Datei wurde von der Aufgabe entfernt. Sie bleibt in der Mediathek ve
 msgid "The first Excel sheet could not be read."
 msgstr "Das erste Excel-Tabellenblatt konnte nicht gelesen werden."
 
+msgid "The first message could not be saved, so no incomplete request was created. Please try again."
+msgstr "The first message could not be saved, so no incomplete request was created. Please try again."
+
 msgid "The import draft could not be created."
 msgstr "Der Importentwurf konnte nicht erstellt werden."
 
 msgid "The import draft does not exist."
 msgstr "Der Importentwurf ist nicht vorhanden."
 
+msgid "The internal note was added."
+msgstr "The internal note was added."
+
+msgid "The linked person needs a valid email address."
+msgstr "The linked person needs a valid email address."
+
 msgid "The payment could not be added."
 msgstr "Die Zahlung konnte nicht hinzugefügt werden."
 
 msgid "The payment was added."
 msgstr "Die Zahlung wurde hinzugefügt."
+
+msgid "The person is linked immediately and no marketing consent is granted."
+msgstr "The person is linked immediately and no marketing consent is granted."
 
 msgid "The project and its related records were deleted permanently."
 msgstr "Das Projekt und seine verknüpften Datensätze wurden endgültig gelöscht."
@@ -1058,20 +1415,47 @@ msgstr "Das Projekt wurde wiederhergestellt."
 msgid "The project was updated."
 msgstr "Das Projekt wurde aktualisiert."
 
+msgid "The reply could not be sent. Nothing was added to the customer conversation."
+msgstr "The reply could not be sent. Nothing was added to the customer conversation."
+
+msgid "The reply was added to the conversation."
+msgstr "The reply was added to the conversation."
+
+msgid "The request details were saved."
+msgstr "The request details were saved."
+
 msgid "The requested project action is invalid."
 msgstr "Die angeforderte Projektaktion ist ungültig."
 
 msgid "The requested task action is invalid."
 msgstr "Die angeforderte Aufgabenaktion ist ungültig."
 
+msgid "The selected person could not be found."
+msgstr "The selected person could not be found."
+
 msgid "The selected project status is invalid."
 msgstr "Der gewählte Projektstatus ist ungültig."
+
+msgid "The selected record does not belong to this customer. Please select it again."
+msgstr "The selected record does not belong to this customer. Please select it again."
 
 msgid "The support request could not be converted."
 msgstr "Das Hilfeersuchen konnte nicht umgewandelt werden."
 
+msgid "The support request could not be created."
+msgstr "The support request could not be created."
+
 msgid "The support request could not be found."
 msgstr "Das Hilfeersuchen wurde nicht gefunden."
+
+msgid "The support request could not be saved. Please reload the page and try again."
+msgstr "The support request could not be saved. Please reload the page and try again."
+
+msgid "The support request does not exist."
+msgstr "The support request does not exist."
+
+msgid "The support source was added."
+msgstr "The support source was added."
 
 msgid "The task could not be moved."
 msgstr "Die Aufgabe konnte nicht verschoben werden."
@@ -1094,6 +1478,9 @@ msgstr "Die Aufgabe wurde wiederhergestellt."
 msgid "The task was saved."
 msgstr "Die Aufgabe wurde gespeichert."
 
+msgid "These files are attached to every point in this request."
+msgstr "These files are attached to every point in this request."
+
 msgid "This action also affects related records. Do you want to continue?"
 msgstr "Diese Aktion betrifft auch verknüpfte Datensätze. Möchten Sie fortfahren?"
 
@@ -1111,6 +1498,12 @@ msgstr "Dieses Projekt existiert nicht."
 
 msgid "This project field cannot be edited here."
 msgstr "Dieses Projektfeld kann hier nicht bearbeitet werden."
+
+msgid "This support request is not available."
+msgstr "This support request is not available."
+
+msgid "This support request no longer exists."
+msgstr "This support request no longer exists."
 
 msgid "This task does not exist."
 msgstr "Diese Aufgabe existiert nicht."
@@ -1151,8 +1544,14 @@ msgstr "Person ohne Namen"
 msgid "Update existing task"
 msgstr "Bestehende Aufgabe aktualisieren"
 
+msgid "Update status, priority, or assignee for a support request."
+msgstr "Update status, priority, or assignee for a support request."
+
 msgid "Update task"
 msgstr "Aufgabe aktualisieren"
+
+msgid "Updated"
+msgstr "Updated"
 
 msgid "Upload and review"
 msgstr "Hochladen und prüfen"
@@ -1175,6 +1574,9 @@ msgstr "Übernehmen"
 msgid "Use a WordPress application password to read projects and tasks or to create import drafts. MCP never applies a draft without confirmation in WordPress."
 msgstr "Verwenden Sie ein WordPress-Anwendungspasswort, um Projekte und Aufgaben zu lesen oder Importentwürfe anzulegen. MCP übernimmt einen Entwurf niemals ohne Bestätigung in WordPress."
 
+msgid "Use sources to distinguish this website from external shops, forms, or other systems. No shop data is changed."
+msgstr "Use sources to distinguish this website from external shops, forms, or other systems. No shop data is changed."
+
 msgid "View project"
 msgstr "Projekt ansehen"
 
@@ -1190,6 +1592,15 @@ msgstr "Für Kunden sichtbar"
 msgid "Waiting for customer"
 msgstr "Wartet auf Kundenantwort"
 
+msgid "Waiting for support"
+msgstr "Waiting for support"
+
+msgid "Website URL (optional)"
+msgstr "Website URL (optional)"
+
+msgid "Website or form"
+msgstr "Website or form"
+
 msgid "Without area"
 msgstr "Ohne Teilbereich"
 
@@ -1199,11 +1610,23 @@ msgstr "Word-Bericht"
 msgid "Write a comment …"
 msgstr "Kommentar schreiben …"
 
+msgid "You"
+msgstr "You"
+
 msgid "You do not have permission."
 msgstr "Sie haben keine Berechtigung."
 
+msgid "You have not submitted any support requests yet."
+msgstr "You have not submitted any support requests yet."
+
 msgid "Your project workspace"
 msgstr "Ihr Projektarbeitsbereich"
+
+msgid "Your reply"
+msgstr "Your reply"
+
+msgid "Your support request was created."
+msgstr "Your support request was created."
 
 msgid "added a checklist item."
 msgstr "hat einen Checklistenpunkt hinzugefügt."
@@ -1229,11 +1652,29 @@ msgstr "hat das Projekt erstellt."
 msgid "created the task."
 msgstr "hat die Aufgabe erstellt."
 
+msgid "events"
+msgstr "events"
+
+msgid "licenses"
+msgstr "licenses"
+
 msgid "moved the task to “%s”."
 msgstr "hat die Aufgabe nach „%s“ verschoben."
 
 msgid "moved the task."
 msgstr "hat die Aufgabe verschoben."
+
+msgid "no linked records"
+msgstr "no linked records"
+
+msgid "orders"
+msgstr "orders"
+
+msgid "products"
+msgstr "products"
+
+msgid "projects"
+msgstr "projects"
 
 msgid "removed a document from the project."
 msgstr "hat ein Dokument aus dem Projekt entfernt."

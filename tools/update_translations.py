@@ -20,7 +20,6 @@ GERMAN = {
     "Companies": "Firmen", "Company ID": "Firmen-ID", "Completed": "Abgeschlossen", "Contact person": "Ansprechperson", "ContactPanda Business": "ContactPanda Business",
     "ContactPanda Business could not create all required tables.": "ContactPanda Business konnte nicht alle erforderlichen Tabellen erstellen.",
     "ContactPanda Business requires ContactPanda %s or newer.": "ContactPanda Business erfordert ContactPanda %s oder neuer.",
-    "ContactPanda Business requires ContactPanda %1$s and ContactPanda Pro %2$s or newer.": "ContactPanda Business erfordert ContactPanda %1$s und ContactPanda Pro %2$s oder neuer.",
     "Contract management": "Vertragsverwaltung", "Create a Business project before converting this support request into a task.": "Erstellen Sie zuerst ein Business-Projekt, bevor Sie dieses Hilfeersuchen in eine Aufgabe umwandeln.",
     "Create project": "Projekt erstellen", "Create task": "Aufgabe erstellen", "Create task from request": "Aufgabe aus Anfrage erstellen",
     "Created from Support Desk request #%d.": "Aus dem Hilfeersuchen #%d erstellt.", "Customer": "Kunde", "Customer account": "Kundenkonto", "Customer accounts with portal access": "Kundenkonten mit Portalzugang",
@@ -54,7 +53,6 @@ GERMAN = {
 
 GERMAN.update({
     "ContactPanda Business requires the active ContactPanda Basic version %s or newer.": "ContactPanda Business benötigt die aktive ContactPanda-Basic-Version %s oder neuer.",
-    "ContactPanda Business requires the active ContactPanda Pro version %s or newer.": "ContactPanda Business benötigt die aktive ContactPanda-Pro-Version %s oder neuer.",
     "ContactPanda dependencies required": "ContactPanda-Abhängigkeiten erforderlich",
 	"Business follows the coordinated family dependency and protected-update contract.": "Business folgt dem abgestimmten Abhängigkeits- und geschützten Update-Vertrag der Produktfamilie.",
     "%d%% match": "%d %% Übereinstimmung",
