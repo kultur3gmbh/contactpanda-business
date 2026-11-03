@@ -28,8 +28,11 @@ final class ContactPanda_Business_Admin {
 		if ( defined( 'CONTACTPANDA_URL' ) && defined( 'CONTACTPANDA_ASSET_VERSION' ) ) {
 			wp_enqueue_style( 'contactpanda-admin', CONTACTPANDA_URL . 'assets/contactpanda-admin.css', array(), CONTACTPANDA_ASSET_VERSION );
 			wp_enqueue_script( 'contactpanda-admin-ui', CONTACTPANDA_URL . 'assets/contactpanda-admin-ui.js', array( 'wp-api-fetch' ), CONTACTPANDA_ASSET_VERSION, true );
+			wp_enqueue_style( 'panda-editor-ui', CONTACTPANDA_URL . 'assets/panda-editor-ui.css', array( 'contactpanda-admin' ), CONTACTPANDA_ASSET_VERSION );
+			wp_enqueue_script( 'panda-editor-ui', CONTACTPANDA_URL . 'assets/panda-editor-ui.js', array(), CONTACTPANDA_ASSET_VERSION, true );
 			$style_dependencies[]  = 'contactpanda-admin';
 			$script_dependencies[] = 'contactpanda-admin-ui';
+			$script_dependencies[] = 'panda-editor-ui';
 		}
 		wp_enqueue_style( 'contactpanda-business-admin', CONTACTPANDA_BUSINESS_URL . 'assets/contactpanda-business-admin.css', $style_dependencies, CONTACTPANDA_BUSINESS_VERSION );
 		if ( false !== strpos( $hook, 'contactpanda-business-support' ) ) {
