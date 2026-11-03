@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Professional CRM, support, project, task, correction, import, and customer workspace for ContactPanda.
- * Version: 0.8.91
+ * Version: 0.8.92
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.91' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.92' );
 define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.9.8' );
 define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.92' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
