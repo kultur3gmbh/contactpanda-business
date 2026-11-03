@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 
 final class ContactPanda_Business_Schema {
-	const VERSION = '1.7.0';
+	const VERSION = '1.7.1';
 	const OPTION = 'contactpanda_business_db_version';
 
 	public static function table_names() {
@@ -26,7 +26,7 @@ final class ContactPanda_Business_Schema {
 	}
 
 	public static function maybe_upgrade() {
-		return self::VERSION === (string) get_option( self::OPTION, '' ) ? true : self::install();
+		return self::VERSION === (string) get_option( self::OPTION, '' ) && self::schema_ready() ? true : self::install();
 	}
 
 	public static function install() {
@@ -245,6 +245,7 @@ final class ContactPanda_Business_Schema {
 		);
 		foreach ( $sql as $statement ) dbDelta( $statement );
 		foreach ( $t as $table ) if ( $table !== $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) ) ) return new WP_Error( 'contactpanda_business_schema', __( 'ContactPanda Business could not create all required tables.', 'contactpanda-business' ) );
+		if ( ! self::schema_ready() ) return new WP_Error( 'contactpanda_business_schema_columns', __( 'ContactPanda Business could not create all required tables.', 'contactpanda-business' ) );
 		self::link_business_customers();
 		update_option( self::OPTION, self::VERSION, false );
 		return true;
@@ -255,6 +256,7 @@ final class ContactPanda_Business_Schema {
 		if ( ! class_exists( 'ContactPanda_Business_Customers' ) ) return;
 		global $wpdb;
 		$tables = self::table_names();
+		if ( ! self::column_exists( $tables['participants'], 'business_customer_id' ) || ! self::column_exists( $tables['participants'], 'participant_role' ) || ! self::column_exists( $tables['projects'], 'business_customer_id' ) ) return;
 		$participants = $wpdb->get_results( "SELECT id,project_id,entity_type,entity_id,participant_role,is_primary FROM `{$tables['participants']}` WHERE business_customer_id=0 AND participant_role IN ('customer','customer_account','agency')", ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Internal prefix-safe table name.
 		foreach ( (array) $participants as $participant ) {
 			$contact_id = 'person' === $participant['entity_type'] ? absint( $participant['entity_id'] ) : 0;
@@ -271,5 +273,22 @@ final class ContactPanda_Business_Schema {
 				$wpdb->query( $wpdb->prepare( "UPDATE `{$tables['projects']}` SET business_customer_id=%d WHERE id=%d AND business_customer_id=0", absint( $customer_id ), absint( $participant['project_id'] ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Internal prefix-safe table name.
 			}
 		}
+	}
+
+	/** Confirm the bridge columns used during boot exist before querying them. */
+	private static function schema_ready() {
+		$tables = self::table_names();
+		return self::column_exists( $tables['projects'], 'business_customer_id' )
+			&& self::column_exists( $tables['participants'], 'business_customer_id' )
+			&& self::column_exists( $tables['participants'], 'participant_role' )
+			&& self::column_exists( $tables['participants'], 'access_level' );
+	}
+
+	/** Check a known internal table for a required column without assuming wp_ prefix. */
+	private static function column_exists( $table, $column ) {
+		global $wpdb;
+		if ( ! in_array( $table, self::table_names(), true ) ) return false;
+		if ( $table !== $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table ) ) ) ) return false;
+		return (bool) $wpdb->get_var( $wpdb->prepare( "SHOW COLUMNS FROM `{$table}` LIKE %s", $column ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Prefix-safe table name is allowlisted above.
 	}
 }

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ContactPanda Business
  * Description: Professional CRM, support, project, task, correction, import, and customer workspace for ContactPanda.
- * Version: 0.8.92
+ * Version: 0.8.93
  * Author: Kultur3 GmbH
  * Text Domain: contactpanda-business
  * Domain Path: /languages
@@ -10,15 +10,15 @@
  * Requires PHP: 7.4
  * Requires Plugins: contactpanda, contactpanda-plus
  * Requires ContactPanda: 0.9.8
- * Requires ContactPanda Plus: 0.8.92
+ * Requires ContactPanda Plus: 0.8.94
  * Update URI: https://github.com/kultur3gmbh/contactpanda-business
  */
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.92' );
+define( 'CONTACTPANDA_BUSINESS_VERSION', '0.8.93' );
 define( 'CONTACTPANDA_BUSINESS_MIN_BASIC_VERSION', '0.9.8' );
-define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.92' );
+define( 'CONTACTPANDA_BUSINESS_MIN_PLUS_VERSION', '0.8.94' );
 define( 'CONTACTPANDA_BUSINESS_FILE', __FILE__ );
 define( 'CONTACTPANDA_BUSINESS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CONTACTPANDA_BUSINESS_URL', plugin_dir_url( __FILE__ ) );
@@ -119,8 +119,8 @@ function contactpanda_business_boot() {
 	ContactPanda_Business_Service_Access::boot();
 	ContactPanda_Business_Access::boot();
 	if ( $is_backoffice && ( ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::may_upgrade_schema() ) ) {
-		ContactPanda_Business_Schema::maybe_upgrade();
-		ContactPanda_Business_Schema::link_business_customers();
+		$schema_ready = ContactPanda_Business_Schema::maybe_upgrade();
+		if ( ! is_wp_error( $schema_ready ) ) ContactPanda_Business_Schema::link_business_customers();
 	}
 	$needs_support = ! class_exists( 'ContactPanda_Runtime' ) || ContactPanda_Runtime::needs_module( array( 'contactpanda-business-support' ), array( 'contactpanda_business_service_' ) );
 	if ( contactpanda_business_module_entitled( 'support_desk' ) && $needs_support ) ContactPanda_Business_Helpdesk::boot();
